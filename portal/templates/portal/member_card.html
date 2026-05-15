@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <meta charSet="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="{% static 'portal/css/style.css' %}" />
+    <title>BAIUST Computer Club - Member Verification</title>
+    <link rel="icon" href="{% static 'portal/favicon.ico' %}" type="image/x-icon" sizes="16x16"/>
+</head>
+<body class="__variable_5cfdac __variable_9a8899 antialiased">
+    <div class="min-h-screen bg-gradient-to-br from-green-600 via-emerald-600 to-teal-600 flex items-center justify-center p-4">
+        <div class="w-full max-w-md">
+            <div class="rounded-2xl shadow-2xl bg-white overflow-hidden">
+                <div style="background: linear-gradient(to right, #16a34a, #059669);" class="p-6 text-center text-white">
+                    <div class="flex justify-center mb-4">
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        </div>
+                    </div>
+                    <h2 class="text-xl font-bold">BAIUST Computer Club</h2>
+                    <p class="text-sm opacity-90">Verified General Member of BCC</p>
+                </div>
+                <div class="p-6 space-y-4">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-10 h-10 text-green-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">{{ profile.user.first_name }}</h3>
+                    </div>
+                    <div class="border-t border-gray-200 pt-4 space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-500">Student ID</span>
+                            <span class="text-sm font-semibold text-gray-900">{{ profile.student_id|default:"N/A" }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-500">Department</span>
+                            <span class="text-sm font-semibold text-gray-900">{{ profile.department|default:"N/A" }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-500">Batch</span>
+                            <span class="text-sm font-semibold text-gray-900">{{ profile.batch|default:"N/A" }}</span>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-200 pt-4 text-center">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&amp;data={{ request.scheme }}://{{ request.get_host }}{% url 'member_public' profile.member_uuid %}" alt="QR Code" class="w-32 h-32 mx-auto rounded-lg" />
+                        <p class="text-xs text-gray-400 mt-2">Scan to verify</p>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-4 text-center">
+                    <p class="text-xs text-gray-500">This is an official membership verification page</p>
+                    <a href="{% url 'home' %}" class="text-sm text-green-600 font-semibold hover:underline mt-1 inline-block">Visit Portal</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

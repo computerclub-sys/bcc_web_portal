@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <meta charSet="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="{% static 'portal/css/style.css' %}" />
+    <meta name="next-size-adjust" content=""/>
+    <title>BAIUST - Computer Club Portal | Profile</title>
+    <meta name="description" content="Internal portal for Computer Club management"/>
+    <link rel="icon" href="{% static 'portal/favicon.ico' %}" type="image/x-icon" sizes="16x16"/>
+</head>
+<body class="__variable_5cfdac __variable_9a8899 antialiased">
+    <div class="min-h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 flex items-center justify-center p-4 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-20 w-32 h-32 border-2 border-club-400 rounded-lg animate-pulse"></div>
+            <div class="absolute top-40 right-32 w-24 h-24 border border-club-300 rounded-full animate-ping"></div>
+            <div class="absolute bottom-32 left-40 w-20 h-20 border border-club-500 transform rotate-45 animate-bounce"></div>
+        </div>
+        <div class="w-full max-w-2xl">
+            <div class="rounded-lg text-card-foreground shadow-xl border-0 bg-white/95 backdrop-blur-sm">
+                <div class="flex flex-col p-6 text-center space-y-4">
+                    <div class="flex justify-center">
+                        <div class="w-20 h-20 bg-club-600 rounded-full flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user w-10 h-10 text-white"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        </div>
+                    </div>
+                    <h3 class="tracking-tight text-2xl font-bold text-gray-900">{{ user.first_name|default:user.username }}</h3>
+                    <p class="text-sm text-gray-600">Your Profile</p>
+                </div>
+                <div class="p-6 pt-0">
+                    {% if messages %}
+                    <div class="mb-4">
+                        {% for message in messages %}
+                        <div class="p-3 bg-green-500/20 border border-green-500 rounded text-green-100 text-sm mb-2">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    
+                    {% if profile.is_member %}
+                    <div class="mb-6 p-4 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg text-white text-center">
+                        <div class="flex items-center justify-center gap-2 mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            <span class="text-lg font-bold">Verified General Member</span>
+                        </div>
+                        <p class="text-sm opacity-90">You are an official member of BAIUST Computer Club</p>
+                    </div>
+                    
+                    <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                        <h4 class="text-sm font-semibold text-gray-700 mb-3 text-center">Your Membership QR Code</h4>
+                        <div class="flex justify-center">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&amp;data={{ request.scheme }}://{{ request.get_host }}{% url 'member_public' profile.member_uuid %}" alt="Membership QR Code" class="w-48 h-48 rounded-lg border-2 border-gray-300" />
+                        </div>
+                        <p class="text-xs text-gray-500 text-center mt-2">Scan to verify membership</p>
+                    </div>
+                    {% elif application %}
+                    <div class="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                        <div class="flex items-center gap-2 text-yellow-800">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            <span class="font-semibold">Application Pending</span>
+                        </div>
+                        <p class="text-sm text-yellow-700 mt-1">Your membership application is under review. You will be notified once approved.</p>
+                        {% if application.status == 'rejected' %}
+                        <p class="text-sm text-red-600 mt-2 font-medium">Your application was rejected. {{ application.notes }}</p>
+                        {% endif %}
+                    </div>
+                    {% else %}
+                    <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg text-center">
+                        <h4 class="font-semibold text-blue-900 mb-2">Become a General Member</h4>
+                        <p class="text-sm text-blue-700 mb-3">Apply for official membership to get your unique QR code and membership card.</p>
+                        <form method="POST" action="{% url 'apply_membership' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="inline-flex items-center justify-center gap-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 text-sm transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" x2="19" y1="8" y2="14"></line><line x1="22" x2="16" y1="11" y2="11"></line></svg>
+                                Apply for Membership
+                            </button>
+                        </form>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-gray-500">Full Name</label>
+                                <p class="text-sm font-semibold text-gray-900">{{ user.first_name }}</p>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-gray-500">Email</label>
+                                <p class="text-sm font-semibold text-gray-900">{{ user.email }}</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-gray-500">Student ID</label>
+                                <p class="text-sm font-semibold text-gray-900">{{ profile.student_id|default:"Not set" }}</p>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-gray-500">Phone</label>
+                                <p class="text-sm font-semibold text-gray-900">{{ profile.phone }}</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-gray-500">Department</label>
+                                <p class="text-sm font-semibold text-gray-900">{{ profile.department|default:"Not set" }}</p>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-gray-500">Batch</label>
+                                <p class="text-sm font-semibold text-gray-900">{{ profile.batch|default:"Not set" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center p-6 pt-0 gap-3">
+                    <a href="{% url 'home' %}" class="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-gray-300 bg-white hover:bg-gray-50 h-10 px-4 py-2 text-sm font-medium text-gray-700 transition-all">Back to Home</a>
+                    <a href="{% url 'logout' %}" style="background-color: #ef4444; color: #ffffff;" class="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:opacity-90 h-10 px-4 py-2 text-sm font-semibold transition-all">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
