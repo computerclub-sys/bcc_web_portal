@@ -5,9 +5,15 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from .models import Profile, MembershipApplication
+from events.models import Event
 
 def home(request):
-    return render(request, 'portal/index.html')
+    active_events = Event.objects.filter(status='active').order_by('date')[:4]
+    completed_events = Event.objects.filter(status='completed').order_by('-date')[:6]
+    return render(request, 'portal/index.html', {
+        'active_events': active_events,
+        'completed_events': completed_events,
+    })
 
 def login_view(request):
     if request.method == 'POST':
@@ -17,6 +23,7 @@ def login_view(request):
         user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
+            messages.success(request, f'Welcome back, {user.first_name or user.username}!')
             return redirect('home')
         else:
             messages.error(request, 'Invalid credentials or user does not exist.')
