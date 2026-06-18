@@ -75,6 +75,12 @@ class TeamMember(models.Model):
     linkedin = models.URLField(blank=True, default='https://linkedin.com/')
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
+    leader_position = models.CharField(max_length=20, blank=True, choices=[
+        ('president', 'President'),
+        ('general_secretary', 'General Secretary'),
+        ('vice_president', 'Vice President'),
+    ])
+    leader_order = models.PositiveIntegerField(default=0)
 
     class Meta:
         ordering = ['panel', 'order']

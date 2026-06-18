@@ -9,11 +9,23 @@ from .models import Profile
 from events.models import Event
 
 def home(request):
+    from .models import TeamMember
+
     active_events = Event.objects.filter(status='active').order_by('date')[:3]
     completed_events = Event.objects.filter(status='completed').order_by('-date')[:3]
+
+    president = TeamMember.objects.filter(leader_position='president', is_active=True).first()
+    gs = TeamMember.objects.filter(leader_position='general_secretary', is_active=True).first()
+    vps = list(TeamMember.objects.filter(leader_position='vice_president', is_active=True).order_by('leader_order'))
+    while len(vps) < 4:
+        vps.append(None)
+
     return render(request, 'portal/index.html', {
         'active_events': active_events,
         'completed_events': completed_events,
+        'president': president,
+        'gs': gs,
+        'vps': vps,
     })
 
 def team(request):

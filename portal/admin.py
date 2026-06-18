@@ -115,10 +115,10 @@ class ProfileAdmin(admin.ModelAdmin):
 
 @admin.register(TeamMember)
 class TeamMemberAdmin(admin.ModelAdmin):
-    list_display = ('name', 'role', 'panel', 'order', 'is_active', 'image_preview')
-    list_filter = ('panel', 'is_active')
+    list_display = ('name', 'role', 'panel', 'leader_position', 'order', 'is_active', 'image_preview')
+    list_filter = ('panel', 'leader_position', 'is_active')
     search_fields = ('name', 'role', 'department')
-    list_editable = ('order', 'is_active')
+    list_editable = ('order', 'is_active', 'leader_position')
     readonly_fields = ('image_preview',)
     fieldsets = (
         (None, {
@@ -132,6 +132,10 @@ class TeamMemberAdmin(admin.ModelAdmin):
         }),
         ('Settings', {
             'fields': ('order', 'is_active')
+        }),
+        ('Leader Tree', {
+            'fields': ('leader_position', 'leader_order'),
+            'description': 'Assign to position in the leader tree on the homepage (President, General Secretary, or Vice President). Set leader_order for VP ordering.',
         }),
     )
 

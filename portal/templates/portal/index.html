@@ -54,7 +54,7 @@
                 <a href="{% url 'join_guide' %}" class="btn btn-primary btn-large btn-glow hero-join-btn">Join the Club</a>
                 {% endif %}
                 <a href="#about" class="btn btn-outline btn-large hero-scroll-btn">
-                    Explore &darr;
+                    Explore
                 </a>
             </div>
             <div class="hero-stats">
@@ -217,11 +217,11 @@
             <div class="leader-card-wrap">
                 <div class="leader-card">
                     <div class="leader-avatar-wrap">
-                        <div class="leader-avatar">S</div>
+                        <div class="leader-avatar">{{ president.avatar_letter|default:"S" }}</div>
                         <div class="leader-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
                     </div>
-                    <div class="leader-name">Samin Islam</div>
-                    <div class="leader-role">President</div>
+                    <div class="leader-name">{{ president.name|default:"President" }}</div>
+                    <div class="leader-role">{{ president.role|default:"TBD" }}</div>
                 </div>
             </div>
 
@@ -233,11 +233,11 @@
             <div class="leader-card-wrap">
                 <div class="leader-card">
                     <div class="leader-avatar-wrap">
-                        <div class="leader-avatar">G</div>
+                        <div class="leader-avatar">{{ gs.avatar_letter|default:"G" }}</div>
                         <div class="leader-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
                     </div>
-                    <div class="leader-name">General Secretary</div>
-                    <div class="leader-role">TBD</div>
+                    <div class="leader-name">{{ gs.name|default:"General Secretary" }}</div>
+                    <div class="leader-role">{{ gs.role|default:"TBD" }}</div>
                 </div>
             </div>
 
@@ -252,46 +252,27 @@
 
             <!-- VPs -->
             <div class="leader-row-4">
+                {% for vp in vps %}
                 <div class="leader-card-wrap">
                     <div class="leader-card">
                         <div class="leader-avatar-wrap">
-                            <div class="leader-avatar">T</div>
-                            <div class="leader-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-                        </div>
-                        <div class="leader-name">Tanvir Hasan</div>
-                        <div class="leader-role">VP</div>
-                    </div>
-                </div>
-                <div class="leader-card-wrap">
-                    <div class="leader-card">
-                        <div class="leader-avatar-wrap">
+                            {% if vp %}
+                            <div class="leader-avatar">{{ vp.avatar_letter|default:"V" }}</div>
+                            {% else %}
                             <div class="leader-avatar">V</div>
+                            {% endif %}
                             <div class="leader-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
                         </div>
+                        {% if vp %}
+                        <div class="leader-name">{{ vp.name }}</div>
+                        <div class="leader-role">{{ vp.role|default:"VP" }}</div>
+                        {% else %}
                         <div class="leader-name">VP</div>
                         <div class="leader-role">TBD</div>
+                        {% endif %}
                     </div>
                 </div>
-                <div class="leader-card-wrap">
-                    <div class="leader-card">
-                        <div class="leader-avatar-wrap">
-                            <div class="leader-avatar">V</div>
-                            <div class="leader-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-                        </div>
-                        <div class="leader-name">VP</div>
-                        <div class="leader-role">TBD</div>
-                    </div>
-                </div>
-                <div class="leader-card-wrap">
-                    <div class="leader-card">
-                        <div class="leader-avatar-wrap">
-                            <div class="leader-avatar">V</div>
-                            <div class="leader-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-                        </div>
-                        <div class="leader-name">VP</div>
-                        <div class="leader-role">TBD</div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
 
         </div>
