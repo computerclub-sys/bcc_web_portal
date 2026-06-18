@@ -2,687 +2,341 @@
 {% load static %}
 
 {% block content %}
-        <section class="pt-24 md:pt-32 pb-16 md:pb-20 px-4 relative overflow-hidden bg-gradient-to-br from-white via-green-50 to-white">
-            <div class="absolute inset-0 dashed-pattern"></div>
-            <div class="absolute inset-0 overflow-hidden">
-                <div
-                    class="absolute -top-40 -left-40 w-96 h-96 bg-gradient-to-br from-green-400/30 to-emerald-500/30 rounded-full blur-3xl">
-                </div>
-                <div
-                    class="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-gradient-to-tl from-green-500/30 to-teal-400/30 rounded-full blur-3xl">
-                </div>
-                <div
-                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-br from-emerald-400/20 to-green-600/20 rounded-full blur-3xl">
-                </div>
+<section class="hero-section">
+    <div class="hero-dashed-pattern"></div>
+    <div class="hero-bg-orb hero-bg-orb-1"></div>
+    <div class="hero-bg-orb hero-bg-orb-2"></div>
+    <div class="hero-bg-orb hero-bg-orb-3"></div>
+    <div class="hero-3d-cube hero-3d-cube-1">
+        <div class="cube-face cube-front">{ }</div>
+        <div class="cube-face cube-back">&lt;/&gt;</div>
+        <div class="cube-face cube-right">()</div>
+        <div class="cube-face cube-left">[]</div>
+        <div class="cube-face cube-top">=&gt;</div>
+        <div class="cube-face cube-bottom">#!</div>
+    </div>
+    <div class="hero-3d-cube hero-3d-cube-2">
+        <div class="cube-face cube-front">&lt;h1&gt;</div>
+        <div class="cube-face cube-back">&lt;/h1&gt;</div>
+        <div class="cube-face cube-right">div</div>
+        <div class="cube-face cube-left">class</div>
+        <div class="cube-face cube-top">def</div>
+        <div class="cube-face cube-bottom">fn</div>
+    </div>
+    <div class="hero-3d-cube hero-3d-cube-3">
+        <div class="cube-face cube-front">if</div>
+        <div class="cube-face cube-back">else</div>
+        <div class="cube-face cube-right">for</div>
+        <div class="cube-face cube-left">while</div>
+        <div class="cube-face cube-top">try</div>
+        <div class="cube-face cube-bottom">catch</div>
+    </div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                Build. Code. Connect.
             </div>
-            <div class="max-w-7xl mx-auto text-center relative z-10">
-                <div>
-                    <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border-2 border-green-200 px-4 py-2 md:px-5 md:py-2.5 rounded-full mb-6 md:mb-8 shadow-lg glow-green"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-sparkles w-4 h-4 md:w-5 md:h-5 text-[#34793B] animate-pulse">
-                            <path
-                                d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z">
-                            </path>
-                            <path d="M20 3v4"></path>
-                            <path d="M22 5h-4"></path>
-                            <path d="M4 17v2"></path>
-                            <path d="M5 18H3"></path>
-                        </svg>
-                        <span
-                            class="text-xs md:text-sm font-semibold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">Welcome
-                            to Innovation Hub</span>
-                    </div>
-                    <h1 class="text-4xl md:text-6xl lg:text-8xl font-black mb-6 md:mb-8 leading-tight"><span
-                            class="block animated-gradient-text mb-2 text-[#34793B]">BAIUST</span><span class="block text-gray-900">Computer Club</span></h1>
-                    <p class="text-base md:text-xl lg:text-2xl text-gray-700 mb-8 md:mb-10 max-w-3xl mx-auto font-medium leading-relaxed px-4">Join our vibrant community of
-                        <!-- --><span class="text-green-600 font-bold">tech enthusiasts</span>,
-                        <!-- --><span class="text-green-600 font-bold">coders</span>, and
-                        <!-- --><span class="text-green-600 font-bold">innovators</span>.<br
-                            class="hidden md:block" />Learn, build, and grow together.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4">
-                        {% if not user.is_authenticated %}
-                        <a href="{% url 'register' %}"><button
-                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary hover:bg-primary/90 h-10 gradient-green text-white group text-sm md:text-base lg:text-lg px-6 py-5 md:px-8 md:py-6 shadow-xl hover:shadow-2xl transition-all glow-green">Get
-                                Started<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="lucide lucide-arrow-right w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-2 transition-transform">
-                                    <path d="M5 12h14"></path>
-                                    <path d="m12 5 7 7-7 7"></path>
-                                </svg></button></a>
-                        {% endif %}
-                        <a href="#about"><button
-                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-background hover:text-accent-foreground h-10 border-2 border-green-600 text-green-700 hover:bg-green-50 text-sm md:text-base lg:text-lg px-6 py-5 md:px-8 md:py-6 shadow-lg">Learn
-                                More</button></a>
-                    </div>
-                </div>
+            <div class="hero-terminal">
+                <span class="hero-terminal-prompt">&gt;</span>
+                <span class="hero-terminal-text">Welcome to the club</span>
+                <span class="hero-terminal-cursor">_</span>
             </div>
-            <div class="absolute top-32 left-10 hidden lg:block">
-                <div class="bg-white/80 backdrop-blur-md p-4 rounded-lg shadow-xl border border-green-200"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-code-xml w-8 h-8 text-green-600">
-                        <path d="m18 16 4-4-4-4"></path>
-                        <path d="m6 8-4 4 4 4"></path>
-                        <path d="m14.5 4-5 16"></path>
-                    </svg></div>
-            </div>
-            <div class="absolute bottom-32 right-10 hidden lg:block">
-                <div class="bg-white/80 backdrop-blur-md p-4 rounded-lg shadow-xl border border-green-200"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-trophy w-8 h-8 text-green-600">
-                        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-                        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
-                        <path d="M4 22h16"></path>
-                        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
-                        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
-                        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
-                    </svg></div>
-            </div>
-            <div class="absolute top-1/2 left-20 hidden xl:block">
-                <div class="bg-white/80 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-green-200"><span
-                        class="text-green-600 font-mono text-sm">&lt;/&gt;</span></div>
-            </div>
-        </section>
-        <section id="about" class="py-16 md:py-24 px-4 bg-white relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-96 h-96 bg-green-100 rounded-full blur-3xl opacity-30"></div>
-            <div class="absolute bottom-0 left-0 w-80 h-80 bg-emerald-100 rounded-full blur-3xl opacity-30"></div>
-            <div class="max-w-7xl mx-auto relative z-10">
-                <div class="text-center mb-12 md:mb-20">
-                    <div class="inline-block mb-3 md:mb-4"><span
-                            class="text-green-600 font-bold text-xs md:text-sm uppercase tracking-wider bg-green-100 px-3 py-1.5 md:px-4 md:py-2 rounded-full">Our
-                            Mission</span></div>
-                    <h2 class="text-3xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6"><span
-                            class="animated-gradient-text">What We Do</span></h2>
-                    <p class="text-gray-600 text-sm md:text-base lg:text-lg max-w-2xl mx-auto px-4">We foster
-                        innovation, collaboration, and learning through various activities and programs</p>
-                </div>
-                <div class="grid md:grid-cols-3 gap-6 md:gap-8">
-                    <div>
-                        <div
-                            class="rounded-lg bg-card text-card-foreground shadow-sm relative overflow-hidden border-2 border-transparent hover:border-green-300 transition-all group h-full bg-gradient-to-br from-white to-green-50/30">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-br from-green-400 to-emerald-500 opacity-0 group-hover:opacity-5 transition-opacity">
-                            </div>
-                            <div class="flex flex-col space-y-1.5 p-6 relative">
-                                <div
-                                    class="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="lucide lucide-code-xml w-8 h-8 text-white">
-                                        <path d="m18 16 4-4-4-4"></path>
-                                        <path d="m6 8-4 4 4 4"></path>
-                                        <path d="m14.5 4-5 16"></path>
-                                    </svg>
-                                </div>
-                                <div class="font-semibold tracking-tight text-2xl mb-3 text-gray-900">Coding Workshops
-                                </div>
-                                <div class="text-muted-foreground text-base leading-relaxed">Regular workshops on latest
-                                    technologies, programming languages, and development tools</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div
-                            class="rounded-lg bg-card text-card-foreground shadow-sm relative overflow-hidden border-2 border-transparent hover:border-green-300 transition-all group h-full bg-gradient-to-br from-white to-green-50/30">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-br from-emerald-400 to-teal-500 opacity-0 group-hover:opacity-5 transition-opacity">
-                            </div>
-                            <div class="flex flex-col space-y-1.5 p-6 relative">
-                                <div
-                                    class="w-16 h-16 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="lucide lucide-users w-8 h-8 text-white">
-                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                                        <circle cx="9" cy="7" r="4"></circle>
-                                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                                    </svg>
-                                </div>
-                                <div class="font-semibold tracking-tight text-2xl mb-3 text-gray-900">Community</div>
-                                <div class="text-muted-foreground text-base leading-relaxed">Connect with like-minded
-                                    peers, share knowledge, and collaborate on exciting projects</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div
-                            class="rounded-lg bg-card text-card-foreground shadow-sm relative overflow-hidden border-2 border-transparent hover:border-green-300 transition-all group h-full bg-gradient-to-br from-white to-green-50/30">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-br from-teal-400 to-cyan-500 opacity-0 group-hover:opacity-5 transition-opacity">
-                            </div>
-                            <div class="flex flex-col space-y-1.5 p-6 relative">
-                                <div
-                                    class="w-16 h-16 bg-gradient-to-br from-teal-400 to-cyan-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="lucide lucide-trophy w-8 h-8 text-white">
-                                        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-                                        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
-                                        <path d="M4 22h16"></path>
-                                        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
-                                        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
-                                        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
-                                    </svg>
-                                </div>
-                                <div class="font-semibold tracking-tight text-2xl mb-3 text-gray-900">Competitions</div>
-                                <div class="text-muted-foreground text-base leading-relaxed">Participate in hackathons,
-                                    coding challenges, and tech competitions</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="upcoming-events" class="py-16 md:py-24 px-4 bg-white relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-96 h-96 bg-green-100 rounded-full blur-3xl opacity-30"></div>
-            <div class="absolute bottom-0 left-0 w-80 h-80 bg-emerald-100 rounded-full blur-3xl opacity-30"></div>
-            <div class="max-w-7xl mx-auto relative z-10">
-                <div class="text-center mb-12 md:mb-20">
-                    <div class="inline-block mb-3 md:mb-4"><span
-                            class="text-green-700 font-bold text-xs md:text-sm uppercase tracking-wider bg-white/80 backdrop-blur-sm px-3 py-1.5 md:px-4 md:py-2 rounded-full border-2 border-green-300">Coming
-                            Soon</span></div>
-                    <h2 class="text-3xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6"><span
-                            class="animated-gradient-text">Upcoming Events</span></h2>
-                    <p class="text-gray-600 text-sm md:text-base lg:text-lg px-4">Mark your calendar for our exciting
-                        upcoming events</p>
-                </div>
-                {% if active_events %}
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-                    {% for event in active_events %}
-                    <div class="group">
-                        <a href="{% url 'events:event_detail' event.id %}"
-                            class="block rounded-lg bg-card text-card-foreground overflow-hidden border-2 border-white/50 shadow-lg hover:shadow-xl transition-all bg-gradient-to-br from-green-50 to-emerald-50 backdrop-blur-sm h-full">
-                            <div class="h-1.5 bg-gradient-to-r from-green-500 to-emerald-600"></div>
-                            <div class="relative w-full aspect-[4/3] overflow-hidden">
-                                {% if event.poster %}
-                                <img alt="{{ event.title }}" decoding="async" data-nimg="fill"
-                                    class="object-cover transition-transform duration-300 group-hover:scale-110"
-                                    style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-                                    src="{{ event.poster.url }}" />
-                                {% endif %}
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                <div
-                                    class="absolute top-2 right-2 bg-white/90 backdrop-blur-sm px-1.5 py-0.5 md:px-2 md:py-1 rounded-full shadow-md">
-                                    <span class="text-[9px] md:text-[10px] font-bold text-green-700">{{ event.date|date:"d M Y" }}</span>
-                                </div>
-                                <div class="absolute bottom-0 left-0 right-0 p-2 md:p-3">
-                                    <h3 class="text-white font-bold text-xs md:text-sm lg:text-base line-clamp-2">{{ event.title }}</h3>
-                                </div>
-                            </div>
-                            <div class="flex flex-col space-y-1.5 p-2 md:p-3">
-                                <div
-                                    class="flex items-center gap-1 md:gap-1.5 text-[10px] md:text-xs font-semibold bg-gradient-to-r from-green-500 to-emerald-600 bg-clip-text text-transparent">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="lucide lucide-calendar w-3 h-3 md:w-3.5 md:h-3.5 text-green-600">
-                                        <path d="M8 2v4"></path>
-                                        <path d="M16 2v4"></path>
-                                        <rect width="18" height="18" x="3" y="4" rx="2"></rect>
-                                        <path d="M3 10h18"></path>
-                                    </svg>Registration Open
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    {% endfor %}
-                </div>
-                {% else %}
-                <div class="text-center py-10">
-                    <p class="text-gray-500">No upcoming events yet. Check back soon!</p>
-                </div>
+            <h1 class="hero-title">
+                <span class="hero-title-line">BAIUST</span>
+                <span class="hero-title-line hero-title-green">Computer Club</span>
+            </h1>
+            <p class="hero-subtitle">
+                A student-driven tech community at BAIUST where ideas become code, skills grow through collaboration, and future engineers find their people.
+            </p>
+            <div class="hero-actions">
+                {% if not user.is_authenticated %}
+                <a href="{% url 'join_guide' %}" class="btn btn-primary btn-large btn-glow hero-join-btn">Join the Club</a>
                 {% endif %}
+                <a href="#about" class="btn btn-outline btn-large hero-scroll-btn">
+                    Explore &darr;
+                </a>
             </div>
-        </section>
-        <section id="events" class="py-16 md:py-24 px-4 relative overflow-hidden">
-            <div class="absolute inset-0 animated-gradient opacity-40"></div>
-            <div class="absolute inset-0 dashed-pattern"></div>
-            <div class="max-w-7xl mx-auto relative z-10">
-                <div class="text-center mb-12 md:mb-20">
-                    <h2 class="text-3xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6"><span
-                            class="animated-gradient-text">Events we&#x27;ve done</span></h2>
-                    <p class="text-gray-600 text-sm md:text-base lg:text-lg px-4">Explore our previous events and
-                        activities</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number" data-count="50">0</span>
+                    <span class="hero-stat-label">Members</span>
                 </div>
-                {% if completed_events %}
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-                    {% for event in completed_events %}
-                    <div class="group">
-                        <a href="{% url 'events:event_detail' event.id %}"
-                            class="block rounded-lg bg-card text-card-foreground overflow-hidden border-2 border-white/50 shadow-lg hover:shadow-xl transition-all bg-gradient-to-br from-green-50 to-emerald-50 backdrop-blur-sm h-full">
-                            <div class="h-1.5 bg-gradient-to-r from-green-500 to-emerald-600"></div>
-                            <div class="relative w-full aspect-[4/3] overflow-hidden">
-                                {% if event.poster %}
-                                <img alt="{{ event.title }}" decoding="async" data-nimg="fill"
-                                    class="object-cover transition-transform duration-300 group-hover:scale-110"
-                                    style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-                                    src="{{ event.poster.url }}" />
-                                {% endif %}
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                <div class="absolute bottom-0 left-0 right-0 p-2 md:p-3">
-                                    <h3 class="text-white font-bold text-xs md:text-sm lg:text-base line-clamp-2">{{ event.title }}</h3>
-                                </div>
-                            </div>
-                            <div class="flex flex-col space-y-1.5 p-2 md:p-3">
-                                <div
-                                    class="flex items-center gap-1 md:gap-1.5 text-[10px] md:text-xs font-semibold bg-gradient-to-r from-green-500 to-emerald-600 bg-clip-text text-transparent">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="lucide lucide-calendar w-3 h-3 md:w-3.5 md:h-3.5 text-green-600">
-                                        <path d="M8 2v4"></path>
-                                        <path d="M16 2v4"></path>
-                                        <rect width="18" height="18" x="3" y="4" rx="2"></rect>
-                                        <path d="M3 10h18"></path>
-                                    </svg>{{ event.date|date:"M d, Y" }}
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    {% endfor %}
+                <div class="hero-stat">
+                    <span class="hero-stat-number" data-count="12">0</span>
+                    <span class="hero-stat-label">Events</span>
                 </div>
-                {% else %}
-                <div class="text-center py-10">
-                    <p class="text-gray-500">No completed events yet.</p>
+                <div class="hero-stat">
+                    <span class="hero-stat-number" data-count="8">0</span>
+                    <span class="hero-stat-label">Workshops</span>
                 </div>
-                {% endif %}
             </div>
-        </section>
-        <section id="team"
-            class="py-12 md:py-16 px-4 bg-gradient-to-br from-green-50 via-white to-emerald-50 relative overflow-hidden">
-            <div
-                class="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-[#014935]/10 to-[#327a3b]/20 rounded-full blur-3xl opacity-50">
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider" />
+
+<section id="about" class="content-band fade-up">
+    <div class="container">
+        <div class="section-head-center">
+            <span class="eyebrow-mono">About</span>
+            <h2 class="display-lg" style="margin-top:var(--spacing-lg);margin-bottom:var(--spacing-3xl)"><span class="gradient-text">Who we are</span></h2>
+            <div style="max-width:680px;margin:0 auto">
+<p style="font-size:20px;line-height:1.7;color:var(--color-body);margin-bottom:var(--spacing-lg)">
+    We are a community of builders, thinkers, and problem-solvers at Bangladesh Army International University of Science & Technology. BAIUST Computer Club exists to bridge the gap between academic curriculum and real-world engineering practice.
+</p>
+<p style="font-size:20px;line-height:1.7;color:var(--color-body)">
+    Through workshops, hackathons, mentorship, and open-source collaboration, we create an environment where technical skills flourish and lasting connections form.
+</p>
             </div>
-            <div
-                class="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-tl from-[#327a3b]/10 to-[#014935]/20 rounded-full blur-3xl opacity-50">
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider" />
+
+<section class="content-band fade-up">
+    <div class="container section-head-center">
+        <span class="eyebrow-mono">Everything you need</span>
+        <h2 class="display-lg" style="margin-top:var(--spacing-lg);margin-bottom:var(--spacing-3xl)"><span class="gradient-text">What we do</span></h2>
+        <div class="feature-grid stagger-children">
+            <article class="card-feature feature-card">
+                <div class="feature-card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                </div>
+                <h3 class="feature-card-title">Coding Workshops</h3>
+                <p class="feature-card-desc">
+                    Hands-on sessions covering web development, algorithms, AI/ML, and modern software practices. Learn by building, guided by peers.
+                </p>
+            </article>
+
+            <article class="card-feature feature-card">
+                <div class="feature-card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <h3 class="feature-card-title">Community</h3>
+                <p class="feature-card-desc">
+                    Connect with like-minded peers through tech talks, study groups, and collaborative projects. Your network starts here.
+                </p>
+            </article>
+
+            <article class="card-feature feature-card">
+                <div class="feature-card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M12 2v7"></path></svg>
+                </div>
+                <h3 class="feature-card-title">Competitions & Events</h3>
+                <p class="feature-card-desc">
+                    Hackathons, coding battles, and tech contests that challenge your skills and celebrate achievement. Push your limits.
+                </p>
+            </article>
+        </div>
+    </div>
+</section>
+
+{% if active_events %}
+<hr class="section-divider" />
+
+<section class="content-band fade-up">
+    <div class="container section-head-center">
+        <span class="eyebrow-mono">Coming soon</span>
+        <h2 class="display-lg" style="margin-top:var(--spacing-lg);margin-bottom:var(--spacing-3xl)"><span class="gradient-text">Upcoming Events</span></h2>
+        <div class="event-card-grid stagger-children">
+            {% for event in active_events %}
+            <a href="{% url 'events:event_detail' event.id %}" class="event-card-link">
+                <div class="event-card-poster{% if not event.poster %} event-card-poster-placeholder{% endif %}"{% if event.poster %} style="background-image:url('{{ event.poster.url }}')"{% endif %}>
+                    <div class="event-card-poster-overlay"></div>
+                    <div class="event-card-date-badge">
+                        <span class="ec-day">{{ event.date|date:"d" }}</span>
+                        <span class="ec-month">{{ event.date|date:"M" }}</span>
+                    </div>
+                    <svg class="card-event-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+                <div class="event-card-body">
+                    <h3 class="feature-card-title">{{ event.title }}</h3>
+                    {% if event.description %}
+                    <p class="feature-card-desc" style="flex:1">{{ event.description|truncatewords:18 }}</p>
+                    {% endif %}
+                    <span class="card-event-footer">
+                        <span class="card-event-tag card-event-tag-upcoming">{{ event.date|date:"F j, Y" }}</span>
+                    </span>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% if completed_events %}
+<hr class="section-divider" />
+
+<section class="content-band fade-up">
+    <div class="container section-head-center">
+        <span class="eyebrow-mono">Our track record</span>
+        <h2 class="display-lg" style="margin-top:var(--spacing-lg);margin-bottom:var(--spacing-3xl)"><span class="gradient-text">Events we've done</span></h2>
+        <div class="event-card-grid stagger-children">
+            {% for event in completed_events %}
+            <a href="{% url 'events:event_detail' event.id %}" class="event-card-link">
+                <div class="event-card-poster{% if not event.poster %} event-card-poster-placeholder{% endif %}"{% if event.poster %} style="background-image:url('{{ event.poster.url }}')"{% endif %}>
+                    <div class="event-card-poster-overlay"></div>
+                    <div class="event-card-date-badge">
+                        <span class="ec-day">{{ event.date|date:"d" }}</span>
+                        <span class="ec-month">{{ event.date|date:"M" }}</span>
+                    </div>
+                    <svg class="card-event-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+                <div class="event-card-body">
+                    <h3 class="feature-card-title">{{ event.title }}</h3>
+                    {% if event.description %}
+                    <p class="feature-card-desc" style="flex:1">{{ event.description|truncatewords:18 }}</p>
+                    {% endif %}
+                    <span class="card-event-footer">
+                        <span class="card-event-tag">{{ event.status|title }}</span>
+                    </span>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        <a href="{% url 'events:event_list' %}" class="btn btn-outline" style="margin-top:var(--spacing-3xl);display:inline-block">View all events</a>
+    </div>
+</section>
+{% endif %}
+
+<hr class="section-divider" />
+
+<section id="team" class="content-band">
+    <div class="container section-head-center">
+        <span class="eyebrow-mono">Leadership</span>
+        <h2 class="display-lg" style="margin-top:var(--spacing-lg);margin-bottom:var(--spacing-lg)"><span class="gradient-text">BCC 10th Panel</span></h2>
+        <p style="font-size:14px;color:var(--color-mute);margin-bottom:var(--spacing-3xl)">Meet the passionate individuals behind the club</p>
+
+        <div class="leader-tree">
+
+            <!-- President -->
+            <div class="leader-card-wrap">
+                <div class="leader-card">
+                    <div class="leader-avatar">S</div>
+                    <div class="leader-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                    <div class="leader-name">Samin Islam</div>
+                    <div class="leader-role">President</div>
+                </div>
             </div>
-            <div class="max-w-7xl mx-auto relative z-10">
-                <div class="text-center mb-8 md:mb-12">
-                    <div class="inline-block mb-2 md:mb-3"><span
-                            class="text-[#014935] font-bold text-[10px] md:text-xs uppercase tracking-wider bg-[#327a3b]/10 px-2.5 py-1 md:px-3 md:py-1.5 rounded-full border-2 border-[#327a3b]/20">Leadership</span>
-                    </div>
-                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-black mb-3 md:mb-4"><span
-                            class="animated-gradient-text">BCC 10th Panel</span></h2>
-                    <p class="text-gray-600 text-xs md:text-sm px-4">Meet the passionate individuals behind the club</p>
-                </div>
-                <div class="flex justify-center mb-4 md:mb-6">
-                    <div class="w-full max-w-[200px]">
-                        <div
-                            class="rounded-lg text-card-foreground text-center border border-white/30 hover:border-white/50 transition-all group bg-white/10 backdrop-blur-xl overflow-hidden shadow-xl hover:shadow-2xl">
-                            <div class="flex flex-col space-y-1.5 relative p-4">
-                                <div class="relative mx-auto mb-4">
-                                    <div
-                                        class="w-20 h-20 mx-auto bg-gradient-to-br from-[#014935] to-[#327a3b] rounded-3xl flex items-center justify-center shadow-xl relative overflow-hidden">
-                                        <img alt="President" loading="lazy" decoding="async" data-nimg="fill"
-                                            class="object-cover rounded-3xl scale-110"
-                                            style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-                                            src="https://placehold.co/400x400/e2e8f0/1e293b?text=Portrait" />
-                                    </div>
-                                    <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-[#327a3b] rounded-full border-3 border-white flex items-center justify-center shadow-lg"><span
-                                            class="text-white text-[10px] font-bold">✓</span></div>
-                                </div>
-                                <div class="font-semibold tracking-tight text-base mb-1 text-gray-900">Dummy Member
-                                </div>
-                                <div
-                                    class="text-xs font-semibold bg-gradient-to-r from-[#014935] to-[#327a3b] bg-clip-text text-transparent">
-                                    President</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="hidden lg:block relative flex justify-center mb-10 max-w-4xl mx-auto">
-                    <div class="absolute top-0 left-1/2 w-0.5 h-10 bg-gradient-to-b from-[#327a3b] to-[#327a3b]"></div>
-                    <div
-                        class="absolute top-10 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#327a3b] to-transparent">
-                    </div>
-                    <div class="absolute top-10 left-1/4 w-0.5 h-10 bg-gradient-to-b from-[#327a3b] to-transparent">
-                    </div>
-                    <div class="absolute top-10 right-1/4 w-0.5 h-10 bg-gradient-to-b from-[#327a3b] to-transparent">
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6 lg:mb-10 max-w-2xl mx-auto pt-6 lg:pt-20">
-                    <div>
-                        <div
-                            class="rounded-lg text-card-foreground text-center border border-white/30 hover:border-white/50 transition-all group bg-white/10 backdrop-blur-xl overflow-hidden shadow-xl hover:shadow-2xl">
-                            <div class="flex flex-col space-y-1.5 relative p-4">
-                                <div class="relative mx-auto mb-4">
-                                    <div
-                                        class="w-20 h-20 mx-auto bg-gradient-to-br from-[#327a3b] to-[#014935] rounded-3xl flex items-center justify-center shadow-xl relative overflow-hidden">
-                                        <img alt="General Secretary" loading="lazy" decoding="async" data-nimg="fill"
-                                            class="object-cover rounded-3xl scale-110"
-                                            style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-                                            src="https://placehold.co/400x400/e2e8f0/1e293b?text=Portrait" />
-                                    </div>
-                                    <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-[#327a3b] rounded-full border-3 border-white flex items-center justify-center shadow-lg"><span
-                                            class="text-white text-[10px] font-bold">✓</span></div>
-                                </div>
-                                <div class="font-semibold tracking-tight text-base mb-1 text-gray-900">Dummy Member
-                                </div>
-                                <div
-                                    class="text-xs font-semibold bg-gradient-to-r from-[#327a3b] to-[#014935] bg-clip-text text-transparent">
-                                    General Secretary</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div
-                            class="rounded-lg text-card-foreground text-center border border-white/30 hover:border-white/50 transition-all group bg-white/10 backdrop-blur-xl overflow-hidden shadow-xl hover:shadow-2xl">
-                            <div class="flex flex-col space-y-1.5 relative p-4">
-                                <div class="relative mx-auto mb-4">
-                                    <div
-                                        class="w-20 h-20 mx-auto bg-gradient-to-br from-[#014935] to-[#327a3b] rounded-3xl flex items-center justify-center shadow-xl relative overflow-hidden">
-                                        <img alt="Deputy General Secretary" loading="lazy" decoding="async"
-                                            data-nimg="fill" class="object-cover rounded-3xl scale-110"
-                                            style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-                                            src="https://placehold.co/400x400/e2e8f0/1e293b?text=Portrait" />
-                                    </div>
-                                    <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-[#327a3b] rounded-full border-3 border-white flex items-center justify-center shadow-lg"><span
-                                            class="text-white text-[10px] font-bold">✓</span></div>
-                                </div>
-                                <div class="font-semibold tracking-tight text-base mb-1 text-gray-900">Dummy Member
-                                </div>
-                                <div
-                                    class="text-xs font-semibold bg-gradient-to-r from-[#014935] to-[#327a3b] bg-clip-text text-transparent">
-                                    Deputy General Secretary</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="hidden lg:block relative flex justify-center mb-10 max-w-5xl mx-auto">
-                    <div class="absolute top-0 left-1/2 w-0.5 h-10 bg-gradient-to-b from-[#327a3b] to-[#327a3b]"></div>
-                    <div
-                        class="absolute top-10 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#327a3b] to-transparent">
-                    </div>
-                    <div class="absolute top-10 left-[12.5%] w-0.5 h-10 bg-gradient-to-b from-[#327a3b] to-transparent">
-                    </div>
-                    <div class="absolute top-10 left-[37.5%] w-0.5 h-10 bg-gradient-to-b from-[#327a3b] to-transparent">
-                    </div>
-                    <div
-                        class="absolute top-10 right-[37.5%] w-0.5 h-10 bg-gradient-to-b from-[#327a3b] to-transparent">
-                    </div>
-                    <div
-                        class="absolute top-10 right-[12.5%] w-0.5 h-10 bg-gradient-to-b from-[#327a3b] to-transparent">
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 lg:pt-20">
-                    <div>
-                        <div
-                            class="rounded-lg text-card-foreground text-center border border-white/30 hover:border-white/50 transition-all group bg-white/10 backdrop-blur-xl overflow-hidden shadow-xl hover:shadow-2xl">
-                            <div class="flex flex-col space-y-1.5 relative p-4">
-                                <div class="relative mx-auto mb-4">
-                                    <div
-                                        class="w-20 h-20 mx-auto bg-gradient-to-br from-[#014935] to-[#327a3b] rounded-3xl flex items-center justify-center shadow-xl relative overflow-hidden">
-                                        <img alt="Md. Tahmeedul Islam Alif" loading="lazy" decoding="async"
-                                            data-nimg="fill" class="object-cover rounded-3xl scale-110"
-                                            style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-                                            src="https://placehold.co/400x400/e2e8f0/1e293b?text=Portrait" />
-                                    </div>
-                                    <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-[#327a3b] rounded-full border-3 border-white flex items-center justify-center shadow-lg"><span
-                                            class="text-white text-[10px] font-bold">✓</span></div>
-                                </div>
-                                <div class="font-semibold tracking-tight text-base mb-1 text-gray-900">Dummy Member
-                                </div>
-                                <div
-                                    class="text-xs font-semibold bg-gradient-to-r from-[#014935] to-[#327a3b] bg-clip-text text-transparent">
-                                    Vice President</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div
-                            class="rounded-lg text-card-foreground text-center border border-white/30 hover:border-white/50 transition-all group bg-white/10 backdrop-blur-xl overflow-hidden shadow-xl hover:shadow-2xl">
-                            <div class="flex flex-col space-y-1.5 relative p-4">
-                                <div class="relative mx-auto mb-4">
-                                    <div
-                                        class="w-20 h-20 mx-auto bg-gradient-to-br from-[#327a3b] to-[#014935] rounded-3xl flex items-center justify-center shadow-xl relative overflow-hidden">
-                                        <img alt="Md Iktiup Mahmud Seyam" loading="lazy" decoding="async"
-                                            data-nimg="fill" class="object-cover rounded-3xl scale-110"
-                                            style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-                                            src="https://placehold.co/400x400/e2e8f0/1e293b?text=Portrait" />
-                                    </div>
-                                    <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-[#327a3b] rounded-full border-3 border-white flex items-center justify-center shadow-lg"><span
-                                            class="text-white text-[10px] font-bold">✓</span></div>
-                                </div>
-                                <div class="font-semibold tracking-tight text-base mb-1 text-gray-900">Dummy Member
-                                </div>
-                                <div
-                                    class="text-xs font-semibold bg-gradient-to-r from-[#327a3b] to-[#014935] bg-clip-text text-transparent">
-                                    Vice President (Acting)</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div
-                            class="rounded-lg text-card-foreground text-center border border-white/30 hover:border-white/50 transition-all group bg-white/10 backdrop-blur-xl overflow-hidden shadow-xl hover:shadow-2xl">
-                            <div class="flex flex-col space-y-1.5 relative p-4">
-                                <div class="relative mx-auto mb-4">
-                                    <div
-                                        class="w-20 h-20 mx-auto bg-gradient-to-br from-[#014935] to-[#327a3b] rounded-3xl flex items-center justify-center shadow-xl relative overflow-hidden">
-                                        <img alt="Shawon Roy" loading="lazy" decoding="async" data-nimg="fill"
-                                            class="object-cover rounded-3xl scale-110"
-                                            style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-                                            src="https://placehold.co/400x400/e2e8f0/1e293b?text=Portrait" />
-                                    </div>
-                                    <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-[#327a3b] rounded-full border-3 border-white flex items-center justify-center shadow-lg"><span
-                                            class="text-white text-[10px] font-bold">✓</span></div>
-                                </div>
-                                <div class="font-semibold tracking-tight text-base mb-1 text-gray-900">Dummy Member
-                                </div>
-                                <div
-                                    class="text-xs font-semibold bg-gradient-to-r from-[#014935] to-[#327a3b] bg-clip-text text-transparent">
-                                    Vice President</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div
-                            class="rounded-lg text-card-foreground text-center border border-white/30 hover:border-white/50 transition-all group bg-white/10 backdrop-blur-xl overflow-hidden shadow-xl hover:shadow-2xl">
-                            <div class="flex flex-col space-y-1.5 relative p-4">
-                                <div class="relative mx-auto mb-4">
-                                    <div
-                                        class="w-20 h-20 mx-auto bg-gradient-to-br from-[#327a3b] to-[#014935] rounded-3xl flex items-center justify-center shadow-xl relative overflow-hidden">
-                                        <img alt="Jannatul Tabassum Nahar" loading="lazy" decoding="async"
-                                            data-nimg="fill" class="object-cover rounded-3xl scale-110"
-                                            style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-                                            src="https://placehold.co/400x400/e2e8f0/1e293b?text=Portrait" />
-                                    </div>
-                                    <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-[#327a3b] rounded-full border-3 border-white flex items-center justify-center shadow-lg"><span
-                                            class="text-white text-[10px] font-bold">✓</span></div>
-                                </div>
-                                <div class="font-semibold tracking-tight text-base mb-1 text-gray-900">Dummy Member
-                                </div>
-                                <div
-                                    class="text-xs font-semibold bg-gradient-to-r from-[#327a3b] to-[#014935] bg-clip-text text-transparent">
-                                    Vice President</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center mt-10"><a href="#team"><button
-                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary hover:bg-primary/90 h-10 gradient-green text-white shadow-lg hover:shadow-xl transition-all text-base px-6 py-5 group">View
-                            Full Team<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="lucide lucide-arrow-right w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform">
-                                <path d="M5 12h14"></path>
-                                <path d="m12 5 7 7-7 7"></path>
-                            </svg></button></a></div>
+
+            <div class="tree-lines">
+                <div class="tree-line-v"></div>
             </div>
-        </section>
-        <section id="contact" class="py-16 md:py-24 px-4 relative overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-[#014935]/5 via-white to-[#327a3b]/5"></div>
-            <div class="absolute inset-0 dashed-pattern"></div>
-            <div
-                class="absolute top-20 left-20 w-64 h-64 bg-gradient-to-br from-[#014935]/30 to-[#327a3b]/40 rounded-full blur-3xl">
+
+            <!-- GS -->
+            <div class="leader-card-wrap">
+                <div class="leader-card">
+                    <div class="leader-avatar">G</div>
+                    <div class="leader-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                    <div class="leader-name">General Secretary</div>
+                    <div class="leader-role">TBD</div>
+                </div>
             </div>
-            <div
-                class="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-tl from-[#327a3b]/30 to-[#014935]/40 rounded-full blur-3xl">
+
+            <div class="tree-lines">
+                <div class="tree-line-v"></div>
+                <div class="tree-line-h"></div>
+                <div class="tree-line-branch l1"></div>
+                <div class="tree-line-branch l2"></div>
+                <div class="tree-line-branch l3"></div>
+                <div class="tree-line-branch l4"></div>
             </div>
-            <div class="max-w-4xl mx-auto text-center relative z-10">
-                <div>
-                    <div class="inline-block mb-4 md:mb-6"><span
-                            class="text-[#014935] font-bold text-xs md:text-sm uppercase tracking-wider bg-white/80 backdrop-blur-sm px-3 py-1.5 md:px-4 md:py-2 rounded-full border-2 border-[#327a3b]/30">Let&#x27;s
-                            Connect</span></div>
-                    <h2 class="text-3xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6"><span
-                            class="animated-gradient-text">Get In Touch</span></h2>
-                    <p class="text-gray-700 text-sm md:text-base lg:text-lg mb-8 md:mb-12 max-w-2xl mx-auto px-4">Have
-                        questions? Want to join? We&#x27;d love to hear from you!</p>
-                    <div class="flex justify-center gap-3 md:gap-4 mb-8 md:mb-12 px-4"><button
-                            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary hover:bg-primary/90 h-10 gradient-green text-white shadow-2xl hover:shadow-3xl transition-all glow-green text-sm md:text-base lg:text-lg px-6 py-5 md:px-8 md:py-6"><svg
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="lucide lucide-mail w-4 h-4 md:w-5 md:h-5 mr-2">
-                                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-                            </svg>Email Us</button></div>
-                    <div class="flex justify-center gap-4 md:gap-6 flex-wrap">
-                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="group relative"
-                            aria-label="GitHub" tabindex="0">
-                            <div
-                                class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-gray-700 to-gray-900 rounded-2xl flex items-center justify-center shadow-xl hover:shadow-2xl transition-all">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="lucide lucide-github w-6 h-6 md:w-8 md:h-8 text-white">
-                                    <path
-                                        d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4">
-                                    </path>
-                                    <path d="M9 18c-4.51 2-5-2-7-2"></path>
-                                </svg>
-                            </div>
-                            <span
-                                class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs font-medium text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">GitHub</span>
-                        </a>
-                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="group relative"
-                            aria-label="Facebook" tabindex="0">
-                            <div
-                                class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center shadow-xl hover:shadow-2xl transition-all">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="lucide lucide-facebook w-6 h-6 md:w-8 md:h-8 text-white">
-                                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                                </svg>
-                            </div>
-                            <span
-                                class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs font-medium text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Facebook</span>
-                        </a>
-                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="group relative"
-                            aria-label="Instagram" tabindex="0">
-                            <div
-                                class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-xl hover:shadow-2xl transition-all">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="lucide lucide-instagram w-6 h-6 md:w-8 md:h-8 text-white">
-                                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-                                </svg>
-                            </div>
-                            <span
-                                class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs font-medium text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Instagram</span>
-                        </a>
-                        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="group relative"
-                            aria-label="YouTube" tabindex="0">
-                            <div
-                                class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-red-600 to-red-700 rounded-2xl flex items-center justify-center shadow-xl hover:shadow-2xl transition-all">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="lucide lucide-youtube w-6 h-6 md:w-8 md:h-8 text-white">
-                                    <path
-                                        d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17">
-                                    </path>
-                                    <path d="m10 15 5-3-5-3z"></path>
-                                </svg>
-                            </div>
-                            <span
-                                class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs font-medium text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">YouTube</span>
-                        </a>
+
+            <!-- VPs -->
+            <div class="leader-row-4">
+                <div class="leader-card-wrap">
+                    <div class="leader-card">
+                        <div class="leader-avatar">T</div>
+                        <div class="leader-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                        <div class="leader-name">Tanvir Hasan</div>
+                        <div class="leader-role">VP</div>
+                    </div>
+                </div>
+                <div class="leader-card-wrap">
+                    <div class="leader-card">
+                        <div class="leader-avatar">V</div>
+                        <div class="leader-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                        <div class="leader-name">VP</div>
+                        <div class="leader-role">TBD</div>
+                    </div>
+                </div>
+                <div class="leader-card-wrap">
+                    <div class="leader-card">
+                        <div class="leader-avatar">V</div>
+                        <div class="leader-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                        <div class="leader-name">VP</div>
+                        <div class="leader-role">TBD</div>
+                    </div>
+                </div>
+                <div class="leader-card-wrap">
+                    <div class="leader-card">
+                        <div class="leader-avatar">V</div>
+                        <div class="leader-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                        <div class="leader-name">VP</div>
+                        <div class="leader-role">TBD</div>
                     </div>
                 </div>
             </div>
-        </section>
-        <footer
-            class="bg-gradient-to-br from-gray-900 via-gray-800 to-[#014935] text-white py-12 md:py-16 px-4 relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#014935] via-[#327a3b] to-[#014935]">
+
+        </div>
+
+        <div class="team-cta" style="margin-top:var(--spacing-3xl)">
+            <a href="/team" class="btn btn-outline btn-large">View Full Team</a>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider" />
+
+<section id="contact" class="content-band" style="background:linear-gradient(135deg, var(--color-canvas) 0%, rgba(var(--color-primary-rgb), 0.04) 40%, rgba(var(--color-primary-rgb), 0.06) 60%, var(--color-canvas) 100%);position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;pointer-events:none;background-image:repeating-linear-gradient(0deg, transparent, transparent 24px, rgba(var(--color-primary-rgb), 0.07) 0, rgba(var(--color-primary-rgb), 0.07) 26px),repeating-linear-gradient(90deg, transparent, transparent 24px, rgba(var(--color-primary-rgb), 0.07) 0, rgba(var(--color-primary-rgb), 0.07) 26px),repeating-linear-gradient(45deg, transparent, transparent 48px, rgba(var(--color-primary-rgb), 0.04) 0, rgba(var(--color-primary-rgb), 0.04) 52px),repeating-linear-gradient(-45deg, transparent, transparent 48px, rgba(var(--color-primary-rgb), 0.04) 0, rgba(var(--color-primary-rgb), 0.04) 52px)"></div>
+    <div style="position:absolute;width:400px;height:400px;border-radius:50%;pointer-events:none;filter:blur(80px);opacity:0.6;background:radial-gradient(circle, rgba(var(--color-primary-rgb), 0.15), transparent 70%);top:-100px;right:-100px"></div>
+    <div style="position:absolute;width:300px;height:300px;border-radius:50%;pointer-events:none;filter:blur(80px);opacity:0.4;background:radial-gradient(circle, rgba(var(--color-primary-rgb), 0.1), transparent 70%);bottom:-80px;left:-80px"></div>
+    <div class="container" style="position:relative;z-index:1">
+        <div style="max-width:500px;margin:0 auto;text-align:center">
+            <span class="eyebrow-mono">Get in touch</span>
+            <h2 class="display-lg" style="margin-top:var(--spacing-lg);margin-bottom:var(--spacing-xl)"><span class="gradient-text">Let's connect</span></h2>
+            <p style="font-size:15px;color:var(--color-body);margin-bottom:var(--spacing-3xl);line-height:1.6">
+                Have questions? Want to join? We'd love to hear from you. Reach out and become part of something bigger.
+            </p>
+            <div style="display:flex;flex-wrap:wrap;gap:var(--spacing-md);margin-bottom:var(--spacing-4xl);justify-content:center">
+                <a href="mailto:contact@bcc.baiust.edu" class="btn btn-primary">Email Us</a>
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Facebook</a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline">GitHub</a>
             </div>
-            <div class="absolute inset-0 opacity-5">
-                <div class="absolute inset-0 dashed-pattern"></div>
+        </div>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img alt="BCC Logo" src="{% static 'portal/images/LogoWithWhiteText.png' %}" />
+                <p class="footer-tagline">Building the future, one line of code at a time.</p>
             </div>
-            <div class="max-w-7xl mx-auto relative z-10">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-8 md:mb-12">
-                    <div class="text-center md:text-left">
-                        <div class="relative h-12 md:h-16 w-auto mb-3 md:mb-4 inline-block"><img alt="BCC Logo"
-                                loading="lazy" width="160" height="48" decoding="async" data-nimg="1"
-                                class="object-contain md:w-[200px] md:h-[64px]" style="color:transparent"
-                                src="{% static 'portal/media/Logo With White Text PNG.png' %}" /></div>
-                        <p class="text-gray-300 text-xs md:text-sm leading-relaxed px-4 md:px-0">Building the future,
-                            one line of code at a time. Join us in our mission to foster innovation and collaboration.
-                        </p>
-                    </div>
-                    <div class="hidden md:block text-center md:text-left">
-                        <h3 class="text-lg md:text-xl font-bold mb-3 md:mb-4 text-[#327a3b]">Quick Links</h3>
-                        <ul class="space-y-2">
-                            <li><a href="#about"
-                                    class="text-gray-300 hover:text-[#327a3b] transition-colors text-xs md:text-sm inline-block">About</a>
-                            </li>
-                            <li><a href="#events"
-                                    class="text-gray-300 hover:text-[#327a3b] transition-colors text-xs md:text-sm inline-block">Events</a>
-                            </li>
-                            <li><a href="#team"
-                                    class="text-gray-300 hover:text-[#327a3b] transition-colors text-xs md:text-sm inline-block">Team</a>
-                            </li>
-                            <li><a href="#contact"
-                                    class="text-gray-300 hover:text-[#327a3b] transition-colors text-xs md:text-sm inline-block">Contact</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="text-center md:text-left">
-                        <h3 class="text-lg md:text-xl font-bold mb-3 md:mb-4 text-[#327a3b]">Get In Touch</h3>
-                        <div class="space-y-2 md:space-y-3 text-xs md:text-sm text-gray-300">
-                            <div class="flex items-center justify-center md:justify-start gap-2"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="lucide lucide-mail w-3.5 h-3.5 md:w-4 md:h-4 text-[#327a3b]">
-                                    <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-                                </svg><span>bcc@baiust.edu.bd</span></div>
-                            <div class="flex items-center justify-center md:justify-start gap-2"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="lucide lucide-phone w-3.5 h-3.5 md:w-4 md:h-4 text-[#327a3b]">
-                                    <path
-                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
-                                    </path>
-                                </svg><span>+880 XXX-XXXXXX</span></div>
-                            <div class="flex items-start justify-center md:justify-start gap-2"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="lucide lucide-map-pin w-3.5 h-3.5 md:w-4 md:h-4 text-[#327a3b] mt-1">
-                                    <path
-                                        d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
-                                    </path>
-                                    <circle cx="12" cy="10" r="3"></circle>
-                                </svg><span>BAIUST, Cumilla, Bangladesh</span></div>
-                        </div>
-                    </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Navigate</h4>
+                    <a href="{% url 'home' %}">Home</a>
+                    <a href="{% url 'events:event_list' %}">Events</a>
+                    <a href="#about">About</a>
                 </div>
-                <div class="text-center">
-                    <p class="text-xs md:text-sm text-gray-400">©
-                        <!-- -->2025
-                        <!-- -->BAIUST Computer Club. All rights reserved.
-                    </p>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <a href="mailto:contact@bcc.baiust.edu">Email</a>
+                    <a href="https://github.com" target="_blank">GitHub</a>
+                    <a href="https://facebook.com" target="_blank">Facebook</a>
                 </div>
             </div>
-        </footer>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; {% now "Y" %} BAIUST Computer Club. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
 {% endblock %}

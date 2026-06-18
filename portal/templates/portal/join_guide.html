@@ -1,0 +1,118 @@
+{% extends "portal/base.html" %}
+{% load static %}
+{% block title %}Join — BAIUST Computer Club{% endblock %}
+{% block nav %}{{ block.super }}{% endblock %}
+{% block content %}
+<style>
+.join-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 6rem 1.5rem 4rem;
+}
+.join-container h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+.join-container .subtitle {
+  color: var(--color-body);
+  margin-bottom: 3rem;
+  font-size: 1.05rem;
+  text-align: center;
+}
+.step {
+  display: flex;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--color-canvas);
+  border-radius: 20px;
+  border: 1px solid var(--color-hairline);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.10);
+  transform: translateY(-2px);
+  transition: all 0.5s ease-out;
+}
+.step:hover {
+  border-color: var(--color-primary);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.18),
+    0 0 0 1px var(--color-primary),
+    0 0 24px rgba(var(--color-primary-rgb), 0.20),
+    0 0 64px rgba(var(--color-primary-rgb), 0.10);
+  transform: translateY(-8px);
+}
+.step-number {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--color-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.step-content h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+.step-content p {
+  color: var(--color-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+</style>
+
+<div class="join-container">
+  <h1 class="gradient-text">Join BAIUST Computer Club</h1>
+  <p class="subtitle">Follow these simple steps to become a member.</p>
+
+  <div class="step">
+    <div class="step-number">1</div>
+    <div class="step-content">
+      <h3>Get Your QR Code</h3>
+      <p>Visit any club executive or the club room to receive your unique membership QR code. This code is your key to accessing the portal.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-number">2</div>
+    <div class="step-content">
+      <h3>Scan or Open the QR Link</h3>
+      <p>Scan your QR code using any smartphone camera, or click the link sent to you. You'll be taken to the registration page with your code pre-filled.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-number">3</div>
+    <div class="step-content">
+      <h3>Create Your Account</h3>
+      <p>Fill in your name, email, and a password to create your portal account. Make sure to use a valid email — you'll use it to sign in later.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-number">4</div>
+    <div class="step-content">
+      <h3>Complete Your Profile</h3>
+      <p>After registering, add your phone number, department, and batch to complete your profile. This info helps the club stay connected with you.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-number">5</div>
+    <div class="step-content">
+      <h3>You're In!</h3>
+      <p>Sign in anytime to access your membership card, register for events, and track your payments. Welcome to the community!</p>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:2rem">
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<div style="max-width:500px;margin:40px auto;padding:30px;background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,0.1)">
+  <h2 style="margin-bottom:8px">Generate Member Profiles</h2>
+  <p style="color:#6b7280;margin-bottom:24px">Create new pre-claimed member profiles with QR codes for physical card printing.</p>
+
+  <form method="post">
+    {% csrf_token %}
+    <label style="display:block;margin-bottom:8px;font-weight:600;font-size:14px">Number of profiles to create</label>
+    <input type="number" name="count" min="1" max="5000" required
+           style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:16px;margin-bottom:20px" />
+    <div style="display:flex;gap:12px">
+      <button type="submit"
+              style="padding:10px 24px;background:#014935;color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer">
+        Generate
+      </button>
+      <a href=".." style="padding:10px 24px;background:#f3f4f6;color:#374151;border-radius:8px;text-decoration:none;font-weight:500">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

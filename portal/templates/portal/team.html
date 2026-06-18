@@ -1,0 +1,70 @@
+{% extends "portal/base.html" %}
+{% load static %}
+
+{% block title %}Our Team — BAIUST Computer Club{% endblock %}
+
+{% block content %}
+<section class="page-header" style="border-bottom:none;text-align:center">
+    <div class="container">
+        <span class="eyebrow-mono" style="display:inline-block;margin-top:var(--spacing-2xl)">Our team</span>
+        <h1 class="display-xl" style="margin-top:var(--spacing-lg)"><span class="gradient-text">The People Behind BCC</span></h1>
+<p style="font-size:20px;color:var(--color-body);max-width:560px;margin:var(--spacing-lg) auto 0;line-height:1.6">
+    Our talented team of students passionate about technology, innovation, and community building
+</p>
+    </div>
+</section>
+
+<section class="page-body">
+    <div class="container">
+
+        {% for panel in panels_data %}
+        <div class="team-panel">
+            <h2 class="panel-title">{{ panel.title }}</h2>
+            <p class="panel-subtitle">{{ panel.subtitle }}</p>
+            <div class="member-grid">
+                {% for member in panel.members %}
+                <div class="member-card">
+                    <span class="member-badge">{{ member.badge }}</span>
+                    <div class="member-avatar-wrap">
+                        {% if member.image %}
+                        <img src="{{ member.image.url }}" alt="{{ member.name }}" class="member-avatar-img" />
+                        {% else %}
+                        <div class="member-avatar">{{ member.avatar_letter }}</div>
+                        {% endif %}
+                        <span class="member-verified">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </span>
+                    </div>
+                    <div class="member-name">{{ member.name }}</div>
+                    <div class="member-role">{{ member.role }}</div>
+                    <div class="member-dept">{{ member.department }}</div>
+                    <p class="member-desc">{{ member.bio }}</p>
+                    {% if member.tags %}
+                    <div class="member-tags">
+                        {% for tag in member.tags %}
+                        <span class="tag">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <div class="member-links">
+                        {% if member.email %}
+                        <a href="mailto:{{ member.email }}" class="member-link" aria-label="Email"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
+                        {% endif %}
+                        {% if member.github %}
+                        <a href="{{ member.github }}" class="member-link" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></a>
+                        {% endif %}
+                        {% if member.linkedin %}
+                        <a href="{{ member.linkedin }}" class="member-link" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% empty %}
+                <p style="color:var(--color-body);grid-column:1/-1;text-align:center;padding:var(--spacing-xl) 0">No members added yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
+{% endblock %}

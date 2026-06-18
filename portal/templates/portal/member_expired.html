@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'portal/css/base.css' %}" />
+    <link rel="icon" type="image/png" href="{% static 'portal/images/LogoWithBlackTextPNG.png' %}" />
+    <title>BAIUST Computer Club — Membership Expired</title>
+</head>
+<body>
+    <div class="member-card-page">
+        <div class="member-card card-feature">
+            <div class="member-card-top">
+                <div class="member-card-avatar" style="background:var(--color-error-bg, #fef2f2);color:var(--color-error, #dc2626)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                </div>
+                <h2>Membership Expired</h2>
+                <p>This membership is no longer valid</p>
+            </div>
+
+            <div class="member-card-details">
+                <div style="text-align:center;margin-bottom:var(--spacing-lg)">
+                    <div style="width:56px;height:56px;margin:0 auto var(--spacing-md);display:flex;align-items:center;justify-content:center;border:1px solid var(--color-hairline);border-radius:50%;color:var(--color-ink-light)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    </div>
+                    <h3 style="font-size:18px;font-weight:600;color:var(--color-ink)">{{ profile.user.first_name|default:"Member" }}</h3>
+                </div>
+
+                <div class="member-card-row">
+                    <span class="member-card-row-label">Member ID</span>
+                    <span class="member-card-row-value">{{ profile.student_id|default:"N/A" }}</span>
+                </div>
+                <div class="member-card-row">
+                    <span class="member-card-row-label">Membership Ended</span>
+                    <span class="member-card-row-value">{{ profile.expires_at|date:"M d, Y"|default:"N/A" }}</span>
+                </div>
+            </div>
+
+            <div class="member-card-footer">
+                <p>This membership expired on {{ profile.expires_at|date:"F d, Y" }}. Contact the club administration for renewal.</p>
+                <a href="{% url 'home' %}">Visit Portal &rarr;</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

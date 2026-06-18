@@ -1,107 +1,87 @@
 {% extends "portal/base.html" %}
-{% block title %}BAIUST - Computer Club Portal | Profile{% endblock %}
-{% block description %}Your profile page{% endblock %}
+{% load static %}
+
+{% block title %}Profile — BAIUST Computer Club{% endblock %}
+{% block nav %}{% endblock nav %}
 
 {% block content %}
-<div class="pt-24 pb-16 px-4">
-    <div class="max-w-2xl mx-auto">
-        <div class="rounded-lg text-card-foreground shadow-xl border-0 bg-white/95 backdrop-blur-sm">
-            <div class="flex flex-col p-6 text-center space-y-4">
-                <div class="flex justify-center">
-                    <div class="w-20 h-20 bg-club-600 rounded-full flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user w-10 h-10 text-white"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                    </div>
-                </div>
-                <h3 class="tracking-tight text-2xl font-bold text-gray-900">{{ user.first_name|default:user.username }}</h3>
-                <p class="text-sm text-gray-600">Your Profile</p>
+<div class="profile-page">
+    <div class="profile-card card-feature">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
             </div>
-            <div class="p-6 pt-0">
-                {% if messages %}
-                <div class="mb-4">
-                    {% for message in messages %}
-                    <div class="p-3 bg-green-500/20 border border-green-500 rounded text-green-100 text-sm mb-2">{{ message }}</div>
-                    {% endfor %}
-                </div>
-                {% endif %}
-                
-                {% if profile.is_member %}
-                <div style="background: linear-gradient(to right, #22c55e, #059669);" class="mb-6 p-4 rounded-lg text-white text-center">
-                    <div class="flex items-center justify-center gap-2 mb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                        <span class="text-lg font-bold">Verified General Member</span>
-                    </div>
-                    <p class="text-sm opacity-90">You are an official member of BAIUST Computer Club</p>
-                </div>
-                
-                <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                    <h4 class="text-sm font-semibold text-gray-700 mb-3 text-center">Your Membership QR Code</h4>
-                    <div class="flex justify-center">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&amp;data={{ request.scheme }}://{{ request.get_host }}{% url 'member_public' profile.member_uuid %}" alt="Membership QR Code" class="w-48 h-48 rounded-lg border-2 border-gray-300" />
-                    </div>
-                    <p class="text-xs text-gray-500 text-center mt-2">Scan to verify membership</p>
-                </div>
-                {% elif application %}
-                <div class="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                    <div class="flex items-center gap-2 text-yellow-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                        <span class="font-semibold">Application Pending</span>
-                    </div>
-                    <p class="text-sm text-yellow-700 mt-1">Your membership application is under review. You will be notified once approved.</p>
-                    {% if application.status == 'rejected' %}
-                    <p class="text-sm text-red-600 mt-2 font-medium">Your application was rejected. {{ application.notes }}</p>
-                    {% endif %}
-                </div>
-                {% else %}
-                <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg text-center">
-                    <h4 class="font-semibold text-blue-900 mb-2">Become a General Member</h4>
-                    <p class="text-sm text-blue-700 mb-3">Apply for official membership to get your unique QR code and membership card.</p>
-                    <form method="POST" action="{% url 'apply_membership' %}">
-                        {% csrf_token %}
-                        <button type="submit" class="inline-flex items-center justify-center gap-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 text-sm transition-all">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" x2="19" y1="8" y2="14"></line><line x1="22" x2="16" y1="11" y2="11"></line></svg>
-                            Apply for Membership
-                        </button>
-                    </form>
-                </div>
-                {% endif %}
-                
-                <div class="space-y-4">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="space-y-2">
-                            <label class="text-sm font-medium text-gray-500">Full Name</label>
-                            <p class="text-sm font-semibold text-gray-900">{{ user.first_name }}</p>
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-sm font-medium text-gray-500">Email</label>
-                            <p class="text-sm font-semibold text-gray-900">{{ user.email }}</p>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="space-y-2">
-                            <label class="text-sm font-medium text-gray-500">Student ID</label>
-                            <p class="text-sm font-semibold text-gray-900">{{ profile.student_id|default:"Not set" }}</p>
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-sm font-medium text-gray-500">Phone</label>
-                            <p class="text-sm font-semibold text-gray-900">{{ profile.phone }}</p>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="space-y-2">
-                            <label class="text-sm font-medium text-gray-500">Department</label>
-                            <p class="text-sm font-semibold text-gray-900">{{ profile.department|default:"Not set" }}</p>
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-sm font-medium text-gray-500">Batch</label>
-                            <p class="text-sm font-semibold text-gray-900">{{ profile.batch|default:"Not set" }}</p>
-                        </div>
-                    </div>
-                </div>
+            <h2>{{ user.first_name|default:user.username }}</h2>
+            <p>{{ user.email }}</p>
+
+            {% if profile.is_member %}
+            <div class="profile-membership-badge">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Verified General Member
             </div>
-            <div class="flex items-center p-6 pt-0 gap-3">
-                <a href="{% url 'home' %}" class="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-gray-300 bg-white hover:bg-gray-50 h-10 px-4 py-2 text-sm font-medium text-gray-700 transition-all">Back to Home</a>
-                <a href="{% url 'logout' %}" style="background-color: #ef4444; color: #ffffff;" class="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:opacity-90 h-10 px-4 py-2 text-sm font-semibold transition-all">Logout</a>
+            {% endif %}
+        </div>
+
+        {% if messages %}
+        <div style="margin-bottom:var(--spacing-lg)">
+            {% for message in messages %}
+            <div class="toast" style="position:static;animation:none;margin-bottom:var(--spacing-sm);border-color:var(--color-primary)">
+                <svg class="toast-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span>{{ message }}</span>
             </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if profile.phone or profile.department or profile.batch %}
+        <div class="profile-details">
+            {% if profile.student_id %}
+            <div class="profile-field">
+                <div class="profile-field-label">Member ID</div>
+                <div class="profile-field-value">{{ profile.student_id }}</div>
+            </div>
+            {% endif %}
+            <div class="profile-field">
+                <div class="profile-field-label">Full name</div>
+                <div class="profile-field-value">{{ user.first_name }}</div>
+            </div>
+            <div class="profile-field">
+                <div class="profile-field-label">Email</div>
+                <div class="profile-field-value">{{ user.email }}</div>
+            </div>
+            {% if profile.phone %}
+            <div class="profile-field">
+                <div class="profile-field-label">Phone</div>
+                <div class="profile-field-value">{{ profile.phone }}</div>
+            </div>
+            {% endif %}
+            {% if profile.department %}
+            <div class="profile-field">
+                <div class="profile-field-label">Department</div>
+                <div class="profile-field-value">{{ profile.department }}</div>
+            </div>
+            {% endif %}
+            {% if profile.batch %}
+            <div class="profile-field">
+                <div class="profile-field-label">Batch</div>
+                <div class="profile-field-value">{{ profile.batch }}</div>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if profile.is_member and profile.qr_png %}
+        <div class="qr-section">
+            <img src="{% url 'qr_image' profile.member_uuid %}" alt="Membership QR Code" width="160" height="160" />
+            <p style="font-size:12px;color:var(--color-mute);margin-top:var(--spacing-sm)">Scan to verify your membership</p>
+            <a href="{% url 'member_public' profile.member_uuid %}" class="btn btn-outline" style="margin-top:var(--spacing-md);font-size:13px" target="_blank">View member card</a>
+        </div>
+        {% endif %}
+
+        <div class="profile-actions">
+            <a href="{% url 'profile_edit' %}" class="btn" style="flex:1;justify-content:center">Edit Profile</a>
+            <a href="{% url 'home' %}" class="btn btn-outline" style="flex:1;justify-content:center">Home</a>
+            <a href="{% url 'logout' %}" class="btn btn-ghost" style="flex:1;justify-content:center;color:#ef4444" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Sign out</a>
         </div>
     </div>
 </div>

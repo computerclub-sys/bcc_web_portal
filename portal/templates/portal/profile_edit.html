@@ -1,0 +1,58 @@
+{% extends "portal/base.html" %}
+{% load static %}
+
+{% block title %}Edit Profile — BAIUST Computer Club{% endblock %}
+{% block nav %}{% endblock nav %}
+
+{% block content %}
+<div class="profile-page">
+    <div class="profile-card card-feature" style="overflow:visible">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </div>
+            <h2>Edit Profile</h2>
+            <p>{{ user.email }}</p>
+        </div>
+
+        <form method="post" style="padding:0 var(--spacing-2xl) var(--spacing-2xl)">
+            {% csrf_token %}
+
+            <div class="profile-field" style="margin-bottom:var(--spacing-lg);padding-top:0">
+                <div class="profile-field-label">Member ID</div>
+                <div class="profile-field-value" style="color:var(--color-mute)">{{ profile.student_id|default:"N/A" }}</div>
+            </div>
+
+            <div class="form-group" style="margin-bottom:var(--spacing-lg)">
+                <label class="form-label">Full name</label>
+                <input type="text" name="name" value="{{ user.first_name }}" class="text-input" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom:var(--spacing-lg)">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" value="{{ user.email }}" class="text-input" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom:var(--spacing-lg)">
+                <label class="form-label">Phone</label>
+                <input type="text" name="phone" value="{{ profile.phone }}" class="text-input" placeholder="e.g. 017XXXXXXXX">
+            </div>
+
+            <div class="form-group" style="margin-bottom:var(--spacing-lg)">
+                <label class="form-label">Department</label>
+                <input type="text" name="department" value="{{ profile.department }}" class="text-input" placeholder="e.g. CSE">
+            </div>
+
+            <div class="form-group" style="margin-bottom:var(--spacing-2xl)">
+                <label class="form-label">Batch</label>
+                <input type="text" name="batch" value="{{ profile.batch }}" class="text-input" placeholder="e.g. 2025-26">
+            </div>
+
+            <div style="display:flex;gap:var(--spacing-sm)">
+                <button type="submit" class="btn btn-primary" style="flex:1;justify-content:center;border-radius:14px">Save Changes</button>
+                <a href="{% url 'profile' %}" class="btn btn-outline" style="flex:1;justify-content:center">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

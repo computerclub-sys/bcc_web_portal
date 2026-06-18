@@ -2,72 +2,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <meta charSet="utf-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="{% static 'portal/css/home-style.css' %}" data-precedence="next" />
-    <link rel="stylesheet" href="{% block page_css %}{% endblock %}" />
-    <meta name="next-size-adjust" content="" />
+    <link rel="stylesheet" href="{% static 'portal/css/base.css' %}" />
+    <link rel="icon" type="image/jpeg" href="{% static 'portal/images/BCC Club logo.jpeg' %}" />
     <title>{% block title %}BAIUST Computer Club{% endblock %}</title>
-    <meta name="description" content="{% block description %}Join our vibrant community of tech enthusiasts, coders, and innovators{% endblock %}" />
-    <link rel="icon" href="{% static 'portal/favicon.ico' %}" />
+    <meta name="description" content="{% block description %}BAIUST Computer Club — a student-driven tech community fostering innovation through workshops, events, and collaboration.{% endblock %}" />
     {% block extra_head %}{% endblock %}
 </head>
-<body class="__className_f367f3">
-    <div hidden="">
-        <!--$-->
-        <!--/$-->
-    </div>
-    <main class="min-h-screen">
-        {% block header %}
-        <div class="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 origin-left z-[60]"></div>
-        <nav class="fixed top-0 w-full bg-white/70 backdrop-blur-xl z-50 border-b border-[#014935]/20 shadow-lg">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-center h-20">
-                    <div class="flex items-center group cursor-pointer">
-                        <a href="{% url 'home' %}" class="relative h-16 w-auto"><img alt="BCC Logo" width="180" height="64" decoding="async" data-nimg="1" class="object-contain" style="color:transparent" src="{% static 'portal/media/Logo With Black Text PNG.png' %}" /></a>
-                    </div>
-                    <div class="hidden md:flex gap-10">
-                        <a href="{% url 'home' %}" class="text-gray-700 hover:text-[#014935] transition-colors font-medium text-lg relative group">Home<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#014935] to-[#327a3b] group-hover:w-full transition-all duration-300"></span></a>
-                        <a href="{% url 'events:event_list' %}" class="text-gray-700 hover:text-[#014935] transition-colors font-medium text-lg relative group">Events<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#014935] to-[#327a3b] group-hover:w-full transition-all duration-300"></span></a>
-                        <a href="{% url 'home' %}#team" class="text-gray-700 hover:text-[#014935] transition-colors font-medium text-lg relative group">Team<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#014935] to-[#327a3b] group-hover:w-full transition-all duration-300"></span></a>
-                        <a href="{% url 'home' %}#contact" class="text-gray-700 hover:text-[#014935] transition-colors font-medium text-lg relative group">Contact<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#014935] to-[#327a3b] group-hover:w-full transition-all duration-300"></span></a>
-                    </div>
-                    {% if user.is_authenticated %}
-                    <div class="hidden md:flex gap-4 items-center">
-                        <a href="{% url 'profile' %}"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-green-500 bg-white text-green-700 hover:bg-green-50 h-10 px-6 py-5 text-sm font-semibold shadow-[0_0_15px_rgba(34,197,94,0.3)] transition-all">Profile</button></a>
-                    </div>
-                    <div class="md:hidden flex gap-2 items-center">
-                        <a href="{% url 'profile' %}"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-green-500 bg-white text-green-700 hover:bg-green-50 h-10 px-3 py-2 text-xs font-semibold shadow-[0_0_10px_rgba(34,197,94,0.2)] transition-all">Profile</button></a>
-                    </div>
-                    {% else %}
-                    <div class="hidden md:flex gap-4">
-                        <a href="{% url 'login' %}"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-green-500 bg-white text-green-700 hover:bg-green-50 h-10 px-6 py-5 text-base font-semibold shadow-[0_0_15px_rgba(34,197,94,0.3)] transition-all">Login</button></a>
-                        <a href="{% url 'register' %}"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary hover:bg-primary/90 h-10 gradient-green glow-green text-white shadow-lg hover:shadow-xl transition-all px-6 py-5 text-base font-semibold">Join Us</button></a>
-                    </div>
-                    <div class="md:hidden flex gap-2">
-                        <a href="{% url 'login' %}"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-green-500 bg-white text-green-700 hover:bg-green-50 h-10 px-3 py-2 text-xs font-semibold shadow-[0_0_10px_rgba(34,197,94,0.2)] transition-all">Login</button></a>
-                        <a href="{% url 'register' %}"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary hover:bg-primary/90 h-10 gradient-green glow-green text-white shadow-lg hover:shadow-xl transition-all px-4 py-2 text-xs font-semibold">Join</button></a>
-                    </div>
-                    {% endif %}
-                </div>
+<body>
+    <div class="page-bg"></div>
+    {% block nav %}
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <div class="nav-brand">
+                <a href="{% url 'home' %}" class="nav-logo">
+                    <img alt="BCC" class="logo-light" src="{% static 'portal/images/LogoWithBlackTextPNG.png' %}" />
+                    <img alt="BCC" class="logo-dark" src="{% static 'portal/images/LogoWithWhiteText.png' %}" />
+                </a>
             </div>
-        </nav>
-        {% endblock %}
-        {% block mobile_header %}{% endblock %}
-        {% block content %}{% endblock %}
-    </main>
-    {% if messages %}
-    <div id="toast-container" class="fixed top-24 right-4 z-[100] flex flex-col gap-2">
-        {% for message in messages %}
-        <div class="bg-white border-l-4 border-green-500 shadow-lg rounded-lg p-4 min-w-[300px] flex items-center gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-green-500 flex-shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            <span class="text-sm font-medium text-gray-800">{{ message }}</span>
-            <button onclick="this.parentElement.remove()" class="ml-auto text-gray-400 hover:text-gray-600 flex-shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            <div class="nav-mobile-wrap">
+                <div class="nav-links">
+                    <a href="{% url 'events:event_list' %}" class="nav-link">Events</a>
+                    <a href="{% url 'team' %}" class="nav-link">Team</a>
+                    <a href="{% url 'home' %}#about" class="nav-link">About</a>
+                    <a href="{% url 'home' %}#contact" class="nav-link">Contact</a>
+                </div>
+                {% if user.is_authenticated %}
+                <div class="nav-actions">
+                    <button class="dark-toggle" aria-label="Toggle dark mode">
+                        <svg class="dark-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                        <svg class="light-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    </button>
+                    <a href="{% url 'profile' %}" class="btn btn-outline">Profile</a>
+                </div>
+                {% else %}
+                <div class="nav-actions">
+                    <button class="dark-toggle" aria-label="Toggle dark mode">
+                        <svg class="dark-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                        <svg class="light-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    </button>
+                    <a href="{% url 'login' %}" class="btn btn-primary">Sign in</a>
+                    
+                </div>
+                {% endif %}
+            </div>
+            <button class="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
+        </div>
+    </nav>
+    {% endblock nav %}
+    <div class="page-fade-in">{% block content %}{% endblock %}</div>
+    {% if messages %}
+    <div id="toast-container" class="toast-container">
+        {% for message in messages %}
+        <div class="toast {% if message.tags == 'error' %}error{% elif message.tags == 'info' %}info{% endif %}">
+            <svg class="toast-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <span>{{ message }}</span>
+            <button class="toast-close" onclick="this.parentElement.remove()" aria-label="Dismiss">&times;</button>
         </div>
         {% endfor %}
     </div>
@@ -75,9 +70,73 @@
         setTimeout(() => {
             const container = document.getElementById('toast-container');
             if (container) container.remove();
-        }, 5000);
+        }, 6000);
     </script>
     {% endif %}
+    <script>
+        document.querySelector('.nav-toggle')?.addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.querySelector('.nav-mobile-wrap')?.classList.toggle('mobile-open');
+        });
+    </script>
+    <script>
+        (function() {
+            const stored = localStorage.getItem('bcc-dark-mode');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (stored === 'true' || (stored === null && prefersDark)) {
+                document.body.classList.add('dark-mode');
+            }
+        })();
+        window.toggleDark = function() {
+            const isDark = document.body.classList.toggle('dark-mode');
+            localStorage.setItem('bcc-dark-mode', isDark);
+        };
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.dark-toggle').forEach(function(btn) {
+                btn.addEventListener('click', window.toggleDark);
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        if (entry.target.classList.contains('stagger-children')) {
+                            entry.target.classList.add('visible');
+                        }
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+            document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-children').forEach(function(el) {
+                observer.observe(el);
+            });
+
+            var statsObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.querySelectorAll('[data-count]').forEach(function(el) {
+                            var target = parseInt(el.getAttribute('data-count'));
+                            var current = 0;
+                            var step = Math.max(1, Math.floor(target / 60));
+                            var timer = setInterval(function() {
+                                current += step;
+                                if (current >= target) {
+                                    current = target;
+                                    clearInterval(timer);
+                                }
+                                el.textContent = current + (target >= 1000 ? '+' : '+');
+                            }, 25);
+                        });
+                        statsObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            var stats = document.querySelector('.hero-stats');
+            if (stats) statsObserver.observe(stats);
+        });
+    </script>
     {% block extra_scripts %}{% endblock %}
 </body>
 </html>

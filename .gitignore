@@ -3,11 +3,27 @@
 *.pot
 *.pyc
 __pycache__
-db.sqlite3
-media
+*.sqlite3
+media/
+staticfiles/
 
 # Backup files # 
 *.bak 
+*.orig
+
+# OS generated files #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# AI Agent Skills #
+.agents/
+skills-lock.json
+DESIGN.md
 
 # If you are using PyCharm # 
 # User-specific stuff
@@ -138,3 +154,6 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+
+agent_images/
+.skylos/

@@ -1,0 +1,30 @@
+{% extends "portal/base.html" %}
+{% load static %}
+
+{% block title %}Not Found — BAIUST Computer Club{% endblock %}
+
+{% block content %}
+<div class="profile-page">
+    <div class="profile-card card-feature" style="text-align:center;padding:var(--spacing-3xl) var(--spacing-xl)">
+        <div style="font-size:72px;font-weight:800;color:var(--color-primary);line-height:1;margin-bottom:var(--spacing-md)">404</div>
+        <h2 style="margin-bottom:var(--spacing-sm)">
+            {% if is_superuser %}
+            Superuser has no profile
+            {% else %}
+            User does not have a profile
+            {% endif %}
+        </h2>
+        <p style="color:var(--color-mute);margin-bottom:var(--spacing-xl);max-width:400px;margin-left:auto;margin-right:auto">
+            {% if is_superuser %}
+            Admin accounts are not linked to student profiles. Please use a regular student account to access this page.
+            {% else %}
+            This account is not linked to any student profile. Please register to create one.
+            {% endif %}
+        </p>
+        <div style="display:flex;gap:var(--spacing-md);justify-content:center;flex-wrap:wrap">
+            <a href="{% url 'home' %}" class="btn btn-outline" style="text-decoration:none">Go Home</a>
+            <a href="{% url 'logout' %}" class="btn btn-ghost" style="text-decoration:none;color:#ef4444">Sign out</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
