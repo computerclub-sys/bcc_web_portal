@@ -993,6 +993,7 @@ input, textarea, select {
 
 .feature-card,
 .event-card-link,
+.event-card,
 .leader-card {
     display: flex;
     flex-direction: column;
@@ -1008,13 +1009,19 @@ input, textarea, select {
     transition: background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease, transform 0.5s ease;
 }
 
-.event-card-link {
+.event-card-link,
+.event-card {
     text-decoration: none;
     color: inherit;
 }
 
+.event-card {
+    overflow: hidden;
+}
+
 .feature-card:hover,
 .event-card-link:hover,
+.event-card:hover,
 .leader-card:hover {
     background: var(--color-primary-muted);
     box-shadow: 0 0 20px rgba(0, 217, 146, 0.3), 0 0 60px rgba(0, 217, 146, 0.15);
@@ -1267,7 +1274,7 @@ input, textarea, select {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
+    transition: transform 0.5s ease;
 }
 
 .event-card:hover .event-card-image img {
@@ -1276,6 +1283,8 @@ input, textarea, select {
 
 .event-card-body {
     padding: var(--spacing-lg);
+    text-align: left;
+    width: 100%;
 }
 
 .event-card-meta {

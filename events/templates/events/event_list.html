@@ -30,7 +30,7 @@
             <h2 style="font-size:22px;font-weight:600;color:var(--color-ink);margin-bottom:var(--spacing-2xl);text-align:center">Upcoming events</h2>
             <div class="grid-3">
                 {% for event in active_events %}
-                <a href="{% url 'events:event_detail' event.id %}" class="card-feature event-card">
+                <a href="{% url 'events:event_detail' event.id %}" class="event-card">
                     <div class="event-card-image">
                         {% if event.poster %}
                         <img src="{{ event.poster.url }}" alt="{{ event.title }}" />
@@ -61,7 +61,7 @@
             <h2 style="font-size:22px;font-weight:600;color:var(--color-ink);margin-bottom:var(--spacing-2xl);text-align:center">Past events</h2>
             <div class="grid-3">
                 {% for event in completed_events %}
-                <a href="{% url 'events:event_detail' event.id %}" class="card-feature event-card">
+                <a href="{% url 'events:event_detail' event.id %}" class="event-card">
                     <div class="event-card-image">
                         {% if event.poster %}
                         <img src="{{ event.poster.url }}" alt="{{ event.title }}" />
