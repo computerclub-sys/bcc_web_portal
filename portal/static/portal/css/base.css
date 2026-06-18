@@ -431,6 +431,26 @@ input, textarea, select {
     border-radius: var(--rounded-full);
 }
 
+.nav-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(var(--color-primary-rgb), 0.08);
+    color: var(--color-body);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.nav-avatar:hover {
+    border-color: rgba(var(--color-primary-rgb), 0.3);
+    color: var(--color-primary);
+    background: rgba(var(--color-primary-rgb), 0.12);
+}
+
 /* ── Dark Mode Toggle ── */
 .dark-toggle {
     width: 40px;
