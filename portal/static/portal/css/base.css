@@ -523,6 +523,8 @@ input, textarea, select {
         top: 0;
         left: 0;
         right: 0;
+        bottom: auto;
+        transform: none;
         background: var(--color-bg);
         z-index: 999;
         padding: calc(var(--nav-height) + var(--spacing-xl)) var(--spacing-lg) var(--spacing-lg);
