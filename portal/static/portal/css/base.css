@@ -986,8 +986,8 @@ input, textarea, select {
 .feature-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-lg);
-    max-width: 900px;
+    gap: var(--spacing-xl);
+    max-width: 1040px;
     margin: 0 auto;
 }
 
