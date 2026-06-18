@@ -2236,7 +2236,7 @@ select {
     min-width: 180px;
     box-shadow: var(--shadow-md);
     position: relative;
-    transition: background 2s ease-in-out, box-shadow 2s ease-in-out, border-color 2s ease-in-out, transform 2s ease-in-out;
+    transition: background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease, transform 0.5s ease;
 }
 
 .leader-card:hover {
