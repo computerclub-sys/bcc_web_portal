@@ -14,8 +14,6 @@ class NoCompressCloudinaryStorage(MediaCloudinaryStorage):
             'use_filename': True,
             'resource_type': self._get_resource_type(name),
             'tags': self.TAG,
-            'quality': 100,
-            'fetch_format': '',
         }
         folder = os.path.dirname(name)
         if folder:
@@ -28,7 +26,5 @@ class NoCompressCloudinaryStorage(MediaCloudinaryStorage):
             name,
             resource_type=self._get_resource_type(name),
             secure=True,
-            quality=100,
-            fetch_format='',
         )
         return url
