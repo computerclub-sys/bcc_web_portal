@@ -555,6 +555,14 @@ input, textarea, select {
         width: 100%;
         border-radius: 0;
     }
+    .site-nav.mobile-open {
+        top: 0;
+        left: 0;
+        right: 0;
+        transform: none;
+        width: 100%;
+        border-radius: 0;
+    }
     .nav-links { display: none; }
     .nav-actions { display: none; }
     .nav-toggle { display: flex; }
