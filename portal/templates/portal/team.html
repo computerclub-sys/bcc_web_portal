@@ -1,5 +1,6 @@
 {% extends "portal/base.html" %}
 {% load static %}
+{% load cloudinary_tags %}
 
 {% block title %}Our Team — BAIUST Computer Club{% endblock %}
 
@@ -27,7 +28,7 @@
                     <span class="member-badge">{{ member.badge }}</span>
                     <div class="member-avatar-wrap">
                         {% if member.image %}
-                        <img src="{{ member.image.url }}" alt="{{ member.name }}" class="member-avatar-img" />
+                        <img src="{{ member.image.url|cl_thumb:'160x160' }}" alt="{{ member.name }}" class="member-avatar-img" />
                         {% else %}
                         <div class="member-avatar">{{ member.avatar_letter }}</div>
                         {% endif %}
