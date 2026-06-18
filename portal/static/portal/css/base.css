@@ -2016,12 +2016,14 @@ select {
     font-weight: 700;
     color: var(--color-ink);
     margin-bottom: var(--spacing-sm);
+    text-align: center;
 }
 
 .panel-subtitle {
     font-size: 16px;
     color: var(--color-mute);
     margin-bottom: var(--spacing-xl);
+    text-align: center;
 }
 
 .member-grid {
@@ -2034,6 +2036,7 @@ select {
     position: absolute;
     top: var(--spacing-sm);
     right: var(--spacing-sm);
+    z-index: 1;
     font-size: 12px;
     font-weight: 700;
     padding: 4px 12px;
