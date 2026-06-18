@@ -1714,6 +1714,9 @@ select {
 }
 
 .profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     padding: var(--spacing-xl) var(--spacing-2xl) 0;
 }
@@ -1730,7 +1733,13 @@ select {
     border-radius: 50%;
     overflow: hidden;
     border: 3px solid var(--color-primary);
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
+    background: var(--color-primary-muted);
+    color: var(--color-primary);
 }
 
 .profile-avatar img {
@@ -1791,12 +1800,14 @@ select {
     display: grid;
     gap: var(--spacing-md);
     padding: 0 var(--spacing-2xl);
+    text-align: center;
 }
 
 .profile-field {
     display: flex;
-    align-items: baseline;
-    gap: var(--spacing-md);
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
     padding: var(--spacing-sm) 0;
     border-bottom: 1px solid var(--color-hairline);
 }
@@ -1811,8 +1822,6 @@ select {
     color: var(--color-mute);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    min-width: 120px;
-    flex-shrink: 0;
 }
 
 .profile-field-value {
@@ -1873,6 +1882,16 @@ select {
 
 .profile-edit-form {
     padding: 0 var(--spacing-2xl) var(--spacing-2xl);
+    text-align: center;
+}
+
+.profile-edit-form .form-label {
+    text-align: center;
+}
+
+.profile-edit-form .text-input,
+.profile-edit-form .form-input {
+    text-align: center;
 }
 
 .profile-edit-form .form-group {
@@ -1892,10 +1911,13 @@ select {
     padding: 0 var(--spacing-2xl) var(--spacing-lg);
 }
 
+.qr-section img {
+    display: block;
+    margin: 0 auto;
+}
+
 @media (max-width: 640px) {
-    .profile-header-inner { flex-direction: column; text-align: center; }
     .profile-stats { grid-template-columns: 1fr; }
-    .profile-field { flex-direction: column; gap: 2px; }
 }
 
 /* ── Team Page ── */
