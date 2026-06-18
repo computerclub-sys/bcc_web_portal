@@ -299,30 +299,38 @@ input, textarea, select {
 }
 
 /* ── Site Nav ── */
+:root {
+    --nav-border-alpha: 0.15;
+}
+
+.dark-mode {
+    --nav-border-alpha: 0.06;
+}
+
 .site-nav {
     position: fixed;
-    top: var(--spacing-md);
+    top: calc(16px * (1 - var(--nav-progress, 0)));
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
     height: var(--nav-height);
-    width: calc(100% - var(--spacing-lg) * 2);
-    max-width: var(--container-width);
+    width: calc(
+        min(100vw - 48px, 1200px) * (1 - var(--nav-progress, 0)) +
+        100vw * var(--nav-progress, 0)
+    );
     display: flex;
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(var(--nav-blur));
     -webkit-backdrop-filter: blur(var(--nav-blur));
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: var(--rounded-full);
+    border: 1px solid rgba(255, 255, 255, calc(var(--nav-border-alpha) * (1 - var(--nav-progress, 0))));
+    border-radius: calc(9999px * (1 - var(--nav-progress, 0)));
     box-shadow: var(--shadow-xl);
-    transition: all 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .dark-mode .site-nav {
     background: rgba(15, 15, 35, 0.75);
-    border-color: rgba(255, 255, 255, 0.06);
 }
 
 .site-nav.scrolled {

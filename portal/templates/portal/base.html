@@ -76,7 +76,11 @@
     <script>
         document.querySelector('.nav-toggle')?.addEventListener('click', function() {
             this.classList.toggle('active');
-            document.querySelector('.site-nav')?.classList.toggle('mobile-open');
+            var nav = document.querySelector('.site-nav');
+            nav?.classList.toggle('mobile-open');
+            if (nav && !nav.classList.contains('mobile-open')) {
+                window.dispatchEvent(new Event('scroll'));
+            }
         });
     </script>
     <script>
@@ -100,16 +104,27 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var nav = document.querySelector('.site-nav');
-            var scrollThreshold = 80;
-            function updateNavScroll() {
-                if (window.scrollY > scrollThreshold) {
-                    nav.classList.add('scrolled');
-                } else {
-                    nav.classList.remove('scrolled');
+            var ticking = false;
+            var SCROLL_RANGE = 200;
+            function updateNav() {
+                if (nav.classList.contains('mobile-open')) return;
+                var progress = Math.min(window.scrollY / SCROLL_RANGE, 1);
+                nav.style.setProperty('--nav-progress', progress);
+                nav.style.boxShadow = progress > 0.5 ? 'var(--shadow-lg)' : 'var(--shadow-xl)';
+                ticking = false;
+            }
+            function onScroll() {
+                if (!ticking) {
+                    requestAnimationFrame(updateNav);
+                    ticking = true;
                 }
             }
-            window.addEventListener('scroll', updateNavScroll, { passive: true });
-            updateNavScroll();
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', onScroll, { passive: true });
+            document.querySelectorAll('.dark-toggle').forEach(function(btn) {
+                btn.addEventListener('click', onScroll);
+            });
+            updateNav();
 
             var observer = new IntersectionObserver(function(entries) {
                 entries.forEach(function(entry) {
