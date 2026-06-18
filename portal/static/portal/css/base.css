@@ -2033,16 +2033,14 @@ select {
 }
 
 .member-badge {
-    position: absolute;
-    top: var(--spacing-sm);
-    right: var(--spacing-sm);
-    z-index: 1;
+    display: inline-block;
     font-size: 12px;
     font-weight: 700;
     padding: 4px 12px;
     border-radius: var(--rounded-full);
     background: var(--color-primary);
     color: #fff;
+    margin-bottom: var(--spacing-sm);
 }
 
 .member-avatar-wrap {
