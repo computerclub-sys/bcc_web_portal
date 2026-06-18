@@ -70,9 +70,9 @@ class TeamMember(models.Model):
     badge = models.CharField(max_length=50, blank=True)
     avatar_letter = models.CharField(max_length=1, blank=True)
     image = models.ImageField(upload_to='team/', blank=True)
-    email = models.EmailField(blank=True)
-    github = models.URLField(blank=True)
-    linkedin = models.URLField(blank=True)
+    email = models.EmailField(blank=True, default='')
+    github = models.URLField(blank=True, default='https://github.com/')
+    linkedin = models.URLField(blank=True, default='https://linkedin.com/')
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
 
