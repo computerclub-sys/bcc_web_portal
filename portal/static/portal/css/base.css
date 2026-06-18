@@ -327,9 +327,6 @@ input, textarea, select {
 
 .site-nav.scrolled {
     top: 0;
-    left: 0;
-    right: 0;
-    transform: none;
     width: 100%;
     max-width: none;
     border-radius: 0;
@@ -2365,6 +2362,11 @@ select {
     justify-content: center;
     border: 2px solid var(--color-surface);
     transform: translate(2px, 2px);
+}
+
+.leader-card {
+    width: 220px;
+    min-height: 210px;
 }
 
 .leader-name {
