@@ -259,9 +259,9 @@
                 <div class="tree-line-branch l4"></div>
             </div>
 
-            <!-- VPs -->
+            <!-- VP Row 1 -->
             <div class="leader-row-4">
-                {% for vp in vps %}
+                {% for vp in vps_row1 %}
                 <div class="leader-card-wrap">
                     <div class="leader-card">
                         <div class="leader-avatar-wrap">
@@ -287,6 +287,26 @@
                 </div>
                 {% endfor %}
             </div>
+            {% if vps_row2 %}
+            <div class="leader-row-center">
+                {% for vp in vps_row2 %}
+                <div class="leader-card-wrap">
+                    <div class="leader-card">
+                        <div class="leader-avatar-wrap">
+                            {% if vp.image %}
+                            <img src="{{ vp.image.url|cl_thumb:'160x160' }}" alt="{{ vp.name }}" class="leader-avatar-img" />
+                            {% else %}
+                            <div class="leader-avatar">{{ vp.avatar_letter|default:"V" }}</div>
+                            {% endif %}
+                            <div class="leader-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                        </div>
+                        <div class="leader-name">{{ vp.name }}</div>
+                        <div class="leader-role">{{ vp.role|default:"VP" }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
 
         </div>
 

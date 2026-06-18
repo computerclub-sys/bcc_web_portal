@@ -17,15 +17,18 @@ def home(request):
     president = TeamMember.objects.filter(leader_position='president', is_active=True).first()
     gs = TeamMember.objects.filter(leader_position='general_secretary', is_active=True).first()
     vps = list(TeamMember.objects.filter(leader_position='vice_president', is_active=True).order_by('leader_order'))
-    while len(vps) < 4:
-        vps.append(None)
+    vps_row1 = vps[:4]
+    vps_row2 = vps[4:]
+    while len(vps_row1) < 4:
+        vps_row1.append(None)
 
     return render(request, 'portal/index.html', {
         'active_events': active_events,
         'completed_events': completed_events,
         'president': president,
         'gs': gs,
-        'vps': vps,
+        'vps_row1': vps_row1,
+        'vps_row2': vps_row2,
     })
 
 def team(request):
