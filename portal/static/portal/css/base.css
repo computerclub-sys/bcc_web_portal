@@ -238,13 +238,13 @@ input, textarea, select {
 
 /* ── Page Layout ── */
 .page-header {
-    padding: calc(var(--nav-height) + var(--spacing-3xl)) 0 var(--spacing-2xl);
+    padding: calc(var(--nav-height) + var(--spacing-3xl) + var(--spacing-md)) 0 var(--spacing-2xl);
     border-bottom: 1px solid var(--color-hairline);
     background: var(--color-bg);
 }
 
 .page-header-sm {
-    padding: calc(var(--nav-height) + var(--spacing-2xl)) 0 var(--spacing-xl);
+    padding: calc(var(--nav-height) + var(--spacing-2xl) + var(--spacing-md)) 0 var(--spacing-xl);
     border-bottom: 1px solid var(--color-hairline);
     background: var(--color-bg);
 }
@@ -301,24 +301,28 @@ input, textarea, select {
 /* ── Site Nav ── */
 .site-nav {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: var(--spacing-md);
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1000;
     height: var(--nav-height);
+    width: calc(100% - var(--spacing-lg) * 2);
+    max-width: var(--container-width);
     display: flex;
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(var(--nav-blur));
     -webkit-backdrop-filter: blur(var(--nav-blur));
-    border-bottom: 1px solid var(--color-hairline);
-    transition: background 0.3s ease, border-color 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--rounded-full);
+    box-shadow: var(--shadow-xl);
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .dark-mode .site-nav {
     background: rgba(15, 15, 35, 0.75);
-    border-bottom-color: var(--color-hairline);
+    border-color: rgba(255, 255, 255, 0.06);
 }
 
 .nav-inner {
@@ -375,38 +379,35 @@ input, textarea, select {
 }
 
 .nav-link {
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
     color: var(--color-body);
-    transition: color 0.2s ease;
-    position: relative;
-}
-
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--color-primary);
-    transition: width 0.25s ease;
-    border-radius: 1px;
+    padding: 8px 20px;
+    border-radius: var(--rounded-full);
+    transition: all 0.15s ease;
 }
 
 .nav-link:hover {
     color: var(--color-ink);
-}
-
-.nav-link:hover::after {
-    width: 100%;
+    background: rgba(var(--color-primary-rgb), 0.08);
 }
 
 .nav-actions {
     display: flex;
     align-items: center;
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm);
     margin-left: auto;
+}
+
+.nav-actions .btn {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 8px 24px;
+    border-radius: var(--rounded-full);
 }
 
 /* ── Dark Mode Toggle ── */
@@ -414,8 +415,8 @@ input, textarea, select {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: var(--color-surface);
-    border: 1px solid var(--color-hairline);
+    background: rgba(var(--color-primary-rgb), 0.08);
+    border: 1px solid transparent;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -427,7 +428,7 @@ input, textarea, select {
 }
 
 .dark-toggle:hover {
-    border-color: var(--color-primary);
+    border-color: rgba(var(--color-primary-rgb), 0.3);
     color: var(--color-primary);
 }
 
@@ -501,7 +502,13 @@ input, textarea, select {
 }
 
 @media (max-width: 768px) {
-    .site-nav { backdrop-filter: none; -webkit-backdrop-filter: none; }
+    .site-nav {
+        top: var(--spacing-sm);
+        width: calc(100% - var(--spacing-md));
+        border-radius: var(--rounded-xl);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
     .nav-links { display: none; }
     .nav-actions { display: none; }
     .nav-toggle { display: flex; }
@@ -517,7 +524,7 @@ input, textarea, select {
         z-index: 1;
         transform: none;
         background: var(--color-bg);
-        padding: calc(var(--nav-height) + var(--spacing-xl)) var(--spacing-lg) 140px;
+        padding: calc(var(--nav-height) + var(--spacing-2xl)) var(--spacing-lg) 140px;
         overflow-y: auto;
         gap: var(--spacing-md);
         align-items: stretch;
@@ -544,9 +551,11 @@ input, textarea, select {
 
     .site-nav.mobile-open .nav-link {
         font-size: 22px;
-        font-weight: 600;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
         color: var(--color-ink);
-        padding: var(--spacing-sm) 0;
+        padding: var(--spacing-md) 0;
         border-bottom: 1px solid var(--color-hairline);
     }
 }
@@ -560,7 +569,7 @@ input, textarea, select {
     position: relative;
     overflow: hidden;
     background: linear-gradient(135deg, var(--color-canvas) 0%, rgba(var(--color-primary-rgb), 0.09) 35%, rgba(var(--color-primary-rgb), 0.14) 65%, var(--color-canvas) 100%);
-    padding-top: var(--nav-height);
+    padding-top: calc(var(--nav-height) + var(--spacing-md));
 }
 
 .hero-section .container {
@@ -1326,7 +1335,7 @@ input, textarea, select {
 
 /* ── Event Detail ── */
 .event-detail-page {
-    padding-top: var(--nav-height);
+    padding-top: calc(var(--nav-height) + var(--spacing-md));
     background: var(--color-bg);
     min-height: 100vh;
 }
@@ -1510,7 +1519,7 @@ input, textarea, select {
 /* ── Toast ── */
 .toast-container {
     position: fixed;
-    top: calc(var(--nav-height) + var(--spacing-md));
+    top: calc(var(--nav-height) + var(--spacing-md) * 2);
     right: var(--spacing-lg);
     z-index: 9999;
     display: flex;
@@ -1656,7 +1665,7 @@ select {
     justify-content: center;
     padding: var(--spacing-xl);
     background: var(--color-bg);
-    padding-top: calc(var(--nav-height) + var(--spacing-xl));
+    padding-top: calc(var(--nav-height) + var(--spacing-xl) + var(--spacing-md));
 }
 
 .auth-card {
@@ -2364,6 +2373,7 @@ select {
 
 .leader-row-center {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: var(--spacing-md);
     width: 100%;
@@ -2783,7 +2793,7 @@ select {
 
 @media (max-width: 768px) {
     .page-header {
-        padding: calc(var(--nav-height) + var(--spacing-2xl)) 0 var(--spacing-xl);
+        padding: calc(var(--nav-height) + var(--spacing-2xl) + var(--spacing-md)) 0 var(--spacing-xl);
     }
 
     .page-body {
