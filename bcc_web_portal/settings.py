@@ -141,7 +141,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = 'media/'
@@ -162,7 +162,7 @@ if CLOUDINARY_STORAGE['CLOUD_NAME']:
         api_secret=CLOUDINARY_STORAGE['API_SECRET'],
     )
     STORAGES = {
-        'default': {'BACKEND': 'bcc_web_portal.storage.HighQualityCloudinaryStorage'},
+        'default': {'BACKEND': 'cloudinary_storage.storage.MediaCloudinaryStorage'},
         'staticfiles': {'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage'},
     }
 else:
