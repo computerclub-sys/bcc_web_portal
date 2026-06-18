@@ -1008,16 +1008,15 @@ input, textarea, select {
     background: var(--color-surface);
     border: 1px solid var(--color-hairline);
     border-radius: var(--rounded-md);
-    box-shadow: var(--shadow-sm);
-    transition: background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
-    animation: cardFloat 3s ease-in-out infinite;
+    box-shadow: var(--shadow-md);
+    transition: background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
 }
 
 .feature-card:hover {
-    animation-play-state: paused;
     background: var(--color-primary-muted);
-    box-shadow: 0 12px 40px rgba(0, 217, 146, 0.25);
+    box-shadow: 0 0 20px rgba(0, 217, 146, 0.3), 0 0 60px rgba(0, 217, 146, 0.15);
     border-color: var(--color-primary);
+    transform: translateY(-4px);
 }
 
 .feature-card-icon {
