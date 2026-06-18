@@ -2279,6 +2279,15 @@ select {
     border: 2px solid var(--color-primary);
 }
 
+.leader-avatar-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-primary);
+    display: block;
+}
+
 .leader-check {
     position: absolute;
     bottom: 0;

@@ -1,5 +1,6 @@
 {% extends "portal/base.html" %}
 {% load static %}
+{% load cloudinary_tags %}
 
 {% block content %}
 <section class="hero-section">
@@ -217,7 +218,11 @@
             <div class="leader-card-wrap">
                 <div class="leader-card">
                     <div class="leader-avatar-wrap">
+                        {% if president.image %}
+                        <img src="{{ president.image.url|cl_thumb:'160x160' }}" alt="{{ president.name }}" class="leader-avatar-img" />
+                        {% else %}
                         <div class="leader-avatar">{{ president.avatar_letter|default:"S" }}</div>
+                        {% endif %}
                         <div class="leader-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
                     </div>
                     <div class="leader-name">{{ president.name|default:"President" }}</div>
@@ -233,7 +238,11 @@
             <div class="leader-card-wrap">
                 <div class="leader-card">
                     <div class="leader-avatar-wrap">
+                        {% if gs.image %}
+                        <img src="{{ gs.image.url|cl_thumb:'160x160' }}" alt="{{ gs.name }}" class="leader-avatar-img" />
+                        {% else %}
                         <div class="leader-avatar">{{ gs.avatar_letter|default:"G" }}</div>
+                        {% endif %}
                         <div class="leader-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
                     </div>
                     <div class="leader-name">{{ gs.name|default:"General Secretary" }}</div>
@@ -257,7 +266,11 @@
                     <div class="leader-card">
                         <div class="leader-avatar-wrap">
                             {% if vp %}
-                            <div class="leader-avatar">{{ vp.avatar_letter|default:"V" }}</div>
+                                {% if vp.image %}
+                                <img src="{{ vp.image.url|cl_thumb:'160x160' }}" alt="{{ vp.name }}" class="leader-avatar-img" />
+                                {% else %}
+                                <div class="leader-avatar">{{ vp.avatar_letter|default:"V" }}</div>
+                                {% endif %}
                             {% else %}
                             <div class="leader-avatar">V</div>
                             {% endif %}
