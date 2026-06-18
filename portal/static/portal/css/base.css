@@ -1008,7 +1008,7 @@ input, textarea, select {
     border: 1px solid var(--color-hairline);
     border-radius: var(--rounded-md);
     box-shadow: var(--shadow-md);
-    transition: background 0.5s ease-in-out, box-shadow 0.5s ease-in-out, border-color 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transition: background 0.8s ease-in-out, box-shadow 0.8s ease-in-out, border-color 0.8s ease-in-out, transform 0.8s ease-in-out;
 }
 
 .feature-card:hover {
