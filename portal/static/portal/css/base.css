@@ -852,7 +852,6 @@ input, textarea, select {
     justify-content: center;
     gap: var(--spacing-2xl);
     padding-top: var(--spacing-xl);
-    border-top: 1px solid var(--color-hairline);
 }
 
 .hero-stat {
