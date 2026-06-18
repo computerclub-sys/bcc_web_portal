@@ -1,0 +1,11 @@
+django>=6.0,<6.1
+django-cloudinary-storage
+cloudinary
+pillow
+python-multipart
+python-dotenv
+qrcode
+gunicorn
+whitenoise
+dj-database-url
+psycopg[binary]
