@@ -1712,12 +1712,23 @@ select {
 
 /* ── Profile Page ── */
 .profile-page {
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: var(--spacing-xl);
     background: var(--color-bg);
+}
+
+.profile-card {
+    width: 100%;
+    max-width: 480px;
+    max-height: 100%;
+    overflow-y: auto;
+    background: var(--color-surface);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--rounded-md);
 }
 
 .profile-header {
@@ -1792,15 +1803,6 @@ select {
 
 .profile-body {
     padding: var(--spacing-2xl) 0 var(--spacing-6xl);
-}
-
-.profile-card {
-    width: 100%;
-    max-width: 480px;
-    background: var(--color-surface);
-    border: 1px solid var(--color-hairline);
-    border-radius: var(--rounded-md);
-    overflow: hidden;
 }
 
 .profile-details {
