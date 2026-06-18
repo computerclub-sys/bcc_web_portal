@@ -162,7 +162,7 @@ if CLOUDINARY_STORAGE['CLOUD_NAME']:
         api_secret=CLOUDINARY_STORAGE['API_SECRET'],
     )
     STORAGES = {
-        'default': {'BACKEND': 'cloudinary_storage.storage.MediaCloudinaryStorage'},
+        'default': {'BACKEND': 'bcc_web_portal.storage.NoCompressCloudinaryStorage'},
         'staticfiles': {'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage'},
     }
 else:

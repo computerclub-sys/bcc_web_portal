@@ -2041,8 +2041,8 @@ select {
     font-weight: 700;
     padding: 4px 12px;
     border-radius: var(--rounded-full);
-    background: var(--color-primary-muted);
-    color: var(--color-primary);
+    background: var(--color-primary);
+    color: #fff;
 }
 
 .member-avatar-wrap {
