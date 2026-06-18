@@ -1009,13 +1009,15 @@ input, textarea, select {
     border: 1px solid var(--color-hairline);
     border-radius: var(--rounded-md);
     box-shadow: var(--shadow-sm);
-    animation: cardFloat 5s ease-in-out infinite;
+    transition: background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    animation: cardFloat 3s ease-in-out infinite;
 }
 
 .feature-card:hover {
     animation-play-state: paused;
-    box-shadow: var(--shadow-lg);
-    border-color: var(--color-primary-muted);
+    background: var(--color-primary-muted);
+    box-shadow: 0 12px 40px rgba(0, 217, 146, 0.25);
+    border-color: var(--color-primary);
 }
 
 .feature-card-icon {
@@ -1033,7 +1035,7 @@ input, textarea, select {
 
 .feature-card:hover .feature-card-icon {
     background: var(--color-primary);
-    color: #0a0a1a;
+    color: #fff;
 }
 
 .feature-card-title {
@@ -1805,13 +1807,11 @@ select {
     display: grid;
     gap: var(--spacing-md);
     padding: 0 var(--spacing-2xl);
-    text-align: center;
 }
 
 .profile-field {
     display: flex;
     align-items: baseline;
-    justify-content: center;
     gap: var(--spacing-sm);
     padding: var(--spacing-sm) 0;
     border-bottom: 1px solid var(--color-hairline);
