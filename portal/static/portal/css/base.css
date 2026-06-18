@@ -662,8 +662,8 @@ input, textarea, select {
     font-size: 16px;
     font-weight: 700;
     color: var(--color-primary);
-    background: rgba(0, 217, 146, 0.04);
-    border: 1px solid rgba(0, 217, 146, 0.12);
+    background: var(--color-surface);
+    border: 1px solid rgba(0, 217, 146, 0.2);
     border-radius: var(--rounded-xs);
     backface-visibility: hidden;
 }
@@ -725,13 +725,14 @@ input, textarea, select {
     align-items: center;
     gap: var(--spacing-sm);
     padding: 6px 16px;
-    background: rgba(0, 217, 146, 0.1);
+    background: var(--color-surface);
     color: var(--color-primary);
     border-radius: var(--rounded-full);
     font-size: 16px;
     font-weight: 600;
     margin-bottom: var(--spacing-lg);
-    border: 1px solid rgba(0, 217, 146, 0.15);
+    border: 1px solid rgba(0, 217, 146, 0.25);
+    box-shadow: 0 4px 16px rgba(0, 217, 146, 0.15);
 }
 
 .hero-badge-dot {
@@ -758,6 +759,7 @@ input, textarea, select {
     border-radius: var(--rounded-full);
     font-family: var(--font-mono);
     font-size: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
     color: var(--color-mute);
     margin-bottom: var(--spacing-lg);
 }
@@ -864,7 +866,7 @@ input, textarea, select {
     font-size: 16px;
     font-weight: 600;
     line-height: 1;
-    border-radius: var(--rounded-sm);
+    border-radius: var(--rounded-full);
     transition: all 0.25s ease;
     border: 1.5px solid transparent;
     white-space: nowrap;
@@ -2253,10 +2255,7 @@ select {
 }
 
 .section-divider {
-    height: 1px;
-    background: var(--color-hairline);
-    border: none;
-    margin: 0;
+    display: none;
 }
 
 /* ── Stats Section ── */
