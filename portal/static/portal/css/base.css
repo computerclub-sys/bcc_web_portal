@@ -997,7 +997,7 @@ input, textarea, select {
     background: var(--color-surface);
     border: 1px solid var(--color-hairline);
     border-radius: var(--rounded-md);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04), 0 0 40px rgba(0, 217, 146, 0.06);
     transition: background 2s ease-in-out, box-shadow 2s ease-in-out, border-color 2s ease-in-out, transform 2s ease-in-out;
 }
 
@@ -2246,6 +2246,11 @@ select {
     transform: scale(1.03);
 }
 
+.leader-avatar-wrap {
+    position: relative;
+    margin-bottom: var(--spacing-sm);
+}
+
 .leader-card .leader-avatar {
     width: 60px;
     height: 60px;
@@ -2257,13 +2262,13 @@ select {
     justify-content: center;
     font-size: 22px;
     font-weight: 700;
-    margin-bottom: var(--spacing-sm);
     border: 2px solid var(--color-primary);
 }
 
 .leader-check {
     position: absolute;
-    bottom: -8px;
+    bottom: 0;
+    right: 0;
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -2273,6 +2278,7 @@ select {
     align-items: center;
     justify-content: center;
     border: 2px solid var(--color-surface);
+    transform: translate(2px, 2px);
 }
 
 .leader-name {
