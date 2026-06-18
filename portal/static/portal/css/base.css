@@ -2670,6 +2670,15 @@ select {
 
     .leader-row-4 {
         grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+
+    .leader-card {
+        width: 100%;
+    }
+
+    .leader-card-wrap {
+        margin-bottom: var(--spacing-lg);
     }
 
     .tree-lines {
