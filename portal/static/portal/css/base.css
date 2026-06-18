@@ -551,7 +551,7 @@ input, textarea, select {
     justify-content: center;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, var(--color-canvas) 0%, rgba(var(--color-primary-rgb), 0.04) 40%, rgba(var(--color-primary-rgb), 0.06) 60%, var(--color-canvas) 100%);
+    background: linear-gradient(135deg, var(--color-canvas) 0%, rgba(var(--color-primary-rgb), 0.09) 35%, rgba(var(--color-primary-rgb), 0.14) 65%, var(--color-canvas) 100%);
     padding-top: var(--nav-height);
 }
 
