@@ -2464,10 +2464,18 @@ select {
     background: var(--color-hairline);
 }
 
-.tree-line-branch.l1 { left: 12.5%; }
-.tree-line-branch.l2 { left: 37.5%; }
-.tree-line-branch.l3 { left: 62.5%; }
-.tree-line-branch.l4 { left: 87.5%; }
+.tree-line-branch-down {
+    position: absolute;
+    top: 50%;
+    width: 2px;
+    height: 50%;
+    background: var(--color-hairline);
+}
+
+.tree-line-branch.l1, .tree-line-branch-down.l1 { left: 12.5%; }
+.tree-line-branch.l2, .tree-line-branch-down.l2 { left: 37.5%; }
+.tree-line-branch.l3, .tree-line-branch-down.l3 { left: 62.5%; }
+.tree-line-branch.l4, .tree-line-branch-down.l4 { left: 87.5%; }
 
 .leader-row-4 {
     display: grid;
@@ -2482,7 +2490,6 @@ select {
     justify-content: center;
     gap: var(--spacing-md);
     width: 100%;
-    margin-top: var(--spacing-md);
 }
 
 /* ── Team CTA ── */
