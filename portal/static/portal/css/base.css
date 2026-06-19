@@ -1006,6 +1006,19 @@ input, textarea, select {
     transform: translateY(-1px);
 }
 
+.hero-scroll-btn,
+.contact-social-btn {
+    background: rgba(var(--color-primary-rgb), 0.06);
+    border-color: rgba(var(--color-primary-rgb), 0.2);
+    backdrop-filter: blur(4px);
+}
+
+.hero-scroll-btn:hover,
+.contact-social-btn:hover {
+    background: rgba(var(--color-primary-rgb), 0.12);
+    border-color: var(--color-primary);
+}
+
 .btn-secondary {
     background: transparent;
     color: var(--color-ink);

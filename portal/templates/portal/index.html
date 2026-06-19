@@ -54,7 +54,7 @@
             </p>
             <div class="hero-actions">
                 {% if not user.is_authenticated %}
-                <a href="{% url 'join_guide' %}" class="btn btn-primary btn-large btn-glow hero-join-btn">Join the Club</a>
+                <a href="{% url 'join_guide' %}" class="btn btn-primary btn-large btn-glow hero-join-btn">Join Us</a>
                 {% endif %}
                 <a href="#about" class="btn btn-outline btn-large hero-scroll-btn">
                     Explore
@@ -333,10 +333,13 @@
             <p style="font-size:15px;color:var(--color-body);margin-bottom:var(--spacing-3xl);line-height:1.6">
                 Have questions? Want to join? We'd love to hear from you. Reach out and become part of something bigger.
             </p>
+            <div style="display:flex;flex-wrap:wrap;gap:var(--spacing-md);margin-bottom:var(--spacing-md);justify-content:center">
+                <a href="mailto:computerclub@baiust.ac.bd" class="btn btn-primary">Email Us</a>
+            </div>
             <div style="display:flex;flex-wrap:wrap;gap:var(--spacing-md);margin-bottom:var(--spacing-4xl);justify-content:center">
-                <a href="mailto:contact@bcc.baiust.edu" class="btn btn-primary">Email Us</a>
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Facebook</a>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline">GitHub</a>
+                <a href="https://facebook.com/share/1H7AUw9f6F" target="_blank" rel="noopener noreferrer" class="btn btn-outline contact-social-btn">Facebook</a>
+                <a href="https://github.com/computerclub-sys" target="_blank" rel="noopener noreferrer" class="btn btn-outline contact-social-btn">GitHub</a>
+                <a href="https://www.instagram.com/baiust.computer.club" target="_blank" rel="noopener noreferrer" class="btn btn-outline contact-social-btn">Instagram</a>
             </div>
         </div>
     </div>
@@ -358,9 +361,9 @@
                 </div>
                 <div class="footer-col">
                     <h4>Connect</h4>
-                    <a href="mailto:contact@bcc.baiust.edu">Email</a>
-                    <a href="https://github.com" target="_blank">GitHub</a>
-                    <a href="https://facebook.com" target="_blank">Facebook</a>
+                    <a href="mailto:computerclub@baiust.ac.bd">Email</a>
+                    <a href="https://github.com/computerclub-sys" target="_blank">GitHub</a>
+                    <a href="https://facebook.com/share/1H7AUw9f6F" target="_blank">Facebook</a>
                 </div>
             </div>
         </div>
