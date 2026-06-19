@@ -662,6 +662,34 @@ input, textarea, select {
     z-index: 1;
 }
 
+.hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background-image:
+        linear-gradient(rgba(var(--color-primary-rgb), 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--color-primary-rgb), 0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+.hero-grid-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, transparent 30%, var(--color-bg) 100%);
+}
+
+#circuit-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0.55;
+}
+
 .hero-bg-orb {
     position: absolute;
     border-radius: 50%;
