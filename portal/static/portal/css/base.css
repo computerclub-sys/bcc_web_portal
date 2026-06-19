@@ -2447,7 +2447,7 @@ select {
 .tree-line-v {
     width: 2px;
     height: 100%;
-    background: var(--color-hairline);
+    background: #00d992;
 }
 
 .tree-line-h {
@@ -2456,7 +2456,7 @@ select {
     left: 10%;
     right: 10%;
     height: 2px;
-    background: var(--color-hairline);
+    background: #00d992;
 }
 
 .tree-line-branch {
@@ -2464,7 +2464,7 @@ select {
     top: 0;
     width: 2px;
     height: 50%;
-    background: var(--color-hairline);
+    background: #00d992;
 }
 
 .tree-line-branch-down {
@@ -2472,7 +2472,7 @@ select {
     top: 50%;
     width: 2px;
     height: 50%;
-    background: var(--color-hairline);
+    background: #00d992;
 }
 
 .tree-line-branch.l1, .tree-line-branch-down.l1 { left: 12.5%; }
