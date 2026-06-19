@@ -2338,6 +2338,9 @@ select {
 .member-card-qr {
     text-align: center;
     padding: 0 var(--spacing-xl) var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .member-card-footer {
