@@ -307,126 +307,106 @@ ul { list-style: none; }
 }
 
 /* ══════════════════════════════════════════════════
-   QUICK OVERVIEW
+   EVENTS GRID — Cybernauts-inspired
    ══════════════════════════════════════════════════ */
-.events-overview {
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+.event-card {
+  position: relative;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--clr-border);
+  border-radius: 16px;
+  padding: 28px 24px 24px;
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
-.event-overview-card {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 20px 24px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--clr-border);
-  border-radius: var(--radius-md);
-  transition: all 0.3s;
-}
-.event-overview-card:hover {
-  background: rgba(255,255,255,0.06);
+.event-card:hover {
+  background: rgba(255,255,255,0.07);
   border-color: rgba(255,255,255,0.15);
-  transform: translateX(6px);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.3);
 }
-.event-overview-icon {
+.event-card-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  padding: 3px 12px;
+  border-radius: 20px;
+  background: rgba(255,107,53,0.2);
+  border: 1px solid rgba(255,107,53,0.3);
+  color: var(--clr-accent-light);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.event-card-icon {
   font-size: 36px;
-  flex-shrink: 0;
-  width: 56px;
-  height: 56px;
+  margin-bottom: 14px;
+  width: 52px;
+  height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(255,255,255,0.05);
-  border-radius: var(--radius-sm);
-}
-.event-overview-body { flex: 1; }
-.event-overview-body h3 {
-  font-size: 18px;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 4px;
-}
-.event-overview-date {
-  font-size: 13px;
-  color: var(--clr-accent);
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-.event-overview-desc {
-  font-size: 14px;
-  color: var(--clr-muted);
-}
-
-/* ══════════════════════════════════════════════════
-   EVENTS GRID
-   ══════════════════════════════════════════════════ */
-.events-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-}
-.event-card-link {
-  display: block;
-}
-.event-card {
-  background: rgba(255,255,255,0.03);
+  border-radius: 12px;
   border: 1px solid var(--clr-border);
-  border-radius: var(--radius-lg);
-  padding: 32px 24px;
-  text-align: center;
-  transition: all 0.35s ease;
-  position: relative;
-  overflow: hidden;
-}
-.event-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--clr-gradient-1);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.event-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(106, 17, 203, 0.3);
-  box-shadow: 0 12px 40px rgba(106, 17, 203, 0.2);
-}
-.event-card:hover::before { opacity: 1; }
-.event-card-badge {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  padding: 4px 12px;
-  border-radius: 20px;
-  background: var(--clr-accent);
-  color: white;
-  font-size: 12px;
-  font-weight: 700;
-}
-.event-card-icon-wrap {
-  font-size: 48px;
-  margin-bottom: 16px;
 }
 .event-card-title {
   font-size: 20px;
   font-weight: 700;
   color: white;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  line-height: 1.3;
 }
 .event-card-desc {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--clr-muted);
   line-height: 1.6;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
+  flex: 1;
 }
-.event-card-cta {
-  font-size: 14px;
+.event-card-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 14px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 10px;
+  border: 1px solid var(--clr-border);
+}
+.event-card-spec {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.spec-label {
+  font-size: 12px;
   font-weight: 600;
-  color: var(--clr-accent-light);
+  color: var(--clr-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.spec-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+}
+.event-card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+.event-card-actions .btn {
+  flex: 1;
+  padding: 9px 16px;
+  font-size: 13px;
+  justify-content: center;
 }
 
 /* ══════════════════════════════════════════════════

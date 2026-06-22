@@ -59,6 +59,18 @@
                         <span>Individual</span>
                     </div>
                     {% endif %}
+                    {% if event.registration_fee %}
+                    <div class="event-detail-meta-item">
+                        <strong>Registration Fee</strong>
+                        <span>{% if event.registration_fee == 0 %}Free{% else %}BDT {{ event.registration_fee }}{% endif %}</span>
+                    </div>
+                    {% endif %}
+                    {% if event.prize_pool %}
+                    <div class="event-detail-meta-item">
+                        <strong>Prize Pool</strong>
+                        <span>{{ event.prize_pool }}</span>
+                    </div>
+                    {% endif %}
                 </div>
 
                 <div class="event-detail-actions">

@@ -28,7 +28,7 @@ class FestAdmin(admin.ModelAdmin):
 
 @admin.register(FestEvent)
 class FestEventAdmin(admin.ModelAdmin):
-    list_display = ('title', 'fest', 'category', 'date', 'registration_open', 'order')
+    list_display = ('title', 'fest', 'category', 'date', 'registration_open', 'registration_fee', 'prize_pool', 'order')
     list_filter = ('category', 'registration_open', 'fest')
     search_fields = ('title', 'description')
     prepopulated_fields = {'slug': ('title',)}
@@ -36,7 +36,8 @@ class FestEventAdmin(admin.ModelAdmin):
         ('Fest', {'fields': ('fest', 'category')}),
         ('Event Info', {'fields': ('title', 'slug', 'short_description', 'description', 'poster')}),
         ('Date & Time', {'fields': ('date', 'time')}),
-        ('Registration', {'fields': ('registration_open', 'requires_team', 'min_team_size', 'max_team_size', 'requires_payment')}),
+        ('Registration', {'fields': ('registration_open', 'requires_team', 'min_team_size', 'max_team_size', 'requires_payment', 'registration_fee')}),
+        ('Prizes', {'fields': ('prize_pool',)}),
         ('Files', {'fields': ('rule_book_pdf',)}),
         ('Ordering', {'fields': ('order',)}),
     )

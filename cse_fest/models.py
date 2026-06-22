@@ -40,6 +40,8 @@ class FestEvent(models.Model):
     min_team_size = models.PositiveIntegerField(default=1)
     max_team_size = models.PositiveIntegerField(default=1)
     requires_payment = models.BooleanField(default=False)
+    registration_fee = models.DecimalField(max_digits=10, decimal_places=2, default=0, blank=True, help_text='Registration fee in BDT')
+    prize_pool = models.CharField(max_length=200, blank=True, help_text='e.g. 50,000 BDT + Trophies')
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
