@@ -15,6 +15,14 @@
                 <p style="margin: 4px 0; color: #555;">Date: {{ event.date|date:"F d, Y" }}</p>
                 {% if event.time %}<p style="margin: 4px 0; color: #555;">Time: {{ event.time|time:"g:i A" }}</p>{% endif %}
                 {% if registration.team_name %}<p style="margin: 4px 0; color: #555;">Team: {{ registration.team_name }}</p>{% endif %}
+                {% if team_members %}
+                <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #eee;">
+                    <p style="margin: 0 0 4px; color: #555; font-weight: 600;">Team Members:</p>
+                    {% for m in team_members %}
+                    <p style="margin: 2px 0; color: #666; font-size: 14px;">{{ forloop.counter }}. {{ m.name }} ({{ m.email }})</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
             </div>
             <p>Stay tuned for further updates. We'll keep you posted via email and our notice board.</p>
             <p style="margin-top: 24px;">Best regards,<br><strong>Organizing Team</strong><br>{{ fest.title }}</p>

@@ -4,7 +4,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-from .models import Fest, FestEvent, FestSchedule, Notice, CommitteeMember, Faq, Sponsor, FestRegistration
+from .models import Fest, FestEvent, FestSchedule, Notice, CommitteeMember, Faq, Sponsor, FestRegistration, FestTeamMember
 
 
 def _get_fest(year):
@@ -85,11 +85,27 @@ def register(request, year):
         phone=phone,
         gender=request.POST.get('gender', ''),
         team_name=request.POST.get('team_name', ''),
-        team_members=request.POST.get('team_members', ''),
         transaction_id=request.POST.get('transaction_id', ''),
         notes=request.POST.get('notes', ''),
         agreed_to_rules=True,
     )
+
+    if event.requires_team:
+        try:
+            team_size = int(request.POST.get('team_size', 0))
+        except (ValueError, TypeError):
+            team_size = 0
+        for i in range(team_size):
+            tm_name = request.POST.get(f'team_member_name_{i}', '').strip()
+            tm_email = request.POST.get(f'team_member_email_{i}', '').strip()
+            if tm_name and tm_email:
+                FestTeamMember.objects.create(
+                    registration=registration,
+                    name=tm_name,
+                    email=tm_email,
+                )
+
+    team_members = list(registration.team_members.all())
 
     try:
         subject = f'Registration Confirmed — {event.title} ({fest.title})'
@@ -98,6 +114,7 @@ def register(request, year):
             'event': event,
             'fest': fest,
             'registration': registration,
+            'team_members': team_members,
         })
         send_mail(
             subject,

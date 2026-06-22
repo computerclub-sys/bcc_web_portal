@@ -34,10 +34,11 @@ class FestEvent(models.Model):
     date = models.DateField()
     time = models.TimeField(blank=True, null=True)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
-    team_size = models.PositiveIntegerField(default=1)
     rule_book_pdf = models.FileField(upload_to='cse_fest/rules/', blank=True)
     registration_open = models.BooleanField(default=True)
     requires_team = models.BooleanField(default=False)
+    min_team_size = models.PositiveIntegerField(default=1)
+    max_team_size = models.PositiveIntegerField(default=1)
     requires_payment = models.BooleanField(default=False)
     order = models.PositiveIntegerField(default=0)
 
@@ -161,7 +162,6 @@ class FestRegistration(models.Model):
     phone = models.CharField(max_length=20)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, blank=True)
     team_name = models.CharField(max_length=200, blank=True, help_text='For group events')
-    team_members = models.TextField(blank=True, help_text='Names of team members')
     transaction_id = models.CharField(max_length=100, blank=True, help_text='Payment transaction ID if required')
     notes = models.TextField(blank=True)
     agreed_to_rules = models.BooleanField(default=False)
@@ -172,3 +172,15 @@ class FestRegistration(models.Model):
 
     def __str__(self):
         return f'{self.full_name} — {self.event.title}'
+
+
+class FestTeamMember(models.Model):
+    registration = models.ForeignKey(FestRegistration, on_delete=models.CASCADE, related_name='team_members')
+    name = models.CharField(max_length=200)
+    email = models.EmailField()
+
+    class Meta:
+        ordering = ['id']
+
+    def __str__(self):
+        return f'{self.name} ({self.email})'

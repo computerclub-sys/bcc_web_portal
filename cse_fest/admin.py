@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Fest, FestEvent, FestSchedule, Notice, CommitteeMember, Faq, Sponsor, FestRegistration
+from .models import Fest, FestEvent, FestSchedule, Notice, CommitteeMember, Faq, Sponsor, FestRegistration, FestTeamMember
 
 
 class FestEventInline(admin.TabularInline):
@@ -36,7 +36,7 @@ class FestEventAdmin(admin.ModelAdmin):
         ('Fest', {'fields': ('fest', 'category')}),
         ('Event Info', {'fields': ('title', 'slug', 'short_description', 'description', 'poster')}),
         ('Date & Time', {'fields': ('date', 'time')}),
-        ('Registration', {'fields': ('registration_open', 'requires_team', 'team_size', 'requires_payment')}),
+        ('Registration', {'fields': ('registration_open', 'requires_team', 'min_team_size', 'max_team_size', 'requires_payment')}),
         ('Files', {'fields': ('rule_book_pdf',)}),
         ('Ordering', {'fields': ('order',)}),
     )
@@ -84,9 +84,19 @@ class SponsorAdmin(admin.ModelAdmin):
     list_filter = ('sponsor_type', 'fest')
 
 
+class FestTeamMemberInline(admin.TabularInline):
+    model = FestTeamMember
+    extra = 0
+    fields = ('name', 'email')
+    readonly_fields = ('name', 'email')
+    can_delete = False
+    max_num = 0
+
+
 @admin.register(FestRegistration)
 class FestRegistrationAdmin(admin.ModelAdmin):
     list_display = ('full_name', 'email', 'event', 'phone', 'created_at')
     list_filter = ('event__fest', 'event')
     search_fields = ('full_name', 'email', 'phone', 'student_id')
     readonly_fields = ('created_at',)
+    inlines = [FestTeamMemberInline]

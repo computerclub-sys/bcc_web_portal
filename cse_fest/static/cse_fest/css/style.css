@@ -912,6 +912,30 @@ ul { list-style: none; }
 .form-group select { color: var(--clr-text); }
 .form-group select option { background: var(--clr-dark-2); color: white; }
 
+/* ── Team Member Fields ── */
+.team-size-field {
+  max-width: 260px;
+}
+.team-members-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.team-member-block {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+}
+.team-member-heading {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--clr-accent-light);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--clr-border);
+}
+
 .checkbox-label {
   display: flex !important;
   flex-direction: row !important;

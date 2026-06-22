@@ -51,7 +51,7 @@
                     {% if event.requires_team %}
                     <div class="event-detail-meta-item">
                         <strong>Team Size</strong>
-                        <span>{{ event.team_size }} members</span>
+                        <span>{% if event.min_team_size == event.max_team_size %}{{ event.min_team_size }} members{% else %}{{ event.min_team_size }}–{{ event.max_team_size }} members{% endif %}</span>
                     </div>
                     {% else %}
                     <div class="event-detail-meta-item">
@@ -126,10 +126,21 @@
                         </div>
 
                         {% if event.requires_team %}
-                        <div class="form-group">
-                            <label>Team Members</label>
-                            <textarea name="team_members" rows="3" placeholder="List your team members' names (one per line)"></textarea>
+                        <div class="form-group team-size-field">
+                            <label>Number of Team Members *</label>
+                            <select name="team_size" id="teamSizeSelect" required>
+                                <option value="">— Select —</option>
+                                {% for n in ""|ljust:event.max_team_size %}
+                                    {% with num=forloop.counter %}
+                                    {% if num >= event.min_team_size %}
+                                    <option value="{{ num }}">{{ num }} members</option>
+                                    {% endif %}
+                                    {% endwith %}
+                                {% endfor %}
+                            </select>
                         </div>
+
+                        <div class="team-members-container" id="teamMembersContainer"></div>
                         {% endif %}
 
                         {% if event.requires_payment %}
@@ -163,4 +174,47 @@
         </div>
     </div>
 </section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+var teamSizeSelect = document.getElementById('teamSizeSelect');
+var teamMembersContainer = document.getElementById('teamMembersContainer');
+
+function renderTeamMembers(count) {
+    var html = '';
+    for (var i = 0; i < count; i++) {
+        html +=
+            '<div class="team-member-block">' +
+            '  <h4 class="team-member-heading">Member ' + (i + 1) + '</h4>' +
+            '  <div class="form-row">' +
+            '    <div class="form-group">' +
+            '      <label>Name *</label>' +
+            '      <input type="text" name="team_member_name_' + i + '" required placeholder="Full name">' +
+            '    </div>' +
+            '    <div class="form-group">' +
+            '      <label>Email *</label>' +
+            '      <input type="email" name="team_member_email_' + i + '" required placeholder="email@example.com">' +
+            '    </div>' +
+            '  </div>' +
+            '</div>';
+    }
+    teamMembersContainer.innerHTML = html;
+}
+
+if (teamSizeSelect) {
+    {% if event.requires_team and event.min_team_size == event.max_team_size %}
+    teamSizeSelect.value = '{{ event.min_team_size }}';
+    renderTeamMembers({{ event.min_team_size }});
+    {% endif %}
+    teamSizeSelect.addEventListener('change', function() {
+        var val = parseInt(this.value, 10);
+        if (val > 0) {
+            renderTeamMembers(val);
+        } else {
+            teamMembersContainer.innerHTML = '';
+        }
+    });
+}
+</script>
 {% endblock %}
