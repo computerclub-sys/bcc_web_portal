@@ -7,12 +7,14 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 from events.models import Event
+from cse_fest.models import Fest
 
 def home(request):
     from .models import TeamMember
 
     active_events = Event.objects.filter(status='active').order_by('date')[:3]
     completed_events = Event.objects.filter(status='completed').order_by('-date')[:3]
+    cse_fests = Fest.objects.filter(is_active=True).order_by('-year')
 
     president = TeamMember.objects.filter(leader_position='president', is_active=True).first()
     gs = TeamMember.objects.filter(leader_position='general_secretary', is_active=True).first()
@@ -25,6 +27,7 @@ def home(request):
     return render(request, 'portal/index.html', {
         'active_events': active_events,
         'completed_events': completed_events,
+        'cse_fests': cse_fests,
         'president': president,
         'gs': gs,
         'vps_row1': vps_row1,

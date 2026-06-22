@@ -15,14 +15,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
+from cse_fest import views as cse_fest_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('portal.urls')),
     path('events/', include('events.urls')),
+    re_path(r'^cse-fest-(?P<year>\d{4})/', include('cse_fest.urls')),
+    path('cse-fest/', cse_fest_views.redirect_to_latest, name='cse_fest_latest'),
 ]
 
 if settings.DEBUG:
