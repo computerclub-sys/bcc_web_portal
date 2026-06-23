@@ -149,6 +149,12 @@ class Sponsor(models.Model):
 
 
 class FestRegistration(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('confirmed', 'Confirmed'),
+        ('cancelled', 'Cancelled'),
+    ]
+
     GENDER_CHOICES = [
         ('male', 'Male'),
         ('female', 'Female'),
@@ -156,6 +162,8 @@ class FestRegistration(models.Model):
     ]
 
     event = models.ForeignKey(FestEvent, on_delete=models.CASCADE, related_name='registrations')
+    application_id = models.CharField(max_length=20, unique=True, blank=True, editable=False)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     full_name = models.CharField(max_length=200)
     university = models.CharField(max_length=200)
     department = models.CharField(max_length=200)
@@ -172,8 +180,19 @@ class FestRegistration(models.Model):
     class Meta:
         ordering = ['-created_at']
 
+    def save(self, *args, **kwargs):
+        if not self.application_id:
+            prefix = f'CSE-{self.event.fest.year}'
+            last = FestRegistration.objects.filter(application_id__startswith=prefix).order_by('-id').first()
+            if last and last.application_id:
+                num = int(last.application_id.split('-')[-1]) + 1
+            else:
+                num = 1
+            self.application_id = f'{prefix}-{num:04d}'
+        super().save(*args, **kwargs)
+
     def __str__(self):
-        return f'{self.full_name} — {self.event.title}'
+        return f'{self.application_id} — {self.full_name} — {self.event.title}'
 
 
 class FestTeamMember(models.Model):

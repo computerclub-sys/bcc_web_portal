@@ -127,5 +127,25 @@ def register(request, year):
     except Exception:
         pass
 
-    messages.success(request, f'Registration successful! Check your email ({email}) for confirmation.')
+    messages.success(request, f'Registration successful! Your application ID is {registration.application_id}. Check your email ({email}) for confirmation.')
     return redirect('cse_fest:event_detail', year=year, slug=event.slug)
+
+
+def application_status(request, year):
+    fest = _get_fest(year)
+    registration = None
+    search_id = ''
+
+    if request.method == 'POST':
+        search_id = request.POST.get('application_id', '').strip()
+        if search_id:
+            try:
+                registration = FestRegistration.objects.get(application_id=search_id, event__fest=fest)
+            except FestRegistration.DoesNotExist:
+                messages.error(request, 'No application found with that ID.')
+
+    return render(request, 'cse_fest/application_status.html', {
+        'fest': fest,
+        'registration': registration,
+        'search_id': search_id,
+    })

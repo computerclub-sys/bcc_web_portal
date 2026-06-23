@@ -12,6 +12,7 @@
             <p>You have successfully registered for:</p>
             <div style="background: #f0f4ff; border-radius: 8px; padding: 16px; margin: 16px 0;">
                 <h3 style="margin: 0 0 8px; color: #333;">{{ event.title }}</h3>
+                <p style="margin: 4px 0; color: #333; font-size: 16px; font-weight: 600;">Application ID: <span style="font-family: monospace; color: #6a11cb;">{{ registration.application_id }}</span></p>
                 <p style="margin: 4px 0; color: #555;">Date: {{ event.date|date:"F d, Y" }}</p>
                 {% if event.time %}<p style="margin: 4px 0; color: #555;">Time: {{ event.time|time:"g:i A" }}</p>{% endif %}
                 {% if registration.team_name %}<p style="margin: 4px 0; color: #555;">Team: {{ registration.team_name }}</p>{% endif %}
@@ -25,6 +26,7 @@
                 {% endif %}
             </div>
             <p>Stay tuned for further updates. We'll keep you posted via email and our notice board.</p>
+            <p>You can check your application status anytime at our <a href="https://bcc.baiust.ac.bd/cse-fest-{{ fest.year }}/application-status/" style="color: #6a11cb;">Application Status Page</a> using your Application ID.</p>
             <p style="margin-top: 24px;">Best regards,<br><strong>Organizing Team</strong><br>{{ fest.title }}</p>
         </div>
         <div style="background: #f9f9f9; padding: 16px; text-align: center; font-size: 13px; color: #888;">

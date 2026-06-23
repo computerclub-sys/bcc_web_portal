@@ -40,6 +40,7 @@
                 <a href="#faq" class="nav-link">FAQ</a>
                 <a href="#notices" class="nav-link">Notices</a>
                 <a href="#contact" class="nav-link">Contact</a>
+                <a href="{% url 'cse_fest:application_status' year=fest.year %}" class="nav-link">Status</a>
             </div>
             <button class="nav-toggle" id="navToggle" aria-label="Menu">
                 <span></span><span></span><span></span>
@@ -81,6 +82,7 @@
             setTimeout(function() {
                 document.getElementById('loader-screen').style.display = 'none';
                 document.getElementById('page-wrapper').style.display = '';
+                window.dispatchEvent(new Event('resize'));
             }, 3000);
         });
         var nav = document.getElementById('nav');

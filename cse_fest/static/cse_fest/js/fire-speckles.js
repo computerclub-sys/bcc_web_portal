@@ -11,14 +11,15 @@
 
   function resize() {
     const rect = hero.getBoundingClientRect();
+    if (rect.width < 1 || rect.height < 1) return;
     W = canvas.width = rect.width;
     H = canvas.height = rect.height;
   }
 
   function createParticle() {
     return {
-      x: Math.random() * W,
-      y: Math.random() * H,
+      x: Math.random() * (W || window.innerWidth),
+      y: Math.random() * (H || window.innerHeight),
       vx: (Math.random() - 0.5) * 0.3,
       vy: (Math.random() - 0.5) * 0.3,
       size: 2 + Math.random() * 4,
@@ -29,6 +30,12 @@
   for (let i = 0; i < COUNT; i++) particles.push(createParticle());
 
   function draw() {
+    if (W < 1 || H < 1) {
+      resize();
+      requestAnimationFrame(draw);
+      return;
+    }
+
     ctx.clearRect(0, 0, W, H);
 
     for (const p of particles) {
