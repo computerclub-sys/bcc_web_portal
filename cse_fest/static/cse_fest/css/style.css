@@ -5,7 +5,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #0a0a12;
+  --bg: transparent;
   --bg-alt: #111122;
   --surface: #151528;
   --border: rgba(255,255,255,0.06);
@@ -125,6 +125,21 @@ img { max-width: 100%; height: auto; display: block; }
 .nav-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 6px 10px; }
 .nav-toggle span { display: block; width: 18px; height: 2px; background: var(--text-heading); border-radius: 2px; transition: 0.3s; }
 
+/* ── Site Background ── */
+.site-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: #020617;
+}
+.site-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle 500px at 50% 100px, rgba(139,92,246,0.4), transparent);
+  pointer-events: none;
+}
+
 /* ── Hero ── */
 .hero {
   min-height: 100vh;
@@ -134,7 +149,7 @@ img { max-width: 100%; height: auto; display: block; }
   overflow: hidden;
   background: linear-gradient(135deg, #0a0a18 0%, #151530 40%, #1a1040 100%);
 }
-#hero-bg-canvas {
+.hero-bg-spline {
   position: absolute;
   inset: 0;
   width: 100%;

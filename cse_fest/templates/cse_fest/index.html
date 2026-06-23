@@ -2,21 +2,14 @@
 {% load static %}
 
 {% block extra_head %}
-<script type="importmap">
-    {
-        "imports": {
-            "three": "{% static 'cse_fest/vendor/three/three.module.js' %}",
-            "three/addons/": "{% static 'cse_fest/vendor/three/jsm/' %}"
-        }
-    }
-</script>
+<link rel="preconnect" href="https://my.spline.design">
 {% endblock %}
 
 {% block content %}
 
 <!-- ═══ HERO ═══ -->
 <section class="hero" id="home">
-    <canvas id="hero-bg-canvas"></canvas>
+    <iframe src='https://my.spline.design/boxeshover-NBwUKgYryFELvhzfx3ZWMpZx/' frameborder='0' class="hero-bg-spline"></iframe>
     <div class="container">
         <div class="hero-body">
             <span class="hero-sup">{{ fest.title }}</span>
@@ -206,7 +199,5 @@
 </section>
 {% endif %}
 
-{% block extra_scripts %}
-<script type="module" src="{% static 'cse_fest/js/hero-bg.js' %}"></script>
-{% endblock %}
+{% block extra_scripts %}{% endblock %}
 {% endblock %}
