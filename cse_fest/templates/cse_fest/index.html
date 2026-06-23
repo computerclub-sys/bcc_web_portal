@@ -141,17 +141,22 @@
             <h3 class="committee-label">{{ group.grouper }}</h3>
             <div class="committee-grid">
                 {% for member in group.list %}
-                <div class="member-card">
-                    <div class="member-avatar">
-                        {% if member.photo %}
-                        <img src="{{ member.photo.url }}" alt="{{ member.name }}">
-                        {% else %}
-                        <div class="member-avatar-placeholder">{{ member.name|first }}</div>
-                        {% endif %}
+                <div class="cm-card">
+                    <div class="cm-top">
+                        <div class="cm-border"></div>
+                        <div class="cm-avatar">
+                            {% if member.photo %}
+                            <img src="{{ member.photo.url }}" alt="{{ member.name }}">
+                            {% else %}
+                            <span>{{ member.name|first }}</span>
+                            {% endif %}
+                        </div>
                     </div>
-                    <h4 class="member-name">{{ member.name }}</h4>
-                    <p class="member-role">{{ member.position }}</p>
-                    {% if member.department %}<p class="member-dept">{{ member.department }}</p>{% endif %}
+                    <div class="cm-bottom">
+                        <span class="cm-name">{{ member.name }}</span>
+                        <span class="cm-role">{{ member.position }}</span>
+                        {% if member.department %}<span class="cm-dept">{{ member.department }}</span>{% endif %}
+                    </div>
                 </div>
                 {% endfor %}
             </div>
