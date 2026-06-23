@@ -89,14 +89,11 @@
             <div class="sponsor-grid">
                 {% for sponsor in group.list %}
                 <a href="{{ sponsor.url }}" target="_blank" rel="noopener" class="sponsor-card" title="{{ sponsor.name }}">
-                    <div class="sponsor-border"></div>
-                    <div class="sponsor-inner">
-                        {% if sponsor.logo %}
-                        <img src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}">
-                        {% else %}
-                        <span class="sponsor-name">{{ sponsor.name }}</span>
-                        {% endif %}
-                    </div>
+                    {% if sponsor.logo %}
+                    <img src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}">
+                    {% else %}
+                    <span class="sponsor-name">{{ sponsor.name }}</span>
+                    {% endif %}
                 </a>
                 {% endfor %}
             </div>

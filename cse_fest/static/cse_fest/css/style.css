@@ -505,47 +505,23 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   min-height: 140px;
   text-decoration: none;
   color: white;
-  overflow: hidden;
-}
-.sponsor-border {
-  overflow: hidden;
-  pointer-events: none;
-  position: absolute;
   z-index: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
-  background-image: linear-gradient(0deg, #381032 -50%, #952f9f 100%);
-  border-radius: 1rem;
 }
-.sponsor-border::before {
+.sponsor-card::before {
   content: "";
-  pointer-events: none;
   position: absolute;
-  z-index: 1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 200%;
-  height: 10rem;
-  background-image: linear-gradient(0deg, transparent 0%, #d946ef 40%, #d946ef 60%, transparent 100%);
-  animation: sponsor-rotate 6s linear infinite;
+  inset: 0;
+  padding: 2px;
+  border-radius: 1rem;
+  background: conic-gradient(#381032, #952f9f, #d946ef, #381032);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: sponsor-rotate-conic 4s linear infinite;
+  z-index: -1;
 }
-@keyframes sponsor-rotate {
-  to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-.sponsor-inner {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  background: #0d0d0d;
-  border-radius: calc(1rem - 1px);
-  padding: 1rem;
+@keyframes sponsor-rotate-conic {
+  to { transform: rotate(360deg); }
 }
 .sponsor-card img { max-height: 48px; max-width: 100%; opacity: 0.9; transition: opacity 0.3s; }
 .sponsor-card:hover img { opacity: 1; }
