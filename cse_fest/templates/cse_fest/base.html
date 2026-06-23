@@ -36,13 +36,13 @@
                 <span class="nav-title">{{ fest.title }}</span>
             </a>
             <div class="nav-links" id="navLinks">
-                <a href="#events" class="nav-link">Events</a>
-                <a href="#schedule" class="nav-link">Schedule</a>
-                <a href="#sponsors" class="nav-link">Sponsors</a>
-                <a href="#committee" class="nav-link">Committee</a>
-                <a href="#faq" class="nav-link">FAQ</a>
-                <a href="#notices" class="nav-link">Notices</a>
-                <a href="#contact" class="nav-link">Contact</a>
+                <a href="{% url 'cse_fest:index' year=fest.year %}#events" class="nav-link">Events</a>
+                <a href="{% url 'cse_fest:index' year=fest.year %}#schedule" class="nav-link">Schedule</a>
+                <a href="{% url 'cse_fest:index' year=fest.year %}#sponsors" class="nav-link">Sponsors</a>
+                <a href="{% url 'cse_fest:index' year=fest.year %}#committee" class="nav-link">Committee</a>
+                <a href="{% url 'cse_fest:index' year=fest.year %}#faq" class="nav-link">FAQ</a>
+                <a href="{% url 'cse_fest:index' year=fest.year %}#notices" class="nav-link">Notices</a>
+                <a href="{% url 'cse_fest:index' year=fest.year %}#contact" class="nav-link">Contact</a>
                 <a href="{% url 'cse_fest:application_status' year=fest.year %}" class="nav-link">Status</a>
             </div>
             <button class="nav-toggle" id="navToggle" aria-label="Menu">
@@ -102,9 +102,16 @@
         document.querySelectorAll('.nav-link').forEach(function(a) {
             a.addEventListener('click', function(e) {
                 var h = this.getAttribute('href');
-                if (h.startsWith('#')) {
+                var hashIndex = h.indexOf('#');
+                if (hashIndex !== -1) {
+                    var hash = h.substring(hashIndex);
+                    var path = h.substring(0, hashIndex);
+                    if (path && path !== window.location.pathname) {
+                        window.location.href = h;
+                        return;
+                    }
                     e.preventDefault();
-                    var el = document.querySelector(h);
+                    var el = document.querySelector(hash);
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
                     nav.classList.remove('nav--open');
                 }
