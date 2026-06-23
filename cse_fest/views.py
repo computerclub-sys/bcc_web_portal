@@ -108,7 +108,7 @@ def register(request, year):
     team_members = list(registration.team_members.all())
 
     try:
-        subject = f'Registration Confirmed — {event.title} ({fest.title})'
+        subject = f'Application Received — {event.title} ({fest.title})'
         html = render_to_string('cse_fest/emails/confirmation.html', {
             'name': full_name,
             'event': event,
@@ -133,19 +133,31 @@ def register(request, year):
 
 def application_status(request, year):
     fest = _get_fest(year)
-    registration = None
+    registrations = None
     search_id = ''
+    search_type = 'id'
 
     if request.method == 'POST':
+        search_type = request.POST.get('search_type', 'id')
         search_id = request.POST.get('application_id', '').strip()
         if search_id:
-            try:
-                registration = FestRegistration.objects.get(application_id=search_id, event__fest=fest)
-            except FestRegistration.DoesNotExist:
-                messages.error(request, 'No application found with that ID.')
+            if search_type == 'team':
+                registrations = FestRegistration.objects.filter(
+                    event__fest=fest,
+                    team_name__icontains=search_id,
+                ).select_related('event').order_by('-created_at')
+                if not registrations:
+                    messages.error(request, 'No applications found with that team name.')
+            else:
+                try:
+                    reg = FestRegistration.objects.get(application_id=search_id, event__fest=fest)
+                    registrations = [reg]
+                except FestRegistration.DoesNotExist:
+                    messages.error(request, 'No application found with that ID.')
 
     return render(request, 'cse_fest/application_status.html', {
         'fest': fest,
-        'registration': registration,
+        'registrations': registrations,
         'search_id': search_id,
+        'search_type': search_type,
     })
