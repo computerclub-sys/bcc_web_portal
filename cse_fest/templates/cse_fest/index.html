@@ -7,6 +7,7 @@
 
 <!-- ═══ HERO ═══ -->
 <section class="hero" id="home">
+    <canvas id="fire-speckles"></canvas>
     <div class="container">
         <div class="hero-body">
             <h1 class="hero-title">
@@ -207,5 +208,7 @@
 </section>
 {% endif %}
 
-{% block extra_scripts %}{% endblock %}
+{% block extra_scripts %}
+<script src="{% static 'cse_fest/js/fire-speckles.js' %}"></script>
+{% endblock %}
 {% endblock %}
