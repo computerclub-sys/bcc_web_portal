@@ -493,6 +493,11 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 24px;
 }
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
 .sponsor-card {
   position: relative;
   display: flex;
@@ -513,7 +518,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   inset: 0;
   padding: 2px;
   border-radius: 1rem;
-  background: conic-gradient(#381032, #952f9f, #d946ef, #381032);
+  background: conic-gradient(from var(--angle), #381032, #952f9f, #d946ef, #381032);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -521,7 +526,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   z-index: -1;
 }
 @keyframes sponsor-rotate-conic {
-  to { transform: rotate(360deg); }
+  to { --angle: 360deg; }
 }
 .sponsor-card img { max-height: 48px; max-width: 100%; opacity: 0.9; transition: opacity 0.3s; }
 .sponsor-card:hover img { opacity: 1; }
