@@ -147,6 +147,19 @@ img { max-width: 100%; height: auto; display: block; }
   overflow: hidden;
   background: linear-gradient(135deg, #0a0a18 0%, #151530 40%, #1a1040 100%);
 }
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(45deg, transparent 49%, rgba(56,16,50,0.25) 49%, rgba(56,16,50,0.25) 51%, transparent 51%),
+    linear-gradient(-45deg, transparent 49%, rgba(56,16,50,0.25) 49%, rgba(56,16,50,0.25) 51%, transparent 51%);
+  background-size: 40px 40px;
+  -webkit-mask-image: radial-gradient(ellipse 100% 80% at 50% 100%, #000 50%, transparent 90%);
+  mask-image: radial-gradient(ellipse 100% 80% at 50% 100%, #000 50%, transparent 90%);
+}
 #hero-bg-canvas {
   position: absolute;
   inset: 0;
