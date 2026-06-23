@@ -7,6 +7,9 @@
     <title>{% block title %}{{ fest.title }} {{ fest.year }}{% endblock %}</title>
     <meta name="description" content="{% block description %}CSE Fest {{ fest.year }} — Hackathon, IUPC, E-Football, ICT Quiz and more!{% endblock %}">
     <link rel="stylesheet" href="{% static 'cse_fest/css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>🎪</text></svg>">
     {% block extra_head %}{% endblock %}
 </head>
