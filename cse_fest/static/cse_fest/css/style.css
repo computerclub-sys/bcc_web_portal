@@ -619,7 +619,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--text-heading);
   text-align: left;
@@ -633,7 +633,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   transition: all 0.3s ease;
   padding: 0 20px;
   color: var(--text-muted);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.7;
 }
 .faq--open .faq-a { max-height: 500px; padding: 0 20px 16px; }
@@ -644,12 +644,21 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   display: flex;
   gap: 14px;
   padding: 18px 22px;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
   border-radius: var(--radius-sm);
   position: relative;
+  z-index: 0;
+  transition: all .2s;
 }
-.notice:hover { border-color: rgba(255,255,255,0.1); }
+.notice::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: var(--surface);
+  border-radius: calc(var(--radius-sm) - 2px);
+  z-index: -1;
+}
+.notice:hover { transform: scale(0.98); border-radius: 20px; box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.30); }
 .notice-new {
   position: absolute;
   top: 10px;
@@ -663,9 +672,9 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-.notice-body h4 { font-size: 15px; font-weight: 700; color: var(--text-heading); margin-bottom: 4px; }
-.notice-body p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 6px; }
-.notice-date { font-size: 11px; color: var(--text-muted); opacity: 0.5; }
+.notice-body h4 { font-size: 20px; font-weight: 700; color: var(--text-heading); margin-bottom: 4px; }
+.notice-body p { font-size: 18px; color: var(--text-muted); line-height: 1.6; margin-bottom: 6px; }
+.notice-date { font-size: 14px; color: var(--text-muted); opacity: 0.5; }
 
 /* ── Event Detail ── */
 .detail-section { padding: 100px 0 60px; }
