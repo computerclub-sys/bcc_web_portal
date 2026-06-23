@@ -145,7 +145,21 @@ img { max-width: 100%; height: auto; display: block; }
   align-items: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #0a0a18 0%, #151530 40%, #1a1040 100%);
+  background:
+    radial-gradient(ellipse at center, transparent 50%, #0b0712 95%),
+    radial-gradient(circle at 50% 50%, rgba(194,59,142,0.15), transparent 40%),
+    linear-gradient(#07030a, #0b0712 60%);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 20% 30%, #6b2b7f 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, #7f1f3a 0%, transparent 35%);
+  filter: blur(120px) opacity(0.4);
 }
 .hero::after {
   content: '';
