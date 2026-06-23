@@ -1,11 +1,22 @@
 {% extends "cse_fest/base.html" %}
 {% load static %}
 
+{% block extra_head %}
+<script type="importmap">
+    {
+        "imports": {
+            "three": "{% static 'cse_fest/vendor/three/three.module.js' %}",
+            "three/addons/": "{% static 'cse_fest/vendor/three/jsm/' %}"
+        }
+    }
+</script>
+{% endblock %}
+
 {% block content %}
 
 <!-- ═══ HERO ═══ -->
 <section class="hero" id="home">
-    <div class="hero-bg"></div>
+    <canvas id="hero-bg-canvas"></canvas>
     <div class="container">
         <div class="hero-body">
             <span class="hero-sup">{{ fest.title }}</span>
@@ -195,4 +206,7 @@
 </section>
 {% endif %}
 
+{% block extra_scripts %}
+<script type="module" src="{% static 'cse_fest/js/hero-bg.js' %}"></script>
+{% endblock %}
 {% endblock %}
