@@ -530,7 +530,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 }
 .sponsor-card img { max-height: 48px; max-width: 100%; opacity: 0.9; transition: opacity 0.3s; }
 .sponsor-card:hover img { opacity: 1; }
-.sponsor-name { font-weight: 600; color: #fff; font-size: 14px; text-align: center; }
+.sponsor-name { display: block; width: 100%; font-weight: 600; color: #fff; font-size: 14px; text-align: center; }
 
 /* ── Timeline ── */
 .timeline {
