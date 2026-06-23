@@ -19,8 +19,12 @@
     <canvas id="hero-bg-canvas"></canvas>
     <div class="container">
         <div class="hero-body">
-            <span class="hero-sup">{{ fest.title }}</span>
-            <h1 class="hero-title">{{ fest.year }}</h1>
+            <h1 class="hero-title">
+                <span class="neon-fire-text">
+                    <span class="inline-block" style="filter:blur(1px)">{{ fest.title }}</span>
+                    <span class="inline-block" style="filter:blur(1px)">{{ fest.year }}</span>
+                </span>
+            </h1>
             <p class="hero-desc">The premier inter-department championship is back. Compete in gaming, programming, and tech challenges. Battle for supremacy.</p>
             <div class="hero-meta">
                 <span class="hero-date">📅 June 11 – 20 | BAIUST Campus</span>
@@ -50,7 +54,8 @@
             {% for event in events %}
             <div class="flip-card">
                 <div class="flip-card-inner">
-                    <div class="flip-card-front">
+                    <div class="flip-card-front"{% if event.poster %} style="background-image:url('{{ event.poster.url }}')"{% endif %}>
+                        <div class="fcf-overlay"></div>
                         <div class="fcf-icon">
                             {% if event.category == 'hackathon' %}🧠{% elif event.category == 'iupc' %}💻{% elif event.category == 'efootball' %}⚽{% elif event.category == 'ictquiz' %}❓{% endif %}
                         </div>
