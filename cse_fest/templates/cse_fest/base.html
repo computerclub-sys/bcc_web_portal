@@ -79,11 +79,14 @@
 
     <script>
         window.addEventListener('load', function() {
+            var isFirst = !sessionStorage.getItem('cse_loaded');
+            var delay = isFirst ? 3000 : 1500;
+            sessionStorage.setItem('cse_loaded', '1');
             setTimeout(function() {
                 document.getElementById('loader-screen').style.display = 'none';
                 document.getElementById('page-wrapper').style.display = '';
                 window.dispatchEvent(new Event('resize'));
-            }, 3000);
+            }, delay);
         });
         var nav = document.getElementById('nav');
         document.getElementById('navToggle').addEventListener('click', function() {
