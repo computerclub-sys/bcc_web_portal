@@ -141,16 +141,16 @@
             <div class="committee-grid">
                 {% for member in group.list %}
                 <div class="cm-card">
-                    <div class="cm-avatar">
-                        {% if member.photo %}
-                        <img src="{{ member.photo.url }}" alt="{{ member.name }}">
-                        {% else %}
-                        <span>{{ member.name|first }}</span>
-                        {% endif %}
+                    <b></b>
+                    {% if member.photo %}
+                    <img src="{{ member.photo.url }}" alt="{{ member.name }}">
+                    {% else %}
+                    <span class="cm-initial">{{ member.name|first }}</span>
+                    {% endif %}
+                    <div class="cm-content">
+                        <p class="cm-title">{{ member.name }}<br><span>{{ member.position }}</span></p>
+                        {% if member.department %}<p class="cm-dept">{{ member.department }}</p>{% endif %}
                     </div>
-                    <p class="cm-name">{{ member.name }}</p>
-                    <p class="cm-role">{{ member.position }}</p>
-                    {% if member.department %}<p class="cm-dept">{{ member.department }}</p>{% endif %}
                 </div>
                 {% endfor %}
             </div>
