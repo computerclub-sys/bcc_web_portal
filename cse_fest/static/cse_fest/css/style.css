@@ -312,7 +312,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   border-top: 1px solid var(--border);
 }
 .hero-countdown-label {
-  font-size: 12px;
+  font-size: 20px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -322,8 +322,8 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 }
 .cd { display: flex; gap: 20px; justify-content: center; }
 .cd-item { display: flex; flex-direction: column; align-items: center; min-width: 64px; }
-.cd-num { font-size: 34px; font-weight: 800; color: var(--text-heading); line-height: 1; }
-.cd-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-top: 4px; }
+.cd-num { font-size: 42px; font-weight: 800; color: var(--text-heading); line-height: 1; }
+.cd-label { font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-top: 4px; }
 
 /* ── Section ── */
 .section { padding: 80px 0; }
@@ -336,7 +336,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   margin-bottom: 10px;
 }
 .section-desc {
-  font-size: 15px;
+  font-size: 24px;
   color: var(--text-muted);
   max-width: 520px;
   margin: 0 auto;
@@ -906,7 +906,7 @@ form { display: flex; flex-direction: column; gap: 14px; }
   .section { padding: 56px 0; }
   .events-grid { grid-template-columns: 1fr; }
   .committee-grid { grid-template-columns: repeat(2, 1fr); }
-  .cd-num { font-size: 26px; }
+  .cd-num { font-size: 32px; }
   .cd-item { min-width: 48px; }
 }
 @media (max-width: 480px) {
