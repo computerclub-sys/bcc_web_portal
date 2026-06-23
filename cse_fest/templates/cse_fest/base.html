@@ -5,29 +5,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{{ fest.title }} {{ fest.year }}{% endblock %}</title>
-    <meta name="description" content="{% block description %}CSE Spring Fest {{ fest.year }} — Hackathon, IUPC, E-Football, ICT Quiz and more!{% endblock %}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <meta name="description" content="{% block description %}CSE Fest {{ fest.year }} — Hackathon, IUPC, E-Football, ICT Quiz and more!{% endblock %}">
     <link rel="stylesheet" href="{% static 'cse_fest/css/style.css' %}">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>🎪</text></svg>" sizes="32x32">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>🎪</text></svg>">
     {% block extra_head %}{% endblock %}
 </head>
 <body>
-    <nav class="fest-nav" id="festNav">
-        <div class="fest-nav-inner">
-            <a href="{% url 'cse_fest:index' year=fest.year %}" class="fest-nav-brand">
-                <span class="fest-nav-logo">🎪</span>
-                <span class="fest-nav-title">{{ fest.title|truncatechars:20 }}</span>
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="{% url 'cse_fest:index' year=fest.year %}" class="nav-brand">
+                <span class="nav-logo">🎪</span>
+                <span class="nav-title">{{ fest.title }}</span>
             </a>
-            <div class="fest-nav-links" id="festNavLinks">
-                <a href="#events" class="fest-nav-link">Events</a>
-                <a href="#schedule" class="fest-nav-link">Schedule</a>
-                <a href="#sponsors" class="fest-nav-link">Sponsors</a>
-                <a href="#committee" class="fest-nav-link">Committee</a>
-                <a href="#faq" class="fest-nav-link">FAQ</a>
-                <a href="#notices" class="fest-nav-link">Notices</a>
-                <a href="#contact" class="fest-nav-link">Contact</a>
+            <div class="nav-links" id="navLinks">
+                <a href="#events" class="nav-link">Events</a>
+                <a href="#schedule" class="nav-link">Schedule</a>
+                <a href="#sponsors" class="nav-link">Sponsors</a>
+                <a href="#committee" class="nav-link">Committee</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+                <a href="#notices" class="nav-link">Notices</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
-            <button class="fest-nav-toggle" id="festNavToggle" aria-label="Toggle menu">
+            <button class="nav-toggle" id="navToggle" aria-label="Menu">
                 <span></span><span></span><span></span>
             </button>
         </div>
@@ -35,85 +34,78 @@
 
     {% block content %}{% endblock %}
 
-    <footer class="fest-footer" id="contact">
-        <div class="fest-container">
-            <div class="fest-footer-grid">
-                <div class="fest-footer-brand">
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
                     <h3>{{ fest.title }}</h3>
                     <p>Bangladesh Army International University of Science & Technology</p>
                 </div>
-                <div class="fest-footer-links">
+                <div class="footer-links">
                     <h4>Quick Links</h4>
                     <a href="#events">Events</a>
                     <a href="#schedule">Schedule</a>
                     <a href="#committee">Committee</a>
                     <a href="#notices">Notices</a>
                 </div>
-                <div class="fest-footer-contact">
+                <div class="footer-contact">
                     <h4>Contact</h4>
-                    <p>Email: computerclub@baiust.ac.bd</p>
-                    <p>Facebook: BAIUST Computer Club</p>
+                    <p>computerclub@baiust.ac.bd</p>
+                    <a href="https://facebook.com/share/1H7AUw9f6F" target="_blank">Facebook</a>
                 </div>
             </div>
-            <div class="fest-footer-bottom">
+            <div class="footer-bottom">
                 <p>&copy; {{ fest.year }} {{ fest.title }}. Organized by BAIUST Computer Club.</p>
             </div>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // Nav toggle
-        document.getElementById('festNavToggle')?.addEventListener('click', function() {
-            document.getElementById('festNav').classList.toggle('fest-nav-open');
+        var nav = document.getElementById('nav');
+        document.getElementById('navToggle').addEventListener('click', function() {
+            nav.classList.toggle('nav--open');
         });
-
-        // Nav shrink on scroll
-        var nav = document.getElementById('festNav');
         window.addEventListener('scroll', function() {
-            nav.classList.toggle('fest-nav-scrolled', window.scrollY > 60);
+            nav.classList.toggle('nav--scrolled', window.scrollY > 40);
         }, { passive: true });
 
-        // Smooth scroll
-        document.querySelectorAll('.fest-nav-link').forEach(function(a) {
+        document.querySelectorAll('.nav-link').forEach(function(a) {
             a.addEventListener('click', function(e) {
-                var href = this.getAttribute('href');
-                if (href.startsWith('#')) {
+                var h = this.getAttribute('href');
+                if (h.startsWith('#')) {
                     e.preventDefault();
-                    var el = document.querySelector(href);
+                    var el = document.querySelector(h);
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
-                    document.getElementById('festNav')?.classList.remove('fest-nav-open');
+                    nav.classList.remove('nav--open');
                 }
             });
         });
 
-        // Countdown timer
         (function() {
             var el = document.getElementById('countdown');
             if (!el) return;
             var target = new Date(el.getAttribute('data-target')).getTime();
             function tick() {
-                var now = new Date().getTime();
+                var now = Date.now();
                 var diff = target - now;
-                if (diff <= 0) { el.innerHTML = '<div class="countdown-item"><span class="countdown-num">LIVE</span><span class="countdown-label">Now</span></div>'; return; }
+                if (diff <= 0) { el.innerHTML = '<div class="cd-item"><span class="cd-num">LIVE</span><span class="cd-label">Now</span></div>'; return; }
                 var d = Math.floor(diff / 86400000);
                 var h = Math.floor((diff % 86400000) / 3600000);
                 var m = Math.floor((diff % 3600000) / 60000);
                 var s = Math.floor((diff % 60000) / 1000);
-                el.innerHTML = '<div class="countdown-item"><span class="countdown-num">' + d + '</span><span class="countdown-label">Days</span></div>' +
-                    '<div class="countdown-item"><span class="countdown-num">' + String(h).padStart(2,'0') + '</span><span class="countdown-label">Hours</span></div>' +
-                    '<div class="countdown-item"><span class="countdown-num">' + String(m).padStart(2,'0') + '</span><span class="countdown-label">Mins</span></div>' +
-                    '<div class="countdown-item"><span class="countdown-num">' + String(s).padStart(2,'0') + '</span><span class="countdown-label">Secs</span></div>';
+                el.innerHTML =
+                    '<div class="cd-item"><span class="cd-num">' + d + '</span><span class="cd-label">Days</span></div>' +
+                    '<div class="cd-item"><span class="cd-num">' + String(h).padStart(2,'0') + '</span><span class="cd-label">Hours</span></div>' +
+                    '<div class="cd-item"><span class="cd-num">' + String(m).padStart(2,'0') + '</span><span class="cd-label">Mins</span></div>' +
+                    '<div class="cd-item"><span class="cd-num">' + String(s).padStart(2,'0') + '</span><span class="cd-label">Secs</span></div>';
             }
             tick();
             setInterval(tick, 1000);
         })();
 
-        // FAQ accordion
-        document.querySelectorAll('.faq-question').forEach(function(q) {
+        document.querySelectorAll('.faq-q').forEach(function(q) {
             q.addEventListener('click', function() {
-                var item = this.parentElement;
-                item.classList.toggle('faq-open');
+                this.parentElement.classList.toggle('faq--open');
             });
         });
     </script>

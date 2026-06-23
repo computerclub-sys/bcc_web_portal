@@ -4,85 +4,74 @@
 {% block title %}{{ event.title }} — {{ fest.title }}{% endblock %}
 
 {% block content %}
-<section class="event-detail-section">
-    <div class="fest-container">
+<section class="detail-section">
+    <div class="container">
         <a href="{% url 'cse_fest:index' year=fest.year %}" class="back-link">&larr; Back to {{ fest.title }}</a>
 
         {% if messages %}
-        <div class="messages">
+        <div class="msg-list">
             {% for message in messages %}
-            <div class="message {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
+            <div class="msg msg--{{ message.tags }}">{{ message }}</div>
             {% endfor %}
         </div>
         {% endif %}
 
-        <div class="event-detail-layout">
-            <div class="event-detail-left">
+        <div class="detail-layout">
+            <div class="detail-left">
                 {% if event.poster %}
-                <div class="event-detail-poster">
-                    <img src="{{ event.poster.url }}" alt="{{ event.title }}">
-                </div>
+                <div class="detail-poster"><img src="{{ event.poster.url }}" alt="{{ event.title }}"></div>
                 {% endif %}
-
-                <div class="event-detail-date-box">
-                    <span class="date-box-month">{{ event.date|date:"M" }}</span>
-                    <span class="date-box-day">{{ event.date|date:"d" }}</span>
-                    <span class="date-box-year">{{ event.date|date:"Y" }}</span>
-                    {% if event.time %}
-                    <span class="date-box-time">{{ event.time|time:"g:i A" }}</span>
-                    {% endif %}
+                <div class="detail-date">
+                    <span class="detail-date-month">{{ event.date|date:"M" }}</span>
+                    <span class="detail-date-day">{{ event.date|date:"d" }}</span>
+                    <span class="detail-date-year">{{ event.date|date:"Y" }}</span>
+                    {% if event.time %}<span class="detail-date-time">{{ event.time|time:"g:i A" }}</span>{% endif %}
                 </div>
             </div>
 
-            <div class="event-detail-right">
-                <span class="event-detail-category">{{ event.get_category_display }}</span>
-                <h1 class="event-detail-title">{{ event.title }}</h1>
+            <div class="detail-right">
+                <span class="detail-cat">{{ event.get_category_display }}</span>
+                <h1 class="detail-title">{{ event.title }}</h1>
 
-                <div class="event-detail-section-block">
-                    <h2>About the Event</h2>
+                <div class="detail-desc">
+                    <h2>About this Event</h2>
                     <p>{{ event.description|linebreaks }}</p>
                 </div>
 
-                <div class="event-detail-meta-grid">
-                    <div class="event-detail-meta-item">
-                        <strong>Target Participants</strong>
+                <div class="detail-meta">
+                    <div class="detail-meta-item">
+                        <strong>Participants</strong>
                         <span>All university students</span>
                     </div>
                     {% if event.requires_team %}
-                    <div class="event-detail-meta-item">
+                    <div class="detail-meta-item">
                         <strong>Team Size</strong>
                         <span>{% if event.min_team_size == event.max_team_size %}{{ event.min_team_size }} members{% else %}{{ event.min_team_size }}–{{ event.max_team_size }} members{% endif %}</span>
                     </div>
                     {% else %}
-                    <div class="event-detail-meta-item">
+                    <div class="detail-meta-item">
                         <strong>Participation</strong>
                         <span>Individual</span>
                     </div>
                     {% endif %}
-                    {% if event.registration_fee %}
-                    <div class="event-detail-meta-item">
-                        <strong>Registration Fee</strong>
-                        <span>{% if event.registration_fee == 0 %}Free{% else %}BDT {{ event.registration_fee }}{% endif %}</span>
+                    <div class="detail-meta-item">
+                        <strong>Entry Fee</strong>
+                        <span>{% if event.registration_fee > 0 %}BDT {{ event.registration_fee }}{% else %}Free{% endif %}</span>
                     </div>
-                    {% endif %}
-                    {% if event.prize_pool %}
-                    <div class="event-detail-meta-item">
+                    <div class="detail-meta-item">
                         <strong>Prize Pool</strong>
-                        <span>{{ event.prize_pool }}</span>
+                        <span>{% if event.prize_pool %}BDT {{ event.prize_pool }}{% else %}—{% endif %}</span>
                     </div>
-                    {% endif %}
                 </div>
 
-                <div class="event-detail-actions">
-                    {% if event.rule_book_pdf %}
-                    <a href="{{ event.rule_book_pdf.url }}" target="_blank" class="btn btn-outline">📄 Rule Book</a>
-                    {% endif %}
-                </div>
+                {% if event.rule_book_pdf %}
+                <a href="{{ event.rule_book_pdf.url }}" target="_blank" class="btn btn-outline" style="margin-bottom:32px">📄 Rule Book</a>
+                {% endif %}
 
                 {% if event.registration_open %}
-                <div class="registration-form-wrap" id="register-form">
+                <div class="form-wrap" id="register-form">
                     <h2>Register for {{ event.title }}</h2>
-                    <form method="POST" action="{% url 'cse_fest:register' year=fest.year %}" class="fest-form">
+                    <form method="POST" action="{% url 'cse_fest:register' year=fest.year %}">
                         {% csrf_token %}
                         <input type="hidden" name="event_id" value="{{ event.id }}">
 
@@ -138,7 +127,7 @@
                         </div>
 
                         {% if event.requires_team %}
-                        <div class="form-group team-size-field">
+                        <div class="form-group" style="max-width:260px">
                             <label>Number of Team Members *</label>
                             <select name="team_size" id="teamSizeSelect" required>
                                 <option value="">— Select —</option>
@@ -151,8 +140,7 @@
                                 {% endfor %}
                             </select>
                         </div>
-
-                        <div class="team-members-container" id="teamMembersContainer"></div>
+                        <div class="team-members" id="teamMembersContainer"></div>
                         {% endif %}
 
                         {% if event.requires_payment %}
@@ -174,13 +162,11 @@
                             </label>
                         </div>
 
-                        <button type="submit" class="btn btn-primary btn-lg">Submit Registration</button>
+                        <button type="submit" class="btn btn-primary">Submit Registration</button>
                     </form>
                 </div>
                 {% else %}
-                <div class="registration-closed">
-                    <p>Registration is currently closed for this event.</p>
-                </div>
+                <div class="form-closed">Registration is currently closed for this event.</div>
                 {% endif %}
             </div>
         </div>
@@ -190,42 +176,30 @@
 
 {% block extra_scripts %}
 <script>
-var teamSizeSelect = document.getElementById('teamSizeSelect');
-var teamMembersContainer = document.getElementById('teamMembersContainer');
+var sel = document.getElementById('teamSizeSelect');
+var con = document.getElementById('teamMembersContainer');
 
-function renderTeamMembers(count) {
-    var html = '';
-    for (var i = 0; i < count; i++) {
-        html +=
-            '<div class="team-member-block">' +
-            '  <h4 class="team-member-heading">Member ' + (i + 1) + '</h4>' +
-            '  <div class="form-row">' +
-            '    <div class="form-group">' +
-            '      <label>Name *</label>' +
-            '      <input type="text" name="team_member_name_' + i + '" required placeholder="Full name">' +
-            '    </div>' +
-            '    <div class="form-group">' +
-            '      <label>Email *</label>' +
-            '      <input type="email" name="team_member_email_' + i + '" required placeholder="email@example.com">' +
-            '    </div>' +
-            '  </div>' +
-            '</div>';
+function renderMembers(n) {
+    var h = '';
+    for (var i = 0; i < n; i++) {
+        h += '<div class="tm-block">' +
+            '<h4 class="tm-heading">Member ' + (i + 1) + '</h4>' +
+            '<div class="form-row">' +
+            '<div class="form-group"><label>Name *</label><input type="text" name="team_member_name_' + i + '" required placeholder="Full name"></div>' +
+            '<div class="form-group"><label>Email *</label><input type="email" name="team_member_email_' + i + '" required placeholder="email@example.com"></div>' +
+            '</div></div>';
     }
-    teamMembersContainer.innerHTML = html;
+    con.innerHTML = h;
 }
 
-if (teamSizeSelect) {
+if (sel) {
     {% if event.requires_team and event.min_team_size == event.max_team_size %}
-    teamSizeSelect.value = '{{ event.min_team_size }}';
-    renderTeamMembers({{ event.min_team_size }});
+    sel.value = '{{ event.min_team_size }}';
+    renderMembers({{ event.min_team_size }});
     {% endif %}
-    teamSizeSelect.addEventListener('change', function() {
-        var val = parseInt(this.value, 10);
-        if (val > 0) {
-            renderTeamMembers(val);
-        } else {
-            teamMembersContainer.innerHTML = '';
-        }
+    sel.addEventListener('change', function() {
+        var v = parseInt(this.value, 10);
+        con.innerHTML = v > 0 ? renderMembers(v) : '';
     });
 }
 </script>
