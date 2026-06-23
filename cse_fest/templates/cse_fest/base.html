@@ -78,8 +78,10 @@
 
     <script>
         window.addEventListener('load', function() {
-            document.getElementById('loader-screen').style.display = 'none';
-            document.getElementById('page-wrapper').style.display = '';
+            setTimeout(function() {
+                document.getElementById('loader-screen').style.display = 'none';
+                document.getElementById('page-wrapper').style.display = '';
+            }, 1000);
         });
         var nav = document.getElementById('nav');
         document.getElementById('navToggle').addEventListener('click', function() {
