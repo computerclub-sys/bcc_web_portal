@@ -168,11 +168,11 @@ img { max-width: 100%; height: auto; display: block; }
   z-index: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(45deg, transparent 49%, rgba(56,16,50,0.25) 49%, rgba(56,16,50,0.25) 51%, transparent 51%),
-    linear-gradient(-45deg, transparent 49%, rgba(56,16,50,0.25) 49%, rgba(56,16,50,0.25) 51%, transparent 51%);
+    linear-gradient(45deg, transparent 49%, rgba(208,201,212,0.3) 49%, rgba(208,201,212,0.3) 51%, transparent 51%),
+    linear-gradient(-45deg, transparent 49%, rgba(208,201,212,0.3) 49%, rgba(208,201,212,0.3) 51%, transparent 51%);
   background-size: 40px 40px;
-  -webkit-mask-image: radial-gradient(ellipse 100% 80% at 50% 100%, #000 50%, transparent 90%);
-  mask-image: radial-gradient(ellipse 100% 80% at 50% 100%, #000 50%, transparent 90%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, #000 30%, transparent 70%);
+  mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, #000 30%, transparent 70%);
 }
 #fire-speckles {
   position: absolute;
