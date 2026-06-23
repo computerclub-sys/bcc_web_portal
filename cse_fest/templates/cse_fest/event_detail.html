@@ -76,59 +76,67 @@
                         <input type="hidden" name="event_id" value="{{ event.id }}">
 
                         <div class="form-row">
-                            <div class="form-group">
-                                <label>Full Name *</label>
-                                <input type="text" name="full_name" required placeholder="Your full name">
+                            <div class="fl-input">
+                                <span class="fl-bar"></span>
+                                <input type="text" name="full_name" id="fn" required placeholder=" ">
+                                <label class="fl-label" for="fn">Full Name *</label>
                             </div>
-                            <div class="form-group">
-                                <label>Email *</label>
-                                <input type="email" name="email" required placeholder="your@email.com">
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>University / Institution</label>
-                                <input type="text" name="university" value="BAIUST" placeholder="University name">
-                            </div>
-                            <div class="form-group">
-                                <label>Department</label>
-                                <input type="text" name="department" placeholder="e.g. CSE">
+                            <div class="fl-input">
+                                <span class="fl-bar"></span>
+                                <input type="email" name="email" id="em" required placeholder=" ">
+                                <label class="fl-label" for="em">Email *</label>
                             </div>
                         </div>
 
                         <div class="form-row">
-                            <div class="form-group">
-                                <label>Student ID</label>
-                                <input type="text" name="student_id" placeholder="Student ID number">
+                            <div class="fl-input">
+                                <span class="fl-bar"></span>
+                                <input type="text" name="university" id="uni" value="BAIUST" placeholder=" ">
+                                <label class="fl-label" for="uni">University / Institution</label>
                             </div>
-                            <div class="form-group">
-                                <label>Phone Number *</label>
-                                <input type="tel" name="phone" required placeholder="01XXXXXXXXX">
+                            <div class="fl-input">
+                                <span class="fl-bar"></span>
+                                <input type="text" name="department" id="dept" placeholder=" ">
+                                <label class="fl-label" for="dept">Department</label>
                             </div>
                         </div>
 
                         <div class="form-row">
-                            <div class="form-group">
-                                <label>Gender (optional)</label>
-                                <select name="gender">
+                            <div class="fl-input">
+                                <span class="fl-bar"></span>
+                                <input type="text" name="student_id" id="sid" placeholder=" ">
+                                <label class="fl-label" for="sid">Student ID</label>
+                            </div>
+                            <div class="fl-input">
+                                <span class="fl-bar"></span>
+                                <input type="tel" name="phone" id="ph" required placeholder=" ">
+                                <label class="fl-label" for="ph">Phone Number *</label>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="fl-input">
+                                <span class="fl-bar"></span>
+                                <select name="gender" id="gender">
                                     <option value="">Prefer not to say</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                     <option value="other">Other</option>
                                 </select>
+                                <label class="fl-label" for="gender">Gender (optional)</label>
                             </div>
                             {% if event.requires_team %}
-                            <div class="form-group">
-                                <label>Team Name</label>
-                                <input type="text" name="team_name" placeholder="Your team name">
+                            <div class="fl-input">
+                                <span class="fl-bar"></span>
+                                <input type="text" name="team_name" id="tn" placeholder=" ">
+                                <label class="fl-label" for="tn">Team Name</label>
                             </div>
                             {% endif %}
                         </div>
 
                         {% if event.requires_team %}
-                        <div class="form-group" style="max-width:260px">
-                            <label>Number of Team Members *</label>
+                        <div class="fl-input" style="max-width:260px">
+                            <span class="fl-bar"></span>
                             <select name="team_size" id="teamSizeSelect" required>
                                 <option value="">— Select —</option>
                                 {% for n in ""|ljust:event.max_team_size %}
@@ -139,24 +147,27 @@
                                     {% endwith %}
                                 {% endfor %}
                             </select>
+                            <label class="fl-label" for="teamSizeSelect">Number of Team Members *</label>
                         </div>
                         <div class="team-members" id="teamMembersContainer"></div>
                         {% endif %}
 
                         {% if event.requires_payment %}
-                        <div class="form-group">
-                            <label>Transaction ID</label>
-                            <input type="text" name="transaction_id" placeholder="bKash/rocket transaction ID">
+                        <div class="fl-input">
+                            <span class="fl-bar"></span>
+                            <input type="text" name="transaction_id" id="txn" placeholder=" ">
+                            <label class="fl-label" for="txn">Transaction ID</label>
                         </div>
                         {% endif %}
 
-                        <div class="form-group">
-                            <label>Special Notes</label>
-                            <textarea name="notes" rows="2" placeholder="Any special requirements or questions"></textarea>
+                        <div class="fl-input">
+                            <span class="fl-bar"></span>
+                            <textarea name="notes" id="notes" rows="2" placeholder=" "></textarea>
+                            <label class="fl-label" for="notes">Special Notes</label>
                         </div>
 
-                        <div class="form-group">
-                            <label class="checkbox-label">
+                        <div class="fl-input">
+                            <label class="checkbox-label" style="padding-left:0">
                                 <input type="checkbox" name="agreed_to_rules" required>
                                 <span>I agree to the rules &amp; regulations of this event *</span>
                             </label>
@@ -176,6 +187,13 @@
 
 {% block extra_scripts %}
 <script>
+document.querySelectorAll('.fl-input select, .fl-input input, .fl-input textarea').forEach(function(el) {
+    function update() { el.closest('.fl-input').classList.toggle('has-value', el.value !== ''); }
+    update();
+    el.addEventListener('change', update);
+    el.addEventListener('input', update);
+});
+
 var sel = document.getElementById('teamSizeSelect');
 var con = document.getElementById('teamMembersContainer');
 
@@ -185,8 +203,8 @@ function renderMembers(n) {
         h += '<div class="tm-block">' +
             '<h4 class="tm-heading">Member ' + (i + 1) + '</h4>' +
             '<div class="form-row">' +
-            '<div class="form-group"><label>Name *</label><input type="text" name="team_member_name_' + i + '" required placeholder="Full name"></div>' +
-            '<div class="form-group"><label>Email *</label><input type="email" name="team_member_email_' + i + '" required placeholder="email@example.com"></div>' +
+            '<div class="fl-input"><span class="fl-bar"></span><input type="text" name="team_member_name_' + i + '" id="tmn_' + i + '" required placeholder=" "><label class="fl-label" for="tmn_' + i + '">Name *</label></div>' +
+            '<div class="fl-input"><span class="fl-bar"></span><input type="email" name="team_member_email_' + i + '" id="tme_' + i + '" required placeholder=" "><label class="fl-label" for="tme_' + i + '">Email *</label></div>' +
             '</div></div>';
     }
     con.innerHTML = h;

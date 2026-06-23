@@ -149,6 +149,14 @@ img { max-width: 100%; height: auto; display: block; }
   overflow: hidden;
   background: linear-gradient(135deg, #0a0a18 0%, #151530 40%, #1a1040 100%);
 }
+#hero-bg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: auto;
+}
 .hero-body {
   position: relative;
   z-index: 2;
@@ -232,25 +240,59 @@ img { max-width: 100%; height: auto; display: block; }
   grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
   gap: 20px;
 }
-.card {
+.flip-card {
+  background-color: transparent;
+  width: 100%;
+  aspect-ratio: 3/4;
+  perspective: 1000px;
+}
+.flip-card-inner {
   position: relative;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 28px 24px 24px;
-  transition: all 0.3s;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border: 1px solid rgba(124,92,252,0.2);
+  border-radius: 1rem;
+  padding: 24px;
+  overflow: hidden;
 }
-.card:hover {
-  border-color: rgba(124,92,252,0.25);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+.flip-card-front {
+  background: linear-gradient(135deg, #1a1040 0%, #151530 50%, #0a0a18 100%);
+  gap: 16px;
 }
-.card-badge {
-  position: absolute;
-  top: 14px;
-  right: 14px;
+.flip-card-front .title {
+  font-size: 1.3em;
+  font-weight: 800;
+  color: var(--text-heading);
+  margin: 0;
+}
+.fcf-icon {
+  font-size: 42px;
+  line-height: 1;
+}
+.flip-card-back {
+  background: linear-gradient(135deg, #0a0a18 0%, #151530 40%, #1a1040 100%);
+  transform: rotateY(180deg);
+  justify-content: flex-start;
+  padding-top: 28px;
+  gap: 8px;
+}
+.flip-card-back .card-badge {
   padding: 3px 12px;
   border-radius: 20px;
   background: rgba(124,92,252,0.15);
@@ -258,73 +300,59 @@ img { max-width: 100%; height: auto; display: block; }
   color: var(--accent-light);
   font-size: 11px;
   font-weight: 700;
+  white-space: nowrap;
 }
-.card-icon {
-  font-size: 32px;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255,255,255,0.04);
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  margin-bottom: 14px;
-}
-.card-title {
-  font-size: 19px;
-  font-weight: 700;
-  color: var(--text-heading);
-  margin-bottom: 6px;
-}
-.card-desc {
-  font-size: 13px;
+.flip-card-back .card-desc {
+  font-size: 12px;
   color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: 18px;
-  flex: 1;
+  line-height: 1.5;
+  margin: 0;
+  flex: 0;
 }
-.card-prize {
+.flip-card-back .card-prize {
   text-align: center;
-  margin-bottom: 12px;
-  padding: 16px 14px;
+  padding: 10px 12px;
   background: rgba(124,92,252,0.06);
   border: 1px solid rgba(124,92,252,0.12);
   border-radius: 10px;
+  width: 100%;
 }
-.card-prize-label {
+.flip-card-back .card-prize-label {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
-.card-prize-label svg { color: #facc15; }
-.card-prize-amount {
+.flip-card-back .card-prize-label svg { color: #facc15; }
+.flip-card-back .card-prize-amount {
   display: block;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 800;
   color: var(--accent);
   line-height: 1.2;
-  letter-spacing: -0.5px;
 }
-.card-entry {
-  text-align: center;
-  font-size: 13px;
+.flip-card-back .card-entry {
+  font-size: 12px;
   color: var(--text-muted);
-  margin-bottom: 16px;
 }
-.card-actions {
+.flip-card-back .card-actions {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   margin-top: auto;
+  width: 100%;
 }
-.card-actions .btn { flex: 1; padding: 9px 16px; font-size: 13px; justify-content: center; }
+.flip-card-back .card-actions .btn {
+  flex: 1;
+  padding: 8px 14px;
+  font-size: 12px;
+  justify-content: center;
+}
 
 /* ── Sponsors ── */
 .sponsor-group { margin-bottom: 36px; }
@@ -593,27 +621,78 @@ img { max-width: 100%; height: auto; display: block; }
 
 form { display: flex; flex-direction: column; gap: 14px; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.form-group { display: flex; flex-direction: column; gap: 5px; }
-.form-group label { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
-.form-group input, .form-group select, .form-group textarea {
-  padding: 10px 14px;
+.fl-input {
+  position: relative;
+  width: 100%;
+}
+.fl-input .fl-bar {
+  position: absolute;
+  left: -1px;
+  top: 8px;
+  bottom: 8px;
+  width: 4px;
+  border-radius: 4px;
+  background: linear-gradient(to bottom, var(--accent), #7c3aed);
+  opacity: 0.5;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 1;
+}
+.fl-input:focus-within .fl-bar,
+.fl-input.has-value .fl-bar {
+  opacity: 1;
+}
+.fl-input input, .fl-input select, .fl-input textarea {
+  width: 100%;
+  padding: 20px 14px 8px 18px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  background: rgba(0,0,0,0.3);
+  background: rgba(0,0,0,0.35);
   color: var(--text-heading);
   font-size: 14px;
   font-family: inherit;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+.fl-input textarea { padding-top: 22px; resize: vertical; min-height: 50px; }
+.fl-input select { padding-top: 18px; padding-bottom: 10px; color: var(--text); }
+.fl-input select option { background: var(--bg); color: var(--text-heading); }
+.fl-input input:focus, .fl-input select:focus, .fl-input textarea:focus {
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 2px var(--accent-glow);
 }
-.form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-muted); opacity: 0.4; }
-.form-group textarea { resize: vertical; min-height: 50px; }
-.form-group select { color: var(--text); }
-.form-group select option { background: var(--bg); color: var(--text-heading); }
+.fl-input .fl-label {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+.fl-input textarea ~ .fl-label {
+  top: 16px;
+  transform: none;
+}
+.fl-input input:focus ~ .fl-label,
+.fl-input input:not(:placeholder-shown) ~ .fl-label,
+.fl-input select:focus ~ .fl-label,
+.fl-input select:not([value=""]) ~ .fl-label,
+.fl-input textarea:focus ~ .fl-label,
+.fl-input textarea:not(:placeholder-shown) ~ .fl-label {
+  top: 6px;
+  transform: none;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--accent-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.fl-input textarea:focus ~ .fl-label,
+.fl-input textarea:not(:placeholder-shown) ~ .fl-label {
+  top: 6px;
+}
 
 .checkbox-label {
   display: flex !important;
