@@ -109,12 +109,14 @@ def register(request, year):
 
     try:
         subject = f'Application Received — {event.title} ({fest.title})'
+        logo_url = settings.BASE_URL + settings.STATIC_URL + 'portal/images/BCC_Club_logo.png'
         html = render_to_string('cse_fest/emails/confirmation.html', {
             'name': full_name,
             'event': event,
             'fest': fest,
             'registration': registration,
             'team_members': team_members,
+            'logo_url': logo_url,
         })
         send_mail(
             subject,

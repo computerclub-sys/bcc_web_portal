@@ -30,7 +30,8 @@
             <p style="margin-top: 24px;">Best regards,<br><strong>Organizing Team</strong><br>{{ fest.title }}</p>
         </div>
         <div style="background: #f9f9f9; padding: 16px; text-align: center; font-size: 13px; color: #888;">
-            &copy; {{ fest.year }} {{ fest.title }} | BAIUST Computer Club
+            {% if logo_url %}<img src="{{ logo_url }}" alt="BAIUST Computer Club" style="height:40px;margin-bottom:8px;">{% endif %}
+            <p style="margin:0">&copy; {{ fest.year }} {{ fest.title }} | BAIUST Computer Club</p>
         </div>
     </div>
 </body>

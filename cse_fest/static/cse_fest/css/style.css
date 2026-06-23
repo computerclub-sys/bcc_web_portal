@@ -291,7 +291,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   .neon-fire-text { font-size: clamp(2.5rem, 5.5vw, 5rem); }
 }
 .hero-desc {
-  font-size: 17px;
+  font-size: 24px;
   color: var(--text-muted);
   line-height: 1.7;
   margin-bottom: 24px;
@@ -301,7 +301,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 }
 .hero-meta { margin-bottom: 28px; }
 .hero-date {
-  font-size: 15px;
+  font-size: 20px;
   color: var(--text);
   font-weight: 500;
 }

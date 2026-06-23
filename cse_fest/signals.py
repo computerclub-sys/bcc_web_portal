@@ -25,6 +25,7 @@ def send_confirmation_email(sender, instance, created, **kwargs):
         event = instance.event
         fest = event.fest
         team_members = list(instance.team_members.all())
+        logo_url = settings.BASE_URL + settings.STATIC_URL + 'portal/images/BCC_Club_logo.png'
 
         subject = f'Registration Approved — {event.title} ({fest.title})'
         html = render_to_string('cse_fest/emails/confirmation.html', {
@@ -33,6 +34,7 @@ def send_confirmation_email(sender, instance, created, **kwargs):
             'fest': fest,
             'registration': instance,
             'team_members': team_members,
+            'logo_url': logo_url,
         })
         send_mail(
             subject,
