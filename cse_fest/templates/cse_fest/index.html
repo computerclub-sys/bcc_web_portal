@@ -57,7 +57,7 @@
                 <div class="card-actions">
                     <a href="{% url 'cse_fest:event_detail' year=fest.year slug=event.slug %}" class="btn btn-primary btn-sm">View Details</a>
                     {% if event.rule_book_pdf %}
-                    <a href="{{ event.rule_book_pdf.url }}" target="_blank" class="btn btn-outline btn-sm">Rules</a>
+                    <a href="{{ event.rule_book_pdf }}" target="_blank" class="btn btn-outline btn-sm">Rules</a>
                     {% endif %}
                 </div>
             </div>

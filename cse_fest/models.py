@@ -34,7 +34,7 @@ class FestEvent(models.Model):
     date = models.DateField()
     time = models.TimeField(blank=True, null=True)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
-    rule_book_pdf = models.FileField(upload_to='cse_fest/rules/', blank=True)
+    rule_book_pdf = models.URLField(blank=True, help_text='Google Drive link to the rule book PDF')
     registration_open = models.BooleanField(default=True)
     requires_team = models.BooleanField(default=False)
     min_team_size = models.PositiveIntegerField(default=1)
