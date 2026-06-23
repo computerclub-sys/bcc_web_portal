@@ -11,6 +11,20 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body>
+    <div id="loader-screen">
+        <div class="ai-matrix-loader">
+            <div class="digit">0</div>
+            <div class="digit">1</div>
+            <div class="digit">0</div>
+            <div class="digit">1</div>
+            <div class="digit">1</div>
+            <div class="digit">0</div>
+            <div class="digit">0</div>
+            <div class="digit">1</div>
+            <div class="glow"></div>
+        </div>
+    </div>
+    <div id="page-wrapper" style="display:none">
     <div class="site-bg"></div>
     <nav class="nav" id="nav">
         <div class="nav-inner">
@@ -60,8 +74,13 @@
             </div>
         </div>
     </footer>
+    </div>
 
     <script>
+        window.addEventListener('load', function() {
+            document.getElementById('loader-screen').style.display = 'none';
+            document.getElementById('page-wrapper').style.display = '';
+        });
         var nav = document.getElementById('nav');
         document.getElementById('navToggle').addEventListener('click', function() {
             nav.classList.toggle('nav--open');
