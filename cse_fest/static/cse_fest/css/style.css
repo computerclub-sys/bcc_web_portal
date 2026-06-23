@@ -448,7 +448,7 @@ img { max-width: 100%; height: auto; display: block; }
   display: block;
   font-size: 22px;
   font-weight: 800;
-  color: var(--accent);
+  color: var(--accent-light);
   line-height: 1.2;
 }
 .flip-card-back .card-entry {
