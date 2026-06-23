@@ -175,21 +175,79 @@ img { max-width: 100%; height: auto; display: block; }
 .hero-title {
   margin-bottom: 24px;
 }
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  5% { opacity: 0.85; }
+  10% { opacity: 1; }
+  17% { opacity: 0.9; }
+  20% { opacity: 1; }
+  42% { opacity: 0.95; }
+  45% { opacity: 1; }
+  50% { opacity: 0.88; }
+  51% { opacity: 0.75; }
+  52% { opacity: 0.92; }
+  53% { opacity: 0.7; }
+  54% { opacity: 1; }
+  70% { opacity: 0.95; }
+  72% { opacity: 1; }
+  85% { opacity: 0.9; }
+  87% { opacity: 1; }
+}
+@keyframes glow-pulse {
+  0%, 100% {
+    text-shadow:
+      0 0 4px rgba(217,70,239,0.6),
+      0 0 8px rgba(217,70,239,0.4),
+      0 0 16px rgba(217,70,239,0.3),
+      0 0 40px rgba(217,70,239,0.15);
+  }
+  15% {
+    text-shadow:
+      0 0 6px rgba(217,70,239,0.7),
+      0 0 12px rgba(217,70,239,0.5),
+      0 0 24px rgba(217,70,239,0.35),
+      0 0 60px rgba(217,70,239,0.2);
+  }
+  30% {
+    text-shadow:
+      0 0 3px rgba(217,70,239,0.5),
+      0 0 6px rgba(217,70,239,0.3),
+      0 0 12px rgba(217,70,239,0.2),
+      0 0 30px rgba(217,70,239,0.1);
+  }
+  50% {
+    text-shadow:
+      0 0 5px rgba(217,70,239,0.65),
+      0 0 10px rgba(217,70,239,0.45),
+      0 0 20px rgba(217,70,239,0.3),
+      0 0 50px rgba(217,70,239,0.18);
+  }
+  65% {
+    text-shadow:
+      0 0 4px rgba(217,70,239,0.55),
+      0 0 8px rgba(217,70,239,0.35),
+      0 0 16px rgba(217,70,239,0.25),
+      0 0 36px rgba(217,70,239,0.12);
+  }
+  80% {
+    text-shadow:
+      0 0 7px rgba(217,70,239,0.75),
+      0 0 14px rgba(217,70,239,0.55),
+      0 0 28px rgba(217,70,239,0.4),
+      0 0 70px rgba(217,70,239,0.22);
+  }
+}
 .neon-fire-text {
   font-size: clamp(2rem, 6vw, 4rem);
   font-weight: 900;
   line-height: 1;
-  color: #fff;
+  color: #efe9f2;
   letter-spacing: -0.05em;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.25em;
-  text-shadow:
-    0 0 10px rgba(255,255,255,0.5),
-    0 0 20px rgba(255,255,255,0.3),
-    0 0 40px rgba(124,92,252,0.4),
-    0 0 80px rgba(124,92,252,0.2);
+  animation: flicker 2.8s infinite step-end, glow-pulse 2.8s infinite;
 }
 .neon-fire-text .inline-block {
   filter: blur(1px);
