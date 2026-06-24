@@ -209,5 +209,13 @@
 
 {% block extra_scripts %}
 <script src="{% static 'cse_fest/js/fire-speckles.js' %}"></script>
+<script>
+var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+        if (e.isIntersecting) e.target.classList.add('in-view');
+    });
+}, { threshold: 0.3 });
+document.querySelectorAll('.cm-card').forEach(function(c) { observer.observe(c); });
+</script>
 {% endblock %}
 {% endblock %}

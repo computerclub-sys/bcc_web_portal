@@ -632,7 +632,8 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   object-fit: contain;
   border-radius: 4px;
 }
-.cm-card:hover img {
+.cm-card:hover img,
+.cm-card.in-view img {
   scale: 0.5;
   opacity: 0.9;
   transform: translateY(-70px);
@@ -646,7 +647,8 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   font-family: 'Press Start 2P', monospace;
   transition: 0.5s;
 }
-.cm-card:hover .cm-initial {
+.cm-card:hover .cm-initial,
+.cm-card.in-view .cm-initial {
   opacity: 0.9;
   transform: translateY(-70px) scale(0.6);
 }
@@ -660,7 +662,8 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   transform: scale(0);
   transition: 0.5s;
 }
-.cm-card:hover .cm-content {
+.cm-card:hover .cm-content,
+.cm-card.in-view .cm-content {
   transform: scale(1);
   bottom: 25px;
 }
@@ -1046,18 +1049,6 @@ form { display: flex; flex-direction: column; gap: 14px; }
 @media (max-width: 480px) {
   .committee-grid { grid-template-columns: 1fr; }
   .section { padding: 40px 0; }
-}
-
-@media (min-width: 1024px) {
-  .cm-content {
-    transform: scale(1);
-    bottom: 25px;
-  }
-  .cm-card img, .cm-card .cm-initial {
-    scale: 0.5;
-    opacity: 0.9;
-    transform: translateY(-70px);
-  }
 }
 
 /* ── Loading Screen ── */
