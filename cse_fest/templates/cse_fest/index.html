@@ -46,7 +46,7 @@
             <div class="flip-card">
                 <div class="flip-card-inner">
                     <div class="flip-card-front"{% if event.poster %} style="background-image:url('{{ event.poster.url }}')"{% endif %}>
-                        <div class="fcf-overlay"></div>
+                        {% if not event.poster %}<div class="fcf-overlay"></div>{% endif %}
                         <p class="title">{{ event.title }}</p>
                     </div>
                     <div class="flip-card-back">
