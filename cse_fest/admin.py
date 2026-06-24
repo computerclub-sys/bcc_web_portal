@@ -96,8 +96,16 @@ class FestTeamMemberInline(admin.TabularInline):
 
 @admin.register(FestRegistration)
 class FestRegistrationAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'email', 'event', 'phone', 'created_at')
-    list_filter = ('event__fest', 'event')
-    search_fields = ('full_name', 'email', 'phone', 'student_id')
+    list_display = ('full_name', 'email', 'event', 'phone', 'payment_method', 'status', 'created_at')
+    list_filter = ('event__fest', 'event', 'payment_method', 'status')
+    search_fields = ('full_name', 'email', 'phone', 'student_id', 'application_id', 'transaction_id')
     readonly_fields = ('created_at',)
     inlines = [FestTeamMemberInline]
+    fieldsets = (
+        ('Application', {'fields': ('application_id', 'event', 'status', 'created_at')}),
+        ('Personal Info', {'fields': ('full_name', 'email', 'phone', 'gender')}),
+        ('Academic', {'fields': ('university', 'department', 'student_id')}),
+        ('Team', {'fields': ('team_name',)}),
+        ('Payment', {'fields': ('payment_method', 'transaction_id')}),
+        ('Other', {'fields': ('notes',)}),
+    )

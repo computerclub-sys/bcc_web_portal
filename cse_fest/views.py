@@ -75,6 +75,11 @@ def register(request, year):
         messages.error(request, 'You must agree to the rules & regulations.')
         return redirect('cse_fest:event_detail', year=year, slug=event.slug)
 
+    payment_method = request.POST.get('payment_method', 'physical')
+    if payment_method == 'bkash' and not request.POST.get('transaction_id', '').strip():
+        messages.error(request, 'Transaction ID is required for bKash payment.')
+        return redirect('cse_fest:event_detail', year=year, slug=event.slug)
+
     registration = FestRegistration.objects.create(
         event=event,
         full_name=full_name,
@@ -85,6 +90,7 @@ def register(request, year):
         phone=phone,
         gender=request.POST.get('gender', ''),
         team_name=request.POST.get('team_name', ''),
+        payment_method=request.POST.get('payment_method', 'physical'),
         transaction_id=request.POST.get('transaction_id', ''),
         notes=request.POST.get('notes', ''),
         agreed_to_rules=True,

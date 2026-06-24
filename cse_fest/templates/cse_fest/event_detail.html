@@ -153,10 +153,28 @@
                         {% endif %}
 
                         {% if event.requires_payment %}
-                        <div class="fl-input">
-                            <span class="fl-bar"></span>
-                            <input type="text" name="transaction_id" id="txn" placeholder=" ">
-                            <label class="fl-label" for="txn">Transaction ID</label>
+                        <div class="payment-section">
+                            <p class="payment-label">Payment Method</p>
+                            <div class="payment-options">
+                                <label class="payment-option active" id="label-physical">
+                                    <input type="radio" name="payment_method" value="physical" checked onchange="togglePayment('physical')">
+                                    <span class="payment-radio"></span>
+                                    Physical Payment
+                                </label>
+                                <label class="payment-option" id="label-bkash">
+                                    <input type="radio" name="payment_method" value="bkash" onchange="togglePayment('bkash')">
+                                    <span class="payment-radio"></span>
+                                    bKash
+                                </label>
+                            </div>
+                            <div class="bkash-fields" id="bkashFields" style="display:none">
+                                <p class="bkash-hint">Send payment to <strong>{{ fest.bkash_number|default:"01XXXXXXXXX" }}</strong> (bKash)</p>
+                                <div class="fl-input">
+                                    <span class="fl-bar"></span>
+                                    <input type="text" name="transaction_id" id="txn" placeholder=" ">
+                                    <label class="fl-label" for="txn">bKash Transaction ID *</label>
+                                </div>
+                            </div>
                         </div>
                         {% endif %}
 
@@ -187,6 +205,12 @@
 
 {% block extra_scripts %}
 <script>
+function togglePayment(method) {
+    document.querySelectorAll('.payment-option').forEach(function(el) { el.classList.remove('active'); });
+    document.getElementById('label-' + method).classList.add('active');
+    document.getElementById('bkashFields').style.display = method === 'bkash' ? 'block' : 'none';
+}
+
 document.querySelectorAll('.fl-input select, .fl-input input, .fl-input textarea').forEach(function(el) {
     function update() { el.closest('.fl-input').classList.toggle('has-value', el.value !== ''); }
     update();

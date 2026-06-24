@@ -8,6 +8,7 @@ class Fest(models.Model):
     title = models.CharField(max_length=200, default='CSE Spring Fest')
     is_active = models.BooleanField(default=True)
     target_date = models.DateTimeField(blank=True, null=True, help_text='Countdown target date/time')
+    bkash_number = models.CharField(max_length=20, blank=True, help_text='bKash number for payment')
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -149,6 +150,11 @@ class Sponsor(models.Model):
 
 
 class FestRegistration(models.Model):
+    PAYMENT_METHOD_CHOICES = [
+        ('physical', 'Physical Payment'),
+        ('bkash', 'bKash'),
+    ]
+
     STATUS_CHOICES = [
         ('pending', 'Pending'),
         ('confirmed', 'Confirmed'),
@@ -172,7 +178,8 @@ class FestRegistration(models.Model):
     phone = models.CharField(max_length=20)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, blank=True)
     team_name = models.CharField(max_length=200, blank=True, help_text='For group events')
-    transaction_id = models.CharField(max_length=100, blank=True, help_text='Payment transaction ID if required')
+    payment_method = models.CharField(max_length=10, choices=PAYMENT_METHOD_CHOICES, default='physical')
+    transaction_id = models.CharField(max_length=100, blank=True, help_text='bKash transaction ID')
     notes = models.TextField(blank=True)
     agreed_to_rules = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
