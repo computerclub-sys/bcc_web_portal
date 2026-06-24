@@ -1048,6 +1048,18 @@ form { display: flex; flex-direction: column; gap: 14px; }
   .section { padding: 40px 0; }
 }
 
+@media (min-width: 1024px) {
+  .cm-content {
+    transform: scale(1);
+    bottom: 25px;
+  }
+  .cm-card img, .cm-card .cm-initial {
+    scale: 0.5;
+    opacity: 0.9;
+    transform: translateY(-70px);
+  }
+}
+
 /* ── Loading Screen ── */
 #loader-screen {
   position: fixed;

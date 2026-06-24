@@ -6,8 +6,6 @@
 {% block content %}
 <section class="detail-section">
     <div class="container">
-        <a href="{% url 'cse_fest:index' year=fest.year %}" class="back-link">&larr; Back to {{ fest.title }}</a>
-
         {% if messages %}
         <div class="msg-list">
             {% for message in messages %}
