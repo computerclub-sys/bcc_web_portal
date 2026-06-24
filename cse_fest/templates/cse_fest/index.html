@@ -212,7 +212,7 @@
 <script>
 var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
-        if (e.isIntersecting) e.target.classList.add('in-view');
+        e.target.classList.toggle('in-view', e.isIntersecting);
     });
 }, { threshold: 0.15 });
 document.querySelectorAll('.cm-card').forEach(function(c) { observer.observe(c); });
