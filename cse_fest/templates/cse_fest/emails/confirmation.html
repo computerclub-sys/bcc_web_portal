@@ -4,12 +4,17 @@
 <body style="font-family: Arial, sans-serif; background: #f5f5f5; padding: 30px;">
     <div style="max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.1);">
         <div style="background: linear-gradient(135deg, #6a11cb, #2575fc); padding: 30px; text-align: center;">
-            <h1 style="color: white; margin: 0; font-size: 24px;">Registration Confirmed!</h1>
+            <h1 style="color: white; margin: 0; font-size: 24px;">{% if is_approved %}Application Approved! ✅{% else %}Registration Confirmed!{% endif %}</h1>
             <p style="color: rgba(255,255,255,0.85); margin: 8px 0 0;">{{ fest.title }}</p>
         </div>
         <div style="padding: 30px;">
             <p>Dear <strong>{{ name }}</strong>,</p>
+            {% if is_approved %}
+            <p>We are pleased to inform you that your application for <strong>{{ event.title }}</strong> has been <strong style="color: #16a34a;">approved</strong>.</p>
+            <p>Here are your registration details:</p>
+            {% else %}
             <p>You have successfully registered for:</p>
+            {% endif %}
             <div style="background: #f0f4ff; border-radius: 8px; padding: 16px; margin: 16px 0;">
                 <h3 style="margin: 0 0 8px; color: #333;">{{ event.title }}</h3>
                 <p style="margin: 4px 0; color: #333; font-size: 16px; font-weight: 600;">Application ID: <span style="font-family: monospace; color: #6a11cb;">{{ registration.application_id }}</span></p>
@@ -25,7 +30,12 @@
                 </div>
                 {% endif %}
             </div>
+            {% if is_approved %}
+            <p>Congratulations! We look forward to seeing you at the event. Please be present on time and bring your student ID.</p>
+            {% else %}
+            <p>Your application is currently <strong>pending review</strong>. We will notify you once it's approved.</p>
             <p>Stay tuned for further updates. We'll keep you posted via email and our notice board.</p>
+            {% endif %}
             <p>You can check your application status anytime at our <a href="https://bcc.baiust.ac.bd/cse-fest-{{ fest.year }}/application-status/" style="color: #6a11cb;">Application Status Page</a> using your Application ID.</p>
             <p style="margin-top: 24px;">Best regards,<br><strong>Organizing Team</strong><br>{{ fest.title }}</p>
         </div>

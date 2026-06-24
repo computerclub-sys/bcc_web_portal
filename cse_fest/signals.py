@@ -35,6 +35,7 @@ def send_confirmation_email(sender, instance, created, **kwargs):
             'registration': instance,
             'team_members': team_members,
             'logo_url': logo_url,
+            'is_approved': True,
         })
         send_mail(
             subject,
