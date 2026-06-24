@@ -47,9 +47,6 @@
                 <div class="flip-card-inner">
                     <div class="flip-card-front"{% if event.poster %} style="background-image:url('{{ event.poster.url }}')"{% endif %}>
                         <div class="fcf-overlay"></div>
-                        <div class="fcf-icon">
-                            {% if event.category == 'hackathon' %}🧠{% elif event.category == 'iupc' %}💻{% elif event.category == 'efootball' %}⚽{% elif event.category == 'ictquiz' %}❓{% endif %}
-                        </div>
                         <p class="title">{{ event.title }}</p>
                     </div>
                     <div class="flip-card-back">

@@ -392,20 +392,11 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   z-index: 0;
   border-radius: inherit;
 }
-.flip-card-front .fcf-icon,
-.flip-card-front .title {
-  position: relative;
-  z-index: 1;
-}
 .flip-card-front .title {
   font-size: 1.3em;
   font-weight: 800;
   color: var(--text-heading);
   margin: 0;
-}
-.fcf-icon {
-  font-size: 42px;
-  line-height: 1;
 }
 .flip-card-back {
   background: linear-gradient(135deg, #0a0a18 0%, #151530 40%, #1a1040 100%);
