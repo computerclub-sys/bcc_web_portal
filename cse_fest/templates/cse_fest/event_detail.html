@@ -58,7 +58,7 @@
                     </div>
                     <div class="detail-meta-item">
                         <strong>Prize Pool</strong>
-                        <span>{% if event.prize_pool %}BDT {{ event.prize_pool }}{% else %}—{% endif %}</span>
+                        <span>{% if prizes %}{% for p in prizes %}{{ p.position }} – {{ p.amount }}{% if not forloop.last %}<br>{% endif %}{% endfor %}{% elif event.prize_pool %}BDT {{ event.prize_pool }}{% else %}—{% endif %}</span>
                     </div>
                 </div>
 

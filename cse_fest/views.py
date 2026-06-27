@@ -4,7 +4,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-from .models import Fest, FestEvent, FestSchedule, Notice, CommitteeMember, Faq, Sponsor, FestRegistration, FestTeamMember
+from .models import Fest, FestEvent, FestPrize, FestSchedule, Notice, CommitteeMember, Faq, Sponsor, FestRegistration, FestTeamMember
 
 
 def _get_fest(year):
@@ -43,10 +43,12 @@ def index(request, year):
 def event_detail(request, year, slug):
     fest = _get_fest(year)
     event = get_object_or_404(FestEvent, fest=fest, slug=slug)
+    prizes = FestPrize.objects.filter(event=event).order_by('order')
 
     return render(request, 'cse_fest/event_detail.html', {
         'fest': fest,
         'event': event,
+        'prizes': prizes,
     })
 
 

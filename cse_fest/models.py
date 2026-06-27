@@ -58,6 +58,19 @@ class FestEvent(models.Model):
         super().save(*args, **kwargs)
 
 
+class FestPrize(models.Model):
+    event = models.ForeignKey(FestEvent, on_delete=models.CASCADE, related_name='prizes')
+    position = models.CharField(max_length=100, help_text='e.g. Winner, 1st Runners Up')
+    amount = models.CharField(max_length=200, help_text='e.g. 1500/- & Trophy')
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return f'{self.position} — {self.event.title}'
+
+
 class FestSchedule(models.Model):
     fest = models.ForeignKey(Fest, on_delete=models.CASCADE, related_name='schedules')
     title = models.CharField(max_length=200)

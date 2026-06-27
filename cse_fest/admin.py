@@ -1,11 +1,17 @@
 from django.contrib import admin
-from .models import Fest, FestEvent, FestSchedule, Notice, CommitteeMember, Faq, Sponsor, FestRegistration, FestTeamMember
+from .models import Fest, FestEvent, FestPrize, FestSchedule, Notice, CommitteeMember, Faq, Sponsor, FestRegistration, FestTeamMember
 
 
 class FestEventInline(admin.TabularInline):
     model = FestEvent
     extra = 1
     fields = ('title', 'slug', 'category', 'date', 'order', 'registration_open')
+
+
+class FestPrizeInline(admin.TabularInline):
+    model = FestPrize
+    extra = 1
+    fields = ('position', 'amount', 'order')
 
 
 class FestScheduleInline(admin.TabularInline):
@@ -41,6 +47,7 @@ class FestEventAdmin(admin.ModelAdmin):
         ('Files', {'fields': ('rule_book_pdf',)}),
         ('Ordering', {'fields': ('order',)}),
     )
+    inlines = [FestPrizeInline]
 
 
 @admin.register(FestSchedule)
