@@ -88,8 +88,8 @@ class SponsorAdmin(admin.ModelAdmin):
 class FestTeamMemberInline(admin.TabularInline):
     model = FestTeamMember
     extra = 0
-    fields = ('name', 'email')
-    readonly_fields = ('name', 'email')
+    fields = ('name', 'email', 'phone', 'student_id', 'department', 'semester', 't_shirt_size')
+    readonly_fields = ('name', 'email', 'phone', 'student_id', 'department', 'semester', 't_shirt_size')
     can_delete = False
     max_num = 0
 
@@ -107,5 +107,6 @@ class FestRegistrationAdmin(admin.ModelAdmin):
         ('Academic', {'fields': ('university', 'department', 'student_id')}),
         ('Team', {'fields': ('team_name',)}),
         ('Payment', {'fields': ('payment_method', 'transaction_id')}),
+        ('eFootball', {'fields': ('in_game_name_id', 'device_name', 'self_photo')}),
         ('Other', {'fields': ('notes',)}),
     )

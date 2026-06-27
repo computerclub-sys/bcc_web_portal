@@ -180,6 +180,9 @@ class FestRegistration(models.Model):
     team_name = models.CharField(max_length=200, blank=True, help_text='For group events')
     payment_method = models.CharField(max_length=10, choices=PAYMENT_METHOD_CHOICES, default='physical')
     transaction_id = models.CharField(max_length=100, blank=True, help_text='bKash transaction ID')
+    in_game_name_id = models.CharField(max_length=200, blank=True, help_text='In-Game Name & ID (for eFootball)')
+    device_name = models.CharField(max_length=200, blank=True, help_text='Device Name (for eFootball)')
+    self_photo = models.ImageField(upload_to='cse_fest/selfies/', blank=True, help_text='Self photo (for eFootball)')
     notes = models.TextField(blank=True)
     agreed_to_rules = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -203,9 +206,18 @@ class FestRegistration(models.Model):
 
 
 class FestTeamMember(models.Model):
+    TSHIRT_CHOICES = [
+        ('s', 'S'), ('m', 'M'), ('l', 'L'), ('xl', 'XL'), ('xxl', 'XXL'),
+    ]
+
     registration = models.ForeignKey(FestRegistration, on_delete=models.CASCADE, related_name='team_members')
     name = models.CharField(max_length=200)
     email = models.EmailField()
+    phone = models.CharField(max_length=20, blank=True)
+    student_id = models.CharField(max_length=50, blank=True)
+    department = models.CharField(max_length=200, blank=True)
+    semester = models.CharField(max_length=20, blank=True, help_text='e.g. 4/1')
+    t_shirt_size = models.CharField(max_length=5, choices=TSHIRT_CHOICES, blank=True)
 
     class Meta:
         ordering = ['id']

@@ -817,6 +817,22 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   padding: 28px;
 }
 .payment-section { margin-bottom: 20px; }
+.iupc-intro { font-size: 15px; color: var(--text-muted); margin-bottom: 20px; }
+.iupc-member-block {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.iupc-member-heading {
+  font-family: var(--font-pixel);
+  font-size: 11px;
+  color: var(--accent-light);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 14px;
+}
 .payment-label { font-size: 13px; font-weight: 700; color: var(--text-heading); margin-bottom: 10px; letter-spacing: 0.5px; }
 .payment-options { display: flex; gap: 12px; margin-bottom: 14px; }
 .payment-option {
