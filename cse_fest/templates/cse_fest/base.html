@@ -33,7 +33,6 @@
         <div class="nav-inner">
             <a href="{% url 'cse_fest:index' year=fest.year %}" class="nav-brand">
                 <img src="{% static 'cse_fest/images/Png Logo x CSE Fest.png' %}" alt="CSE Fest" class="nav-logo-img">
-                <span class="nav-title">{{ fest.title }}</span>
             </a>
             <div class="nav-links" id="navLinks">
                 <a href="{% url 'cse_fest:index' year=fest.year %}#events" class="nav-link">Events</a>
