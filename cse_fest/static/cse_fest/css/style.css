@@ -846,7 +846,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 }
 .detail-desc { margin-bottom: 24px; }
 .detail-desc h2 { font-size: 20px; font-weight: 700; color: var(--text-heading); margin-bottom: 8px; }
-.detail-desc p { font-size: 21px; color: var(--text-muted); line-height: 1.8; }
+.detail-desc p { font-size: 24px; color: var(--text-muted); line-height: 1.8; }
 
 .detail-meta {
   display: grid;
@@ -861,7 +861,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   border-radius: var(--radius-sm);
 }
 .detail-meta-item strong { display: block; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 2px; }
-.detail-meta-item span { font-size: 20px; color: var(--text-heading); font-weight: 600; }
+.detail-meta-item span { font-size: 22px; color: var(--text-heading); font-weight: 600; }
 
 .form-wrap {
   background: var(--surface);
