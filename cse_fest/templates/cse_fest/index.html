@@ -17,6 +17,11 @@
                 </span>
             </h1>
             <p class="hero-desc">The premier inter-department championship is back. Compete in gaming, programming, and tech challenges. Battle for supremacy.</p>
+            <div class="hero-meta">
+                {% if fest.target_date %}
+                <span class="hero-date">{{ fest.target_date|date:"F j, Y" }} | BAIUST Campus</span>
+                {% endif %}
+            </div>
             <div class="hero-actions">
                 <a href="#events" class="btn btn-primary">Explore Events</a>
 
