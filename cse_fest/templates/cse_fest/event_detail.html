@@ -130,6 +130,92 @@
                             </div>
                         </div>
                         {% endfor %}
+                        {% elif event.category == 'hackathon' %}
+                        <div class="hackathon-section">
+                            <div class="hackathon-block">
+                                <h3 class="iupc-member-heading">Team Information</h3>
+                                <div class="form-row">
+                                    <div class="fl-input">
+                                        <span class="fl-bar"></span>
+                                        <input type="text" name="hackathon_team_name" id="htn" required placeholder=" ">
+                                        <label class="fl-label" for="htn">Team Name *</label>
+                                    </div>
+                                    <div class="fl-input">
+                                        <span class="fl-bar"></span>
+                                        <input type="text" name="hackathon_category" id="hc" required placeholder=" ">
+                                        <label class="fl-label" for="hc">Category *</label>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="fl-input">
+                                        <span class="fl-bar"></span>
+                                        <input type="text" name="tl_name" id="tln" required placeholder=" ">
+                                        <label class="fl-label" for="tln">Team Leader Name *</label>
+                                    </div>
+                                    <div class="fl-input">
+                                        <span class="fl-bar"></span>
+                                        <input type="tel" name="tl_phone" id="tlp" required placeholder=" ">
+                                        <label class="fl-label" for="tlp">Team Leader Phone *</label>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="fl-input">
+                                        <span class="fl-bar"></span>
+                                        <input type="email" name="tl_email" id="tle" required placeholder=" ">
+                                        <label class="fl-label" for="tle">Team Leader Email *</label>
+                                    </div>
+                                    <div class="fl-input"></div>
+                                </div>
+                            </div>
+                            {% for i in "1234"|make_list %}
+                            <div class="hackathon-member-block">
+                                <h3 class="iupc-member-heading">Member {{ forloop.counter }}{% if forloop.last %} <span style="color:var(--text-muted);font-weight:400">(Optional)</span>{% endif %}</h3>
+                                <div class="form-row">
+                                    <div class="fl-input">
+                                        <span class="fl-bar"></span>
+                                        <input type="text" name="member_{{ forloop.counter }}_name" id="hm{{ forloop.counter }}_n" {% if not forloop.last %}required{% endif %} placeholder=" ">
+                                        <label class="fl-label" for="hm{{ forloop.counter }}_n">Name{% if not forloop.last %} *{% endif %}</label>
+                                    </div>
+                                    <div class="fl-input">
+                                        <span class="fl-bar"></span>
+                                        <input type="text" name="member_{{ forloop.counter }}_student_id" id="hm{{ forloop.counter }}_sid" {% if not forloop.last %}required{% endif %} placeholder=" ">
+                                        <label class="fl-label" for="hm{{ forloop.counter }}_sid">Student ID{% if not forloop.last %} *{% endif %}</label>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="fl-input">
+                                        <span class="fl-bar"></span>
+                                        <input type="text" name="member_{{ forloop.counter }}_department" id="hm{{ forloop.counter }}_dept" {% if not forloop.last %}required{% endif %} placeholder=" ">
+                                        <label class="fl-label" for="hm{{ forloop.counter }}_dept">Department{% if not forloop.last %} *{% endif %}</label>
+                                    </div>
+                                    <div class="fl-input">
+                                        <span class="fl-bar"></span>
+                                        <input type="text" name="member_{{ forloop.counter }}_semester" id="hm{{ forloop.counter }}_sem" {% if not forloop.last %}required{% endif %} placeholder=" " pattern="\d+/\d+" title="e.g. 4/1">
+                                        <label class="fl-label" for="hm{{ forloop.counter }}_sem">Semester (e.g., 4/1){% if not forloop.last %} *{% endif %}</label>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="fl-input">
+                                        <span class="fl-bar"></span>
+                                        <input type="tel" name="member_{{ forloop.counter }}_phone" id="hm{{ forloop.counter }}_ph" {% if not forloop.last %}required{% endif %} placeholder=" ">
+                                        <label class="fl-label" for="hm{{ forloop.counter }}_ph">Phone{% if not forloop.last %} *{% endif %}</label>
+                                    </div>
+                                    <div class="fl-input">
+                                        <span class="fl-bar"></span>
+                                        <select name="member_{{ forloop.counter }}_t_shirt" id="hm{{ forloop.counter }}_ts" {% if not forloop.last %}required{% endif %}>
+                                            <option value="">— Select —</option>
+                                            <option value="s">S</option>
+                                            <option value="m">M</option>
+                                            <option value="l">L</option>
+                                            <option value="xl">XL</option>
+                                            <option value="xxl">XXL</option>
+                                        </select>
+                                        <label class="fl-label" for="hm{{ forloop.counter }}_ts">T-shirt Size{% if not forloop.last %} *{% endif %}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
                         {% else %}
                         <div class="form-row">
                             <div class="fl-input">

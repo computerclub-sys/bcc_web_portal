@@ -112,7 +112,7 @@ class FestRegistrationAdmin(admin.ModelAdmin):
         ('Application', {'fields': ('application_id', 'event', 'status', 'created_at')}),
         ('Personal Info', {'fields': ('full_name', 'email', 'phone', 'gender')}),
         ('Academic', {'fields': ('university', 'department', 'student_id')}),
-        ('Team', {'fields': ('team_name',)}),
+        ('Team', {'fields': ('team_name', 'hackathon_category')}),
         ('Payment', {'fields': ('payment_method', 'transaction_id')}),
         ('eFootball', {'fields': ('in_game_name_id', 'device_name', 'self_photo')}),
         ('Other', {'fields': ('notes',)}),

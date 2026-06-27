@@ -70,11 +70,17 @@ def register(request, year):
     phone = request.POST.get('phone', '').strip()
 
     is_iupc = event.category == 'iupc'
+    is_hackathon = event.category == 'hackathon'
 
     if is_iupc:
         full_name = request.POST.get('member_1_full_name', '').strip()
         email = request.POST.get('member_1_email', '').strip()
         phone = request.POST.get('member_1_phone', '').strip()
+
+    if is_hackathon:
+        full_name = request.POST.get('tl_name', '').strip()
+        email = request.POST.get('tl_email', '').strip()
+        phone = request.POST.get('tl_phone', '').strip()
 
     if not full_name or not email or not phone:
         messages.error(request, 'Name, email, and phone are required.')
@@ -98,7 +104,8 @@ def register(request, year):
         email=email,
         phone=phone,
         gender=request.POST.get('gender', ''),
-        team_name=request.POST.get('team_name', ''),
+        team_name=request.POST.get('team_name', '') if not is_hackathon else request.POST.get('hackathon_team_name', ''),
+        hackathon_category=request.POST.get('hackathon_category', '') if is_hackathon else '',
         payment_method=request.POST.get('payment_method', 'physical'),
         transaction_id=request.POST.get('transaction_id', ''),
         in_game_name_id=request.POST.get('in_game_name_id', ''),
@@ -108,7 +115,21 @@ def register(request, year):
         agreed_to_rules=True,
     )
 
-    if is_iupc:
+    if is_hackathon:
+        for i in range(1, 5):
+            tm_name = request.POST.get(f'member_{i}_name', '').strip()
+            if tm_name:
+                FestTeamMember.objects.create(
+                    registration=registration,
+                    name=tm_name,
+                    email=request.POST.get(f'member_{i}_email', ''),
+                    phone=request.POST.get(f'member_{i}_phone', ''),
+                    student_id=request.POST.get(f'member_{i}_student_id', ''),
+                    department=request.POST.get(f'member_{i}_department', ''),
+                    semester=request.POST.get(f'member_{i}_semester', ''),
+                    t_shirt_size=request.POST.get(f'member_{i}_t_shirt', ''),
+                )
+    elif is_iupc:
         for i in range(1, 4):
             tm_name = request.POST.get(f'member_{i}_full_name', '').strip()
             tm_email = request.POST.get(f'member_{i}_email', '').strip()

@@ -817,8 +817,9 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   padding: 28px;
 }
 .payment-section { margin-bottom: 20px; }
+.hackathon-section { margin-bottom: 20px; }
 .iupc-intro { font-size: 15px; color: var(--text-muted); margin-bottom: 20px; }
-.iupc-member-block {
+.iupc-member-block, .hackathon-member-block, .hackathon-block {
   background: rgba(255,255,255,0.02);
   border: 1px solid var(--border);
   border-radius: var(--radius);

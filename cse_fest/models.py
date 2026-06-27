@@ -191,6 +191,7 @@ class FestRegistration(models.Model):
     phone = models.CharField(max_length=20)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, blank=True)
     team_name = models.CharField(max_length=200, blank=True, help_text='For group events')
+    hackathon_category = models.CharField(max_length=100, blank=True, help_text='Project category (for hackathon)')
     payment_method = models.CharField(max_length=10, choices=PAYMENT_METHOD_CHOICES, default='physical')
     transaction_id = models.CharField(max_length=100, blank=True, help_text='bKash transaction ID')
     in_game_name_id = models.CharField(max_length=200, blank=True, help_text='In-Game Name & ID (for eFootball)')
