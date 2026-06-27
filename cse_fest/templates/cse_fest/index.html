@@ -21,6 +21,9 @@
                 {% if fest.target_date %}
                 <span class="hero-date">{{ fest.target_date|date:"F j, Y" }} | BAIUST Campus</span>
                 {% endif %}
+                {% if fest.last_registration_date %}
+                <span class="hero-date" style="margin-left:16px">Last Reg: {{ fest.last_registration_date|date:"F j, Y" }}</span>
+                {% endif %}
             </div>
             <div class="hero-actions">
                 <a href="#events" class="btn btn-primary">Explore Events</a>
