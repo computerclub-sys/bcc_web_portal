@@ -216,8 +216,12 @@
         <div class="event-card-grid stagger-children">
             {% for fest in cse_fests %}
             <a href="/cse-fest-{{ fest.year }}/" class="event-card-link">
-                <div class="event-card-poster" style="background:linear-gradient(135deg, #1a0533, #2d1b69)">
+                <div class="event-card-poster{% if fest.poster %}" style="background-image:url('{{ fest.poster.url }}')"{% else %}" style="background:linear-gradient(135deg, #1a0533, #2d1b69)"{% endif %}>
                     <div class="event-card-poster-overlay"></div>
+                    <div class="event-card-poster-content">
+                        <h4 class="event-card-poster-title">{{ fest.title }}</h4>
+                        <p class="event-card-poster-sub">{{ fest.year }}</p>
+                    </div>
                     <div class="event-card-date-badge">
                         <span class="ec-day">{{ fest.year|stringformat:"s"|slice:"2:" }}</span>
                         <span class="ec-month">{{ fest.year }}</span>

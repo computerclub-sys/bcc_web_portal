@@ -9,6 +9,7 @@ class Fest(models.Model):
     is_active = models.BooleanField(default=True)
     target_date = models.DateTimeField(blank=True, null=True, help_text='Countdown target date/time')
     bkash_number = models.CharField(max_length=20, blank=True, help_text='bKash number for payment')
+    poster = models.ImageField(upload_to='cse_fest/posters/', blank=True, help_text='Fest poster for homepage card')
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

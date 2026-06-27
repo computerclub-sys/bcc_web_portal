@@ -29,6 +29,9 @@ class NoticeInline(admin.TabularInline):
 class FestAdmin(admin.ModelAdmin):
     list_display = ('title', 'year', 'is_active', 'target_date', 'created_at')
     list_filter = ('is_active',)
+    fieldsets = (
+        ('Fest', {'fields': ('title', 'year', 'is_active', 'poster', 'target_date', 'bkash_number')}),
+    )
     inlines = [FestEventInline, FestScheduleInline, NoticeInline]
 
 

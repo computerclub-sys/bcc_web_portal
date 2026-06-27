@@ -1235,6 +1235,28 @@ input, textarea, select {
     background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 50%);
     pointer-events: none;
 }
+.event-card-poster-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+    padding-bottom: 4px;
+}
+.event-card-poster-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    line-height: 1.2;
+}
+.event-card-poster-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    margin: 2px 0 0 0;
+}
 
 .event-card-date-badge {
     position: relative;
