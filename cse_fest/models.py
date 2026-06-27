@@ -9,7 +9,6 @@ class Fest(models.Model):
     is_active = models.BooleanField(default=True)
     target_date = models.DateTimeField(blank=True, null=True, help_text='Countdown target date/time')
     bkash_number = models.CharField(max_length=20, blank=True, help_text='bKash number for payment')
-    last_registration_date = models.DateTimeField(blank=True, null=True, help_text='Last date/time for registration')
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -43,6 +42,7 @@ class FestEvent(models.Model):
     max_team_size = models.PositiveIntegerField(default=1)
     requires_payment = models.BooleanField(default=False)
     registration_fee = models.DecimalField(max_digits=10, decimal_places=2, default=0, blank=True, help_text='Registration fee in BDT')
+    last_registration_date = models.DateTimeField(blank=True, null=True, help_text='Last date/time for registration (per event)')
     hackathon_fee_3 = models.DecimalField(max_digits=10, decimal_places=2, default=1500, blank=True, help_text='Hackathon fee for 3-member team')
     hackathon_fee_4 = models.DecimalField(max_digits=10, decimal_places=2, default=2000, blank=True, help_text='Hackathon fee for 4-member team')
     prize_pool = models.CharField(max_length=200, blank=True, help_text='e.g. 50,000 BDT + Trophies')

@@ -60,6 +60,12 @@
                         <strong>Prize Pool</strong>
                         <span>{% if prizes %}{% for p in prizes %}{{ p.position }} – {{ p.amount }}{% if not forloop.last %}<br>{% endif %}{% endfor %}{% elif event.prize_pool %}BDT {{ event.prize_pool }}{% else %}—{% endif %}</span>
                     </div>
+                    {% if event.last_registration_date %}
+                    <div class="detail-meta-item">
+                        <strong>Last Reg</strong>
+                        <span>{{ event.last_registration_date|date:"F j, Y" }}</span>
+                    </div>
+                    {% endif %}
                 </div>
 
                 {% if event.rule_book_pdf %}
