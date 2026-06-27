@@ -119,6 +119,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   padding-right: 8px;
 }
 .nav-logo { font-size: 18px; }
+.nav-logo-img { height: 36px; width: auto; }
 .nav-links { display: flex; gap: 2px; }
 .nav-link {
   padding: 14px 26px;
