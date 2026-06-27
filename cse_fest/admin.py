@@ -42,7 +42,7 @@ class FestEventAdmin(admin.ModelAdmin):
         ('Fest', {'fields': ('fest', 'category')}),
         ('Event Info', {'fields': ('title', 'slug', 'short_description', 'description', 'poster')}),
         ('Date & Time', {'fields': ('date', 'time')}),
-        ('Registration', {'fields': ('registration_open', 'requires_team', 'min_team_size', 'max_team_size', 'requires_payment', 'registration_fee')}),
+        ('Registration', {'fields': ('registration_open', 'requires_team', 'min_team_size', 'max_team_size', 'requires_payment', 'registration_fee', 'hackathon_fee_3', 'hackathon_fee_4')}),
         ('Prizes', {'fields': ('prize_pool',)}),
         ('Files', {'fields': ('rule_book_pdf',)}),
         ('Ordering', {'fields': ('order',)}),
