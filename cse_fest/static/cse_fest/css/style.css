@@ -149,7 +149,6 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   .nav > .nav-link { display: none; }
   .nav-toggle { display: flex; }
   .nav { height: 64px; padding: 0 8px; }
-  .nav-logo { padding: 4px 0; }
 }
 
 /* Desktop: show all */
