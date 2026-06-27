@@ -29,26 +29,36 @@
     </div>
     <div id="page-wrapper" style="display:none">
     <div class="site-bg"></div>
-    <nav class="nav" id="nav">
-        <div class="nav-inner">
-            <a href="{% url 'cse_fest:index' year=fest.year %}" class="nav-logo">
-                <img src="{% static 'cse_fest/images/Png Logo x CSE Fest.png' %}" alt="CSE Fest" class="nav-logo-img">
-            </a>
-            <div class="nav-links" id="navLinks">
+    <nav class="nav" id="nav" role="navigation" aria-label="Main Navigation">
+        <a href="{% url 'cse_fest:index' year=fest.year %}" class="nav-logo" aria-label="CSE Fest Home">
+            <img src="{% static 'cse_fest/images/Png Logo x CSE Fest.png' %}" alt="CSE Fest" class="nav-logo-img">
+        </a>
+        <div class="nav-right">
+            <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="20" width="20"><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path></svg>
+            </button>
+            <div class="nav-desktop" id="navDesktop">
                 <a href="{% url 'cse_fest:index' year=fest.year %}#events" class="nav-link">Events</a>
                 <a href="{% url 'cse_fest:index' year=fest.year %}#schedule" class="nav-link">Schedule</a>
                 <a href="{% url 'cse_fest:index' year=fest.year %}#sponsors" class="nav-link">Sponsors</a>
-                <a href="{% url 'cse_fest:index' year=fest.year %}#committee" class="nav-link">Committee</a>
                 <a href="{% url 'cse_fest:index' year=fest.year %}#faq" class="nav-link">FAQ</a>
-                <a href="{% url 'cse_fest:index' year=fest.year %}#notices" class="nav-link">Notices</a>
-                <a href="{% url 'cse_fest:index' year=fest.year %}#contact" class="nav-link">Contact</a>
                 <a href="{% url 'cse_fest:application_status' year=fest.year %}" class="nav-link">Status</a>
+                <a href="{% url 'cse_fest:index' year=fest.year %}#events" class="nav-cta">Register Now</a>
             </div>
-            <button class="nav-toggle" id="navToggle" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
         </div>
     </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="{% url 'cse_fest:index' year=fest.year %}#events" class="nav-link">Events</a>
+        <a href="{% url 'cse_fest:index' year=fest.year %}#schedule" class="nav-link">Schedule</a>
+        <a href="{% url 'cse_fest:index' year=fest.year %}#sponsors" class="nav-link">Sponsors</a>
+        <a href="{% url 'cse_fest:index' year=fest.year %}#committee" class="nav-link">Committee</a>
+        <a href="{% url 'cse_fest:index' year=fest.year %}#faq" class="nav-link">FAQ</a>
+        <a href="{% url 'cse_fest:index' year=fest.year %}#notices" class="nav-link">Notices</a>
+        <a href="{% url 'cse_fest:index' year=fest.year %}#contact" class="nav-link">Contact</a>
+        <a href="{% url 'cse_fest:application_status' year=fest.year %}" class="nav-link">Status</a>
+        <a href="{% url 'cse_fest:index' year=fest.year %}#events" class="nav-cta">Register Now</a>
+    </div>
 
     {% block content %}{% endblock %}
 
@@ -91,15 +101,20 @@
             }, delay);
         });
         var nav = document.getElementById('nav');
-        document.getElementById('navToggle').addEventListener('click', function() {
-            nav.classList.toggle('nav--open');
+        var mobileMenu = document.getElementById('mobileMenu');
+        var navToggle = document.getElementById('navToggle');
+        navToggle.addEventListener('click', function() {
+            var open = mobileMenu.classList.toggle('mobile-menu--open');
+            navToggle.setAttribute('aria-expanded', open);
         });
         window.addEventListener('scroll', function() {
             nav.classList.toggle('nav--scrolled', window.scrollY > 40);
         }, { passive: true });
 
-        document.querySelectorAll('.nav-link').forEach(function(a) {
+        document.querySelectorAll('.nav-link, .nav-cta').forEach(function(a) {
             a.addEventListener('click', function(e) {
+                mobileMenu.classList.remove('mobile-menu--open');
+                navToggle.setAttribute('aria-expanded', 'false');
                 var h = this.getAttribute('href');
                 var hashIndex = h.indexOf('#');
                 if (hashIndex !== -1) {
@@ -112,7 +127,6 @@
                     e.preventDefault();
                     var el = document.querySelector(hash);
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
-                    nav.classList.remove('nav--open');
                 }
             });
         });
