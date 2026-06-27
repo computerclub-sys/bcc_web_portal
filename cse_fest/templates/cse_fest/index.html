@@ -60,7 +60,7 @@
                         </div>
                         <div class="card-entry">Entry Fee: {% if event.category == 'hackathon' %}BDT {{ event.hackathon_fee_3|floatformat:0 }} (3) / BDT {{ event.hackathon_fee_4|floatformat:0 }} (4){% elif event.registration_fee > 0 %}BDT {{ event.registration_fee }}{% else %}Free{% endif %}</div>
                         <div class="card-actions">
-                            <a href="{% if event.registration_open %}{% url 'cse_fest:event_detail' year=fest.year slug=event.slug %}{% else %}#{% endif %}" class="btn btn-primary btn-sm">{% if event.registration_open %}Register Now{% else %}Registration Closed{% endif %}</a>
+                            <a href="{% if event.is_registration_open %}{% url 'cse_fest:event_detail' year=fest.year slug=event.slug %}{% else %}#{% endif %}" class="btn btn-primary btn-sm">{% if event.is_registration_open %}Register Now{% else %}Registration Closed{% endif %}</a>
                             {% if event.rule_book_pdf %}
                             <a href="{{ event.rule_book_pdf }}" target="_blank" class="btn btn-outline btn-sm">Rules</a>
                             {% endif %}

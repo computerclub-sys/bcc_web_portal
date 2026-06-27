@@ -60,6 +60,15 @@ class FestEvent(models.Model):
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
+    @property
+    def is_registration_open(self):
+        from django.utils import timezone
+        if not self.registration_open:
+            return False
+        if self.last_registration_date and timezone.now() > self.last_registration_date:
+            return False
+        return True
+
 
 class FestPrize(models.Model):
     event = models.ForeignKey(FestEvent, on_delete=models.CASCADE, related_name='prizes')

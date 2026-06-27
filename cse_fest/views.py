@@ -61,7 +61,7 @@ def register(request, year):
     event_id = request.POST.get('event_id')
     event = get_object_or_404(FestEvent, id=event_id, fest=fest)
 
-    if not event.registration_open:
+    if not event.is_registration_open:
         messages.error(request, 'Registration is closed for this event.')
         return redirect('cse_fest:event_detail', year=year, slug=event.slug)
 

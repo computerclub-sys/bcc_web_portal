@@ -72,7 +72,7 @@
                 <a href="{{ event.rule_book_pdf }}" target="_blank" class="btn btn-outline" style="margin-bottom:32px">📄 Rule Book</a>
                 {% endif %}
 
-                {% if event.registration_open %}
+                {% if event.is_registration_open %}
                 <div class="form-wrap" id="register-form">
                     <h2>Register for {{ event.title }}</h2>
                     <form method="POST" action="{% url 'cse_fest:register' year=fest.year %}" enctype="multipart/form-data">
