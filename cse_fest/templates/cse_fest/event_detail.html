@@ -69,7 +69,7 @@
                 </div>
 
                 {% if event.rule_book_pdf %}
-                <a href="{{ event.rule_book_pdf }}" target="_blank" class="btn btn-outline" style="margin-bottom:32px">📄 Rule Book</a>
+                <a href="{{ event.rule_book_pdf }}" target="_blank" class="btn btn-outline" style="margin-bottom:32px" data-text="📄 Rule Book"><span class="btn-text">📄 Rule Book</span></a>
                 {% endif %}
 
                 {% if event.is_registration_open %}
@@ -366,7 +366,7 @@
                             </label>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit Registration</button>
+                        <button type="submit" class="btn btn-primary" data-text="Submit Registration"><span class="btn-text">Submit Registration</span></button>
                     </form>
                 </div>
                 {% else %}

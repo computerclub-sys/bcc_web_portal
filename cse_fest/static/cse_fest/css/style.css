@@ -59,7 +59,10 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   transition: all 0.25s;
   text-align: center;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
+.btn .btn-text { position: relative; z-index: 1; transition: opacity 0.2s; }
 .btn-primary {
   background: var(--accent);
   color: white;
@@ -70,6 +73,31 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   transform: translateY(-1px);
   box-shadow: 0 6px 24px var(--accent-glow);
 }
+.btn-primary:hover .btn-text { opacity: 0; }
+.btn-primary::before,
+.btn-primary::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  opacity: 0;
+  pointer-events: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+.btn-primary:hover::before {
+  opacity: 1;
+  color: #d946ef;
+  animation: btnGlitch 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.btn-primary:hover::after {
+  opacity: 1;
+  color: #fff;
+  animation: btnGlitch 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
+}
 .btn-outline {
   background: transparent;
   color: var(--text-heading);
@@ -79,7 +107,41 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   border-color: var(--accent);
   color: var(--accent-light);
 }
+.btn-outline:hover .btn-text { opacity: 0; }
+.btn-outline::before,
+.btn-outline::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  opacity: 0;
+  pointer-events: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+.btn-outline:hover::before {
+  opacity: 1;
+  color: #d946ef;
+  animation: btnGlitch 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.btn-outline:hover::after {
+  opacity: 1;
+  color: #fff;
+  animation: btnGlitch 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
+}
 .btn-sm { padding: 7px 18px; font-size: 13px; }
+
+@keyframes btnGlitch {
+  0%   { transform: translate(0); clip-path: inset(0 0 0 0); }
+  20%  { transform: translate(-3px, 1px); clip-path: inset(50% 0 20% 0); }
+  40%  { transform: translate(2px, -1px); clip-path: inset(20% 0 60% 0); }
+  60%  { transform: translate(-2px, 1px); clip-path: inset(80% 0 5% 0); }
+  80%  { transform: translate(3px, -1px); clip-path: inset(30% 0 45% 0); }
+  100% { transform: translate(0); clip-path: inset(0 0 0 0); }
+}
 
 /* ── Nav (cybernauts style) ── */
 .nav {
