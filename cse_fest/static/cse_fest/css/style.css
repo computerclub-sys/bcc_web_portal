@@ -246,16 +246,13 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   pointer-events: none;
 }
 .hero .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
   position: relative;
   z-index: 2;
 }
 .hero-body {
-  flex: 1;
-  max-width: 620px;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
   padding: 120px 0 80px;
 }
 .hero-sup {
@@ -340,6 +337,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   letter-spacing: -0.05em;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.25em;
   animation: flicker 2.8s infinite step-end, glow-pulse 2.8s infinite;
 }
@@ -355,6 +353,8 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   line-height: 1.7;
   margin-bottom: 24px;
   max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .hero-meta { margin-bottom: 28px; }
 .hero-date {
@@ -362,7 +362,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   color: var(--text);
   font-weight: 500;
 }
-.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+.hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
 
 .hero-countdown {
   padding-top: 32px;
@@ -377,13 +377,18 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   display: block;
   margin-bottom: 14px;
 }
-.cd { display: flex; gap: 20px; }
+.cd { display: flex; gap: 20px; justify-content: center; }
 .cd-item { display: flex; flex-direction: column; align-items: center; min-width: 64px; }
 .cd-num { font-size: 42px; font-weight: 800; color: var(--text-heading); line-height: 1; }
 .cd-label { font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-top: 4px; }
 
 /* ── Hero Robot ── */
-.hero-robot { flex-shrink: 0; }
+.hero-robot {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
 .modelViewPort {
   perspective: 1000px;
   width: 20rem;
@@ -517,12 +522,6 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 
 @media (max-width: 900px) {
   .hero-robot { display: none; }
-  .hero .container { justify-content: center; }
-  .hero-body { text-align: center; max-width: 640px; }
-  .hero-desc { margin-left: auto; margin-right: auto; }
-  .neon-fire-text { justify-content: center; }
-  .hero-actions { justify-content: center; }
-  .cd { justify-content: center; }
 }
 
 /* ── Section ── */
