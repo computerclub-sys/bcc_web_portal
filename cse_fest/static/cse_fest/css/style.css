@@ -38,7 +38,7 @@ body {
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; height: auto; display: block; }
 
-h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title, .card-badge, .status-badge, .hero-sup, .cd-label {
+h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title, .card-badge, .status-badge, .hero-sup, .cd-label, .faq-q {
   font-family: var(--font-pixel);
   line-height: 1.5;
 }
