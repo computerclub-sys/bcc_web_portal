@@ -245,12 +245,17 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   z-index: 1;
   pointer-events: none;
 }
-.hero-body {
+.hero .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
   position: relative;
   z-index: 2;
-  text-align: center;
-  max-width: 720px;
-  margin: 0 auto;
+}
+.hero-body {
+  flex: 1;
+  max-width: 620px;
   padding: 120px 0 80px;
 }
 .hero-sup {
@@ -335,7 +340,6 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   letter-spacing: -0.05em;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 0.25em;
   animation: flicker 2.8s infinite step-end, glow-pulse 2.8s infinite;
 }
@@ -351,8 +355,6 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   line-height: 1.7;
   margin-bottom: 24px;
   max-width: 560px;
-  margin-left: auto;
-  margin-right: auto;
 }
 .hero-meta { margin-bottom: 28px; }
 .hero-date {
@@ -360,7 +362,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   color: var(--text);
   font-weight: 500;
 }
-.hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
 
 .hero-countdown {
   padding-top: 32px;
@@ -375,10 +377,153 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   display: block;
   margin-bottom: 14px;
 }
-.cd { display: flex; gap: 20px; justify-content: center; }
+.cd { display: flex; gap: 20px; }
 .cd-item { display: flex; flex-direction: column; align-items: center; min-width: 64px; }
 .cd-num { font-size: 42px; font-weight: 800; color: var(--text-heading); line-height: 1; }
 .cd-label { font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-top: 4px; }
+
+/* ── Hero Robot ── */
+.hero-robot { flex-shrink: 0; }
+.modelViewPort {
+  perspective: 1000px;
+  width: 20rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle, rgba(0,0,0,0.6) 0%, transparent 70%);
+  overflow: hidden;
+}
+.eva {
+  --EVA-ROTATION-DURATION: 4s;
+  transform-style: preserve-3d;
+  animation: rotateRight var(--EVA-ROTATION-DURATION) linear infinite alternate;
+}
+.head {
+  position: relative;
+  width: 6rem;
+  height: 4rem;
+  border-radius: 48% 53% 45% 55% / 79% 79% 20% 22%;
+  background: linear-gradient(to right, white 45%, gray);
+}
+.eyeChamber {
+  width: 4.5rem;
+  height: 2.75rem;
+  position: relative;
+  left: 50%;
+  top: 55%;
+  border-radius: 45% 53% 45% 48% / 62% 59% 35% 34%;
+  background-color: #0c203c;
+  box-shadow: 0px 0px 2px 2px white, inset 0px 0px 0px 2px black;
+  transform: translate(-50%, -50%);
+  animation: moveRight var(--EVA-ROTATION-DURATION) linear infinite alternate;
+}
+.eye {
+  width: 1.2rem;
+  height: 1.5rem;
+  position: absolute;
+  border-radius: 50%;
+}
+.eye:first-child {
+  left: 12px;
+  top: 50%;
+  background: repeating-linear-gradient(65deg, #9bdaeb 0px, #9bdaeb 1px, white 2px);
+  box-shadow: inset 0px 0px 5px #04b8d5, 0px 0px 15px 1px #0bdaeb;
+  transform: translate(0, -50%) rotate(-65deg);
+}
+.eye:nth-child(2) {
+  right: 12px;
+  top: 50%;
+  background: repeating-linear-gradient(-65deg, #9bdaeb 0px, #9bdaeb 1px, white 2px);
+  box-shadow: inset 0px 0px 5px #04b8d5, 0px 0px 15px 1px #0bdaeb;
+  transform: translate(0, -50%) rotate(65deg);
+}
+.body {
+  width: 6rem;
+  height: 8rem;
+  position: relative;
+  margin-block-start: 0.25rem;
+  border-radius: 47% 53% 45% 55% / 12% 9% 90% 88%;
+  background: linear-gradient(to right, white 35%, gray);
+}
+.hand {
+  position: absolute;
+  left: -1.5rem;
+  top: 0.75rem;
+  width: 2rem;
+  height: 5.5rem;
+  border-radius: 40%;
+  background: linear-gradient(to left, white 15%, gray);
+  box-shadow: 5px 0px 5px rgba(0, 0, 0, 0.25);
+  transform: rotateY(55deg) rotateZ(10deg);
+}
+.hand:first-child {
+  animation: compensateRotation var(--EVA-ROTATION-DURATION) linear infinite alternate;
+}
+.hand:nth-child(2) {
+  left: 92%;
+  background: linear-gradient(to right, white 15%, gray);
+  transform: rotateY(55deg) rotateZ(-10deg);
+  animation: compensateRotationRight var(--EVA-ROTATION-DURATION) linear infinite alternate;
+}
+.scannerThing {
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 60%;
+  top: 10%;
+  border-top: 180px solid #9bdaeb;
+  border-left: 250px solid transparent;
+  border-right: 250px solid transparent;
+  transform-origin: top left;
+  mask: linear-gradient(to right, white, transparent 35%);
+  animation: glow 2s cubic-bezier(0.86, 0, 0.07, 1) infinite;
+}
+.scannerOrigin {
+  position: absolute;
+  width: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  left: 60%;
+  top: 10%;
+  background: #9bdaeb;
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.5);
+  animation: moveRight var(--EVA-ROTATION-DURATION) linear infinite;
+}
+@keyframes rotateRight {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(25deg); }
+}
+@keyframes moveRight {
+  from { transform: translate(-50%, -50%); }
+  to { transform: translate(-40%, -50%); }
+}
+@keyframes compensateRotation {
+  from { transform: rotateY(55deg) rotateZ(10deg); }
+  to { transform: rotatey(30deg) rotateZ(10deg); }
+}
+@keyframes compensateRotationRight {
+  from { transform: rotateY(55deg) rotateZ(-10deg); }
+  to { transform: rotateY(70deg) rotateZ(-10deg); }
+}
+@keyframes glow {
+  from { opacity: 0; }
+  20% { opacity: 1; }
+  45% { transform: rotate(-25deg); }
+  75% { transform: rotate(5deg); }
+  100% { opacity: 0; }
+}
+
+@media (max-width: 900px) {
+  .hero-robot { display: none; }
+  .hero .container { justify-content: center; }
+  .hero-body { text-align: center; max-width: 640px; }
+  .hero-desc { margin-left: auto; margin-right: auto; }
+  .neon-fire-text { justify-content: center; }
+  .hero-actions { justify-content: center; }
+  .cd { justify-content: center; }
+}
 
 /* ── Section ── */
 .section { padding: 80px 0; }
