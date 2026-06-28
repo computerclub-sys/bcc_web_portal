@@ -469,7 +469,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 .eva {
   --EVA-ROTATION-DURATION: 4s;
   transform-style: preserve-3d;
-  animation: rotateRight var(--EVA-ROTATION-DURATION) linear infinite alternate;
+  transform: rotateY(25deg);
 }
 .head {
   position: relative;
