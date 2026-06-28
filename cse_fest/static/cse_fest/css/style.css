@@ -817,7 +817,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   z-index: 1;
 }
 .tl-date {
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--accent-light);
   text-transform: uppercase;

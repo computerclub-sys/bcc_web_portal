@@ -23,7 +23,7 @@ def redirect_to_latest(request):
 def index(request, year):
     fest = _get_fest(year)
     events = FestEvent.objects.filter(fest=fest).order_by('order')
-    schedules = FestSchedule.objects.filter(fest=fest).order_by('date', 'time')
+    schedules = FestSchedule.objects.filter(fest=fest).order_by('order', 'date', 'time')
     notices = Notice.objects.filter(fest=fest, is_active=True)
     committee = CommitteeMember.objects.filter(fest=fest).order_by('order')
     faqs = Faq.objects.filter(fest=fest, is_active=True)
