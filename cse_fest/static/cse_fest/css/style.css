@@ -387,6 +387,11 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   position: absolute;
   left: -120px;
   top: 120px;
+  animation: robotFloat 3s ease-in-out infinite;
+}
+@keyframes robotFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
 }
 .modelViewPort {
   perspective: 1000px;
