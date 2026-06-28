@@ -385,7 +385,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 /* ── Hero Robot ── */
 .hero-robot {
   position: absolute;
-  left: -60px;
+  left: -120px;
   top: 120px;
 }
 .modelViewPort {
