@@ -967,8 +967,12 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   background: rgba(var(--event-accent-rgb, 124,92,252), 0.06);
   border: 1px solid rgba(var(--event-accent-rgb, 124,92,252), 0.12);
   border-radius: 10px;
-  padding: 10px 14px;
+  padding: 20px 14px;
   width: 100%;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .flip-card-back .card-prize-label {
   display: flex;
