@@ -31,7 +31,6 @@
     </div>
 </section>
 
-<script src="{% static 'cse_fest/js/invitation.js' %}"></script>
 <script>
     window.INVITE_CONFIG = {
         festTitle: '{{ fest.title|escapejs }}',
@@ -44,4 +43,5 @@
         logoUrl: '{% static "cse_fest/images/Png Logo x CSE Fest.png" %}'
     };
 </script>
+<script src="{% static 'cse_fest/js/invitation.js' %}"></script>
 {% endblock %}
