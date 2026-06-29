@@ -1922,8 +1922,8 @@ form { display: flex; flex-direction: column; gap: 14px; }
 }
 
 .holo-rules-checkbox .status-text {
-  margin-top: 20px;
-  font-size: 13px;
+  margin-top: 16px;
+  font-size: 9px;
   font-weight: 600;
   color: rgba(var(--event-accent-rgb, 0, 162, 255), 0.8);
   text-shadow: 0 0 5px rgba(var(--event-accent-rgb, 0, 162, 255), 0.5);
@@ -1931,9 +1931,10 @@ form { display: flex; flex-direction: column; gap: 14px; }
   transition: all 0.3s ease;
   text-align: center;
   font-family: var(--font-pixel);
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   height: 1.5em;
   line-height: 1.5em;
+  white-space: nowrap;
 }
 .holo-rules-checkbox .status-text::before,
 .holo-rules-checkbox .holo-checkbox-input:checked ~ .status-text::before {
