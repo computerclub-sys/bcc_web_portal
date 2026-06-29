@@ -26,6 +26,6 @@ class Command(BaseCommand):
                     f'{e.title}: {e.primary_color} / {e.secondary_color} / {e.accent_color}'
                 )
             else:
-                self.stdout.write(f'{e.title}: could not extract (poster file missing?)')
+                self.stdout.write(self.style.WARNING(f'{e.title}: could not extract'))
 
         self.stdout.write(self.style.SUCCESS(f'Processed {count} events'))

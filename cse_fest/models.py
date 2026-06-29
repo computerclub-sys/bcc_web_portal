@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.core.validators import MinValueValidator, MaxValueValidator
+import os
 
 
 class Fest(models.Model):
@@ -64,16 +65,32 @@ class FestEvent(models.Model):
             self.slug = slugify(self.title)
         if self.poster and not self.primary_color:
             try:
-                colors = self._extract_colors(self.poster.path)
+                try:
+                    path = self.poster.path
+                    if not os.path.exists(path):
+                        path = self.poster.url
+                except Exception:
+                    path = self.poster.url
+                colors = self._extract_colors(path)
                 if colors:
                     self.primary_color, self.secondary_color, self.accent_color = colors
             except Exception:
                 pass
         super().save(*args, **kwargs)
 
-    def _extract_colors(self, path):
+    def _extract_colors(self, path_or_url):
         from PIL import Image
-        img = Image.open(path).convert('RGB')
+        import tempfile, os, requests
+        if path_or_url.startswith('http://') or path_or_url.startswith('https://'):
+            r = requests.get(path_or_url, timeout=10)
+            r.raise_for_status()
+            tmp = tempfile.NamedTemporaryFile(delete=False, suffix='.png')
+            tmp.write(r.content)
+            tmp.close()
+            img = Image.open(tmp.name).convert('RGB')
+            os.unlink(tmp.name)
+        else:
+            img = Image.open(path_or_url).convert('RGB')
         img = img.resize((4, 4), Image.LANCZOS)
         pixels = list(img.getdata())
         counts = {}
