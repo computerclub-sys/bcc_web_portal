@@ -1033,7 +1033,14 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   color: var(--text-heading);
   line-height: 1.15;
 }
-.detail-desc { margin-bottom: 24px; }
+.detail-card-section {
+  background: #0a0a18;
+  border: 1px solid rgba(var(--event-accent-rgb, 217,70,239), 0.08);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+.detail-desc { margin: 0; }
 .detail-desc h2 { font-size: 20px; font-weight: 700; color: var(--text-heading); margin-bottom: 8px; }
 .detail-desc p { font-size: 24px; color: var(--text-muted); line-height: 1.8; }
 
