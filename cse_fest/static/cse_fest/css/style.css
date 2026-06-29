@@ -634,9 +634,15 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   display: flex;
   align-items: center;
   gap: 8px;
+  opacity: 0;
+  animation: prizeIn 0.4s ease-out forwards;
 }
+.flip-card-back .card-prize-row:nth-child(1) { animation-delay: 0.1s; }
+.flip-card-back .card-prize-row:nth-child(2) { animation-delay: 0.2s; }
+.flip-card-back .card-prize-row:nth-child(3) { animation-delay: 0.3s; }
+.flip-card-back .card-prize-row:hover { transform: translateX(4px); transition: transform 0.2s; }
 .prize-pos {
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 600;
   color: #ccccee;
   flex: 1;
@@ -648,14 +654,19 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   background: linear-gradient(90deg, rgba(217,70,239,0.2), transparent);
 }
 .prize-amount {
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 700;
   color: #d946ef;
   white-space: nowrap;
+  transition: text-shadow 0.3s, color 0.3s;
+}
+.flip-card-back .card-prize-row:hover .prize-amount {
+  color: #f0a0ff;
+  text-shadow: 0 0 12px rgba(217,70,239,0.6);
 }
 .flip-card-back .card-entry {
   text-align: center;
-  font-size: 13px;
+  font-size: 15px;
   color: #8888aa;
   padding: 4px 12px;
   border: 1px solid rgba(217,70,239,0.1);
@@ -1061,17 +1072,27 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   flex-direction: column;
   gap: 4px;
 }
+@keyframes prizeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 .prize-row {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 14px;
   color: var(--text-heading);
+  opacity: 0;
+  animation: prizeIn 0.4s ease-out forwards;
 }
+.prize-row:nth-child(1) { animation-delay: 0.1s; }
+.prize-row:nth-child(2) { animation-delay: 0.2s; }
+.prize-row:nth-child(3) { animation-delay: 0.3s; }
+.prize-row:hover { transform: translateX(4px); transition: transform 0.2s; }
 .prize-pos-label {
   font-weight: 600;
   color: #ccccee;
-  font-size: 13px;
+  font-size: 16px;
 }
 .prize-dot {
   flex: 1;
@@ -1082,8 +1103,13 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 .prize-val {
   font-weight: 700;
   color: #d946ef;
-  font-size: 15px;
+  font-size: 17px;
   white-space: nowrap;
+  transition: text-shadow 0.3s, color 0.3s;
+}
+.prize-row:hover .prize-val {
+  color: #f0a0ff;
+  text-shadow: 0 0 12px rgba(217,70,239,0.6);
 }
 
 .form-wrap {
