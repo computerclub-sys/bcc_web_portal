@@ -417,26 +417,26 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   max-width: 560px;
   margin-left: auto;
   margin-right: auto;
-  text-shadow: 0 0 8px rgba(217,70,239,0.15), 0 0 20px rgba(217,70,239,0.08);
+  text-shadow: 0 0 10px rgba(217,70,239,0.4), 0 0 25px rgba(217,70,239,0.2), 0 0 50px rgba(217,70,239,0.1);
   animation: glow-pulse-desc 3s ease-in-out infinite;
 }
 
 @keyframes glow-pulse-desc {
-  0%, 100% { text-shadow: 0 0 8px rgba(217,70,239,0.15), 0 0 20px rgba(217,70,239,0.08); }
-  50%      { text-shadow: 0 0 12px rgba(217,70,239,0.25), 0 0 30px rgba(217,70,239,0.12); }
+  0%, 100% { text-shadow: 0 0 10px rgba(217,70,239,0.4), 0 0 25px rgba(217,70,239,0.2), 0 0 50px rgba(217,70,239,0.1); }
+  50%      { text-shadow: 0 0 16px rgba(217,70,239,0.6), 0 0 35px rgba(217,70,239,0.3), 0 0 60px rgba(217,70,239,0.15); }
 }
 .hero-meta { margin-bottom: 28px; }
 .hero-date {
   font-size: 20px;
   color: var(--text);
   font-weight: 500;
-  text-shadow: 0 0 6px rgba(217,70,239,0.12), 0 0 15px rgba(217,70,239,0.06);
+  text-shadow: 0 0 8px rgba(217,70,239,0.35), 0 0 20px rgba(217,70,239,0.15), 0 0 40px rgba(217,70,239,0.08);
   animation: glow-pulse-date 3s ease-in-out infinite;
 }
 
 @keyframes glow-pulse-date {
-  0%, 100% { text-shadow: 0 0 6px rgba(217,70,239,0.12), 0 0 15px rgba(217,70,239,0.06); }
-  50%      { text-shadow: 0 0 10px rgba(217,70,239,0.2), 0 0 25px rgba(217,70,239,0.1); }
+  0%, 100% { text-shadow: 0 0 8px rgba(217,70,239,0.35), 0 0 20px rgba(217,70,239,0.15), 0 0 40px rgba(217,70,239,0.08); }
+  50%      { text-shadow: 0 0 14px rgba(217,70,239,0.55), 0 0 30px rgba(217,70,239,0.25), 0 0 50px rgba(217,70,239,0.12); }
 }
 .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
 
@@ -673,10 +673,11 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   color: var(--event-accent, #d946ef);
   white-space: nowrap;
   transition: text-shadow 0.3s, color 0.3s;
+  text-shadow: 0 0 8px rgba(var(--event-accent-rgb, 217,70,239), 0.35);
 }
 .flip-card-back .card-prize-row:hover .prize-amount {
   color: color-mix(in srgb, var(--event-accent, #d946ef) 80%, white);
-  text-shadow: 0 0 12px rgba(var(--event-accent-rgb, 217,70,239), 0.6);
+  text-shadow: 0 0 16px rgba(var(--event-accent-rgb, 217,70,239), 0.7);
 }
 .flip-card-back .card-entry {
   text-align: center;
@@ -1010,7 +1011,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 .detail-left { position: sticky; top: 80px; }
 .detail-poster { border-radius: var(--radius); overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border); }
 .detail-poster img { width: 100%; display: block; }
-.detail-date { text-align: center; padding: 20px; background: var(--accent); border-radius: var(--radius-sm); color: white; }
+.detail-date { text-align: center; padding: 20px; background: var(--event-accent, var(--accent)); border-radius: var(--radius-sm); color: white; }
 .detail-date-month { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; }
 .detail-date-day { display: block; font-size: 44px; font-weight: 900; line-height: 1; }
 .detail-date-year { display: block; font-size: 15px; opacity: 0.7; }
@@ -1026,6 +1027,28 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.detail-card::after {
+  position: absolute;
+  content: "";
+  top: 30px;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  transform: scale(0.85);
+  filter: blur(30px);
+  background: linear-gradient(to left, rgba(var(--event-accent-rgb, 217,70,239), 0.4) 0%, rgba(var(--event-secondary-rgb, 56,16,50), 0.3) 100%);
+  transition: opacity .5s;
+  pointer-events: none;
+}
+
+.detail-card:hover::after {
+  opacity: 0;
 }
 .detail-card-header { margin-bottom: 20px; }
 .detail-cat {
@@ -1127,10 +1150,11 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   font-size: 17px;
   white-space: nowrap;
   transition: text-shadow 0.3s, color 0.3s;
+  text-shadow: 0 0 8px rgba(var(--event-accent-rgb, 217,70,239), 0.35);
 }
 .prize-row:hover .prize-val {
   color: color-mix(in srgb, var(--event-accent, #d946ef) 80%, white);
-  text-shadow: 0 0 12px rgba(var(--event-accent-rgb, 217,70,239), 0.6);
+  text-shadow: 0 0 16px rgba(var(--event-accent-rgb, 217,70,239), 0.7);
 }
 
 .form-wrap {

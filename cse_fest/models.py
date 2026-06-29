@@ -151,6 +151,7 @@ class FestEvent(models.Model):
             'secondary': secondary,
             'accent': accent,
             'accent_rgb': hex_to_rgb(accent),
+            'secondary_rgb': hex_to_rgb(secondary),
         }
 
 
