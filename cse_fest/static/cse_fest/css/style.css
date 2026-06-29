@@ -586,9 +586,9 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 .flip-card-back .card-badge {
   padding: 4px 14px;
   border-radius: 20px;
-  background: rgba(217,70,239,0.12);
-  border: 1px solid rgba(217,70,239,0.25);
-  color: #d946ef;
+  background: rgba(var(--event-accent-rgb, 217,70,239), 0.12);
+  border: 1px solid rgba(var(--event-accent-rgb, 217,70,239), 0.25);
+  color: var(--event-accent, #d946ef);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.5px;
@@ -607,8 +607,8 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   margin: 2px 0 4px;
 }
 .flip-card-back .card-prize {
-  background: rgba(124,92,252,0.05);
-  border: 1px solid rgba(124,92,252,0.1);
+  background: rgba(var(--event-accent-rgb, 124,92,252), 0.06);
+  border: 1px solid rgba(var(--event-accent-rgb, 124,92,252), 0.12);
   border-radius: 10px;
   padding: 8px 14px;
   width: 100%;
@@ -651,27 +651,27 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 .prize-sep {
   flex: 0 0 20px;
   height: 1px;
-  background: linear-gradient(90deg, rgba(217,70,239,0.2), transparent);
+  background: linear-gradient(90deg, rgba(var(--event-accent-rgb, 217,70,239), 0.25), transparent);
 }
 .prize-amount {
   font-size: 17px;
   font-weight: 700;
-  color: #d946ef;
+  color: var(--event-accent, #d946ef);
   white-space: nowrap;
   transition: text-shadow 0.3s, color 0.3s;
 }
 .flip-card-back .card-prize-row:hover .prize-amount {
-  color: #f0a0ff;
-  text-shadow: 0 0 12px rgba(217,70,239,0.6);
+  color: color-mix(in srgb, var(--event-accent, #d946ef) 80%, white);
+  text-shadow: 0 0 12px rgba(var(--event-accent-rgb, 217,70,239), 0.6);
 }
 .flip-card-back .card-entry {
   text-align: center;
   font-size: 15px;
   color: #8888aa;
   padding: 4px 12px;
-  border: 1px solid rgba(217,70,239,0.1);
+  border: 1px solid rgba(var(--event-accent-rgb, 217,70,239), 0.15);
   border-radius: 8px;
-  background: rgba(217,70,239,0.03);
+  background: rgba(var(--event-accent-rgb, 217,70,239), 0.04);
   width: 100%;
 }
 .flip-card-back .card-actions {
@@ -1018,9 +1018,9 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   display: inline-block;
   padding: 4px 14px;
   border-radius: 20px;
-  background: rgba(217,70,239,0.12);
-  border: 1px solid rgba(217,70,239,0.2);
-  color: #d946ef;
+  background: rgba(var(--event-accent-rgb, 217,70,239), 0.12);
+  border: 1px solid rgba(var(--event-accent-rgb, 217,70,239), 0.2);
+  color: var(--event-accent, #d946ef);
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -1046,12 +1046,12 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 .detail-meta-item {
   padding: 16px;
   background: #0a0a18;
-  border: 1px solid rgba(217,70,239,0.08);
+  border: 1px solid rgba(var(--event-accent-rgb, 217,70,239), 0.08);
   border-radius: var(--radius-sm);
   transition: border-color 0.2s;
 }
 .detail-meta-item:hover {
-  border-color: rgba(217,70,239,0.2);
+  border-color: rgba(var(--event-accent-rgb, 217,70,239), 0.2);
 }
 .detail-meta-item strong {
   display: block;
@@ -1098,18 +1098,18 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   flex: 1;
   max-width: 40px;
   height: 1px;
-  background: linear-gradient(90deg, rgba(217,70,239,0.3), transparent);
+  background: linear-gradient(90deg, rgba(var(--event-accent-rgb, 217,70,239), 0.3), transparent);
 }
 .prize-val {
   font-weight: 700;
-  color: #d946ef;
+  color: var(--event-accent, #d946ef);
   font-size: 17px;
   white-space: nowrap;
   transition: text-shadow 0.3s, color 0.3s;
 }
 .prize-row:hover .prize-val {
-  color: #f0a0ff;
-  text-shadow: 0 0 12px rgba(217,70,239,0.6);
+  color: color-mix(in srgb, var(--event-accent, #d946ef) 80%, white);
+  text-shadow: 0 0 12px rgba(var(--event-accent-rgb, 217,70,239), 0.6);
 }
 
 .form-wrap {

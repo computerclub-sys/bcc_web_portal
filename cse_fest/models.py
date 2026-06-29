@@ -47,6 +47,9 @@ class FestEvent(models.Model):
     hackathon_fee_3 = models.DecimalField(max_digits=10, decimal_places=2, default=1500, blank=True, help_text='Hackathon fee for 3-member team')
     hackathon_fee_4 = models.DecimalField(max_digits=10, decimal_places=2, default=2000, blank=True, help_text='Hackathon fee for 4-member team')
     prize_pool = models.CharField(max_length=200, blank=True, help_text='e.g. 50,000 BDT + Trophies')
+    primary_color = models.CharField(max_length=7, blank=True, help_text='Auto-extracted dominant color from poster')
+    secondary_color = models.CharField(max_length=7, blank=True, help_text='Auto-extracted secondary color from poster')
+    accent_color = models.CharField(max_length=7, blank=True, help_text='Auto-extracted accent color from poster')
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
@@ -59,7 +62,38 @@ class FestEvent(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
+        if self.poster and not self.primary_color:
+            try:
+                colors = self._extract_colors(self.poster.path)
+                if colors:
+                    self.primary_color, self.secondary_color, self.accent_color = colors
+            except Exception:
+                pass
         super().save(*args, **kwargs)
+
+    def _extract_colors(self, path):
+        from PIL import Image
+        img = Image.open(path).convert('RGB')
+        img = img.resize((4, 4), Image.LANCZOS)
+        pixels = list(img.getdata())
+        counts = {}
+        for r, g, b in pixels:
+            key = (r // 64 * 64, g // 64 * 64, b // 64 * 64)
+            avg = (key[0] + 32, key[1] + 32, key[2] + 32)
+            counts[avg] = counts.get(avg, 0) + 1
+        sorted_colors = sorted(counts.items(), key=lambda x: -x[1])
+        def to_hex(rgb):
+            return '#{:02x}{:02x}{:02x}'.format(
+                min(255, max(0, rgb[0])),
+                min(255, max(0, rgb[1])),
+                min(255, max(0, rgb[2]))
+            )
+        if not sorted_colors:
+            return None
+        primary = to_hex(sorted_colors[0][0])
+        secondary = to_hex(sorted_colors[1][0]) if len(sorted_colors) > 1 else primary
+        accent = to_hex(sorted_colors[2][0]) if len(sorted_colors) > 2 else secondary
+        return (primary, secondary, accent)
 
     @property
     def is_registration_open(self):
@@ -69,6 +103,31 @@ class FestEvent(models.Model):
         if self.last_registration_date and timezone.now() > self.last_registration_date:
             return False
         return True
+
+    @property
+    def theme_colors(self):
+        if self.primary_color:
+            primary = self.primary_color
+            secondary = self.secondary_color or self.primary_color
+            accent = self.accent_color or self.primary_color
+        else:
+            defaults = {
+                'hackathon': ('#ea580c', '#dc2626', '#f97316'),
+                'iupc': ('#7c3aed', '#4f46e5', '#a855f7'),
+                'efootball': ('#059669', '#047857', '#10b981'),
+                'ictquiz': ('#0284c7', '#0369a1', '#38bdf8'),
+            }
+            d = defaults.get(self.category, ('#d946ef', '#a21caf', '#e879f9'))
+            primary, secondary, accent = d
+        def hex_to_rgb(h):
+            h = h.lstrip('#')
+            return f'{int(h[0:2],16)},{int(h[2:4],16)},{int(h[4:6],16)}'
+        return {
+            'primary': primary,
+            'secondary': secondary,
+            'accent': accent,
+            'accent_rgb': hex_to_rgb(accent),
+        }
 
 
 class FestPrize(models.Model):

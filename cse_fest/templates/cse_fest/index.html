@@ -50,7 +50,7 @@
         </div>
         <div class="events-grid">
             {% for event in events %}
-            <div class="flip-card">
+            <div class="flip-card" style="--event-primary:{{ event.theme_colors.primary }};--event-accent:{{ event.theme_colors.accent }};--event-accent-rgb:{{ event.theme_colors.accent_rgb }};--event-secondary:{{ event.theme_colors.secondary }}">
                 <div class="flip-card-inner">
                     <div class="flip-card-front"{% if event.poster %} style="background-image:url('{{ event.poster.url }}')"{% endif %}>
                         {% if not event.poster %}<div class="fcf-overlay"></div>{% endif %}

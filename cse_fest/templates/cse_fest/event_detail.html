@@ -28,7 +28,7 @@
             </div>
 
             <div class="detail-right">
-                <div class="detail-card">
+                <div class="detail-card" style="--event-primary:{{ event.theme_colors.primary }};--event-accent:{{ event.theme_colors.accent }};--event-accent-rgb:{{ event.theme_colors.accent_rgb }};--event-secondary:{{ event.theme_colors.secondary }}">
                     <div class="detail-card-header">
                         <span class="detail-cat">{{ event.get_category_display }}</span>
                         <h1 class="detail-title">{{ event.title }}</h1>
