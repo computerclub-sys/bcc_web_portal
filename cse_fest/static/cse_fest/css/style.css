@@ -164,6 +164,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   transition: background 0.2s, 0.3s;
   background: none;
   border: 2px solid rgba(var(--event-accent-rgb, 217,70,239), 0.35);
+  border-radius: 6px;
   cursor: pointer;
   font-family: var(--font-pixel);
   margin-top: 20px;
@@ -1068,6 +1069,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   align-items: center;
   border: 1px solid var(--event-accent, #17795E);
   background-color: var(--event-accent, #209978);
+  border-radius: 6px;
   overflow: hidden;
   text-decoration: none;
   transition: all 0.3s;
