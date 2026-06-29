@@ -163,7 +163,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   text-align: center;
   transition: background 0.2s, 0.3s;
   background: none;
-  border: none;
+  border: 2px solid rgba(var(--event-accent-rgb, 217,70,239), 0.35);
   cursor: pointer;
   font-family: var(--font-pixel);
   margin-top: 20px;
@@ -1723,9 +1723,9 @@ form { display: flex; flex-direction: column; gap: 14px; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
-  min-height: 200px;
+  min-height: 120px;
   z-index: 10;
   margin-top: 16px;
 }
@@ -1739,8 +1739,8 @@ form { display: flex; flex-direction: column; gap: 14px; }
 
 .holo-rules-checkbox .holo-checkbox {
   position: relative;
-  width: 64px;
-  height: 64px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   transform-style: preserve-3d;
   perspective: 1000px;
@@ -1848,8 +1848,8 @@ form { display: flex; flex-direction: column; gap: 14px; }
 
 .holo-rules-checkbox .corner-accent {
   position: absolute;
-  width: 12px;
-  height: 12px;
+  width: 8px;
+  height: 8px;
   border-style: solid;
   border-width: 2px;
   border-color: rgba(var(--event-accent-rgb, 0, 162, 255), 0.5);
@@ -1862,8 +1862,8 @@ form { display: flex; flex-direction: column; gap: 14px; }
 .holo-rules-checkbox .corner-accent:nth-child(4) { bottom: -4px; right: -4px; border-left: none; border-top: none; border-radius: 0 0 4px 0; }
 
 .holo-rules-checkbox .holo-checkbox-input:checked + .holo-checkbox .corner-accent {
-  width: 16px;
-  height: 16px;
+  width: 10px;
+  height: 10px;
   border-color: rgba(var(--event-accent-rgb, 0, 162, 255), 0.9);
 }
 
@@ -1881,6 +1881,10 @@ form { display: flex; flex-direction: column; gap: 14px; }
   height: 1.5em;
   line-height: 1.5em;
 }
+.holo-rules-checkbox .status-text::before,
+.holo-rules-checkbox .holo-checkbox-input:checked ~ .status-text::before {
+  text-align: center;
+}
 
 .holo-rules-checkbox .status-text::before {
   content: "RULES: NOT ACCEPTED";
@@ -1889,7 +1893,7 @@ form { display: flex; flex-direction: column; gap: 14px; }
   left: 0;
   width: 100%;
   height: 100%;
-  white-space: nowrap;
+  text-align: center;
 }
 
 .holo-rules-checkbox .holo-checkbox-input:checked ~ .status-text::before {
@@ -1999,12 +2003,12 @@ form { display: flex; flex-direction: column; gap: 14px; }
   box-shadow: 0 0 5px rgba(var(--event-accent-rgb, 0, 162, 255), 0.4);
 }
 
-.holo-rules-checkbox .holo-checkbox-input:checked + .holo-checkbox .cube-face:nth-child(1) { transform: translateZ(12px); }
-.holo-rules-checkbox .holo-checkbox-input:checked + .holo-checkbox .cube-face:nth-child(2) { transform: rotateY(180deg) translateZ(12px); }
-.holo-rules-checkbox .holo-checkbox-input:checked + .holo-checkbox .cube-face:nth-child(3) { transform: rotateY(90deg) translateZ(12px); }
-.holo-rules-checkbox .holo-checkbox-input:checked + .holo-checkbox .cube-face:nth-child(4) { transform: rotateY(-90deg) translateZ(12px); }
-.holo-rules-checkbox .holo-checkbox-input:checked + .holo-checkbox .cube-face:nth-child(5) { transform: rotateX(90deg) translateZ(12px); }
-.holo-rules-checkbox .holo-checkbox-input:checked + .holo-checkbox .cube-face:nth-child(6) { transform: rotateX(-90deg) translateZ(12px); }
+.holo-rules-checkbox .holo-checkbox-input:checked + .holo-checkbox .cube-face:nth-child(1) { transform: translateZ(8px); }
+.holo-rules-checkbox .holo-checkbox-input:checked + .holo-checkbox .cube-face:nth-child(2) { transform: rotateY(180deg) translateZ(8px); }
+.holo-rules-checkbox .holo-checkbox-input:checked + .holo-checkbox .cube-face:nth-child(3) { transform: rotateY(90deg) translateZ(8px); }
+.holo-rules-checkbox .holo-checkbox-input:checked + .holo-checkbox .cube-face:nth-child(4) { transform: rotateY(-90deg) translateZ(8px); }
+.holo-rules-checkbox .holo-checkbox-input:checked + .holo-checkbox .cube-face:nth-child(5) { transform: rotateX(90deg) translateZ(8px); }
+.holo-rules-checkbox .holo-checkbox-input:checked + .holo-checkbox .cube-face:nth-child(6) { transform: rotateX(-90deg) translateZ(8px); }
 
 @keyframes holo-cube-rotate {
   0% { transform: rotateX(0) rotateY(0) rotateZ(0); }
