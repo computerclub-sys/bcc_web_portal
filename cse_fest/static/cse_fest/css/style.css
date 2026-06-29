@@ -645,7 +645,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 .flip-card {
   background-color: transparent;
   width: 100%;
-  aspect-ratio: 3/5;
+  aspect-ratio: 4/5;
   perspective: 1000px;
 }
 .flip-card-inner {
