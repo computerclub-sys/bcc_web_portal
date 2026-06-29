@@ -580,58 +580,88 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   background: linear-gradient(135deg, #0a0a18 0%, #151530 40%, #1a1040 100%);
   transform: rotateY(180deg);
   justify-content: flex-start;
-  padding-top: 28px;
-  gap: 8px;
+  padding: 24px 20px 20px;
+  gap: 6px;
 }
 .flip-card-back .card-badge {
-  padding: 3px 12px;
+  padding: 4px 14px;
   border-radius: 20px;
-  background: rgba(124,92,252,0.15);
-  border: 1px solid rgba(124,92,252,0.25);
-  color: var(--accent-light);
-  font-size: 13px;
+  background: rgba(217,70,239,0.12);
+  border: 1px solid rgba(217,70,239,0.25);
+  color: #d946ef;
+  font-size: 12px;
   font-weight: 700;
-  white-space: nowrap;
+  letter-spacing: 0.5px;
+}
+.flip-card-back .card-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #eeeef8;
+  margin: 4px 0 0;
+  line-height: 1.2;
 }
 .flip-card-back .card-desc {
-  font-size: 14px;
-  color: var(--text-muted);
-  line-height: 1.5;
-  margin: 0;
-  flex: 0;
+  font-size: 13px;
+  color: #8888aa;
+  line-height: 1.4;
+  margin: 2px 0 4px;
 }
 .flip-card-back .card-prize {
-  text-align: center;
-  padding: 12px 16px;
-  background: rgba(124,92,252,0.06);
-  border: 1px solid rgba(124,92,252,0.12);
+  background: rgba(124,92,252,0.05);
+  border: 1px solid rgba(124,92,252,0.1);
   border-radius: 10px;
+  padding: 8px 14px;
   width: 100%;
 }
 .flip-card-back .card-prize-label {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 6px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
-  color: var(--text-muted);
+  color: #9999bb;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 6px;
 }
-.flip-card-back .card-prize-label svg { color: #facc15; }
-.flip-card-back .card-prize-amount {
-  display: block;
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--accent-light);
-  line-height: 1.2;
+.flip-card-back .card-prize-label svg { stroke: #facc15; }
+.flip-card-back .card-prize-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.flip-card-back .card-prize-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.prize-pos {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ccccee;
+  flex: 1;
+  text-align: left;
+}
+.prize-sep {
+  flex: 0 0 20px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(217,70,239,0.2), transparent);
+}
+.prize-amount {
+  font-size: 14px;
+  font-weight: 700;
+  color: #d946ef;
+  white-space: nowrap;
 }
 .flip-card-back .card-entry {
   text-align: center;
-  font-size: 15px;
-  color: var(--text-muted);
+  font-size: 13px;
+  color: #8888aa;
+  padding: 4px 12px;
+  border: 1px solid rgba(217,70,239,0.1);
+  border-radius: 8px;
+  background: rgba(217,70,239,0.03);
+  width: 100%;
 }
 .flip-card-back .card-actions {
   display: flex;
