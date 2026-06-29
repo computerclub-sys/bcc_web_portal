@@ -84,7 +84,11 @@
 
 <!-- ═══ HERO ═══ -->
 <section class="hero" id="home">
-    <canvas id="fire-speckles"></canvas>
+    <div class="stars-container">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+    </div>
     <div class="container">
         <div class="hero-body">
             <h1 class="hero-title">
@@ -311,7 +315,6 @@
 {% endif %}
 
 {% block extra_scripts %}
-<script src="{% static 'cse_fest/js/fire-speckles.js' %}"></script>
 <script>
 var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
