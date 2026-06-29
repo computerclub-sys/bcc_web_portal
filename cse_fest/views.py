@@ -217,3 +217,10 @@ def application_status(request, year):
         'search_id': search_id,
         'search_type': search_type,
     })
+
+
+def invitation(request, year):
+    fest = _get_fest(year)
+    return render(request, 'cse_fest/invitation.html', {
+        'fest': fest,
+    })

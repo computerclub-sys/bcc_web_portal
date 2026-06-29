@@ -947,6 +947,17 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 .cm-card,
 .cm-card * { cursor: default; }
 
+/* ── Invitation ── */
+.inv-form-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+}
+.inv-preview {
+  margin-top: 32px;
+}
+
 /* ── FAQ ── */
 .faq-list { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
 .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }

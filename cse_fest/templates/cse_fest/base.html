@@ -39,6 +39,7 @@
         <a href="{% url 'cse_fest:index' year=fest.year %}#notices" class="nav-link">Notices</a>
         <a href="{% url 'cse_fest:index' year=fest.year %}#faq" class="nav-link">FAQ</a>
         <a href="{% url 'cse_fest:application_status' year=fest.year %}" class="nav-link">Status</a>
+        <a href="{% url 'cse_fest:invitation' year=fest.year %}" class="nav-link">Get Invitation</a>
         <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="20" width="20"><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path></svg>
         </button>
@@ -53,6 +54,7 @@
         <a href="{% url 'cse_fest:index' year=fest.year %}#notices" class="nav-link">Notices</a>
         <a href="{% url 'cse_fest:index' year=fest.year %}#contact" class="nav-link">Contact</a>
         <a href="{% url 'cse_fest:application_status' year=fest.year %}" class="nav-link">Status</a>
+        <a href="{% url 'cse_fest:invitation' year=fest.year %}" class="nav-link">Get Invitation</a>
     </div>
 
     {% block content %}{% endblock %}

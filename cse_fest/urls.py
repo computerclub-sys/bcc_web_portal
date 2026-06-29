@@ -8,4 +8,5 @@ urlpatterns = [
     path('event/<slug:slug>/', views.event_detail, name='event_detail'),
     path('register/', views.register, name='register'),
     path('application-status/', views.application_status, name='application_status'),
+    path('invitation/', views.invitation, name='invitation'),
 ]

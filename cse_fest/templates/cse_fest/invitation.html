@@ -1,0 +1,47 @@
+{% extends "cse_fest/base.html" %}
+{% load static %}
+
+{% block title %}Get Your Invitation — {{ fest.title }}{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container" style="max-width:600px">
+        <div class="section-head">
+            <h2 class="section-title">Get Your Invitation</h2>
+            <p class="section-desc">Enter your name to generate a personalized visitor pass.</p>
+        </div>
+
+        <div class="inv-form-wrap">
+            <form id="invForm">
+                <div class="fl-input">
+                    <span class="fl-bar"></span>
+                    <input type="text" id="invName" required placeholder=" " maxlength="50">
+                    <label class="fl-label" for="invName">Your Name *</label>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;margin-top:20px" data-text="Generate Invitation"><span class="btn-text">Generate Invitation</span></button>
+            </form>
+        </div>
+
+        <div class="inv-preview" id="invPreview" style="display:none">
+            <h3 style="font-family:var(--font-pixel);color:var(--text-heading);font-size:14px;margin-bottom:16px;text-align:center">Your Invitation Card</h3>
+            <canvas id="invCanvas" width="1600" height="900" style="width:100%;border-radius:12px;border:1px solid var(--border)"></canvas>
+            <button class="btn btn-primary" id="invDownload" style="width:100%;margin-top:16px" data-text="Download PNG"><span class="btn-text">Download PNG</span></button>
+            <button class="btn btn-outline" id="invRegen" style="width:100%;margin-top:8px" data-text="Generate Another"><span class="btn-text">Generate Another</span></button>
+        </div>
+    </div>
+</section>
+
+<script src="{% static 'cse_fest/js/invitation.js' %}"></script>
+<script>
+    window.INVITE_CONFIG = {
+        festTitle: '{{ fest.title|escapejs }}',
+        festYear: '{{ fest.year }}',
+        {% if fest.target_date %}
+        festDate: '{{ fest.target_date|date:"F j, Y" }}',
+        {% else %}
+        festDate: '',
+        {% endif %}
+        logoUrl: '{% static "cse_fest/images/Png Logo x CSE Fest.png" %}'
+    };
+</script>
+{% endblock %}
