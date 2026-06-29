@@ -648,12 +648,11 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   width: 100%;
   aspect-ratio: 4/5;
   perspective: 1000px;
-  box-shadow: 0 0 12px rgba(var(--event-accent-rgb, 124,92,252), 0.08);
   border-radius: 1rem;
   transition: box-shadow 0.3s;
 }
 .flip-card:hover {
-  box-shadow: 0 0 24px rgba(var(--event-accent-rgb, 124,92,252), 0.2);
+  box-shadow: 0 0 40px rgba(var(--event-accent-rgb, 124,92,252), 0.3);
 }
 .flip-card-inner {
   position: relative;
@@ -675,10 +674,17 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   justify-content: center;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  border: 1px solid rgba(124,92,252,0.2);
+  border: 1px solid rgba(var(--event-accent-rgb, 124,92,252), 0.2);
   border-radius: 1rem;
   padding: 24px;
   overflow: hidden;
+  box-shadow: 0 0 40px rgba(var(--event-accent-rgb, 124,92,252), 0.2), inset 0 0 20px rgba(var(--event-accent-rgb, 124,92,252), 0.06);
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+.flip-card:hover .flip-card-front,
+.flip-card:hover .flip-card-back {
+  box-shadow: 0 0 60px rgba(var(--event-accent-rgb, 124,92,252), 0.4), inset 0 0 30px rgba(var(--event-accent-rgb, 124,92,252), 0.12);
+  border-color: rgba(var(--event-accent-rgb, 124,92,252), 0.5);
 }
 .flip-card-front {
   background: linear-gradient(135deg, #1a1040 0%, #151530 50%, #0a0a18 100%);
@@ -1254,7 +1260,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 
 .detail-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: start; }
 .detail-left { position: sticky; top: 80px; }
-.detail-poster { border-radius: var(--radius); overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border); }
+.detail-poster { border-radius: var(--radius); overflow: hidden; margin-bottom: 20px; border: 1px solid rgba(var(--event-accent-rgb, 217,70,239), 0.15); box-shadow: 0 0 24px rgba(var(--event-accent-rgb, 217,70,239), 0.12), inset 0 0 12px rgba(var(--event-accent-rgb, 217,70,239), 0.04); }
 .detail-poster img { width: 100%; display: block; }
 .detail-date { text-align: center; padding: 20px; background: var(--event-accent, var(--accent)); border-radius: var(--radius-sm); color: white; }
 .detail-date-month { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; }
