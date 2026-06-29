@@ -716,7 +716,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
     hsl(0 0 4%) 2px
   );
   background-size: 8px 8px;
-  --f: blur(1em) brightness(2.5);
+  --f: blur(1em) brightness(1.3);
   animation: bgglow 10s linear infinite;
   pointer-events: none;
   border-radius: inherit;
