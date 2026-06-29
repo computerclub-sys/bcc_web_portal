@@ -92,7 +92,7 @@
                     {% if event.is_registration_open %}
                     <div class="form-wrap" id="register-form">
                         <h2>Register for {{ event.title }}</h2>
-                        <form method="POST" action="{% url 'cse_fest:register' year=fest.year %}" enctype="multipart/form-data" data-reg-form>
+                        <form method="POST" action="{% url 'cse_fest:register' year=fest.year %}" enctype="multipart/form-data" data-reg-form novalidate>
                             {% csrf_token %}
                             <input type="hidden" name="event_id" value="{{ event.id }}">
 
@@ -474,9 +474,11 @@ if (sel) {
 
 var regForm = document.querySelector('form[data-reg-form]');
 var rulesNote = document.getElementById('rulesNote');
+console.log('regForm:', regForm, 'rulesNote:', rulesNote);
 if (regForm) {
     regForm.addEventListener('submit', function(e) {
         var cb = document.getElementById('holo-check');
+        console.log('checkbox checked:', cb ? cb.checked : 'no cb');
         if (cb && !cb.checked) {
             e.preventDefault();
             rulesNote.classList.add('show');
