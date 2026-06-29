@@ -132,22 +132,35 @@
             var el = document.getElementById('countdown');
             if (!el) return;
             var target = new Date(el.getAttribute('data-target')).getTime();
+            var cards = [
+                { id: 'cd-days', color: '#d946ef', label: 'Days' },
+                { id: 'cd-hours', color: '#f7ba2b', label: 'Hours' },
+                { id: 'cd-mins', color: '#00d4aa', label: 'Mins' },
+                { id: 'cd-secs', color: '#ea5358', label: 'Secs' }
+            ];
             function tick() {
                 var now = Date.now();
                 var diff = target - now;
-                if (diff <= 0) { el.innerHTML = '<div class="cd-item"><span class="cd-num">LIVE</span><span class="cd-label">Now</span></div>'; return; }
+                if (diff <= 0) {
+                    el.innerHTML = '<div class="cd-card" style="--card-color:#d946ef"><div class="cd-card-inner"><span class="cd-num" style="font-size:32px;color:#d946ef">LIVE</span><span class="cd-label">Now</span></div></div>';
+                    clearInterval(ival);
+                    return;
+                }
                 var d = Math.floor(diff / 86400000);
                 var h = Math.floor((diff % 86400000) / 3600000);
                 var m = Math.floor((diff % 3600000) / 60000);
                 var s = Math.floor((diff % 60000) / 1000);
-                el.innerHTML =
-                    '<div class="cd-item"><span class="cd-num">' + d + '</span><span class="cd-label">Days</span></div>' +
-                    '<div class="cd-item"><span class="cd-num">' + String(h).padStart(2,'0') + '</span><span class="cd-label">Hours</span></div>' +
-                    '<div class="cd-item"><span class="cd-num">' + String(m).padStart(2,'0') + '</span><span class="cd-label">Mins</span></div>' +
-                    '<div class="cd-item"><span class="cd-num">' + String(s).padStart(2,'0') + '</span><span class="cd-label">Secs</span></div>';
+                var vals = [d, String(h).padStart(2,'0'), String(m).padStart(2,'0'), String(s).padStart(2,'0')];
+                cards.forEach(function(c, i) {
+                    var card = document.getElementById(c.id);
+                    if (card) {
+                        card.querySelector('.cd-num').textContent = vals[i];
+                        card.style.setProperty('--card-color', c.color);
+                    }
+                });
             }
             tick();
-            setInterval(tick, 1000);
+            var ival = setInterval(tick, 1000);
         })();
 
         document.querySelectorAll('.faq-q').forEach(function(q) {

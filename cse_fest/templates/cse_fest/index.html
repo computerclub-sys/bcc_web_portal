@@ -9,24 +9,6 @@
 <section class="hero" id="home">
     <canvas id="fire-speckles"></canvas>
     <div class="container">
-        <div class="hero-robot">
-            <div class="modelViewPort">
-                <div class="eva">
-                    <div class="head">
-                        <div class="eyeChamber">
-                            <div class="eye"></div>
-                            <div class="eye"></div>
-                        </div>
-                    </div>
-                    <div class="body">
-                        <div class="hand"></div>
-                        <div class="hand"></div>
-                        <div class="scannerThing"></div>
-                        <div class="scannerOrigin"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="hero-body">
             <h1 class="hero-title">
                 <span class="neon-fire-text">
@@ -47,7 +29,12 @@
             {% if fest.target_date %}
             <div class="hero-countdown">
                 <span class="hero-countdown-label">Fest starts in</span>
-                <div class="cd" id="countdown" data-target="{{ fest.target_date|date:'c' }}"></div>
+                <div class="cd" id="countdown" data-target="{{ fest.target_date|date:'c' }}">
+                    <div class="cd-card" id="cd-days" style="--card-color:#d946ef"><div class="cd-card-inner"><span class="cd-num">0</span><span class="cd-label">Days</span></div></div>
+                    <div class="cd-card" id="cd-hours" style="--card-color:#f7ba2b"><div class="cd-card-inner"><span class="cd-num">00</span><span class="cd-label">Hours</span></div></div>
+                    <div class="cd-card" id="cd-mins" style="--card-color:#00d4aa"><div class="cd-card-inner"><span class="cd-num">00</span><span class="cd-label">Mins</span></div></div>
+                    <div class="cd-card" id="cd-secs" style="--card-color:#ea5358"><div class="cd-card-inner"><span class="cd-num">00</span><span class="cd-label">Secs</span></div></div>
+                </div>
             </div>
             {% endif %}
         </div>
