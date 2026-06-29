@@ -1016,7 +1016,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   background: linear-gradient(90deg, rgba(var(--event-accent-rgb, 217,70,239), 0.25), transparent);
 }
 .prize-amount {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--event-accent, #d946ef);
   white-space: nowrap;
@@ -1028,7 +1028,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   text-shadow: 0 0 16px rgba(var(--event-accent-rgb, 217,70,239), 0.7);
 }
 .flip-card-back .prize-amount {
-  font-size: 14px;
+  font-size: 18px;
 }
 .flip-card-back .prize-pos {
   font-size: 13px;
@@ -1551,7 +1551,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 .prize-val {
   font-weight: 700;
   color: var(--event-accent, #d946ef);
-  font-size: 17px;
+  font-size: 18px;
   white-space: nowrap;
   margin-left: auto;
   transition: text-shadow 0.3s, color 0.3s;
