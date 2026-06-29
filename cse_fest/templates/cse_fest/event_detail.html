@@ -92,7 +92,7 @@
                     {% if event.is_registration_open %}
                     <div class="form-wrap" id="register-form">
                         <h2>Register for {{ event.title }}</h2>
-                        <form method="POST" action="{% url 'cse_fest:register' year=fest.year %}" enctype="multipart/form-data">
+                        <form method="POST" action="{% url 'cse_fest:register' year=fest.year %}" enctype="multipart/form-data" data-reg-form>
                             {% csrf_token %}
                             <input type="hidden" name="event_id" value="{{ event.id }}">
 
@@ -411,6 +411,7 @@
                                     <div class="holo-glow"></div>
                                 </label>
                                 <div class="status-text"></div>
+                                <div class="rules-validation-note" id="rulesNote">You must accept the rules to submit</div>
                             </div>
 
                             <button type="submit" class="btn-cyber-submit">
@@ -469,6 +470,27 @@ if (sel) {
         var v = parseInt(this.value, 10);
         con.innerHTML = v > 0 ? renderMembers(v) : '';
     });
+}
+
+var regForm = document.querySelector('form[data-reg-form]');
+var rulesNote = document.getElementById('rulesNote');
+if (regForm) {
+    regForm.addEventListener('submit', function(e) {
+        var cb = document.getElementById('holo-check');
+        if (cb && !cb.checked) {
+            e.preventDefault();
+            rulesNote.classList.add('show');
+            var box = cb.closest('.holo-rules-checkbox');
+            if (box) box.classList.add('shake');
+            setTimeout(function() { if (box) box.classList.remove('shake'); }, 600);
+        }
+    });
+    var holoCheck = document.getElementById('holo-check');
+    if (holoCheck) {
+        holoCheck.addEventListener('change', function() {
+            if (this.checked) rulesNote.classList.remove('show');
+        });
+    }
 }
 </script>
 {% endblock %}
