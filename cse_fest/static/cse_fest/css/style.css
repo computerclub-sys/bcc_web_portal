@@ -1050,7 +1050,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   margin-top: auto;
   width: 100%;
 }
-.flip-card-back .card-actions .voltage-button {
+.flip-card-back .card-actions .octa-btn {
   width: 100%;
 }
 .flip-card-back .card-actions .btn-outline {
@@ -2097,123 +2097,139 @@ form { display: flex; flex-direction: column; gap: 14px; }
   50% { opacity: 0.7; }
 }
 
-/* ── Voltage / Cyber Button ── */
-.voltage-button {
+/* ── Octagonal Button ── */
+.octa-btn {
   position: relative;
-}
-
-.voltage-button .voltage-link {
-  display: block;
   width: 100%;
-  color: white;
-  background: #0D1127;
-  padding: 0.7rem 1.5rem;
-  border-radius: 5rem;
-  border: 3px solid #5978F3;
-  font-size: 0.85rem;
-  line-height: 1em;
-  letter-spacing: 0.075em;
-  text-align: center;
+  height: 4em;
+  outline: none;
+  transition: 0.1s;
+  background-color: transparent;
+  border: none;
+  font-size: 13px;
+  font-weight: bold;
+  color: #ddebf0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
-  transition: background 0.3s;
-  box-sizing: border-box;
-}
-
-.voltage-button .voltage-link:hover {
+  font-family: var(--font-pixel);
+  letter-spacing: 2px;
   cursor: pointer;
-  background: #0F1C53;
 }
 
-.voltage-button svg {
-  display: block;
+.octa-clip {
+  --color: var(--event-accent, #2761c3);
   position: absolute;
-  top: -0.75em;
-  left: -0.25em;
-  width: calc(100% + 0.5em);
-  height: calc(100% + 1.5em);
+  top: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border: 5px double var(--color);
+  box-shadow: inset 0px 0px 15px var(--color);
+  -webkit-clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
   pointer-events: none;
-  opacity: 1;
 }
 
-.voltage-button svg path {
-  stroke-dasharray: 100;
-}
-
-.voltage-button svg path.line-1 {
-  stroke: #f6de8d;
-  stroke-dashoffset: 0;
-  animation: spark-1 3s linear infinite;
-}
-
-.voltage-button svg path.line-2 {
-  stroke: #6bfeff;
-  stroke-dashoffset: 500;
-  animation: spark-2 3s linear infinite;
-}
-
-.voltage-button .dots {
-  opacity: 1;
-}
-
-.voltage-button .dots .dot {
-  width: 0.7rem;
-  height: 0.7rem;
-  background: white;
-  border-radius: 100%;
+.octa-arrow {
   position: absolute;
-  opacity: 0;
+  transition: 0.2s;
+  background-color: var(--event-accent, #2761c3);
+  top: 35%;
+  width: 11%;
+  height: 30%;
 }
 
-.voltage-button .dots .dot-1 {
-  top: 0;
-  left: 20%;
-  animation: fly-up 3s linear infinite;
+.octa-leftArrow {
+  left: -13.5%;
+  -webkit-clip-path: polygon(100% 0, 100% 100%, 0 50%);
+  clip-path: polygon(100% 0, 100% 100%, 0 50%);
 }
 
-.voltage-button .dots .dot-2 {
-  top: 0;
-  left: 55%;
-  animation: fly-up 3s linear infinite;
-  animation-delay: 0.5s;
+.octa-rightArrow {
+  -webkit-clip-path: polygon(100% 49%, 0 0, 0 100%);
+  clip-path: polygon(100% 49%, 0 0, 0 100%);
+  left: 102%;
 }
 
-.voltage-button .dots .dot-3 {
-  top: 0;
-  left: 80%;
-  animation: fly-up 3s linear infinite;
-  animation-delay: 1s;
+.octa-btn:hover .octa-rightArrow {
+  background-color: var(--event-accent, #27c39f);
+  left: -15%;
+  animation: 0.6s ease-in-out both infinite alternate octa-rightArrow8;
 }
 
-.voltage-button .dots .dot-4 {
-  bottom: 0;
-  left: 30%;
-  animation: fly-down 3s linear infinite;
-  animation-delay: 2.5s;
+.octa-btn:hover .octa-leftArrow {
+  background-color: var(--event-accent, #27c39f);
+  left: 103%;
+  animation: 0.6s ease-in-out both infinite alternate octa-leftArrow8;
 }
 
-.voltage-button .dots .dot-5 {
-  bottom: 0;
-  left: 65%;
-  animation: fly-down 3s linear infinite;
-  animation-delay: 1.5s;
+.octa-corner {
+  position: absolute;
+  width: 4em;
+  height: 4em;
+  background-color: var(--event-accent, #2761c3);
+  box-shadow: inset 1px 1px 8px var(--event-accent, #2781c3);
+  transform: scale(1) rotate(45deg);
+  transition: 0.2s;
+  pointer-events: none;
 }
 
-@keyframes spark-1 {
-  to { stroke-dashoffset: -1000; }
+.octa-rightTop { top: -1.98em; left: 91%; }
+.octa-leftTop { top: -1.96em; left: -3.0em; }
+.octa-leftBottom { top: 2.10em; left: -2.15em; }
+.octa-rightBottom { top: 45%; left: 88%; }
+
+.octa-btn:hover .octa-leftTop {
+  animation: 0.1s ease-in-out 0.05s both octa-changeColor,
+  0.2s linear 0.4s both octa-lightEffect;
 }
 
-@keyframes spark-2 {
-  to { stroke-dashoffset: -500; }
+.octa-btn:hover .octa-rightTop {
+  animation: 0.1s ease-in-out 0.15s both octa-changeColor,
+  0.2s linear 0.4s both octa-lightEffect;
 }
 
-@keyframes fly-up {
-  0% { opacity: 0; transform: translateY(0) scale(0.2); }
-  5% { opacity: 1; transform: translateY(-1.5rem) scale(0.4); }
-  10%, 100% { opacity: 0; transform: translateY(-3rem) scale(0.2); }
+.octa-btn:hover .octa-rightBottom {
+  animation: 0.1s ease-in-out 0.25s both octa-changeColor,
+  0.2s linear 0.4s both octa-lightEffect;
 }
 
-@keyframes fly-down {
-  0% { opacity: 0; transform: translateY(0) scale(0.2); }
-  5% { opacity: 1; transform: translateY(1.5rem) scale(0.4); }
-  10%, 100% { opacity: 0; transform: translateY(3rem) scale(0.2); }
+.octa-btn:hover .octa-leftBottom {
+  animation: 0.1s ease-in-out 0.35s both octa-changeColor,
+  0.2s linear 0.4s both octa-lightEffect;
+}
+
+.octa-btn:hover .octa-corner {
+  transform: scale(1.25) rotate(45deg);
+}
+
+.octa-btn:hover .octa-clip {
+  animation: 0.2s ease-in-out 0.55s both octa-greenLight;
+  --color: var(--event-accent, #27c39f);
+}
+
+@keyframes octa-changeColor {
+  from { background-color: var(--event-accent, #2781c3); }
+  to { background-color: var(--event-accent, #27c39f); }
+}
+
+@keyframes octa-lightEffect {
+  from { box-shadow: 1px 1px 5px var(--event-accent, #27c39f); }
+  to { box-shadow: 0 0 2px var(--event-accent, #27c39f); }
+}
+
+@keyframes octa-greenLight {
+  to { box-shadow: inset 0px 0px 32px var(--event-accent, #27c39f); }
+}
+
+@keyframes octa-leftArrow8 {
+  from { transform: translate(0px); }
+  to { transform: translateX(10px); }
+}
+
+@keyframes octa-rightArrow8 {
+  from { transform: translate(0px); }
+  to { transform: translateX(-10px); }
 }
