@@ -1926,8 +1926,7 @@ form { display: flex; flex-direction: column; gap: 14px; }
   margin-top: 16px;
   font-size: 9px;
   font-weight: 600;
-  color: rgba(var(--event-accent-rgb, 0, 162, 255), 0.8);
-  text-shadow: 0 0 5px rgba(var(--event-accent-rgb, 0, 162, 255), 0.5);
+  color: transparent;
   position: relative;
   transition: all 0.3s ease;
   text-align: center;
@@ -1935,23 +1934,17 @@ form { display: flex; flex-direction: column; gap: 14px; }
   letter-spacing: 0.5px;
   height: 1.5em;
   line-height: 1.5em;
-  white-space: nowrap;
 }
-.holo-rules-checkbox .status-text::before,
-.holo-rules-checkbox .holo-checkbox-input:checked ~ .status-text::before {
-  text-align: center;
-}
-
 .holo-rules-checkbox .status-text::before {
   content: "RULES: NOT ACCEPTED";
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  color: rgba(var(--event-accent-rgb, 0, 162, 255), 0.8);
+  text-shadow: 0 0 5px rgba(var(--event-accent-rgb, 0, 162, 255), 0.5);
 }
-
 .holo-rules-checkbox .holo-checkbox-input:checked ~ .status-text::before {
   content: "RULES: ACCEPTED";
   color: rgba(var(--event-accent-rgb, 0, 162, 255), 1);
@@ -2209,15 +2202,15 @@ form { display: flex; flex-direction: column; gap: 14px; }
   left: 102%;
 }
 
-.octa-btn:hover .octa-rightArrow {
-  background-color: var(--event-accent, #27c39f);
-  left: -15%;
+.octa-btn .octa-rightArrow {
+  background-color: var(--event-accent, #2761c3);
+  left: -13.5%;
   animation: 0.6s ease-in-out both infinite alternate octa-rightArrow8;
 }
 
-.octa-btn:hover .octa-leftArrow {
-  background-color: var(--event-accent, #27c39f);
-  left: 103%;
+.octa-btn .octa-leftArrow {
+  background-color: var(--event-accent, #2761c3);
+  left: 102%;
   animation: 0.6s ease-in-out both infinite alternate octa-leftArrow8;
 }
 
@@ -2230,45 +2223,27 @@ form { display: flex; flex-direction: column; gap: 14px; }
   transform: scale(1) rotate(45deg);
   transition: 0.2s;
   pointer-events: none;
+  animation: 0.1s ease-in-out both infinite alternate octa-cornerPulse,
+  0.2s linear 0.4s both infinite alternate octa-lightEffect;
 }
 
-.octa-rightTop { top: -1.98em; left: 91%; }
-.octa-leftTop { top: -1.96em; left: -3.0em; }
-.octa-leftBottom { top: 2.10em; left: -2.15em; }
-.octa-rightBottom { top: 45%; left: 88%; }
+.octa-rightTop { animation-delay: 0s !important; top: -1.98em; left: 91%; }
+.octa-leftTop { animation-delay: 0.3s !important; top: -1.96em; left: -3.0em; }
+.octa-leftBottom { animation-delay: 0.6s !important; top: 2.10em; left: -2.15em; }
+.octa-rightBottom { animation-delay: 0.9s !important; top: 45%; left: 88%; }
 
-.octa-btn:hover .octa-leftTop {
-  animation: 0.1s ease-in-out 0.05s both octa-changeColor,
-  0.2s linear 0.4s both octa-lightEffect;
-}
-
-.octa-btn:hover .octa-rightTop {
-  animation: 0.1s ease-in-out 0.15s both octa-changeColor,
-  0.2s linear 0.4s both octa-lightEffect;
-}
-
-.octa-btn:hover .octa-rightBottom {
-  animation: 0.1s ease-in-out 0.25s both octa-changeColor,
-  0.2s linear 0.4s both octa-lightEffect;
-}
-
-.octa-btn:hover .octa-leftBottom {
-  animation: 0.1s ease-in-out 0.35s both octa-changeColor,
-  0.2s linear 0.4s both octa-lightEffect;
-}
-
-.octa-btn:hover .octa-corner {
-  transform: scale(1.25) rotate(45deg);
-}
-
-.octa-btn:hover .octa-clip {
-  animation: 0.2s ease-in-out 0.55s both octa-greenLight;
-  --color: var(--event-accent, #27c39f);
+.octa-clip {
+  animation: 0.2s ease-in-out 0.55s both infinite alternate octa-greenLight;
 }
 
 @keyframes octa-changeColor {
-  from { background-color: var(--event-accent, #2781c3); }
+  from { background-color: var(--event-accent, #2761c3); }
   to { background-color: var(--event-accent, #27c39f); }
+}
+
+@keyframes octa-cornerPulse {
+  from { transform: scale(1) rotate(45deg); }
+  to { transform: scale(1.15) rotate(45deg); }
 }
 
 @keyframes octa-lightEffect {
