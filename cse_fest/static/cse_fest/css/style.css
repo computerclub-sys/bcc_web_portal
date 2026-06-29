@@ -538,12 +538,12 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 .events-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 36px;
 }
 .flip-card {
   background-color: transparent;
   width: 100%;
-  aspect-ratio: 3/4;
+  aspect-ratio: 3/5;
   perspective: 1000px;
 }
 .flip-card-inner {
@@ -1324,9 +1324,9 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   background: var(--bg);
 }
 .payment-option.active {
-  border-color: var(--accent-light);
+  border-color: var(--event-accent, var(--accent-light));
   color: var(--text-heading);
-  background: rgba(217, 70, 239, 0.08);
+  background: rgba(var(--event-accent-rgb, 217,70,239), 0.08);
 }
 .payment-option input { display: none; }
 .payment-radio {
@@ -1338,25 +1338,25 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   transition: all 0.2s;
 }
 .payment-option.active .payment-radio {
-  border-color: var(--accent-light);
+  border-color: var(--event-accent, var(--accent-light));
 }
 .payment-option.active .payment-radio::after {
   content: '';
   position: absolute;
   inset: 3px;
   border-radius: 50%;
-  background: var(--accent-light);
+  background: var(--event-accent, var(--accent-light));
 }
 .bkash-hint {
   font-size: 14px;
   color: var(--text);
   margin-bottom: 12px;
   padding: 10px 14px;
-  background: rgba(217, 70, 239, 0.06);
-  border: 1px solid rgba(217, 70, 239, 0.2);
+  background: rgba(var(--event-accent-rgb, 217,70,239), 0.06);
+  border: 1px solid rgba(var(--event-accent-rgb, 217,70,239), 0.2);
   border-radius: var(--radius-sm);
 }
-.bkash-hint strong { color: var(--accent-light); font-weight: 700; }
+.bkash-hint strong { color: var(--event-accent, var(--accent-light)); font-weight: 700; }
 .form-wrap h2 { font-size: 20px; font-weight: 700; color: var(--text-heading); margin-bottom: 20px; }
 .form-closed {
   padding: 28px;
