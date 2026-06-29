@@ -63,19 +63,6 @@ class FestEvent(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
-        if self.poster and not self.primary_color:
-            try:
-                try:
-                    path = self.poster.path
-                    if not os.path.exists(path):
-                        path = self.poster.url
-                except Exception:
-                    path = self.poster.url
-                colors = self._extract_colors(path)
-                if colors:
-                    self.primary_color, self.secondary_color, self.accent_color = colors
-            except Exception:
-                pass
         super().save(*args, **kwargs)
 
     def _extract_colors(self, path_or_url):
