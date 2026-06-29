@@ -204,7 +204,8 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   font-weight: 900;
   font-family: var(--font-pixel);
 }
-.btn-cyber-submit:hover .btn-cyber-glitch {
+.btn-cyber-submit:hover .btn-cyber-glitch,
+.btn-cyber-glitch {
   display: block;
 }
 .btn-cyber-glitch:before {
@@ -861,7 +862,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   background: rgba(var(--event-accent-rgb, 124,92,252), 0.06);
   border: 1px solid rgba(var(--event-accent-rgb, 124,92,252), 0.12);
   border-radius: 10px;
-  padding: 8px 14px;
+  padding: 16px 16px;
   width: 100%;
 }
 .flip-card-back .card-prize-label {
@@ -873,7 +874,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   color: #9999bb;
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
 }
 .flip-card-back .card-prize-label svg { stroke: #facc15; }
 .flip-card-back .card-prize-list {
@@ -917,6 +918,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   text-shadow: 0 0 16px rgba(var(--event-accent-rgb, 217,70,239), 0.7);
 }
 .flip-card-back .card-entry {
+  margin-top: 10px;
   text-align: center;
   font-size: 15px;
   color: #8888aa;
