@@ -537,7 +537,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 /* ── Event Cards ── */
 .events-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 .flip-card {
