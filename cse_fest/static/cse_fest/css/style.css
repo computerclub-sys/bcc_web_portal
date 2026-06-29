@@ -675,8 +675,9 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 }
 .flip-card-front {
   background: linear-gradient(135deg, #1a1040 0%, #151530 50%, #0a0a18 100%);
-  background-size: cover;
+  background-size: contain;
   background-position: center;
+  background-repeat: no-repeat;
   gap: 16px;
 }
 .fcf-overlay {
