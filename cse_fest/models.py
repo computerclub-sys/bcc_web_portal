@@ -81,36 +81,43 @@ class FestEvent(models.Model):
     def _extract_colors(self, path_or_url):
         from PIL import Image
         import tempfile, os, requests
-        if path_or_url.startswith('http://') or path_or_url.startswith('https://'):
-            r = requests.get(path_or_url, timeout=10)
-            r.raise_for_status()
-            tmp = tempfile.NamedTemporaryFile(delete=False, suffix='.png')
-            tmp.write(r.content)
-            tmp.close()
-            img = Image.open(tmp.name).convert('RGB')
-            os.unlink(tmp.name)
-        else:
-            img = Image.open(path_or_url).convert('RGB')
-        img = img.resize((4, 4), Image.LANCZOS)
-        pixels = list(img.getdata())
-        counts = {}
-        for r, g, b in pixels:
-            key = (r // 64 * 64, g // 64 * 64, b // 64 * 64)
-            avg = (key[0] + 32, key[1] + 32, key[2] + 32)
-            counts[avg] = counts.get(avg, 0) + 1
-        sorted_colors = sorted(counts.items(), key=lambda x: -x[1])
-        def to_hex(rgb):
-            return '#{:02x}{:02x}{:02x}'.format(
-                min(255, max(0, rgb[0])),
-                min(255, max(0, rgb[1])),
-                min(255, max(0, rgb[2]))
-            )
-        if not sorted_colors:
-            return None
-        primary = to_hex(sorted_colors[0][0])
-        secondary = to_hex(sorted_colors[1][0]) if len(sorted_colors) > 1 else primary
-        accent = to_hex(sorted_colors[2][0]) if len(sorted_colors) > 2 else secondary
-        return (primary, secondary, accent)
+        tmp_path = None
+        try:
+            if path_or_url.startswith('http://') or path_or_url.startswith('https://'):
+                r = requests.get(path_or_url, timeout=15)
+                r.raise_for_status()
+                tmp = tempfile.NamedTemporaryFile(delete=False, suffix='.png')
+                tmp.write(r.content)
+                tmp.close()
+                tmp_path = tmp.name
+                img = Image.open(tmp_path)
+            else:
+                img = Image.open(path_or_url)
+            img = img.convert('RGB')
+            img.load()
+            img = img.resize((4, 4), Image.LANCZOS)
+            pixels = list(img.getdata())
+            counts = {}
+            for r, g, b in pixels:
+                key = (r // 64 * 64, g // 64 * 64, b // 64 * 64)
+                avg = (key[0] + 32, key[1] + 32, key[2] + 32)
+                counts[avg] = counts.get(avg, 0) + 1
+            sorted_colors = sorted(counts.items(), key=lambda x: -x[1])
+            def to_hex(rgb):
+                return '#{:02x}{:02x}{:02x}'.format(
+                    min(255, max(0, rgb[0])),
+                    min(255, max(0, rgb[1])),
+                    min(255, max(0, rgb[2]))
+                )
+            if not sorted_colors:
+                return None
+            primary = to_hex(sorted_colors[0][0])
+            secondary = to_hex(sorted_colors[1][0]) if len(sorted_colors) > 1 else primary
+            accent = to_hex(sorted_colors[2][0]) if len(sorted_colors) > 2 else secondary
+            return (primary, secondary, accent)
+        finally:
+            if tmp_path and os.path.exists(tmp_path):
+                os.unlink(tmp_path)
 
     @property
     def is_registration_open(self):
