@@ -271,6 +271,8 @@ def invitation(request, year):
 
 @staff_member_required
 def export_approved_excel(request, year):
+    """Export all registrations (including pending and cancelled) to Excel."""
+    # existing export view remains unchanged
     fest = _get_fest(year)
     registrations = list(FestRegistration.objects.filter(
         event__fest=fest
@@ -311,3 +313,17 @@ def export_approved_excel(request, year):
     response['Content-Disposition'] = f'attachment; filename="approved_{fest.year}.xlsx"'
     wb.save(response)
     return response
+
+@staff_member_required
+def delete_pending_cancelled(request, year):
+    """Delete all registrations with status pending or cancelled for the given fest.
+    After deletion, redirect back to the admin changelist with a success message.
+    """
+    fest = _get_fest(year)
+    # Bulk delete
+    to_delete = FestRegistration.objects.filter(event__fest=fest, status__in=['pending', 'cancelled'])
+    count = to_delete.count()
+    to_delete.delete()
+    messages.success(request, f'Deleted {count} pending/cancelled registrations.')
+    # Redirect to admin changelist for FestRegistration
+    return redirect('admin:cse_fest_festregistration_changelist')

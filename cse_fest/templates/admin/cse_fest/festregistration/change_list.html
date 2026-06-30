@@ -7,6 +7,9 @@
     <a href="{% url 'cse_fest:export_approved' year=f.year %}" class="btn btn-high" style="background:#417690;padding:8px 14px;border-radius:4px;color:#fff;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:inline-block">
         Export Approved ({{ f.year }})
     </a>
+    <a href="{% url 'cse_fest:delete_pending_cancelled' year=f.year %}" class="btn btn-danger" style="background:#d9534f;padding:8px 14px;border-radius:4px;color:#fff;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;text-decoration:none;display:inline-block;margin-left:8px">
+        Delete Pending/Cancelled ({{ f.year }})
+    </a>
 </li>
 {% endfor %}
 {{ block.super }}

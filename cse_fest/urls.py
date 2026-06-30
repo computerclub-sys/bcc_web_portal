@@ -10,4 +10,5 @@ urlpatterns = [
     path('application-status/', views.application_status, name='application_status'),
     path('invitation/', views.invitation, name='invitation'),
     path('export-approved/', views.export_approved_excel, name='export_approved'),
+    path('delete-pending-cancelled/', views.delete_pending_cancelled, name='delete_pending_cancelled'),
 ]
