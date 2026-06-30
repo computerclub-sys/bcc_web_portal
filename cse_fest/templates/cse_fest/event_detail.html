@@ -61,6 +61,12 @@
                             <strong>Entry Fee</strong>
                             <span>{% if event.category == 'hackathon' %}3 Members: BDT {{ event.hackathon_fee_3|floatformat:0 }}<br>4 Members: BDT {{ event.hackathon_fee_4|floatformat:0 }}{% elif event.registration_fee > 0 %}BDT {{ event.registration_fee }}{% else %}Free{% endif %}</span>
                         </div>
+                        {% if event.provided_kit %}
+                        <div class="detail-meta-item">
+                            <strong>Provided Kit</strong>
+                            <span>{{ event.provided_kit|linebreaksbr }}</span>
+                        </div>
+                        {% endif %}
                         <div class="detail-meta-item">
                             <strong>Prize Pool</strong>
                             <span class="prize-list">
@@ -84,6 +90,24 @@
                         </div>
                         {% endif %}
                     </div>
+
+                    {% with schedules=event.schedules.all %}
+                    {% if schedules %}
+                    <div class="detail-schedule">
+                        <h3>Schedule</h3>
+                        <div class="schedule-list">
+                            {% for s in schedules %}
+                            <div class="schedule-item">
+                                <span class="schedule-date">{{ s.date|date:"M d" }}</span>
+                                {% if s.time %}<span class="schedule-time">{{ s.time|time:"g:i A" }}</span>{% endif %}
+                                <span class="schedule-title">{{ s.title }}</span>
+                                {% if s.description %}<p class="schedule-desc">{{ s.description }}</p>{% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endwith %}
 
                     {% if event.rule_book_pdf %}
                     <a href="{{ event.rule_book_pdf }}" target="_blank" class="btn btn-outline" style="margin-bottom:32px" data-text="📄 Rule Book"><span class="btn-text">📄 Rule Book</span></a>

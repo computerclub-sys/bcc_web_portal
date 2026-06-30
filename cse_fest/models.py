@@ -48,6 +48,7 @@ class FestEvent(models.Model):
     hackathon_fee_3 = models.DecimalField(max_digits=10, decimal_places=2, default=1500, blank=True, help_text='Hackathon fee for 3-member team')
     hackathon_fee_4 = models.DecimalField(max_digits=10, decimal_places=2, default=2000, blank=True, help_text='Hackathon fee for 4-member team')
     prize_pool = models.CharField(max_length=200, blank=True, help_text='e.g. 50,000 BDT + Trophies')
+    provided_kit = models.TextField(blank=True, help_text='Items provided to participants (T-shirt, food, certificate, etc.)')
     primary_color = models.CharField(max_length=7, blank=True, help_text='Auto-extracted dominant color from poster')
     secondary_color = models.CharField(max_length=7, blank=True, help_text='Auto-extracted secondary color from poster')
     accent_color = models.CharField(max_length=7, blank=True, help_text='Auto-extracted accent color from poster')
@@ -157,6 +158,7 @@ class FestPrize(models.Model):
 
 class FestSchedule(models.Model):
     fest = models.ForeignKey(Fest, on_delete=models.CASCADE, related_name='schedules')
+    event = models.ForeignKey(FestEvent, on_delete=models.CASCADE, null=True, blank=True, related_name='schedules')
     title = models.CharField(max_length=200)
     date = models.DateField()
     time = models.TimeField(blank=True, null=True)
@@ -167,7 +169,10 @@ class FestSchedule(models.Model):
         ordering = ['date', 'time', 'order']
 
     def __str__(self):
-        return f'{self.title} — {self.fest.year}'
+        label = f'{self.title} — {self.fest.year}'
+        if self.event:
+            label += f' ({self.event.title})'
+        return label
 
 
 class Notice(models.Model):

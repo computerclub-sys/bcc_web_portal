@@ -46,7 +46,7 @@ class FestEventAdmin(admin.ModelAdmin):
         ('Event Info', {'fields': ('title', 'slug', 'short_description', 'description', 'poster')}),
         ('Date & Time', {'fields': ('date', 'time', 'last_registration_date')}),
         ('Registration', {'fields': ('registration_open', 'requires_team', 'min_team_size', 'max_team_size', 'requires_payment', 'registration_fee', 'hackathon_fee_3', 'hackathon_fee_4')}),
-        ('Prizes', {'fields': ('prize_pool',)}),
+        ('Prizes & Kit', {'fields': ('prize_pool', 'provided_kit')}),
         ('Files', {'fields': ('rule_book_pdf',)}),
         ('Ordering', {'fields': ('order',)}),
     )
@@ -55,8 +55,8 @@ class FestEventAdmin(admin.ModelAdmin):
 
 @admin.register(FestSchedule)
 class FestScheduleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'fest', 'date', 'time')
-    list_filter = ('fest',)
+    list_display = ('title', 'event', 'fest', 'date', 'time')
+    list_filter = ('fest', 'event')
 
 
 @admin.register(Notice)
