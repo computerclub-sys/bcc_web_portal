@@ -259,7 +259,7 @@ def application_status(request, year):
             team_name__isnull=False,
         ).exclude(team_name='').select_related('event').order_by('-created_at')
         # compact view remains (show_full_details stays False)
-
+        print('DEBUG: filter', filter_category, 'found', len(registrations), 'registrations')
     return render(request, 'cse_fest/application_status.html', {
         'fest': fest,
         'registrations': registrations,
