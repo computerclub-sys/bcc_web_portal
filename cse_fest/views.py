@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from django.http import HttpResponse
+from openpyxl import Workbook
 from .models import Fest, FestEvent, FestPrize, FestSchedule, Notice, CommitteeMember, Faq, Sponsor, FestRegistration, FestTeamMember
 
 
@@ -255,3 +258,43 @@ def invitation(request, year):
     return render(request, 'cse_fest/invitation.html', {
         'fest': fest,
     })
+
+
+@staff_member_required
+def export_approved_excel(request, year):
+    fest = _get_fest(year)
+    registrations = FestRegistration.objects.filter(
+        event__fest=fest, status='confirmed'
+    ).order_by('event', 'full_name')
+
+    wb = Workbook()
+    events = FestEvent.objects.filter(fest=fest)
+    first = True
+    for event in events:
+        qs = registrations.filter(event=event)
+        if first:
+            ws = wb.active
+            ws.title = event.title[:31]
+            first = False
+        else:
+            ws = wb.create_sheet(title=event.title[:31])
+        ws.append(['App ID', 'Name', 'Email', 'Phone', 'Dept', 'Student ID', 'Semester', 'Section', 'Group', 'Team Name', 'Registered At'])
+        for r in qs:
+            ws.append([
+                r.application_id, r.full_name, r.email, r.phone,
+                r.department, r.student_id, '', '', '',
+                r.team_name, r.created_at.strftime('%Y-%m-%d %H:%M')
+            ])
+            for m in r.team_members.all():
+                ws.append([
+                    '', m.name, m.email, m.phone,
+                    m.department, m.student_id, m.semester, m.section, m.group,
+                    '', ''
+                ])
+
+    response = HttpResponse(
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+    response['Content-Disposition'] = f'attachment; filename="approved_{fest.year}.xlsx"'
+    wb.save(response)
+    return response
