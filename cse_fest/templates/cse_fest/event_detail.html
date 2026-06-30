@@ -7,11 +7,23 @@
 <section class="detail-section">
     <div class="container">
         {% if messages %}
-        <div class="msg-list">
-            {% for message in messages %}
-            <div class="msg msg--{{ message.tags }}">{{ message }}</div>
-            {% endfor %}
-        </div>
+        <script>
+        (function() {
+            var msgs = [
+                {% for message in messages %}
+                { text: "{{ message|escapejs }}", type: "{{ message.tags|escapejs }}" },
+                {% endfor %}
+            ];
+            function waitForToast() {
+                if (typeof showToast === 'function') {
+                    msgs.forEach(function(m) { showToast(m.text, m.type); });
+                } else {
+                    setTimeout(waitForToast, 100);
+                }
+            }
+            waitForToast();
+        })();
+        </script>
         {% endif %}
 
         <div class="detail-layout" style="--event-primary:{{ event.theme_colors.primary }};--event-accent:{{ event.theme_colors.accent }};--event-accent-rgb:{{ event.theme_colors.accent_rgb }};--event-secondary:{{ event.theme_colors.secondary }};--event-secondary-rgb:{{ event.theme_colors.secondary_rgb }}">

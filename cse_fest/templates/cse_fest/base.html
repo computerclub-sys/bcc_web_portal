@@ -86,7 +86,19 @@
     </footer>
     </div>
 
+    <div id="toast-container"></div>
+
     <script>
+        function showToast(msg, type) {
+            var t = document.getElementById('toast-container');
+            if (!t) return;
+            var el = document.createElement('div');
+            el.className = 'toast toast--' + (type || 'info');
+            el.textContent = msg;
+            t.appendChild(el);
+            requestAnimationFrame(function() { el.classList.add('toast--show'); });
+            setTimeout(function() { el.classList.remove('toast--show'); setTimeout(function() { el.remove(); }, 400); }, 4000);
+        }
         window.addEventListener('load', function() {
             var isFirst = !sessionStorage.getItem('cse_loaded');
             var delay = isFirst ? 3000 : 1500;

@@ -28,11 +28,23 @@
         </div>
 
         {% if messages %}
-        <div style="margin-top:24px;text-align:center">
-            {% for msg in messages %}
-            <div class="msg msg-{{ msg.tags }}">{{ msg }}</div>
-            {% endfor %}
-        </div>
+        <script>
+        (function() {
+            var msgs = [
+                {% for msg in messages %}
+                { text: "{{ msg|escapejs }}", type: "{{ msg.tags|escapejs }}" },
+                {% endfor %}
+            ];
+            function waitForToast() {
+                if (typeof showToast === 'function') {
+                    msgs.forEach(function(m) { showToast(m.text, m.type); });
+                } else {
+                    setTimeout(waitForToast, 100);
+                }
+            }
+            waitForToast();
+        })();
+        </script>
         {% endif %}
 
         {% if registrations %}
