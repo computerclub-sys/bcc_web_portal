@@ -183,4 +183,4 @@ if os.environ.get('EMAIL_HOST_USER'):
     EMAIL_USE_TLS = True
     EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
     EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
-    DEFAULT_FROM_EMAIL = os.environ['EMAIL_HOST_USER']
+    DEFAULT_FROM_EMAIL = f'"BAIUST Computer Club" <{os.environ["EMAIL_HOST_USER"]}>'

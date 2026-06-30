@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.conf import settings
-from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from .models import Fest, FestEvent, FestPrize, FestSchedule, Notice, CommitteeMember, Faq, Sponsor, FestRegistration, FestTeamMember
@@ -172,14 +172,16 @@ def register(request, year):
             'team_members': team_members,
             'logo_url': logo_url,
         })
-        send_mail(
+        email = EmailMultiAlternatives(
             subject,
             strip_tags(html),
             settings.DEFAULT_FROM_EMAIL,
             [email],
-            html_message=html,
-            fail_silently=True,
+            reply_to=[settings.DEFAULT_FROM_EMAIL],
+            headers={'List-Unsubscribe': f'<{settings.BASE_URL}>', 'X-Mailer': 'BAIUST Computer Club'},
         )
+        email.attach_alternative(html, 'text/html')
+        email.send(fail_silently=True)
     except Exception:
         pass
 
