@@ -49,50 +49,59 @@
       ctx.fill();
     });
 
-    ctx.drawImage(logoImg, 60, 50, 80, 80);
+    ctx.drawImage(logoImg, W/2 - 70, 50, 140, 140);
 
+    ctx.textAlign = 'left';
     ctx.fillStyle = '#eeeef8';
     ctx.font = 'bold 36px "Press Start 2P", monospace';
-    ctx.textAlign = 'left';
-    ctx.fillText(config.festTitle, 160, 80);
+    ctx.fillText(config.festTitle, 100, 240);
 
     ctx.fillStyle = '#d946ef';
     ctx.font = 'bold 28px "Press Start 2P", monospace';
-    ctx.fillText(config.festYear, 160, 118);
+    ctx.fillText(config.festYear, 100, 280);
 
-    ctx.font = 'bold 20px "Press Start 2P", monospace';
-    ctx.textAlign = 'center';
-    var bpw = ctx.measureText('VISITOR PASS').width + 40;
-    ctx.fillStyle = 'rgba(217,70,239,0.15)';
-    roundRect(ctx, W/2 - bpw/2, 200, bpw, 50, 25);
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(217,70,239,0.4)';
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
-    ctx.fillStyle = '#d946ef';
-    ctx.fillText('VISITOR PASS', W/2, 232);
+    var x0 = 100, x1 = W - 100, y = 350;
 
-    ctx.fillStyle = '#efe9f2';
-    ctx.font = 'bold 52px "Press Start 2P", monospace';
-    var displayName = name.length > 20 ? name.substring(0, 20) : name;
-    ctx.fillText(displayName, W/2, 370);
+    ctx.fillStyle = '#eeeef8';
+    ctx.font = '32px "VT323", monospace';
+    ctx.fillText('Dear ' + name + ',', x0, y);
+    y += 60;
 
-    ctx.strokeStyle = 'rgba(217,70,239,0.3)';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(W/2 - 200, 410);
-    ctx.lineTo(W/2 + 200, 410);
-    ctx.stroke();
+    ctx.fillStyle = '#c8c8e0';
+    ctx.font = '28px "VT323", monospace';
+    var body1 = 'You are cordially invited to ' + config.festTitle + ' ' + config.festYear + ',';
+    ctx.fillText(body1, x0, y);
+    y += 42;
+    var dateStr = config.festDate ? 'taking place on ' + config.festDate + '.' : '';
+    ctx.fillText(dateStr, x0, y);
+    y += 42;
+    ctx.fillText('We look forward to welcoming you to two exciting days of', x0, y);
+    y += 42;
+    ctx.fillText('innovation, competition, and celebration.', x0, y);
 
-    if (config.festDate) {
-      ctx.fillStyle = '#c8c8e0';
-      ctx.font = '28px "VT323", monospace';
-      ctx.fillText(config.festDate + '  •  BAIUST Campus', W/2, 470);
-    }
-
+    y += 80;
     ctx.fillStyle = '#6a6a88';
-    ctx.font = '22px "VT323", monospace';
-    ctx.fillText('Non-transferable  •  Organized by BAIUST Computer Club', W/2, H - 80);
+    ctx.font = '28px "VT323", monospace';
+    ctx.fillText('Warm Regards,', x0, y);
+
+    y += 100;
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#eeeef8';
+    ctx.font = 'bold 30px "VT323", monospace';
+    ctx.fillText('Shawon Roy', x0, y);
+    y += 36;
+    ctx.fillStyle = '#a8a8c8';
+    ctx.font = '26px "VT323", monospace';
+    ctx.fillText('President, BAIUST Computer Club', x0, y);
+
+    ctx.textAlign = 'right';
+    var rx = x1;
+    ctx.fillStyle = '#eeeef8';
+    ctx.font = 'bold 30px "VT323", monospace';
+    ctx.fillText('Irfanul Islam Rohan', rx, y - 100 + 100);
+    ctx.fillStyle = '#a8a8c8';
+    ctx.font = '26px "VT323", monospace';
+    ctx.fillText('General Secretary, BAIUST Computer Club', rx, y - 100 + 136);
 
     ctx.strokeStyle = '#d946ef';
     ctx.lineWidth = 2;
