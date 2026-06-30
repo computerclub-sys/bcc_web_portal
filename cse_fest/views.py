@@ -226,6 +226,7 @@ def application_status(request, year):
     registrations = None
     search_id = ''
     search_type = 'id'
+    filter_category = request.GET.get('filter', '')
 
     if request.method == 'POST':
         search_type = request.POST.get('search_type', 'id')
@@ -244,12 +245,20 @@ def application_status(request, year):
                     registrations = [reg]
                 except FestRegistration.DoesNotExist:
                     messages.error(request, 'No application found with that ID.')
+    elif filter_category in ['hackathon', 'iupc']:
+        registrations = FestRegistration.objects.filter(
+            event__fest=fest,
+            event__category=filter_category,
+            status='confirmed',
+            team_name__isnull=False
+        ).exclude(team_name='').select_related('event').order_by('-created_at')
 
     return render(request, 'cse_fest/application_status.html', {
         'fest': fest,
         'registrations': registrations,
         'search_id': search_id,
         'search_type': search_type,
+        'filter_category': filter_category,
     })
 
 
@@ -264,7 +273,7 @@ def invitation(request, year):
 def export_approved_excel(request, year):
     fest = _get_fest(year)
     registrations = list(FestRegistration.objects.filter(
-        event__fest=fest, status='confirmed'
+        event__fest=fest
     ).select_related('event').prefetch_related('team_members').order_by('event', 'full_name'))
 
     wb = Workbook()

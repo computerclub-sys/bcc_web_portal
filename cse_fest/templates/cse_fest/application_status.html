@@ -27,6 +27,11 @@
             </form>
         </div>
 
+        <div class="filter-buttons" style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+            <a href="?filter=hackathon" class="btn btn-primary {% if filter_category == 'hackathon' %}active{% endif %}">Hackathon Approved Teams</a>
+            <a href="?filter=iupc" class="btn btn-primary {% if filter_category == 'iupc' %}active{% endif %}">IUPC Approved Teams</a>
+        </div>
+
         {% if messages %}
         <script>
         (function() {
@@ -56,6 +61,12 @@
                     <h2>{{ reg.application_id }}</h2>
                 </div>
                 <div class="status-body">
+                    {% if filter_category in 'hackathon,iupc' %}
+                    <div class="status-row"><span class="status-label">Team</span><span>{{ reg.team_name }}</span></div>
+                    <div class="status-row"><span class="status-label">Event</span><span>{{ reg.event.title }}</span></div>
+                    <div class="status-row"><span class="status-label">Category</span><span>{{ reg.event.category|title }}</span></div>
+                    <div class="status-row"><span class="status-label">Status</span><span style="color:#22c55e;font-weight:700">Approved</span></div>
+                    {% else %}
                     <div class="status-row"><span class="status-label">Event</span><span>{{ reg.event.title }}</span></div>
                     <div class="status-row"><span class="status-label">Full Name</span><span>{{ reg.full_name }}</span></div>
                     <div class="status-row"><span class="status-label">Email</span><span>{{ reg.email }}</span></div>
@@ -78,6 +89,7 @@
                             {% endfor %}
                         </ul>
                     </div>
+                    {% endif %}
                     {% endif %}
                 </div>
             </div>
