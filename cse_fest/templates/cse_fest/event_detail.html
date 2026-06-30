@@ -58,16 +58,6 @@
                         </div>
                         {% endif %}
                         <div class="detail-meta-item">
-                            <strong>Entry Fee</strong>
-                            <span>{% if event.category == 'hackathon' %}3 Members: BDT {{ event.hackathon_fee_3|floatformat:0 }}<br>4 Members: BDT {{ event.hackathon_fee_4|floatformat:0 }}{% elif event.registration_fee > 0 %}BDT {{ event.registration_fee }}{% else %}Free{% endif %}</span>
-                        </div>
-                        {% if event.provided_kit %}
-                        <div class="detail-meta-item">
-                            <strong>Provided Kit</strong>
-                            <span>{{ event.provided_kit|linebreaksbr }}</span>
-                        </div>
-                        {% endif %}
-                        <div class="detail-meta-item">
                             <strong>Prize Pool</strong>
                             <span class="prize-list">
                                 {% with prizes=event.prizes.all %}
@@ -82,6 +72,16 @@
                                 {% endif %}
                                 {% endwith %}
                             </span>
+                        </div>
+                        {% if event.provided_kit %}
+                        <div class="detail-meta-item">
+                            <strong>Provided Kit</strong>
+                            <span>{{ event.provided_kit|linebreaksbr }}</span>
+                        </div>
+                        {% endif %}
+                        <div class="detail-meta-item">
+                            <strong>Entry Fee</strong>
+                            <span>{% if event.category == 'hackathon' %}3 Members: BDT {{ event.hackathon_fee_3|floatformat:0 }}<br>4 Members: BDT {{ event.hackathon_fee_4|floatformat:0 }}{% elif event.registration_fee > 0 %}BDT {{ event.registration_fee }}{% else %}Free{% endif %}</span>
                         </div>
                         {% if event.last_registration_date %}
                         <div class="detail-meta-item">
