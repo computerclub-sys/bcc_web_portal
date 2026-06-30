@@ -53,7 +53,7 @@
         {% endif %}
 
 {% if registrations %}
-        <div style="margin-top:32px;display:flex;flex-direction:column;gap:16px;max-width:560px;margin-left:auto;margin-right:auto">
+        <div style="margin-top:32px;display:flex;flex-direction:column;gap:16px;max-width:560px;margin:auto;align-items:center">
             {% for reg in registrations %}
                 {% if show_full_details %}
                 <div class="status-card">
@@ -88,9 +88,15 @@
                     </div>
                 </div>
                 {% else %}
-                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
-                    <span class="fw-bold">{{ reg.team_name|default:reg.full_name }}</span>
-                    <span class="badge bg-success">Approved</span>
+                <div class="status-card">
+                    <div class="status-header">
+                        <span class="status-badge status-confirmed">Confirmed</span>
+                        <h2>{{ reg.team_name|default:reg.full_name }}</h2>
+                    </div>
+                    <div class="status-body">
+                        <div class="status-row"><span class="status-label">Event</span><span>{{ reg.event.title }}</span></div>
+                        <div class="status-row"><span class="status-label">Category</span><span>{{ reg.event.category|title }}</span></div>
+                    </div>
                 </div>
                 {% endif %}
             {% endfor %}
