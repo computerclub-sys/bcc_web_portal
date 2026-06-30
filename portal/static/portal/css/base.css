@@ -627,7 +627,10 @@ input, textarea, select {
     justify-content: center;
     position: relative;
     overflow: hidden;
-    background: var(--color-bg);
+    background:
+        radial-gradient(circle at 25% 25%, rgba(var(--color-primary-rgb), 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(0, 184, 255, 0.04) 0%, transparent 40%),
+        linear-gradient(135deg, var(--color-canvas) 0%, rgba(var(--color-primary-rgb), 0.09) 35%, rgba(var(--color-primary-rgb), 0.14) 65%, var(--color-canvas) 100%);
     padding-top: calc(var(--nav-height) + var(--spacing-md));
 }
 
