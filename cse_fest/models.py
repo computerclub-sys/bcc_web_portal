@@ -166,7 +166,7 @@ class FestSchedule(models.Model):
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
-        ordering = ['date', 'time', 'order']
+        ordering = ['date', 'time']
 
     def __str__(self):
         label = f'{self.title} — {self.fest.year}'
