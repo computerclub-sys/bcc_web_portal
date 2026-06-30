@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.http import HttpResponse
+from openpyxl import Workbook
 from .models import Fest, FestEvent, FestPrize, FestSchedule, Notice, CommitteeMember, Faq, Sponsor, FestRegistration, FestTeamMember
 
 
@@ -111,6 +113,7 @@ class FestRegistrationAdmin(admin.ModelAdmin):
     search_fields = ('full_name', 'email', 'phone', 'student_id', 'application_id', 'transaction_id')
     readonly_fields = ('application_id', 'created_at',)
     inlines = [FestTeamMemberInline]
+    actions = ['export_approved_excel']
     fieldsets = (
         ('Application', {'fields': ('application_id', 'event', 'status', 'created_at')}),
         ('Personal Info', {'fields': ('full_name', 'email', 'phone', 'gender', 'section', 'group')}),
@@ -120,3 +123,35 @@ class FestRegistrationAdmin(admin.ModelAdmin):
         ('eFootball', {'fields': ('in_game_name_id', 'device_name', 'self_photo')}),
         ('Other', {'fields': ('notes',)}),
     )
+
+    @admin.action(description='Export selected (approved) as Excel')
+    def export_approved_excel(self, request, queryset):
+        registrations = queryset.filter(status='confirmed').order_by('event', 'full_name')
+        if not registrations.exists():
+            self.message_user(request, 'No approved registrations selected.', level='WARNING')
+            return
+
+        wb = Workbook()
+        ws = wb.active
+        ws.title = 'Approved Registrations'
+        ws.append(['App ID', 'Event', 'Name', 'Email', 'Phone', 'Dept', 'Student ID', 'Semester', 'Section', 'Group', 'Team Name', 'Status', 'Registered At'])
+
+        for r in registrations:
+            ws.append([
+                r.application_id, r.event.title, r.full_name, r.email, r.phone,
+                r.department, r.student_id, '', '', '',
+                r.team_name, r.status, r.created_at.strftime('%Y-%m-%d %H:%M')
+            ])
+            for m in r.team_members.all():
+                ws.append([
+                    '', '', m.name, m.email, m.phone,
+                    m.department, m.student_id, m.semester, m.section, m.group,
+                    '', '', ''
+                ])
+
+        response = HttpResponse(
+            content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
+        response['Content-Disposition'] = 'attachment; filename="approved_registrations.xlsx"'
+        wb.save(response)
+        return response
