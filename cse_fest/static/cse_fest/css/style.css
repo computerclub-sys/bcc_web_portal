@@ -394,6 +394,8 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   object-fit: cover;
   z-index: 0;
   pointer-events: none;
+  will-change: transform;
+  transform: translateZ(0);
 }
 .hero-video-overlay {
   position: absolute;
