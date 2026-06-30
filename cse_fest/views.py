@@ -177,6 +177,7 @@ def register(request, year):
                 )
 
     team_members = list(registration.team_members.all())
+    recipient_email = email
 
     try:
         subject = f'Application Received — {event.title} ({fest.title})'
@@ -189,20 +190,20 @@ def register(request, year):
             'team_members': team_members,
             'logo_url': logo_url,
         })
-        email = EmailMultiAlternatives(
+        msg = EmailMultiAlternatives(
             subject,
             strip_tags(html),
             settings.DEFAULT_FROM_EMAIL,
-            [email],
+            [recipient_email],
             reply_to=[settings.DEFAULT_FROM_EMAIL],
             headers={'List-Unsubscribe': f'<{settings.BASE_URL}>', 'X-Mailer': 'BAIUST Computer Club'},
         )
-        email.attach_alternative(html, 'text/html')
-        email.send(fail_silently=True)
+        msg.attach_alternative(html, 'text/html')
+        msg.send(fail_silently=True)
     except Exception:
         pass
 
-    messages.success(request, f'Registration successful! Your application ID is {registration.application_id}. Check your email ({email}) for confirmation.')
+    messages.success(request, f'Registration successful! Your application ID is {registration.application_id}. Check your email ({recipient_email}) for confirmation.')
     return redirect('cse_fest:event_detail', year=year, slug=event.slug)
 
 
