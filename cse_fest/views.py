@@ -277,6 +277,7 @@ def export_approved_excel(request, year):
     registrations = list(FestRegistration.objects.filter(
         event__fest=fest
     ).select_related('event').prefetch_related('team_members').order_by('event', 'full_name'))
+    print('DEBUG: export registrations count =', len(registrations))
 
     wb = Workbook()
     # Group registrations by event
