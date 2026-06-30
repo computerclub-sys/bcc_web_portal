@@ -17,7 +17,7 @@
   }
 
   function drawCard(name) {
-    var W = 900, H = 1600;
+    var W = 900, H = 1200;
     ctx.clearRect(0, 0, W, H);
 
     var grad = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, W*0.9);
@@ -51,16 +51,14 @@
 
     ctx.drawImage(logoImg, W/2 - 90, 40, 180, 180);
 
-    ctx.textAlign = 'left';
+    ctx.textAlign = 'center';
     ctx.fillStyle = '#eeeef8';
     ctx.font = 'bold 32px "Press Start 2P", monospace';
-    ctx.fillText(config.festTitle, 80, 260);
+    ctx.fillText(config.festTitle, W/2, 260);
 
-    ctx.textAlign = 'center';
     ctx.fillStyle = '#d946ef';
     ctx.font = 'bold 24px "Press Start 2P", monospace';
-    var tw = ctx.measureText(config.festTitle).width;
-    ctx.fillText(config.festYear, 80 + tw / 2, 296);
+    ctx.fillText(config.festYear, W/2, 296);
 
     var x0 = 80, x1 = W - 80, y = 400;
 
@@ -81,12 +79,12 @@
     y += 50;
     ctx.fillText('innovation, competition, and celebration.', x0, y);
 
-    y += 100;
+    y += 200;
     ctx.fillStyle = '#6a6a88';
     ctx.font = '34px "VT323", monospace';
     ctx.fillText('Warm Regards,', x0, y);
 
-    y += 110;
+    y += 160;
     var sigY = y;
     ctx.textAlign = 'left';
     ctx.fillStyle = '#eeeef8';
