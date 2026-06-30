@@ -376,7 +376,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   overflow: hidden;
   background:
     radial-gradient(ellipse at center, transparent 50%, #0b0712 95%),
-    radial-gradient(circle at 50% 50%, rgba(194,59,142,0.15), transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(134,92,250,0.15), transparent 40%),
     linear-gradient(#07030a, #0b0712 60%);
 }
 .hero::before {
