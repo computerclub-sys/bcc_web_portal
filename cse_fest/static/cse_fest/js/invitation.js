@@ -56,52 +56,56 @@
     ctx.font = 'bold 32px "Press Start 2P", monospace';
     ctx.fillText(config.festTitle, 80, 260);
 
+    ctx.textAlign = 'center';
     ctx.fillStyle = '#d946ef';
     ctx.font = 'bold 24px "Press Start 2P", monospace';
-    ctx.fillText(config.festYear, 80, 296);
+    var tw = ctx.measureText(config.festTitle).width;
+    ctx.fillText(config.festYear, 80 + tw / 2, 296);
 
     var x0 = 80, x1 = W - 80, y = 400;
 
     ctx.fillStyle = '#eeeef8';
-    ctx.font = '30px "VT323", monospace';
+    ctx.font = '38px "VT323", monospace';
     ctx.fillText('Dear ' + name + ',', x0, y);
-    y += 56;
+    y += 70;
 
     ctx.fillStyle = '#c8c8e0';
-    ctx.font = '26px "VT323", monospace';
+    ctx.font = '34px "VT323", monospace';
     var body1 = 'You are cordially invited to ' + config.festTitle + ' ' + config.festYear + ',';
     ctx.fillText(body1, x0, y);
-    y += 38;
+    y += 50;
     var dateStr = config.festDate ? 'taking place on ' + config.festDate + '.' : '';
     ctx.fillText(dateStr, x0, y);
-    y += 38;
+    y += 50;
     ctx.fillText('We look forward to welcoming you to two exciting days of', x0, y);
-    y += 38;
+    y += 50;
     ctx.fillText('innovation, competition, and celebration.', x0, y);
 
-    y += 80;
+    y += 100;
     ctx.fillStyle = '#6a6a88';
-    ctx.font = '26px "VT323", monospace';
+    ctx.font = '34px "VT323", monospace';
     ctx.fillText('Warm Regards,', x0, y);
 
-    y += 100;
+    y += 110;
+    var sigY = y;
     ctx.textAlign = 'left';
     ctx.fillStyle = '#eeeef8';
-    ctx.font = 'bold 28px "VT323", monospace';
-    ctx.fillText('Shawon Roy', x0, y);
-    y += 32;
+    ctx.font = 'bold 32px "VT323", monospace';
+    ctx.fillText('Shawon Roy', x0, sigY);
     ctx.fillStyle = '#a8a8c8';
-    ctx.font = '24px "VT323", monospace';
-    ctx.fillText('President, BAIUST Computer Club', x0, y);
+    ctx.font = '28px "VT323", monospace';
+    ctx.fillText('President,', x0, sigY + 36);
+    ctx.fillText('BAIUST Computer Club', x0, sigY + 68);
 
     ctx.textAlign = 'right';
     var rx = x1;
     ctx.fillStyle = '#eeeef8';
-    ctx.font = 'bold 28px "VT323", monospace';
-    ctx.fillText('Irfanul Islam Rohan', rx, y - 100 + 100);
+    ctx.font = 'bold 32px "VT323", monospace';
+    ctx.fillText('Irfanul Islam Rohan', rx, sigY);
     ctx.fillStyle = '#a8a8c8';
-    ctx.font = '24px "VT323", monospace';
-    ctx.fillText('General Secretary, BAIUST Computer Club', rx, y - 100 + 132);
+    ctx.font = '28px "VT323", monospace';
+    ctx.fillText('General Secretary,', rx, sigY + 36);
+    ctx.fillText('BAIUST Computer Club', rx, sigY + 68);
 
     ctx.strokeStyle = '#d946ef';
     ctx.lineWidth = 2;
