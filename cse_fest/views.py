@@ -275,7 +275,7 @@ def export_approved_excel(request, year):
     # existing export view remains unchanged
     fest = _get_fest(year)
     registrations = list(FestRegistration.objects.filter(
-        event__fest=fest
+        event__fest=fest, status='confirmed'
     ).select_related('event').prefetch_related('team_members').order_by('event', 'full_name'))
     print('DEBUG: export registrations count =', len(registrations))
 
