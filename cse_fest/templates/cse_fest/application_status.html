@@ -60,9 +60,11 @@
                     <div class="status-row"><span class="status-label">Full Name</span><span>{{ reg.full_name }}</span></div>
                     <div class="status-row"><span class="status-label">Email</span><span>{{ reg.email }}</span></div>
                     <div class="status-row"><span class="status-label">Phone</span><span>{{ reg.phone }}</span></div>
-                    <div class="status-row"><span class="status-label">University</span><span>{{ reg.university }}</span></div>
-                    <div class="status-row"><span class="status-label">Department</span><span>{{ reg.department }}</span></div>
+                    <div class="status-row"><span class="status-label">University</span><span>{% if reg.event.category == 'iupc' or reg.event.category == 'hackathon' %}BAIUST{% else %}{{ reg.university }}{% endif %}</span></div>
+                    <div class="status-row"><span class="status-label">Department</span><span>{% if reg.event.category == 'iupc' or reg.event.category == 'hackathon' %}CSE{% else %}{{ reg.department }}{% endif %}</span></div>
+                    {% if reg.event.category != 'iupc' and reg.event.category != 'hackathon' %}
                     <div class="status-row"><span class="status-label">Student ID</span><span>{{ reg.student_id }}</span></div>
+                    {% endif %}
                     {% if reg.team_name %}
                     <div class="status-row"><span class="status-label">Team</span><span>{{ reg.team_name }}</span></div>
                     {% endif %}
