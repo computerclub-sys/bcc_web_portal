@@ -227,7 +227,9 @@ def application_status(request, year):
     search_id = ''
     search_type = 'id'
     filter_category = request.GET.get('filter', '')
+    show_full_details = False  # default compact view
 
+    # ----- Search (any status) -----
     if request.method == 'POST':
         search_type = request.POST.get('search_type', 'id')
         search_id = request.POST.get('application_id', '').strip()
@@ -245,13 +247,18 @@ def application_status(request, year):
                     registrations = [reg]
                 except FestRegistration.DoesNotExist:
                     messages.error(request, 'No application found with that ID.')
+            # When a search is performed we always want the full detail view
+            show_full_details = True
+
+    # ----- Filter by event (approved only) -----
     elif filter_category in ['hackathon', 'iupc']:
         registrations = FestRegistration.objects.filter(
             event__fest=fest,
             event__category=filter_category,
             status='confirmed',
-            team_name__isnull=False
+            team_name__isnull=False,
         ).exclude(team_name='').select_related('event').order_by('-created_at')
+        # compact view remains (show_full_details stays False)
 
     return render(request, 'cse_fest/application_status.html', {
         'fest': fest,
@@ -259,6 +266,7 @@ def application_status(request, year):
         'search_id': search_id,
         'search_type': search_type,
         'filter_category': filter_category,
+        'show_full_details': show_full_details,
     })
 
 
