@@ -2,10 +2,6 @@
 {% load static %}
 {% load cloudinary_tags %}
 
-{% block extra_head %}
-<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.js"></script>
-{% endblock %}
-
 {% block content %}
 <section class="hero-section">
     <div class="hero-dashed-pattern"></div>
@@ -78,9 +74,6 @@
                         <span class="hero-stat-label">Workshops</span>
                     </div>
                 </div>
-            </div>
-            <div class="hero-lottie">
-                <dotlottie-player src="{% static 'cse_fest/images/lottie/5U6eyasXtj.lottie' %}" background="transparent" speed="1" loop autoplay></dotlottie-player>
             </div>
         </div>
     </div>
