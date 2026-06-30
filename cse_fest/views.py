@@ -115,6 +115,24 @@ def register(request, year):
         agreed_to_rules=True,
     )
 
+    if is_hackathon or is_iupc:
+        seen_names = set()
+        seen_ids = set()
+        count = 4 if is_hackathon else 3
+        for i in range(1, count + 1):
+            tm_name = request.POST.get(f'member_{i}_name', '').strip()
+            tm_id = request.POST.get(f'member_{i}_student_id', '').strip()
+            if tm_name:
+                if tm_name.lower() in seen_names:
+                    messages.error(request, f'Duplicate member name: {tm_name}. Each member must be unique.')
+                    return redirect('cse_fest:event_detail', year=year, slug=event.slug)
+                seen_names.add(tm_name.lower())
+                if tm_id:
+                    if tm_id.lower() in seen_ids:
+                        messages.error(request, f'Duplicate student ID: {tm_id}. Each member must have a unique ID.')
+                        return redirect('cse_fest:event_detail', year=year, slug=event.slug)
+                    seen_ids.add(tm_id.lower())
+
     if is_hackathon:
         for i in range(1, 5):
             tm_name = request.POST.get(f'member_{i}_name', '').strip()

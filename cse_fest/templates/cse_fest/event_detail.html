@@ -537,17 +537,35 @@ if (sel) {
 
 var regForm = document.querySelector('form[data-reg-form]');
 var rulesNote = document.getElementById('rulesNote');
-console.log('regForm:', regForm, 'rulesNote:', rulesNote);
 if (regForm) {
     regForm.addEventListener('submit', function(e) {
         var cb = document.getElementById('holo-check');
-        console.log('checkbox checked:', cb ? cb.checked : 'no cb');
         if (cb && !cb.checked) {
             e.preventDefault();
             rulesNote.classList.add('show');
             var box = cb.closest('.holo-rules-checkbox');
             if (box) box.classList.add('shake');
             setTimeout(function() { if (box) box.classList.remove('shake'); }, 600);
+        }
+        var names = {}, ids = {};
+        var dupe = false;
+        regForm.querySelectorAll('[name^="member_"][name$="_name"]').forEach(function(inp) {
+            var v = inp.value.trim().toLowerCase();
+            if (v) {
+                if (names[v]) { dupe = true; inp.style.borderColor = '#ef4444'; }
+                else names[v] = true;
+            }
+        });
+        regForm.querySelectorAll('[name^="member_"][name$="_student_id"]').forEach(function(inp) {
+            var v = inp.value.trim().toLowerCase();
+            if (v) {
+                if (ids[v]) { dupe = true; inp.style.borderColor = '#ef4444'; }
+                else ids[v] = true;
+            }
+        });
+        if (dupe) {
+            e.preventDefault();
+            showToast('Team members must have unique names and student IDs.', 'error');
         }
     });
     var holoCheck = document.getElementById('holo-check');
