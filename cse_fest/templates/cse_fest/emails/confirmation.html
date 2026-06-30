@@ -25,7 +25,17 @@
                 <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #eee;">
                     <p style="margin: 0 0 4px; color: #555; font-weight: 600;">Team Members:</p>
                     {% for m in team_members %}
-                    <p style="margin: 2px 0; color: #666; font-size: 14px;">{{ forloop.counter }}. {{ m.name }}{% if m.email %} ({{ m.email }}){% endif %}</p>
+                    <p style="margin: 2px 0; color: #666; font-size: 14px;">
+                        {{ forloop.counter }}. {{ m.name }}
+                        {% if m.email %} | {{ m.email }}{% endif %}
+                        {% if m.phone %} | {{ m.phone }}{% endif %}
+                        {% if m.student_id %} | ID: {{ m.student_id }}{% endif %}
+                        {% if m.department %} | {{ m.department }}{% endif %}
+                        {% if m.semester %} | Sem: {{ m.semester }}{% endif %}
+                        {% if m.section %} | Sec: {{ m.section }}{% endif %}
+                        {% if m.group %} | Grp: {{ m.group }}{% endif %}
+                        {% if m.t_shirt_size %} | T: {{ m.t_shirt_size|upper }}{% endif %}
+                    </p>
                     {% endfor %}
                 </div>
                 {% endif %}

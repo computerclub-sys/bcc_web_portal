@@ -74,7 +74,7 @@
                         <span class="status-label">Team Members</span>
                         <ul style="margin:0;padding-left:20px">
                             {% for m in reg.team_members.all %}
-                            <li>{{ m.name }}{% if m.email %} ({{ m.email }}){% endif %}</li>
+                            <li>{{ m.name }}{% if m.email %} ({{ m.email }}){% endif %}{% if m.phone %} | {{ m.phone }}{% endif %}{% if m.student_id %} | ID: {{ m.student_id }}{% endif %}{% if m.department %} | {{ m.department }}{% endif %}{% if m.semester %} | Sem: {{ m.semester }}{% endif %}{% if m.section %} | Sec: {{ m.section }}{% endif %}{% if m.group %} | Grp: {{ m.group }}{% endif %}{% if m.t_shirt_size %} | T: {{ m.t_shirt_size|upper }}{% endif %}</li>
                             {% endfor %}
                         </ul>
                     </div>
