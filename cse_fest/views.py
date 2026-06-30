@@ -263,15 +263,19 @@ def invitation(request, year):
 @staff_member_required
 def export_approved_excel(request, year):
     fest = _get_fest(year)
-    registrations = FestRegistration.objects.filter(
+    registrations = list(FestRegistration.objects.filter(
         event__fest=fest, status='confirmed'
-    ).order_by('event', 'full_name')
+    ).select_related('event').prefetch_related('team_members').order_by('event', 'full_name'))
 
     wb = Workbook()
-    events = FestEvent.objects.filter(fest=fest)
+    # Group registrations by event
+    from collections import defaultdict
+    by_event = defaultdict(list)
+    for r in registrations:
+        by_event[r.event].append(r)
+
     first = True
-    for event in events:
-        qs = registrations.filter(event=event)
+    for event, regs in by_event.items():
         if first:
             ws = wb.active
             ws.title = event.title[:31]
@@ -279,7 +283,7 @@ def export_approved_excel(request, year):
         else:
             ws = wb.create_sheet(title=event.title[:31])
         ws.append(['App ID', 'Category', 'Name', 'Email', 'Phone', 'Dept', 'Student ID', 'Semester', 'Section', 'Group', 'Team Name', 'Registered At'])
-        for r in qs:
+        for r in regs:
             ws.append([
                 r.application_id, r.event.category, r.full_name, r.email, r.phone,
                 r.department, r.student_id, '', '', '',
