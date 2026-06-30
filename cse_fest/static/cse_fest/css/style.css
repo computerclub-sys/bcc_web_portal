@@ -857,6 +857,22 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 }
 
 /* ── Rules Download Button ── */
+
+@media (max-width: 639px) {
+  .flip-card-back .card-actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .flip-card-back .card-actions .octa-btn,
+  .flip-card-back .card-actions .rules-dl-btn {
+    width: 45%;
+  }
+  .flip-card-back .card-actions .octa-btn,
+  .flip-card-back .card-actions .rules-dl-btn .rules-dl-text {
+    font-size: 11px;
+  }
+}
+
 .rules-dl-btn {
   position: relative;
   width: 100%;
