@@ -273,7 +273,7 @@ class FestRegistration(models.Model):
     application_id = models.CharField(max_length=20, unique=True, blank=True, editable=False)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     full_name = models.CharField(max_length=200)
-    university = models.CharField(max_length=200, blank=True)
+    university = models.CharField(max_length=200, blank=True, default='BAIUST')
     department = models.CharField(max_length=200, blank=True)
     student_id = models.CharField(max_length=50, blank=True)
     email = models.EmailField()

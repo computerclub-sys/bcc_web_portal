@@ -98,7 +98,7 @@ def register(request, year):
     registration = FestRegistration.objects.create(
         event=event,
         full_name=full_name,
-        university=request.POST.get('university', ''),
+        university='BAIUST',
         department=request.POST.get('department', '') if not is_iupc else '',
         student_id=request.POST.get('student_id', '') if not is_iupc else '',
         email=email,

@@ -1509,6 +1509,18 @@ form { display: flex; flex-direction: column; gap: 14px; }
   position: relative;
   width: 100%;
 }
+.fl-input--readonly .fl-readonly-text {
+  display: block;
+  padding: 18px 14px 10px;
+  font-size: 16px;
+  color: var(--text-heading);
+  opacity: 0.8;
+}
+.fl-input--readonly .fl-label {
+  top: 4px;
+  font-size: 11px;
+  opacity: 0.6;
+}
 .fl-input .fl-bar {
   position: absolute;
   left: -1px;
