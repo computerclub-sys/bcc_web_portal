@@ -793,23 +793,12 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   margin: 0;
 }
 .flip-card-back {
-  background-color: #000;
-  background-image:
-    radial-gradient(4px 100px at 0px 200px, var(--event-accent, #09f), #0000),
-    radial-gradient(4px 100px at 150px 200px, var(--event-accent, #09f), #0000),
-    radial-gradient(4px 100px at 300px 200px, var(--event-accent, #09f), #0000);
-  background-size: 300px 300px;
-  animation: rain-scroll 150s linear infinite;
+  background-color: #0a0a18;
   transform: rotateY(180deg);
   justify-content: flex-start;
   gap: 6px;
   padding: 18px 18px 14px;
   z-index: 0;
-}
-
-@keyframes rain-scroll {
-  0% { background-position: 0px 0px, 150px 0px, 300px 0px; }
-  to { background-position: 0px 6000px, 150px 6000px, 300px 6000px; }
 }
 
 .flip-card-back::after {
