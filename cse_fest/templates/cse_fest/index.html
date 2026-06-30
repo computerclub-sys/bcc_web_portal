@@ -152,7 +152,7 @@
                                     {% if prizes %}
                                     {% for p in prizes %}
                                     <div class="card-prize-row">
-                                        <span class="prize-pos">{% if forloop.counter == 1 %}Winner{% elif forloop.counter == 2 %}1st Runners Up{% elif forloop.counter == 3 %}2nd Runners Up{% else %}{{ p.position }}{% endif %}</span>
+                                        <span class="prize-pos">{{ p.position }}</span>
                                         <span class="prize-sep"></span>
                                         <span class="prize-amount">BDT {{ p.amount }}</span>
                                     </div>
