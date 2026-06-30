@@ -62,6 +62,7 @@
 
     var x0 = 120, x1 = W - 80, y = 400;
 
+    ctx.textAlign = 'left';
     ctx.fillStyle = '#eeeef8';
     ctx.font = '38px "VT323", monospace';
     ctx.fillText('Dear ' + name + ',', x0, y);
