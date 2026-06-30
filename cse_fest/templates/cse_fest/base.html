@@ -97,7 +97,7 @@
             el.textContent = msg;
             t.appendChild(el);
             requestAnimationFrame(function() { el.classList.add('toast--show'); });
-            setTimeout(function() { el.classList.remove('toast--show'); setTimeout(function() { el.remove(); }, 400); }, 4000);
+            setTimeout(function() { el.classList.remove('toast--show'); setTimeout(function() { el.remove(); }, 400); }, 30000);
         }
         window.addEventListener('load', function() {
             var isFirst = !sessionStorage.getItem('cse_loaded');
