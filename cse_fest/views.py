@@ -73,9 +73,9 @@ def register(request, year):
     is_hackathon = event.category == 'hackathon'
 
     if is_iupc:
-        full_name = request.POST.get('member_1_full_name', '').strip()
-        email = request.POST.get('member_1_email', '').strip()
-        phone = request.POST.get('member_1_phone', '').strip()
+        full_name = request.POST.get('tl_name', '').strip()
+        email = request.POST.get('tl_email', '').strip()
+        phone = request.POST.get('tl_phone', '').strip()
 
     if is_hackathon:
         full_name = request.POST.get('tl_name', '').strip()
@@ -131,13 +131,12 @@ def register(request, year):
                 )
     elif is_iupc:
         for i in range(1, 4):
-            tm_name = request.POST.get(f'member_{i}_full_name', '').strip()
-            tm_email = request.POST.get(f'member_{i}_email', '').strip()
-            if tm_name and tm_email:
+            tm_name = request.POST.get(f'member_{i}_name', '').strip()
+            if tm_name:
                 FestTeamMember.objects.create(
                     registration=registration,
                     name=tm_name,
-                    email=tm_email,
+                    email='',
                     phone=request.POST.get(f'member_{i}_phone', ''),
                     student_id=request.POST.get(f'member_{i}_student_id', ''),
                     department=request.POST.get(f'member_{i}_department', ''),

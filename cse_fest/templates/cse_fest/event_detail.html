@@ -133,62 +133,87 @@
                             <input type="hidden" name="event_id" value="{{ event.id }}">
 
                             {% if event.category == 'iupc' %}
-                            <p class="iupc-intro">This is a team event. Please provide details for all 3 members below.</p>
-                            {% for m in "123"|make_list %}
-                            <div class="iupc-member-block">
-                                <h3 class="iupc-member-heading">Member {{ forloop.counter }}</h3>
-                                <div class="form-row">
-                                    <div class="fl-input">
-                                        <span class="fl-bar"></span>
-                                        <input type="text" name="member_{{ forloop.counter }}_full_name" id="m{{ forloop.counter }}_fn" required placeholder=" ">
-                                        <label class="fl-label" for="m{{ forloop.counter }}_fn">Full Name *</label>
+                            <div class="hackathon-section">
+                                <div class="hackathon-block">
+                                    <h3 class="iupc-member-heading">Team Information</h3>
+                                    <div class="form-row">
+                                        <div class="fl-input">
+                                            <span class="fl-bar"></span>
+                                            <input type="text" name="team_name" id="iupc_tn" required placeholder=" ">
+                                            <label class="fl-label" for="iupc_tn">Team Name *</label>
+                                        </div>
+                                        <div class="fl-input"></div>
                                     </div>
-                                    <div class="fl-input">
-                                        <span class="fl-bar"></span>
-                                        <input type="email" name="member_{{ forloop.counter }}_email" id="m{{ forloop.counter }}_em" required placeholder=" ">
-                                        <label class="fl-label" for="m{{ forloop.counter }}_em">Email Address *</label>
+                                    <div class="form-row">
+                                        <div class="fl-input">
+                                            <span class="fl-bar"></span>
+                                            <input type="text" name="tl_name" id="iupc_tln" required placeholder=" ">
+                                            <label class="fl-label" for="iupc_tln">Team Leader Name *</label>
+                                        </div>
+                                        <div class="fl-input">
+                                            <span class="fl-bar"></span>
+                                            <input type="tel" name="tl_phone" id="iupc_tlp" required placeholder=" ">
+                                            <label class="fl-label" for="iupc_tlp">Team Leader Phone *</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="fl-input">
-                                        <span class="fl-bar"></span>
-                                        <input type="tel" name="member_{{ forloop.counter }}_phone" id="m{{ forloop.counter }}_ph" required placeholder=" ">
-                                        <label class="fl-label" for="m{{ forloop.counter }}_ph">Phone Number *</label>
-                                    </div>
-                                    <div class="fl-input">
-                                        <span class="fl-bar"></span>
-                                        <select name="member_{{ forloop.counter }}_t_shirt" id="m{{ forloop.counter }}_ts">
-                                            <option value="">— Select —</option>
-                                            <option value="s">S</option>
-                                            <option value="m">M</option>
-                                            <option value="l">L</option>
-                                            <option value="xl">XL</option>
-                                            <option value="xxl">XXL</option>
-                                        </select>
-                                        <label class="fl-label" for="m{{ forloop.counter }}_ts">T-shirt Size *</label>
+                                    <div class="form-row">
+                                        <div class="fl-input">
+                                            <span class="fl-bar"></span>
+                                            <input type="email" name="tl_email" id="iupc_tle" required placeholder=" ">
+                                            <label class="fl-label" for="iupc_tle">Team Leader Email *</label>
+                                        </div>
+                                        <div class="fl-input"></div>
                                     </div>
                                 </div>
-                                <div class="form-row">
-                                    <div class="fl-input">
-                                        <span class="fl-bar"></span>
-                                        <input type="text" name="member_{{ forloop.counter }}_student_id" id="m{{ forloop.counter }}_sid" required placeholder=" ">
-                                        <label class="fl-label" for="m{{ forloop.counter }}_sid">ID *</label>
+                                {% for i in "123"|make_list %}
+                                <div class="hackathon-member-block">
+                                    <h3 class="iupc-member-heading">Member {{ forloop.counter }}</h3>
+                                    <div class="form-row">
+                                        <div class="fl-input">
+                                            <span class="fl-bar"></span>
+                                            <input type="text" name="member_{{ forloop.counter }}_name" id="iupc_m{{ forloop.counter }}_n" required placeholder=" ">
+                                            <label class="fl-label" for="iupc_m{{ forloop.counter }}_n">Name *</label>
+                                        </div>
+                                        <div class="fl-input">
+                                            <span class="fl-bar"></span>
+                                            <input type="text" name="member_{{ forloop.counter }}_student_id" id="iupc_m{{ forloop.counter }}_sid" required placeholder=" ">
+                                            <label class="fl-label" for="iupc_m{{ forloop.counter }}_sid">Student ID *</label>
+                                        </div>
                                     </div>
-                                    <div class="fl-input">
-                                        <span class="fl-bar"></span>
-                                        <input type="text" name="member_{{ forloop.counter }}_department" id="m{{ forloop.counter }}_dept" required placeholder=" ">
-                                        <label class="fl-label" for="m{{ forloop.counter }}_dept">Department *</label>
+                                    <div class="form-row">
+                                        <div class="fl-input">
+                                            <span class="fl-bar"></span>
+                                            <input type="text" name="member_{{ forloop.counter }}_department" id="iupc_m{{ forloop.counter }}_dept" required placeholder=" ">
+                                            <label class="fl-label" for="iupc_m{{ forloop.counter }}_dept">Department *</label>
+                                        </div>
+                                        <div class="fl-input">
+                                            <span class="fl-bar"></span>
+                                            <input type="text" name="member_{{ forloop.counter }}_semester" id="iupc_m{{ forloop.counter }}_sem" required placeholder=" " pattern="\d+/\d+" title="e.g. 4/1">
+                                            <label class="fl-label" for="iupc_m{{ forloop.counter }}_sem">Semester (e.g., 4/1) *</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="fl-input">
+                                            <span class="fl-bar"></span>
+                                            <input type="tel" name="member_{{ forloop.counter }}_phone" id="iupc_m{{ forloop.counter }}_ph" required placeholder=" ">
+                                            <label class="fl-label" for="iupc_m{{ forloop.counter }}_ph">Phone *</label>
+                                        </div>
+                                        <div class="fl-input">
+                                            <span class="fl-bar"></span>
+                                            <select name="member_{{ forloop.counter }}_t_shirt" id="iupc_m{{ forloop.counter }}_ts" required>
+                                                <option value="">— Select —</option>
+                                                <option value="s">S</option>
+                                                <option value="m">M</option>
+                                                <option value="l">L</option>
+                                                <option value="xl">XL</option>
+                                                <option value="xxl">XXL</option>
+                                            </select>
+                                            <label class="fl-label" for="iupc_m{{ forloop.counter }}_ts">T-shirt Size *</label>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-row">
-                                    <div class="fl-input" style="max-width:260px">
-                                        <span class="fl-bar"></span>
-                                        <input type="text" name="member_{{ forloop.counter }}_semester" id="m{{ forloop.counter }}_sem" placeholder=" " pattern="\d+/\d+" title="e.g. 4/1">
-                                        <label class="fl-label" for="m{{ forloop.counter }}_sem">Semester (e.g., 4/1) *</label>
-                                    </div>
-                                </div>
+                                {% endfor %}
                             </div>
-                            {% endfor %}
                             {% elif event.category == 'hackathon' %}
                             <div class="hackathon-section">
                                 <div class="hackathon-block">
