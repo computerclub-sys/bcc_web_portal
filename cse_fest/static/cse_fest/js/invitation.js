@@ -85,7 +85,7 @@
     ctx.font = '34px "VT323", monospace';
     ctx.fillText('Warm Regards,', x0, y);
 
-    y += 160;
+    y += 80;
     var sigY = y;
     ctx.textAlign = 'left';
     ctx.fillStyle = '#eeeef8';
