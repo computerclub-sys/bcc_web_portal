@@ -2169,6 +2169,8 @@ form { display: flex; flex-direction: column; gap: 14px; }
   .committee-grid { grid-template-columns: repeat(2, 1fr); }
   .cd-num { font-size: 32px; }
   .cd-card { width: 100px; height: 100px; }
+  .schedule-item { flex-wrap: wrap; gap: 4px 12px; }
+  .schedule-title { width: 100%; }
 }
 @media (max-width: 480px) {
   .committee-grid { grid-template-columns: 1fr; }
