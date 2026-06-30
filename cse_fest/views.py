@@ -104,6 +104,8 @@ def register(request, year):
         email=email,
         phone=phone,
         gender=request.POST.get('gender', ''),
+        section=request.POST.get('section', ''),
+        group=request.POST.get('group', ''),
         team_name=request.POST.get('team_name', '') if not is_hackathon else request.POST.get('hackathon_team_name', ''),
         hackathon_category=request.POST.get('hackathon_category', '') if is_hackathon else '',
         payment_method=request.POST.get('payment_method', 'physical'),
@@ -145,6 +147,8 @@ def register(request, year):
                     student_id=request.POST.get(f'member_{i}_student_id', ''),
                     department=request.POST.get(f'member_{i}_department', ''),
                     semester=request.POST.get(f'member_{i}_semester', ''),
+                    section=request.POST.get(f'member_{i}_section', ''),
+                    group=request.POST.get(f'member_{i}_group', ''),
                     t_shirt_size=request.POST.get(f'member_{i}_t_shirt', ''),
                 )
     elif is_iupc:
@@ -159,6 +163,8 @@ def register(request, year):
                     student_id=request.POST.get(f'member_{i}_student_id', ''),
                     department=request.POST.get(f'member_{i}_department', ''),
                     semester=request.POST.get(f'member_{i}_semester', ''),
+                    section=request.POST.get(f'member_{i}_section', ''),
+                    group=request.POST.get(f'member_{i}_group', ''),
                     t_shirt_size=request.POST.get(f'member_{i}_t_shirt', ''),
                 )
     elif event.requires_team:
@@ -174,6 +180,11 @@ def register(request, year):
                     registration=registration,
                     name=tm_name,
                     email=tm_email,
+                    student_id=request.POST.get(f'team_member_student_id_{i}', ''),
+                    department=request.POST.get(f'team_member_department_{i}', ''),
+                    semester=request.POST.get(f'team_member_semester_{i}', ''),
+                    section=request.POST.get(f'team_member_section_{i}', ''),
+                    group=request.POST.get(f'team_member_group_{i}', ''),
                 )
 
     team_members = list(registration.team_members.all())

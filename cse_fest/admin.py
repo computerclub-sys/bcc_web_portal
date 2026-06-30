@@ -98,8 +98,8 @@ class SponsorAdmin(admin.ModelAdmin):
 class FestTeamMemberInline(admin.TabularInline):
     model = FestTeamMember
     extra = 0
-    fields = ('name', 'email', 'phone', 'student_id', 'department', 'semester', 't_shirt_size')
-    readonly_fields = ('name', 'email', 'phone', 'student_id', 'department', 'semester', 't_shirt_size')
+    fields = ('name', 'email', 'phone', 'student_id', 'department', 'semester', 'section', 'group', 't_shirt_size')
+    readonly_fields = ('name', 'email', 'phone', 'student_id', 'department', 'semester', 'section', 'group', 't_shirt_size')
     can_delete = False
     max_num = 0
 
@@ -113,7 +113,7 @@ class FestRegistrationAdmin(admin.ModelAdmin):
     inlines = [FestTeamMemberInline]
     fieldsets = (
         ('Application', {'fields': ('application_id', 'event', 'status', 'created_at')}),
-        ('Personal Info', {'fields': ('full_name', 'email', 'phone', 'gender')}),
+        ('Personal Info', {'fields': ('full_name', 'email', 'phone', 'gender', 'section', 'group')}),
         ('Academic', {'fields': ('university', 'department', 'student_id')}),
         ('Team', {'fields': ('team_name', 'hackathon_category')}),
         ('Payment', {'fields': ('payment_method', 'transaction_id')}),

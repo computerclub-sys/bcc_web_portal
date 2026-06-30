@@ -188,8 +188,37 @@
                                         </div>
                                         <div class="fl-input">
                                             <span class="fl-bar"></span>
-                                            <input type="text" name="member_{{ forloop.counter }}_semester" id="iupc_m{{ forloop.counter }}_sem" required placeholder=" " pattern="\d+/\d+" title="e.g. 4/1">
-                                            <label class="fl-label" for="iupc_m{{ forloop.counter }}_sem">Semester (e.g., 4/1) *</label>
+                                            <select name="member_{{ forloop.counter }}_semester" id="iupc_m{{ forloop.counter }}_sem" required>
+                                                <option value="">— Select —</option>
+                                                <option value="1/1">1/1</option>
+                                                <option value="1/2">1/2</option>
+                                                <option value="2/1">2/1</option>
+                                                <option value="2/2">2/2</option>
+                                                <option value="3/1">3/1</option>
+                                                <option value="3/2">3/2</option>
+                                                <option value="4/1">4/1</option>
+                                                <option value="4/2">4/2</option>
+                                            </select>
+                                            <label class="fl-label" for="iupc_m{{ forloop.counter }}_sem">Semester *</label>
+                                        </div>
+                                        <div class="fl-input" style="max-width:160px">
+                                            <span class="fl-bar"></span>
+                                            <select name="member_{{ forloop.counter }}_section" id="iupc_m{{ forloop.counter }}_sec" required>
+                                                <option value="">—</option>
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                                <option value="C">C</option>
+                                            </select>
+                                            <label class="fl-label" for="iupc_m{{ forloop.counter }}_sec">Section *</label>
+                                        </div>
+                                        <div class="fl-input" style="max-width:120px">
+                                            <span class="fl-bar"></span>
+                                            <select name="member_{{ forloop.counter }}_group" id="iupc_m{{ forloop.counter }}_grp" required>
+                                                <option value="">—</option>
+                                                <option value="G1">G1</option>
+                                                <option value="G2">G2</option>
+                                            </select>
+                                            <label class="fl-label" for="iupc_m{{ forloop.counter }}_grp">Group *</label>
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -278,8 +307,39 @@
                                         </div>
                                         <div class="fl-input">
                                             <span class="fl-bar"></span>
-                                            <input type="text" name="member_{{ forloop.counter }}_semester" id="hm{{ forloop.counter }}_sem" {% if not forloop.last %}required{% endif %} placeholder=" " pattern="\d+/\d+" title="e.g. 4/1">
-                                            <label class="fl-label" for="hm{{ forloop.counter }}_sem">Semester (e.g., 4/1){% if not forloop.last %} *{% endif %}</label>
+                                            <select name="member_{{ forloop.counter }}_semester" id="hm{{ forloop.counter }}_sem" {% if not forloop.last %}required{% endif %}>
+                                                <option value="">— Select —</option>
+                                                <option value="1/1">1/1</option>
+                                                <option value="1/2">1/2</option>
+                                                <option value="2/1">2/1</option>
+                                                <option value="2/2">2/2</option>
+                                                <option value="3/1">3/1</option>
+                                                <option value="3/2">3/2</option>
+                                                <option value="4/1">4/1</option>
+                                                <option value="4/2">4/2</option>
+                                            </select>
+                                            <label class="fl-label" for="hm{{ forloop.counter }}_sem">Semester{% if not forloop.last %} *{% endif %}</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="fl-input">
+                                            <span class="fl-bar"></span>
+                                            <select name="member_{{ forloop.counter }}_section" id="hm{{ forloop.counter }}_sec" {% if not forloop.last %}required{% endif %}>
+                                                <option value="">—</option>
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                                <option value="C">C</option>
+                                            </select>
+                                            <label class="fl-label" for="hm{{ forloop.counter }}_sec">Section{% if not forloop.last %} *{% endif %}</label>
+                                        </div>
+                                        <div class="fl-input">
+                                            <span class="fl-bar"></span>
+                                            <select name="member_{{ forloop.counter }}_group" id="hm{{ forloop.counter }}_grp" {% if not forloop.last %}required{% endif %}>
+                                                <option value="">—</option>
+                                                <option value="G1">G1</option>
+                                                <option value="G2">G2</option>
+                                            </select>
+                                            <label class="fl-label" for="hm{{ forloop.counter }}_grp">Group{% if not forloop.last %} *{% endif %}</label>
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -358,6 +418,35 @@
                                     <label class="fl-label" for="gender">Gender (optional)</label>
                                 </div>
                                 {% if event.requires_team %}
+                                <div class="fl-input">
+                                    <span class="fl-bar"></span>
+                                    <input type="text" name="team_name" id="tn" placeholder=" ">
+                                    <label class="fl-label" for="tn">Team Name</label>
+                                </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="form-row">
+                                <div class="fl-input">
+                                    <span class="fl-bar"></span>
+                                    <select name="section" id="sec">
+                                        <option value="">— Select —</option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                    </select>
+                                    <label class="fl-label" for="sec">Section</label>
+                                </div>
+                                <div class="fl-input">
+                                    <span class="fl-bar"></span>
+                                    <select name="group" id="grp">
+                                        <option value="">— Select —</option>
+                                        <option value="G1">G1</option>
+                                        <option value="G2">G2</option>
+                                    </select>
+                                    <label class="fl-label" for="grp">Group</label>
+                                </div>
+                            </div>
                                 <div class="fl-input">
                                     <span class="fl-bar"></span>
                                     <input type="text" name="team_name" id="tn" placeholder=" ">

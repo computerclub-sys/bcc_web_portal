@@ -279,6 +279,8 @@ class FestRegistration(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=20)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, blank=True)
+    section = models.CharField(max_length=5, blank=True, choices=[('A','A'),('B','B'),('C','C')])
+    group = models.CharField(max_length=5, blank=True, choices=[('G1','G1'),('G2','G2')])
     team_name = models.CharField(max_length=200, blank=True, help_text='For group events')
     hackathon_category = models.CharField(max_length=100, blank=True, help_text='Project category (for hackathon)')
     payment_method = models.CharField(max_length=10, choices=PAYMENT_METHOD_CHOICES, default='physical')
@@ -320,6 +322,8 @@ class FestTeamMember(models.Model):
     student_id = models.CharField(max_length=50, blank=True)
     department = models.CharField(max_length=200, blank=True)
     semester = models.CharField(max_length=20, blank=True, help_text='e.g. 4/1')
+    section = models.CharField(max_length=5, blank=True, choices=[('A','A'),('B','B'),('C','C')])
+    group = models.CharField(max_length=5, blank=True, choices=[('G1','G1'),('G2','G2')])
     t_shirt_size = models.CharField(max_length=5, choices=TSHIRT_CHOICES, blank=True)
 
     class Meta:
