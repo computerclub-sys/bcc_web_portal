@@ -145,12 +145,12 @@
                         <div class="card-center">
                             <div class="card-prize">
                                 <div class="card-prize-pool">
+                                    <span class="pool-label">Prize Pool</span>
                                     {% if event.prize_pool %}
                                     <span class="pool-amount">{{ event.prize_pool }}</span>
                                     {% else %}
                                     <span class="pool-amount dim">—</span>
                                     {% endif %}
-                                    <span class="pool-label">Prize Pool</span>
                                 </div>
                             </div>
                             <div class="card-entry">Entry Fee: {% if event.category == 'hackathon' %}BDT {{ event.hackathon_fee_3|floatformat:0 }} (3) / BDT {{ event.hackathon_fee_4|floatformat:0 }} (4){% elif event.registration_fee > 0 %}BDT {{ event.registration_fee }}{% else %}Free{% endif %}</div>
