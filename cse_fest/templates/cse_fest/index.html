@@ -106,7 +106,7 @@
             </div>
             <div class="hero-actions">
                 <a href="#events" class="btn btn-primary" data-text="Explore Events"><span class="btn-text">Explore Events</span></a>
-
+                <a href="{% url 'cse_fest:invitation' year=fest.year %}" class="btn btn-primary" data-text="Get an Invite"><span class="btn-text">Get an Invite</span></a>
             </div>
             {% if fest.target_date %}
             <div class="hero-countdown">
