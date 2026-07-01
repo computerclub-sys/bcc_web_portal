@@ -450,15 +450,14 @@
     var canvases = document.querySelectorAll('.dot-canvas');
     if (!canvases.length) return;
 
-    var NODES_W = 8;
-    var NODES_H = 5;
-    var MAX_CONNECT = 180;
-    var SPEED = 0.5;
+    var SPACING = 40;
+    var SPEED = 0.4;
+    var DOT_COUNT = 80;
 
-    var allCtxData = [];
+    var allData = [];
     var rafId = null;
     var running = true;
-    var defaultRgb = '0,217,146';
+    var rgb = '0,217,146';
 
     function initCanvas(canvas) {
         var rect = canvas.parentElement.getBoundingClientRect();
@@ -471,28 +470,30 @@
         ctx.scale(dpr, dpr);
 
         var w = rect.width, h = rect.height;
-        var padX = w * 0.08, padY = h * 0.08;
-        var stepX = (w - padX * 2) / (NODES_W - 1);
-        var stepY = (h - padY * 2) / (NODES_H - 1);
+        var cols = Math.floor(w / SPACING) + 1;
+        var rows = Math.floor(h / SPACING) + 1;
+        var offX = (w - (cols - 1) * SPACING) / 2;
+        var offY = (h - (rows - 1) * SPACING) / 2;
 
         var nodes = [];
-        for (var row = 0; row < NODES_H; row++) {
-            for (var col = 0; col < NODES_W; col++) {
-                var nx = padX + col * stepX + (Math.random() - 0.5) * stepX * 0.3;
-                var ny = padY + row * stepY + (Math.random() - 0.5) * stepY * 0.3;
-                nodes.push({ x: nx, y: ny, edges: [] });
+        var id = 0;
+        for (var r = 0; r < rows; r++) {
+            for (var c = 0; c < cols; c++) {
+                nodes.push({ x: offX + c * SPACING, y: offY + r * SPACING, edges: [], id: id });
+                id++;
             }
         }
 
-        for (var i = 0; i < nodes.length; i++) {
-            for (var j = i + 1; j < nodes.length; j++) {
-                var dx = nodes[i].x - nodes[j].x;
-                var dy = nodes[i].y - nodes[j].y;
-                var dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < MAX_CONNECT) {
-                    nodes[i].edges.push(j);
-                    nodes[j].edges.push(i);
-                }
+        function connect(a, b) {
+            a.edges.push(b.id);
+            b.edges.push(a.id);
+        }
+
+        for (var r = 0; r < rows; r++) {
+            for (var c = 0; c < cols; c++) {
+                var idx = r * cols + c;
+                if (c + 1 < cols) connect(nodes[idx], nodes[idx + 1]);
+                if (r + 1 < rows) connect(nodes[idx], nodes[idx + cols]);
             }
         }
 
@@ -510,33 +511,31 @@
         }
 
         var particles = [];
-        for (var p = 0; p < 40; p++) {
+        for (var p = 0; p < DOT_COUNT; p++) {
             var ei = Math.floor(Math.random() * edges.length);
             var e = edges[ei];
-            var t = Math.random();
             particles.push({
                 edge: ei,
-                t: t,
-                speed: (0.3 + Math.random() * 0.5) * SPEED,
+                t: Math.random(),
+                speed: (0.3 + Math.random() * 0.7) * SPEED,
                 r: 2 + Math.random() * 1.5,
-                o: 0.5 + Math.random() * 0.4
+                o: 0.6 + Math.random() * 0.4,
+                dir: 1
             });
         }
 
-        allCtxData.push({ ctx: ctx, w: w, h: h, nodes: nodes, edges: edges, particles: particles, rgb: defaultRgb });
+        allData.push({ ctx: ctx, w: w, h: h, nodes: nodes, edges: edges, particles: particles });
     }
 
     canvases.forEach(initCanvas);
 
     function animate() {
         if (!running) return;
-        allCtxData.forEach(function(cd) {
-            var ctx = cd.ctx;
-            ctx.clearRect(0, 0, cd.w, cd.h);
+        allData.forEach(function(d) {
+            var ctx = d.ctx;
+            ctx.clearRect(0, 0, d.w, d.h);
 
-            var nodes = cd.nodes;
-            var edges = cd.edges;
-            var particles = cd.particles;
+            var nodes = d.nodes, edges = d.edges, particles = d.particles;
 
             for (var i = 0; i < edges.length; i++) {
                 var e = edges[i];
@@ -544,45 +543,41 @@
                 ctx.beginPath();
                 ctx.moveTo(na.x, na.y);
                 ctx.lineTo(nb.x, nb.y);
-                ctx.strokeStyle = 'rgba(' + cd.rgb + ',0.12)';
+                ctx.strokeStyle = 'rgba(' + rgb + ',0.10)';
                 ctx.lineWidth = 1;
                 ctx.stroke();
-            }
-
-            for (var i = 0; i < nodes.length; i++) {
-                var n = nodes[i];
-                ctx.beginPath();
-                ctx.arc(n.x, n.y, 1.5, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(' + cd.rgb + ',0.2)';
-                ctx.fill();
             }
 
             for (var i = 0; i < particles.length; i++) {
                 var p = particles[i];
                 var e = edges[p.edge];
                 var na = nodes[e.a], nb = nodes[e.b];
-                var x = na.x + (nb.x - na.x) * p.t;
-                var y = na.y + (nb.y - na.y) * p.t;
+
+                var t = p.dir > 0 ? p.t : (1 - p.t);
+                var x = na.x + (nb.x - na.x) * t;
+                var y = na.y + (nb.y - na.y) * t;
 
                 ctx.beginPath();
                 ctx.arc(x, y, p.r, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(' + cd.rgb + ',' + p.o + ')';
+                ctx.fillStyle = 'rgba(' + rgb + ',' + p.o + ')';
                 ctx.fill();
 
-                p.t += p.speed * 0.006;
+                p.t += p.speed * p.dir * 0.008;
+
                 if (p.t >= 1) {
                     p.t = 0;
-                    var nodeA = e.a;
+                    var nodeA = e.b;
                     var nn = nodes[nodeA];
                     if (nn.edges.length > 0) {
-                        var nextEdgeIdx = nn.edges[Math.floor(Math.random() * nn.edges.length)];
+                        var nextN = nn.edges[Math.floor(Math.random() * nn.edges.length)];
                         for (var j = 0; j < edges.length; j++) {
-                            if ((edges[j].a === nodeA && edges[j].b === nextEdgeIdx) || (edges[j].b === nodeA && edges[j].a === nextEdgeIdx)) {
+                            if ((edges[j].a === nodeA && edges[j].b === nextN) || (edges[j].b === nodeA && edges[j].a === nextN)) {
                                 p.edge = j;
                                 break;
                             }
                         }
                     }
+                    p.dir = 1;
                 }
             }
         });
@@ -595,7 +590,7 @@
     window.addEventListener('resize', function() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function() {
-            allCtxData = [];
+            allData = [];
             running = false;
             if (rafId) cancelAnimationFrame(rafId);
             running = true;
@@ -605,7 +600,7 @@
     });
 
     var ro = new ResizeObserver(function() {
-        allCtxData = [];
+        allData = [];
         running = false;
         if (rafId) cancelAnimationFrame(rafId);
         running = true;
