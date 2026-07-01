@@ -311,12 +311,16 @@ var observer = new IntersectionObserver(function(entries) {
 }, { threshold: 0.15 });
 document.querySelectorAll('.cm-card').forEach(function(c) { observer.observe(c); });
 
-/* Flip card toggle on touch */
+/* Flip card toggle on touch — ignore clicks on buttons/links */
 document.querySelectorAll('.flip-card').forEach(function(card) {
     card.addEventListener('click', function(e) {
-        if (window.innerWidth < 768) {
-            card.classList.toggle('flipped');
+        if (window.innerWidth >= 768) return;
+        var t = e.target;
+        while (t && t !== card) {
+            if (t.tagName === 'A' || t.tagName === 'BUTTON' || t.closest('.octa-btn, .rules-dl-btn, .btn, button, a')) return;
+            t = t.parentElement;
         }
+        card.classList.toggle('flipped');
     });
 });
 </script>
