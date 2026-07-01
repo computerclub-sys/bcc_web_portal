@@ -104,6 +104,7 @@ def register(request, year):
         university='BAIUST',
         department=request.POST.get('department', '') if not is_iupc else '',
         student_id=request.POST.get('student_id', '') if not is_iupc else '',
+        semester=request.POST.get('semester', ''),
         email=email,
         phone=phone,
         gender=request.POST.get('gender', ''),
