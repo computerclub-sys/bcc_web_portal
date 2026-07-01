@@ -1447,6 +1447,7 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 .faq-arrow { flex-shrink: 0; color: var(--text-muted); transition: transform 0.3s; }
 .faq--open .faq-arrow { transform: rotate(180deg); }
 .faq-a {
+  font-family: var(--font);
   max-height: 0;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -1491,8 +1492,8 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-.notice-body h4 { font-size: 20px; font-weight: 700; color: var(--text-heading); margin-bottom: 4px; }
-.notice-body p { font-size: 18px; color: var(--text-muted); line-height: 1.6; margin-bottom: 6px; }
+.notice-body h4 { font-family: var(--font); font-size: 20px; font-weight: 700; color: var(--text-heading); margin-bottom: 4px; }
+.notice-body p { font-family: var(--font); font-size: 18px; color: var(--text-muted); line-height: 1.6; margin-bottom: 6px; }
 .notice-date { font-size: 14px; color: var(--text-muted); opacity: 0.5; }
 
 /* ── Event Detail ── */
