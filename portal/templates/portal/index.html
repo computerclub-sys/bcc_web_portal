@@ -450,92 +450,87 @@
     var canvases = document.querySelectorAll('.dot-canvas');
     if (!canvases.length) return;
 
-    var SPACING = 40;
-    var SPEED = 0.4;
-    var DOT_COUNT = 80;
+    var SPACING = 48;
+    var DOT_COUNT = 60;
+    var DOT_SPEED = 0.3;
+    var rgb = '0,217,146';
 
     var allData = [];
     var rafId = null;
-    var running = true;
-    var rgb = '0,217,146';
 
     function initCanvas(canvas) {
-        var rect = canvas.parentElement.getBoundingClientRect();
+        var parent = canvas.parentElement;
+        var rect = parent.getBoundingClientRect();
         var dpr = window.devicePixelRatio || 1;
-        canvas.width = rect.width * dpr;
-        canvas.height = rect.height * dpr;
-        canvas.style.width = rect.width + 'px';
-        canvas.style.height = rect.height + 'px';
+        var w = Math.round(rect.width);
+        var h = Math.round(rect.height);
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
         var ctx = canvas.getContext('2d');
         ctx.scale(dpr, dpr);
 
-        var w = rect.width, h = rect.height;
-        var cols = Math.floor(w / SPACING) + 1;
-        var rows = Math.floor(h / SPACING) + 1;
-        var offX = (w - (cols - 1) * SPACING) / 2;
-        var offY = (h - (rows - 1) * SPACING) / 2;
+        var cols = Math.floor(w / SPACING);
+        var rows = Math.floor(h / SPACING);
+        var offX = (w - cols * SPACING) / 2;
+        var offY = (h - rows * SPACING) / 2;
 
-        var nodes = [];
-        var id = 0;
-        for (var r = 0; r < rows; r++) {
-            for (var c = 0; c < cols; c++) {
-                nodes.push({ x: offX + c * SPACING, y: offY + r * SPACING, edges: [], id: id });
-                id++;
+        var nodes = [], id = 0;
+        for (var r = 0; r <= rows; r++) {
+            for (var c = 0; c <= cols; c++) {
+                nodes.push({ x: offX + c * SPACING, y: offY + r * SPACING, edges: [], id: id++ });
+            }
+        }
+        var C = cols + 1;
+
+        for (var r = 0; r <= rows; r++) {
+            for (var c = 0; c <= cols; c++) {
+                var idx = r * C + c;
+                if (c < cols) { nodes[idx].edges.push(idx + 1); nodes[idx + 1].edges.push(idx); }
+                if (r < rows) { nodes[idx].edges.push(idx + C); nodes[idx + C].edges.push(idx); }
             }
         }
 
-        function connect(a, b) {
-            a.edges.push(b.id);
-            b.edges.push(a.id);
-        }
-
-        for (var r = 0; r < rows; r++) {
-            for (var c = 0; c < cols; c++) {
-                var idx = r * cols + c;
-                if (c + 1 < cols) connect(nodes[idx], nodes[idx + 1]);
-                if (r + 1 < rows) connect(nodes[idx], nodes[idx + cols]);
-            }
-        }
-
-        var edges = [];
-        var seen = {};
+        var edges = [], seen = {};
         for (var i = 0; i < nodes.length; i++) {
             for (var k = 0; k < nodes[i].edges.length; k++) {
                 var j = nodes[i].edges[k];
                 var key = i < j ? i + '-' + j : j + '-' + i;
-                if (!seen[key]) {
-                    seen[key] = true;
-                    edges.push({ a: i, b: j });
-                }
+                if (!seen[key]) { seen[key] = true; edges.push({ a: i, b: j }); }
             }
         }
 
         var particles = [];
         for (var p = 0; p < DOT_COUNT; p++) {
             var ei = Math.floor(Math.random() * edges.length);
-            var e = edges[ei];
             particles.push({
                 edge: ei,
                 t: Math.random(),
-                speed: (0.3 + Math.random() * 0.7) * SPEED,
+                speed: (0.5 + Math.random()) * DOT_SPEED,
                 r: 2 + Math.random() * 1.5,
-                o: 0.6 + Math.random() * 0.4,
+                o: 0.5 + Math.random() * 0.5,
                 dir: 1
             });
         }
 
-        allData.push({ ctx: ctx, w: w, h: h, nodes: nodes, edges: edges, particles: particles });
+        return { ctx: ctx, w: w, h: h, nodes: nodes, edges: edges, particles: particles };
     }
 
-    canvases.forEach(initCanvas);
+    canvases.forEach(function(c) { allData.push(initCanvas(c)); });
 
-    function animate() {
-        if (!running) return;
-        allData.forEach(function(d) {
-            var ctx = d.ctx;
-            ctx.clearRect(0, 0, d.w, d.h);
+    var lastTime = 0;
 
-            var nodes = d.nodes, edges = d.edges, particles = d.particles;
+    function animate(time) {
+        var dt = lastTime ? Math.min((time - lastTime) / 16, 3) : 1;
+        lastTime = time;
+
+        for (var d = 0; d < allData.length; d++) {
+            var data = allData[d];
+            var ctx = data.ctx;
+            ctx.clearRect(0, 0, data.w, data.h);
+
+            var nodes = data.nodes, edges = data.edges, particles = data.particles;
 
             for (var i = 0; i < edges.length; i++) {
                 var e = edges[i];
@@ -552,8 +547,7 @@
                 var p = particles[i];
                 var e = edges[p.edge];
                 var na = nodes[e.a], nb = nodes[e.b];
-
-                var t = p.dir > 0 ? p.t : (1 - p.t);
+                var t = p.dir === 1 ? p.t : (1 - p.t);
                 var x = na.x + (nb.x - na.x) * t;
                 var y = na.y + (nb.y - na.y) * t;
 
@@ -562,52 +556,43 @@
                 ctx.fillStyle = 'rgba(' + rgb + ',' + p.o + ')';
                 ctx.fill();
 
-                p.t += p.speed * p.dir * 0.008;
+                p.t += p.speed * p.dir * 0.016 * dt;
 
-                if (p.t >= 1) {
-                    p.t = 0;
-                    var nodeA = e.b;
-                    var nn = nodes[nodeA];
-                    if (nn.edges.length > 0) {
-                        var nextN = nn.edges[Math.floor(Math.random() * nn.edges.length)];
+                if (p.t > 1) { p.t = 1; }
+                if (p.t < 0) { p.t = 0; }
+
+                if ((p.dir === 1 && p.t >= 1) || (p.dir === -1 && p.t <= 0)) {
+                    var arrivedAt = p.dir === 1 ? e.b : e.a;
+                    var nn = nodes[arrivedAt];
+                    if (nn.edges.length) {
+                        var pick = nn.edges[Math.floor(Math.random() * nn.edges.length)];
                         for (var j = 0; j < edges.length; j++) {
-                            if ((edges[j].a === nodeA && edges[j].b === nextN) || (edges[j].b === nodeA && edges[j].a === nextN)) {
+                            if ((edges[j].a === arrivedAt && edges[j].b === pick) || (edges[j].b === arrivedAt && edges[j].a === pick)) {
                                 p.edge = j;
+                                p.dir = edges[j].a === arrivedAt ? 1 : -1;
+                                p.t = 0;
                                 break;
                             }
                         }
                     }
-                    p.dir = 1;
                 }
             }
-        });
+        }
         rafId = requestAnimationFrame(animate);
     }
 
-    animate();
+    rafId = requestAnimationFrame(animate);
 
     var resizeTimer;
     window.addEventListener('resize', function() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function() {
-            allData = [];
-            running = false;
             if (rafId) cancelAnimationFrame(rafId);
-            running = true;
-            document.querySelectorAll('.dot-canvas').forEach(initCanvas);
-            animate();
-        }, 200);
+            allData = [];
+            document.querySelectorAll('.dot-canvas').forEach(function(c) { allData.push(initCanvas(c)); });
+            rafId = requestAnimationFrame(animate);
+        }, 300);
     });
-
-    var ro = new ResizeObserver(function() {
-        allData = [];
-        running = false;
-        if (rafId) cancelAnimationFrame(rafId);
-        running = true;
-        document.querySelectorAll('.dot-canvas').forEach(initCanvas);
-        animate();
-    });
-    document.querySelectorAll('.dot-canvas').forEach(function(c) { ro.observe(c.parentElement); });
 })();
 </script>
 {% endblock extra_scripts %}
