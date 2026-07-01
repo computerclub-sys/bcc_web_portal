@@ -71,18 +71,12 @@
                         {% endif %}
                         <div class="detail-meta-item">
                             <strong>Prize Pool</strong>
-                            <span class="prize-list">
-                                {% with prizes=event.prizes.all %}
-                                {% if prizes %}
-                                {% for p in prizes %}
-                                <span class="prize-row"><span class="prize-pos-label">{{ p.position }}</span><span class="prize-dot"></span><span class="prize-val">BDT {{ p.amount }}</span></span>
-                                {% endfor %}
-                                {% elif event.prize_pool %}
-                                <span class="prize-row"><span class="prize-pos-label">Prize Pool</span><span class="prize-dot"></span><span class="prize-val">BDT {{ event.prize_pool }}</span></span>
+                            <span class="detail-prize-pool">
+                                {% if event.prize_pool %}
+                                <span class="detail-pool-amount">{{ event.prize_pool }}</span>
                                 {% else %}
-                                <span>—</span>
+                                <span class="detail-pool-amount dim">—</span>
                                 {% endif %}
-                                {% endwith %}
                             </span>
                         </div>
                         {% if event.provided_kit %}
