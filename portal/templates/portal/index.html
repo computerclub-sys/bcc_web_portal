@@ -451,8 +451,9 @@
     if (!canvases.length) return;
 
     var SPACING = 48;
-    var DOT_COUNT = 60;
-    var DOT_SPEED = 0.3;
+    var H_DOTS = 25;
+    var V_DOTS = 20;
+    var DOT_RADIUS = 2.5;
     var rgb = '0,217,146';
 
     var allData = [];
@@ -476,45 +477,29 @@
         var offX = (w - cols * SPACING) / 2;
         var offY = (h - rows * SPACING) / 2;
 
-        var nodes = [], id = 0;
-        for (var r = 0; r <= rows; r++) {
-            for (var c = 0; c <= cols; c++) {
-                nodes.push({ x: offX + c * SPACING, y: offY + r * SPACING, edges: [], id: id++ });
-            }
-        }
-        var C = cols + 1;
-
-        for (var r = 0; r <= rows; r++) {
-            for (var c = 0; c <= cols; c++) {
-                var idx = r * C + c;
-                if (c < cols) { nodes[idx].edges.push(idx + 1); nodes[idx + 1].edges.push(idx); }
-                if (r < rows) { nodes[idx].edges.push(idx + C); nodes[idx + C].edges.push(idx); }
-            }
-        }
-
-        var edges = [], seen = {};
-        for (var i = 0; i < nodes.length; i++) {
-            for (var k = 0; k < nodes[i].edges.length; k++) {
-                var j = nodes[i].edges[k];
-                var key = i < j ? i + '-' + j : j + '-' + i;
-                if (!seen[key]) { seen[key] = true; edges.push({ a: i, b: j }); }
-            }
-        }
-
-        var particles = [];
-        for (var p = 0; p < DOT_COUNT; p++) {
-            var ei = Math.floor(Math.random() * edges.length);
-            particles.push({
-                edge: ei,
-                t: Math.random(),
-                speed: (0.5 + Math.random()) * DOT_SPEED,
-                r: 2 + Math.random() * 1.5,
-                o: 0.5 + Math.random() * 0.5,
-                dir: 1
+        var hDots = [];
+        for (var i = 0; i < H_DOTS; i++) {
+            var ri = Math.floor(Math.random() * (rows + 1));
+            hDots.push({
+                row: ri,
+                x: Math.random() * (cols * SPACING),
+                speed: (0.3 + Math.random() * 0.5) * SPACING,
+                dir: Math.random() > 0.5 ? 1 : -1
             });
         }
 
-        return { ctx: ctx, w: w, h: h, nodes: nodes, edges: edges, particles: particles };
+        var vDots = [];
+        for (var i = 0; i < V_DOTS; i++) {
+            var ci = Math.floor(Math.random() * (cols + 1));
+            vDots.push({
+                col: ci,
+                y: Math.random() * (rows * SPACING),
+                speed: (0.3 + Math.random() * 0.5) * SPACING,
+                dir: Math.random() > 0.5 ? 1 : -1
+            });
+        }
+
+        return { ctx: ctx, w: w, h: h, cols: cols, rows: rows, offX: offX, offY: offY, hDots: hDots, vDots: vDots };
     }
 
     canvases.forEach(function(c) { allData.push(initCanvas(c)); });
@@ -530,52 +515,68 @@
             var ctx = data.ctx;
             ctx.clearRect(0, 0, data.w, data.h);
 
-            var nodes = data.nodes, edges = data.edges, particles = data.particles;
+            var offX = data.offX, offY = data.offY;
+            var cols = data.cols, rows = data.rows;
+            var gridW = cols * SPACING, gridH = rows * SPACING;
 
-            for (var i = 0; i < edges.length; i++) {
-                var e = edges[i];
-                var na = nodes[e.a], nb = nodes[e.b];
+            ctx.strokeStyle = 'rgba(' + rgb + ',0.08)';
+            ctx.lineWidth = 1;
+
+            for (var r = 0; r <= rows; r++) {
+                var y = offY + r * SPACING;
                 ctx.beginPath();
-                ctx.moveTo(na.x, na.y);
-                ctx.lineTo(nb.x, nb.y);
-                ctx.strokeStyle = 'rgba(' + rgb + ',0.10)';
-                ctx.lineWidth = 1;
+                ctx.moveTo(offX, y);
+                ctx.lineTo(offX + gridW, y);
+                ctx.stroke();
+            }
+            for (var c = 0; c <= cols; c++) {
+                var x = offX + c * SPACING;
+                ctx.beginPath();
+                ctx.moveTo(x, offY);
+                ctx.lineTo(x, offY + gridH);
                 ctx.stroke();
             }
 
-            for (var i = 0; i < particles.length; i++) {
-                var p = particles[i];
-                var e = edges[p.edge];
-                var na = nodes[e.a], nb = nodes[e.b];
-                var t = p.dir === 1 ? p.t : (1 - p.t);
-                var x = na.x + (nb.x - na.x) * t;
-                var y = na.y + (nb.y - na.y) * t;
-
+            for (var i = 0; i < data.hDots.length; i++) {
+                var dot = data.hDots[i];
+                dot.x += dot.speed * dot.dir * 0.016 * dt;
+                if (dot.x > gridW) { dot.x = gridW; dot.dir = -1; }
+                if (dot.x < 0) { dot.x = 0; dot.dir = 1; }
+                var px = offX + dot.x;
+                var py = offY + dot.row * SPACING;
+                var grad = ctx.createRadialGradient(px, py, 0, px, py, DOT_RADIUS * 4);
+                grad.addColorStop(0, 'rgba(' + rgb + ',0.9)');
+                grad.addColorStop(0.4, 'rgba(' + rgb + ',0.4)');
+                grad.addColorStop(1, 'rgba(' + rgb + ',0)');
                 ctx.beginPath();
-                ctx.arc(x, y, p.r, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(' + rgb + ',' + p.o + ')';
+                ctx.arc(px, py, DOT_RADIUS * 4, 0, Math.PI * 2);
+                ctx.fillStyle = grad;
                 ctx.fill();
+                ctx.beginPath();
+                ctx.arc(px, py, DOT_RADIUS, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(' + rgb + ',1)';
+                ctx.fill();
+            }
 
-                p.t += p.speed * p.dir * 0.016 * dt;
-
-                if (p.t > 1) { p.t = 1; }
-                if (p.t < 0) { p.t = 0; }
-
-                if ((p.dir === 1 && p.t >= 1) || (p.dir === -1 && p.t <= 0)) {
-                    var arrivedAt = p.dir === 1 ? e.b : e.a;
-                    var nn = nodes[arrivedAt];
-                    if (nn.edges.length) {
-                        var pick = nn.edges[Math.floor(Math.random() * nn.edges.length)];
-                        for (var j = 0; j < edges.length; j++) {
-                            if ((edges[j].a === arrivedAt && edges[j].b === pick) || (edges[j].b === arrivedAt && edges[j].a === pick)) {
-                                p.edge = j;
-                                p.dir = edges[j].a === arrivedAt ? 1 : -1;
-                                p.t = 0;
-                                break;
-                            }
-                        }
-                    }
-                }
+            for (var i = 0; i < data.vDots.length; i++) {
+                var dot = data.vDots[i];
+                dot.y += dot.speed * dot.dir * 0.016 * dt;
+                if (dot.y > gridH) { dot.y = gridH; dot.dir = -1; }
+                if (dot.y < 0) { dot.y = 0; dot.dir = 1; }
+                var px = offX + dot.col * SPACING;
+                var py = offY + dot.y;
+                var grad = ctx.createRadialGradient(px, py, 0, px, py, DOT_RADIUS * 4);
+                grad.addColorStop(0, 'rgba(' + rgb + ',0.9)');
+                grad.addColorStop(0.4, 'rgba(' + rgb + ',0.4)');
+                grad.addColorStop(1, 'rgba(' + rgb + ',0)');
+                ctx.beginPath();
+                ctx.arc(px, py, DOT_RADIUS * 4, 0, Math.PI * 2);
+                ctx.fillStyle = grad;
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(px, py, DOT_RADIUS, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(' + rgb + ',1)';
+                ctx.fill();
             }
         }
         rafId = requestAnimationFrame(animate);
