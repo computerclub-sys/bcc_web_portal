@@ -34,7 +34,7 @@
             <img src="{% static 'cse_fest/images/Png Logo x CSE Fest.png' %}" alt="CSE Fest" class="nav-logo-img">
         </a>
         <a href="{% url 'cse_fest:index' year=fest.year %}#events" class="nav-link">Events</a>
-        <a href="{% url 'cse_fest:index' year=fest.year %}#schedule" class="nav-link">Schedule</a>
+        <a href="{% url 'cse_fest:schedule' year=fest.year %}" class="nav-link">Schedule</a>
         <a href="{% url 'cse_fest:index' year=fest.year %}#sponsors" class="nav-link">Sponsors</a>
         <a href="{% url 'cse_fest:index' year=fest.year %}#notices" class="nav-link">Notices</a>
         <a href="{% url 'cse_fest:index' year=fest.year %}#faq" class="nav-link">FAQ</a>
@@ -47,7 +47,7 @@
 
     <div class="mobile-menu" id="mobileMenu">
         <a href="{% url 'cse_fest:index' year=fest.year %}#events" class="nav-link">Events</a>
-        <a href="{% url 'cse_fest:index' year=fest.year %}#schedule" class="nav-link">Schedule</a>
+        <a href="{% url 'cse_fest:schedule' year=fest.year %}" class="nav-link">Schedule</a>
         <a href="{% url 'cse_fest:index' year=fest.year %}#sponsors" class="nav-link">Sponsors</a>
         <a href="{% url 'cse_fest:index' year=fest.year %}#committee" class="nav-link">Committee</a>
         <a href="{% url 'cse_fest:index' year=fest.year %}#faq" class="nav-link">FAQ</a>
@@ -69,7 +69,7 @@
                 <div class="footer-links">
                     <h4>Quick Links</h4>
                     <a href="#events">Events</a>
-                    <a href="#schedule">Schedule</a>
+                    <a href="{% url 'cse_fest:schedule' year=fest.year %}">Schedule</a>
                     <a href="#committee">Committee</a>
                     <a href="#notices">Notices</a>
                 </div>

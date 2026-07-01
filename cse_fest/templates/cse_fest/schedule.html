@@ -1,0 +1,27 @@
+{% extends "cse_fest/base.html" %}
+{% load static %}
+
+{% block title %}Schedule — {{ fest.title }}{% endblock %}
+
+{% block content %}
+<section class="section" id="schedule">
+    <div class="container">
+        <div class="section-head">
+            <h2 class="section-title">Event Schedule</h2>
+            <p class="section-desc">Mark your calendar for these key dates.</p>
+        </div>
+        <div class="timeline">
+            {% for sched in schedules %}
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-date">{{ sched.date|date:"M d" }}{% if sched.time %} • {{ sched.time|time:"g:i A" }}{% endif %}</div>
+                <div class="tl-body">
+                    <h4>{{ sched.title }}</h4>
+                    {% if sched.description %}<p>{{ sched.description }}</p>{% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

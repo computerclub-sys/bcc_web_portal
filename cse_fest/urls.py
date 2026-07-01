@@ -5,6 +5,7 @@ app_name = 'cse_fest'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('schedule/', views.schedule_view, name='schedule'),
     path('event/<slug:slug>/', views.event_detail, name='event_detail'),
     path('register/', views.register, name='register'),
     path('application-status/', views.application_status, name='application_status'),

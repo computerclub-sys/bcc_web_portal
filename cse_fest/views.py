@@ -43,6 +43,15 @@ def index(request, year):
     })
 
 
+def schedule_view(request, year):
+    fest = _get_fest(year)
+    schedules = FestSchedule.objects.filter(fest=fest).order_by('order', 'date', 'time')
+    return render(request, 'cse_fest/schedule.html', {
+        'fest': fest,
+        'schedules': schedules,
+    })
+
+
 def event_detail(request, year, slug):
     fest = _get_fest(year)
     event = get_object_or_404(FestEvent, fest=fest, slug=slug)
