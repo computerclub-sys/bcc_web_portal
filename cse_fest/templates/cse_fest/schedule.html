@@ -4,24 +4,67 @@
 {% block title %}Schedule — {{ fest.title }}{% endblock %}
 
 {% block content %}
-<section class="section" id="schedule">
+<section class="section schedule-section" id="schedule">
     <div class="container">
         <div class="section-head">
             <h2 class="section-title">Event Schedule</h2>
             <p class="section-desc">Mark your calendar for these key dates.</p>
         </div>
-        <div class="timeline">
+
+        {% if schedules %}
+        <div class="schedule-track">
             {% for sched in schedules %}
-            <div class="tl-item">
-                <div class="tl-dot"></div>
-                <div class="tl-date">{{ sched.date|date:"M d" }}{% if sched.time %} • {{ sched.time|time:"g:i A" }}{% endif %}</div>
-                <div class="tl-body">
-                    <h4>{{ sched.title }}</h4>
-                    {% if sched.description %}<p>{{ sched.description }}</p>{% endif %}
+            <div class="schedule-item">
+                <div class="schedule-dot"></div>
+                <div class="schedule-card">
+                    <div class="schedule-meta">
+                        <span class="schedule-date-badge">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                            {{ sched.date|date:"M d, Y" }}
+                        </span>
+                        {% if sched.time %}
+                        <span class="schedule-time-badge">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            {{ sched.time|time:"g:i A" }}
+                        </span>
+                        {% endif %}
+                    </div>
+                    <h3 class="schedule-card-title">{{ sched.title }}</h3>
+                    {% if sched.description %}
+                    <p class="schedule-card-desc">{{ sched.description }}</p>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}
         </div>
+        {% else %}
+        <div class="schedule-empty">
+            <p>Schedule will be announced soon. Stay tuned!</p>
+        </div>
+        {% endif %}
     </div>
 </section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+(function() {
+    var items = document.querySelectorAll('.schedule-item');
+    if (!items.length) return;
+
+    function reveal() {
+        var h = window.innerHeight;
+        items.forEach(function(el) {
+            var rect = el.getBoundingClientRect();
+            if (rect.top < h - 60 && !el.classList.contains('reveal')) {
+                el.classList.add('reveal');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', reveal, { passive: true });
+    window.addEventListener('resize', reveal, { passive: true });
+    reveal();
+})();
+</script>
 {% endblock %}
