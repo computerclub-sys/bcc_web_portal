@@ -1647,7 +1647,6 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 .detail-prize-pool {
   display: flex;
   align-items: center;
-  justify-content: center;
   min-height: 48px;
 }
 
