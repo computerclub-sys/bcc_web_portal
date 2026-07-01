@@ -647,7 +647,8 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   border-radius: 1rem;
   transition: box-shadow 0.3s;
 }
-.flip-card:hover {
+.flip-card:hover,
+.flip-card.flipped {
   box-shadow: 0 0 40px rgba(var(--event-accent-rgb, 124,92,252), 0.3);
 }
 .flip-card-inner {
@@ -659,7 +660,8 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   transform-style: preserve-3d;
   will-change: transform;
 }
-.flip-card:hover .flip-card-inner {
+.flip-card:hover .flip-card-inner,
+.flip-card.flipped .flip-card-inner {
   transform: rotateY(180deg);
 }
 .flip-card-front, .flip-card-back {
@@ -679,7 +681,9 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   transform: translateZ(0);
 }
 .flip-card:hover .flip-card-front,
-.flip-card:hover .flip-card-back {
+.flip-card:hover .flip-card-back,
+.flip-card.flipped .flip-card-front,
+.flip-card.flipped .flip-card-back {
   box-shadow: 0 0 60px rgba(var(--event-accent-rgb, 124,92,252), 0.4), inset 0 0 30px rgba(var(--event-accent-rgb, 124,92,252), 0.12);
   border-color: rgba(var(--event-accent-rgb, 124,92,252), 0.5);
 }

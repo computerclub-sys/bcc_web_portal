@@ -310,6 +310,15 @@ var observer = new IntersectionObserver(function(entries) {
     });
 }, { threshold: 0.15 });
 document.querySelectorAll('.cm-card').forEach(function(c) { observer.observe(c); });
+
+/* Flip card toggle on touch */
+document.querySelectorAll('.flip-card').forEach(function(card) {
+    card.addEventListener('click', function(e) {
+        if (window.innerWidth < 768) {
+            card.classList.toggle('flipped');
+        }
+    });
+});
 </script>
 {% endblock %}
 {% endblock %}
