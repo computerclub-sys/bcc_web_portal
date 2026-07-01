@@ -810,9 +810,11 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
 .flip-card-back .card-entry {
   margin-top: 4px;
   text-align: center;
-  font-size: 15px;
-  color: #8888aa;
-  padding: 4px 12px;
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 500;
+  color: #aaaac8;
+  padding: 6px 14px;
   border: 1px solid rgba(var(--event-accent-rgb, 217,70,239), 0.15);
   border-radius: 8px;
   background: rgba(var(--event-accent-rgb, 217,70,239), 0.04);
