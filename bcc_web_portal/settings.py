@@ -71,11 +71,10 @@ MIDDLEWARE = [
 
 LOGIN_URL = '/login/'
 
-# Session: auto-logout on browser close or 5 min inactivity
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-SESSION_COOKIE_AGE = 300
+# Session: auto-logout on browser close or 20 min inactivity
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 1200
 SESSION_SAVE_EVERY_REQUEST = True
-CSRF_USE_SESSIONS = True
 
 ROOT_URLCONF = 'bcc_web_portal.urls'
 
