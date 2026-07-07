@@ -1751,6 +1751,43 @@ h1, h2, h3, h4, h5, h6, .nav-link, .btn, .section-title, .hero-title, .nav-title
   color: var(--event-accent, var(--accent-light));
   margin-bottom: 14px;
 }
+
+/* ── Size Guide ── */
+.size-guide-wrap {
+  margin-bottom: 16px;
+}
+
+.size-guide-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border: 1px solid rgba(var(--event-accent-rgb, 217,70,239), 0.2);
+  border-radius: 8px;
+  background: rgba(var(--event-accent-rgb, 217,70,239), 0.04);
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.size-guide-link:hover {
+  border-color: rgba(var(--event-accent-rgb, 217,70,239), 0.5);
+  background: rgba(var(--event-accent-rgb, 217,70,239), 0.08);
+}
+
+.size-guide-img {
+  width: 40px;
+  height: auto;
+  border-radius: 4px;
+}
+
+.size-guide-link span {
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: var(--event-accent, var(--accent-light));
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 .payment-label { font-size: 13px; font-weight: 700; color: var(--text-heading); margin-bottom: 10px; letter-spacing: 0.5px; }
 .payment-options { display: flex; gap: 12px; margin-bottom: 14px; }
 .payment-option {
