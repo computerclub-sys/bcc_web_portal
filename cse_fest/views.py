@@ -289,11 +289,10 @@ def invitation(request, year):
 
 @staff_member_required
 def export_approved_excel(request, year):
-    """Export all registrations (including pending and cancelled) to Excel."""
-    # existing export view remains unchanged
+    """Export all fest registrations to Excel."""
     fest = _get_fest(year)
     registrations = list(FestRegistration.objects.filter(
-        event__fest=fest, status='confirmed'
+        event__fest=fest
     ).select_related('event').prefetch_related('team_members').order_by('event', 'full_name'))
     print('DEBUG: export registrations count =', len(registrations))
 
@@ -329,7 +328,7 @@ def export_approved_excel(request, year):
     response = HttpResponse(
         content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     )
-    response['Content-Disposition'] = f'attachment; filename="approved_{fest.year}.xlsx"'
+    response['Content-Disposition'] = f'attachment; filename="registrations_{fest.year}.xlsx"'
     wb.save(response)
     return response
 
