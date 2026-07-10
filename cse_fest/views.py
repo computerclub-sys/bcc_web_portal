@@ -315,7 +315,7 @@ def export_approved_excel(request, year):
         for r in regs:
             ws.append([
                 r.application_id, r.event.category, r.full_name, r.email, r.phone,
-                r.department, r.student_id, '', '', '',
+                r.department, r.student_id, r.semester, r.section, r.group,
                 r.team_name, r.hackathon_category, '', r.created_at.strftime('%Y-%m-%d %H:%M')
             ])
             for m in r.team_members.all():
