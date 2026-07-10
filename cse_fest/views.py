@@ -311,18 +311,18 @@ def export_approved_excel(request, year):
             first = False
         else:
             ws = wb.create_sheet(title=event.title[:31])
-        ws.append(['App ID', 'Category', 'Name', 'Email', 'Phone', 'Dept', 'Student ID', 'Semester', 'Section', 'Group', 'Team Name', 'Registered At'])
+        ws.append(['App ID', 'Category', 'Name', 'Email', 'Phone', 'Dept', 'Student ID', 'Semester', 'Section', 'Group', 'Team Name', 'Segment', 'T-Shirt', 'Registered At'])
         for r in regs:
             ws.append([
                 r.application_id, r.event.category, r.full_name, r.email, r.phone,
                 r.department, r.student_id, '', '', '',
-                r.team_name, r.created_at.strftime('%Y-%m-%d %H:%M')
+                r.team_name, r.hackathon_category, '', r.created_at.strftime('%Y-%m-%d %H:%M')
             ])
             for m in r.team_members.all():
                 ws.append([
                     '', '', m.name, m.email, m.phone,
                     m.department, m.student_id, m.semester, m.section, m.group,
-                    '', ''
+                    '', '', m.t_shirt_size, ''
                 ])
 
     response = HttpResponse(
