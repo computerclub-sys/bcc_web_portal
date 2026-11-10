@@ -5,6 +5,17 @@ import cloudinary.uploader
 import cloudinary.utils
 from cloudinary_storage.storage import MediaCloudinaryStorage
 from django.utils.deconstruct import deconstructible
+from whitenoise.storage import CompressedManifestStaticFilesStorage
+
+
+class SafeManifestStaticFilesStorage(CompressedManifestStaticFilesStorage):
+    """Keep hashed static URLs but fall back instead of raising a 500.
+
+    A stale ``staticfiles.json`` (for example, a newly added image that has not
+    been collected yet) should serve the unhashed path, not break the page.
+    """
+
+    manifest_strict = False
 
 
 @deconstructible

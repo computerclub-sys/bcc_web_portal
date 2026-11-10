@@ -3049,3 +3049,96 @@ select {
         color: black;
     }
 }
+
+/* ── Meet the Minds (Home) ── */
+.minds-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-xl);
+    max-width: 1040px;
+    margin: 0 auto;
+}
+
+.mind-card {
+    flex: 0 1 calc((100% - var(--spacing-3xl)) / 3);
+    max-width: 300px;
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--spacing-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--rounded-md);
+    box-shadow: var(--shadow-md);
+    transition: background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease, transform 0.5s ease;
+}
+
+.mind-card:hover {
+    background: var(--color-primary-muted);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 20px rgba(0, 217, 146, 0.3), 0 0 60px rgba(0, 217, 146, 0.15);
+    transform: scale(1.03);
+}
+
+.mind-photo-wrap {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    margin-bottom: var(--spacing-md);
+    border-radius: var(--rounded-sm);
+    overflow: hidden;
+}
+
+.mind-photo,
+.mind-photo-placeholder {
+    width: 100%;
+    height: 100%;
+}
+
+.mind-photo {
+    display: block;
+    object-fit: cover;
+}
+
+.mind-photo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+    color: #fff;
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    user-select: none;
+}
+
+.mind-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-ink);
+    line-height: 1.35;
+    margin-bottom: var(--spacing-xs);
+}
+
+.mind-role {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-mute);
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+}
+
+@media (max-width: 768px) {
+    .mind-card {
+        flex-basis: calc((100% - var(--spacing-xl)) / 2);
+    }
+}
+
+@media (max-width: 480px) {
+    .mind-card {
+        flex-basis: 100%;
+        max-width: 320px;
+    }
+}

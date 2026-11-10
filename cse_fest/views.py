@@ -213,6 +213,7 @@ def register(request, year):
             'registration': registration,
             'team_members': team_members,
             'logo_url': logo_url,
+            'base_url': settings.BASE_URL,
         })
         msg = EmailMultiAlternatives(
             subject,

@@ -22,6 +22,11 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+def env_list(name, default=''):
+    """Read a comma-separated environment variable into a clean list."""
+    return [item.strip() for item in os.environ.get(name, default).split(',') if item.strip()]
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
@@ -31,15 +36,22 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-q2jg2hqeg*j)&@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS = env_list('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1')
 
-if os.environ.get('RENDER'):
-    ALLOWED_HOSTS.append(os.environ.get('RENDER_EXTERNAL_HOSTNAME'))
+if os.environ.get('RENDER_EXTERNAL_HOSTNAME'):
+    ALLOWED_HOSTS.append(os.environ['RENDER_EXTERNAL_HOSTNAME'])
 
-CSRF_TRUSTED_ORIGINS = os.environ.get('DJANGO_CSRF_TRUSTED_ORIGINS', 'http://localhost:8000').split(',')
+CSRF_TRUSTED_ORIGINS = env_list('DJANGO_CSRF_TRUSTED_ORIGINS', 'http://localhost:8000')
 
 if os.environ.get('RENDER_EXTERNAL_URL'):
-    CSRF_TRUSTED_ORIGINS.append(os.environ.get('RENDER_EXTERNAL_URL'))
+    CSRF_TRUSTED_ORIGINS.append(os.environ['RENDER_EXTERNAL_URL'])
+
+# PythonAnywhere (and most hosts) terminate TLS at their proxy.
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = os.environ.get('DJANGO_SECURE_SSL_REDIRECT', 'False') == 'True'
+
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_REFERRER_POLICY = 'same-origin'
 
 
 # Application definition
@@ -56,6 +68,17 @@ INSTALLED_APPS = [
     'events',
     'cse_fest',
 ]
+
+# Optional transactional email over HTTPS. PythonAnywhere free accounts block
+# outbound SMTP, so Brevo (via Anymail) is the supported path there.
+_brevo_api_key = os.environ.get('ANYMAIL_BREVO_API_KEY', '').strip()
+if _brevo_api_key:
+    try:
+        import anymail  # noqa: F401
+    except ImportError:
+        _brevo_api_key = ''
+    else:
+        INSTALLED_APPS.append('anymail')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -102,9 +125,14 @@ WSGI_APPLICATION = 'bcc_web_portal.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',
-        conn_max_age=600,
+        conn_max_age=int(os.environ.get('DB_CONN_MAX_AGE', 0)),
     )
 }
+
+if DATABASES['default']['ENGINE'].endswith('sqlite3'):
+    # SQLite runs on PythonAnywhere's networked filesystem: use a rollback
+    # journal (not WAL) and wait for locks instead of failing immediately.
+    DATABASES['default'].setdefault('OPTIONS', {})['timeout'] = 20
 
 
 # Password validation
@@ -163,23 +191,61 @@ if CLOUDINARY_STORAGE['CLOUD_NAME']:
     )
     STORAGES = {
         'default': {'BACKEND': 'bcc_web_portal.storage.NoCompressCloudinaryStorage'},
-        'staticfiles': {'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage'},
+        'staticfiles': {'BACKEND': 'bcc_web_portal.storage.SafeManifestStaticFilesStorage'},
     }
 else:
     STORAGES = {
         'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'},
-        'staticfiles': {'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage'},
+        'staticfiles': {'BACKEND': 'bcc_web_portal.storage.SafeManifestStaticFilesStorage'},
     }
 
-BASE_URL = os.environ.get('DJANGO_BASE_URL', 'http://localhost:8000')
+BASE_URL = os.environ.get('DJANGO_BASE_URL', 'http://localhost:8000').rstrip('/')
+
+# Only mark cookies Secure when the site is actually served over HTTPS, so
+# local HTTP development keeps working without extra flags.
+if BASE_URL.startswith('https://'):
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
 
 # Email
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-if os.environ.get('EMAIL_HOST_USER'):
+# 1. Brevo/Anymail over HTTPS (works on PythonAnywhere free)
+# 2. SMTP (works locally or on hosts without outbound restrictions)
+# 3. Console (prints to the server log; safe no-op fallback)
+DEFAULT_FROM_EMAIL = os.environ.get(
+    'DEFAULT_FROM_EMAIL',
+    '"BAIUST Computer Club" <noreply@localhost>',
+)
+EMAIL_TIMEOUT = 10
+
+if _brevo_api_key:
+    EMAIL_BACKEND = 'anymail.backends.brevo.EmailBackend'
+    ANYMAIL = {'BREVO_API_KEY': _brevo_api_key}
+elif os.environ.get('EMAIL_HOST_USER'):
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
     EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
     EMAIL_USE_TLS = True
     EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
     EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
-    DEFAULT_FROM_EMAIL = f'"BAIUST Computer Club" <{os.environ["EMAIL_HOST_USER"]}>'
+    DEFAULT_FROM_EMAIL = os.environ.get(
+        'DEFAULT_FROM_EMAIL',
+        f'"BAIUST Computer Club" <{os.environ["EMAIL_HOST_USER"]}>',
+    )
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Logging: PythonAnywhere captures stderr in the web app error log.
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {'format': '[{levelname}] {asctime} {name}: {message}', 'style': '{'},
+    },
+    'handlers': {
+        'console': {'class': 'logging.StreamHandler', 'formatter': 'simple'},
+    },
+    'root': {'handlers': ['console'], 'level': os.environ.get('DJANGO_LOG_LEVEL', 'INFO')},
+    'loggers': {
+        'django.request': {'handlers': ['console'], 'level': 'ERROR', 'propagate': False},
+    },
+}

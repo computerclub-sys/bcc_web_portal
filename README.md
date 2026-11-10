@@ -92,12 +92,17 @@ Copy `.env.example` to `.env` and configure:
 | `DJANGO_ALLOWED_HOSTS` | Comma-separated hosts |
 | `DJANGO_CSRF_TRUSTED_ORIGINS` | Comma-separated trusted origins |
 | `DJANGO_BASE_URL` | Base URL for QR code generation & email links |
+| `DJANGO_SECURE_SSL_REDIRECT` | Set `True` to force HTTPS (optional) |
+| `DATABASE_URL` | Database URL; unset uses SQLite |
+| `DB_CONN_MAX_AGE` | Persistent DB connection age in seconds (default `0`) |
 | `CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name (optional, for production media) |
 | `CLOUDINARY_API_KEY` | Cloudinary API key |
 | `CLOUDINARY_API_SECRET` | Cloudinary API secret |
+| `ANYMAIL_BREVO_API_KEY` | Brevo API key for HTTPS email (recommended on PythonAnywhere) |
 | `EMAIL_HOST_USER` | SMTP email (optional, falls back to console) |
 | `EMAIL_HOST_PASSWORD` | SMTP password |
-| `RENDER` | Set by Render platform for auto host detection |
+| `DEFAULT_FROM_EMAIL` | Sender address for outgoing email |
+| `RENDER_EXTERNAL_HOSTNAME` / `RENDER_EXTERNAL_URL` | Set by Render for auto host detection |
 
 ## Project Structure
 
@@ -106,7 +111,7 @@ bcc_portal/
 ├── bcc_web_portal/           # Django project config
 │   ├── settings.py           # Installed apps, middleware, DB, Cloudinary, email
 │   ├── urls.py               # Root URL routing
-│   ├── storage.py            # Custom NoCompressCloudinaryStorage
+│   ├── storage.py            # Cloudinary + safe static manifest storage
 │   ├── wsgi.py / asgi.py     # WSGI & ASGI entry points
 ├── portal/                   # Core app — auth, profiles, membership, team
 │   ├── models.py             # Profile, TeamMember
@@ -217,9 +222,27 @@ python manage.py createsuperuser
 
 - Superusers: 1-year session expiry
 - Regular users: browser-session (expires on browser close)
-- CSRF stored in sessions (`CSRF_USE_SESSIONS = True`)
+- CSRF tokens use Django's default cookie-based storage
 
 ## Deployment
+
+### PythonAnywhere (free tier)
+
+See [`deploy/pythonanywhere.md`](deploy/pythonanywhere.md) for the full
+walkthrough: SQLite, static/media mappings, WSGI setup, environment variables,
+data upload, and QR regeneration.
+
+Short version:
+
+```bash
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py collectstatic --noinput
+```
+
+Then reload the web app in the PythonAnywhere Web tab.
+
+### Generic host (Render/Heroku)
 
 ```bash
 pip install -r requirements.txt
@@ -228,7 +251,9 @@ python manage.py migrate
 gunicorn bcc_web_portal.wsgi --bind 0.0.0.0:$PORT --workers 4 --timeout 120
 ```
 
-The included `Procfile` is compatible with Render and Heroku.
+The included `Procfile` is compatible with Render and Heroku. Set
+`DATABASE_URL` to a PostgreSQL URL and the `RENDER_EXTERNAL_*` variables are
+picked up automatically.
 
 ## License
 

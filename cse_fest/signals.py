@@ -35,6 +35,7 @@ def send_confirmation_email(sender, instance, created, **kwargs):
             'registration': instance,
             'team_members': team_members,
             'logo_url': logo_url,
+            'base_url': settings.BASE_URL,
             'is_approved': True,
         })
         email = EmailMultiAlternatives(
